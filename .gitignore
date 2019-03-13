@@ -128,3 +128,7 @@ cmake-build-debug
 
 cache
 *.autosave
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/TestCoin/v15/Browse.VC.db
+.vs/TestCoin/v15/Browse.VC.opendb

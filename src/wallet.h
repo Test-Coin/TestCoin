@@ -23,8 +23,8 @@
 #include "validationinterface.h"
 #include "wallet_ismine.h"
 #include "walletdb.h"
-#include "zphrtracker.h"
-#include "zphrwallet.h"
+#include "zabettracker.h"
+#include "zabetwallet.h"
 
 #include <algorithm>
 #include <map>
@@ -84,30 +84,30 @@ enum AvailableCoinsType {
     ALL_COINS = 1,
     ONLY_DENOMINATED = 2,
     ONLY_NOT10000IFMN = 3,
-    ONLY_NONDENOMINATED_NOT10000IFMN = 4, // ONLY_NONDENOMINATED and not 10000 PHR at the same time
+    ONLY_NONDENOMINATED_NOT10000IFMN = 4, // ONLY_NONDENOMINATED and not 10000 ABET at the same time
     ONLY_10000 = 5,                        // find masternode outputs including locked ones (use with caution)
     STAKABLE_COINS = 6                          // UTXO's that are valid for staking
 };
 
-// Possible states for zPHR send
+// Possible states for zABET send
 enum ZerocoinSpendStatus {
-    ZPHR_SPEND_OKAY = 0,                            // No error
-    ZPHR_SPEND_ERROR = 1,                           // Unspecified class of errors, more details are (hopefully) in the returning text
-    ZPHR_WALLET_LOCKED = 2,                         // Wallet was locked
-    ZPHR_COMMIT_FAILED = 3,                         // Commit failed, reset status
-    ZPHR_ERASE_SPENDS_FAILED = 4,                   // Erasing spends during reset failed
-    ZPHR_ERASE_NEW_MINTS_FAILED = 5,                // Erasing new mints during reset failed
-    ZPHR_TRX_FUNDS_PROBLEMS = 6,                    // Everything related to available funds
-    ZPHR_TRX_CREATE = 7,                            // Everything related to create the transaction
-    ZPHR_TRX_CHANGE = 8,                            // Everything related to transaction change
-    ZPHR_TXMINT_GENERAL = 9,                        // General errors in MintToTxIn
-    ZPHR_INVALID_COIN = 10,                         // Selected mint coin is not valid
-    ZPHR_FAILED_ACCUMULATOR_INITIALIZATION = 11,    // Failed to initialize witness
-    ZPHR_INVALID_WITNESS = 12,                      // Spend coin transaction did not verify
-    ZPHR_BAD_SERIALIZATION = 13,                    // Transaction verification failed
-    ZPHR_SPENT_USED_ZPHR = 14,                      // Coin has already been spend
-    ZPHR_TX_TOO_LARGE = 15,                         // The transaction is larger than the max tx size
-    ZPHR_SPEND_V1_SEC_LEVEL
+    ZABET_SPEND_OKAY = 0,                            // No error
+    ZABET_SPEND_ERROR = 1,                           // Unspecified class of errors, more details are (hopefully) in the returning text
+    ZABET_WALLET_LOCKED = 2,                         // Wallet was locked
+    ZABET_COMMIT_FAILED = 3,                         // Commit failed, reset status
+    ZABET_ERASE_SPENDS_FAILED = 4,                   // Erasing spends during reset failed
+    ZABET_ERASE_NEW_MINTS_FAILED = 5,                // Erasing new mints during reset failed
+    ZABET_TRX_FUNDS_PROBLEMS = 6,                    // Everything related to available funds
+    ZABET_TRX_CREATE = 7,                            // Everything related to create the transaction
+    ZABET_TRX_CHANGE = 8,                            // Everything related to transaction change
+    ZABET_TXMINT_GENERAL = 9,                        // General errors in MintToTxIn
+    ZABET_INVALID_COIN = 10,                         // Selected mint coin is not valid
+    ZABET_FAILED_ACCUMULATOR_INITIALIZATION = 11,    // Failed to initialize witness
+    ZABET_INVALID_WITNESS = 12,                      // Spend coin transaction did not verify
+    ZABET_BAD_SERIALIZATION = 13,                    // Transaction verification failed
+    ZABET_SPENT_USED_ZABET = 14,                      // Coin has already been spend
+    ZABET_TX_TOO_LARGE = 15,                         // The transaction is larger than the max tx size
+    ZABET_SPEND_V1_SEC_LEVEL
 };
 
 enum OutputType : int
@@ -226,15 +226,15 @@ public:
     std::string ResetMintZerocoin();
     std::string ResetSpentZerocoin();
     void ReconsiderZerocoins(std::list<CZerocoinMint>& listMintsRestored, std::list<CDeterministicMint>& listDMintsRestored);
-    void ZPhrBackupWallet();
+    void ZAbetBackupWallet();
     bool GetZerocoinKey(const CBigNum& bnSerial, CKey& key);
-    bool CreateZPHROutput(libzerocoin::CoinDenomination denomination, CTxOut& outMint, CDeterministicMint& dMint);
+    bool CreateZABETOutput(libzerocoin::CoinDenomination denomination, CTxOut& outMint, CDeterministicMint& dMint);
     bool GetMint(const uint256& hashSerial, CZerocoinMint& mint);
     bool GetMintFromStakeHash(const uint256& hashStake, CZerocoinMint& mint);
     bool DatabaseMint(CDeterministicMint& dMint);
     bool SetMintUnspent(const CBigNum& bnSerial);
     bool UpdateMint(const CBigNum& bnValue, const int& nHeight, const uint256& txid, const libzerocoin::CoinDenomination& denom);
-    string GetUniqueWalletBackupName(bool fzphrAuto) const;
+    string GetUniqueWalletBackupName(bool fzabetAuto) const;
 
     /** Zerocin entry changed.
     * @note called with lock cs_wallet held.
@@ -249,13 +249,13 @@ public:
      */
     mutable CCriticalSection cs_wallet;
 
-    CzPHRWallet* zwalletMain;
+    CzABETWallet* zwalletMain;
 
     bool fFileBacked;
     bool fWalletUnlockAnonymizeOnly;
     std::string strWalletFile;
     bool fBackupMints;
-    std::unique_ptr<CzPHRTracker> zphrTracker;
+    std::unique_ptr<CzABETTracker> zabetTracker;
 
     std::set<int64_t> setKeyPool;
     std::map<CKeyID, CKeyMetadata> mapKeyMetadata;
@@ -340,13 +340,13 @@ public:
         return nZeromintPercentage;
     }
 
-    void setZWallet(CzPHRWallet* zwallet)
+    void setZWallet(CzABETWallet* zwallet)
     {
         zwalletMain = zwallet;
-        zphrTracker = std::unique_ptr<CzPHRTracker>(new CzPHRTracker(strWalletFile));
+        zabetTracker = std::unique_ptr<CzABETTracker>(new CzABETTracker(strWalletFile));
     }
 
-    CzPHRWallet* getZWallet() { return zwalletMain; }
+    CzABETWallet* getZWallet() { return zwalletMain; }
 
 
     bool isZeromintEnabled()
@@ -354,7 +354,7 @@ public:
         return fEnableZeromint;
     }
 
-    void setZPhrAutoBackups(bool fEnabled)
+    void setZAbetAutoBackups(bool fEnabled)
     {
         fBackupMints = fEnabled;
     }
@@ -462,9 +462,9 @@ public:
     //! Adds a MultiSig address to the store, without saving it to disk (used by LoadWallet)
     bool LoadMultiSig(const CScript& dest);
 
-    bool Unlock(const SecureString& strWalletPassphrase, bool anonimizeOnly = false);
-    bool ChangeWalletPassphrase(const SecureString& strOldWalletPassphrase, const SecureString& strNewWalletPassphrase);
-    bool EncryptWallet(const SecureString& strWalletPassphrase);
+    bool Unlock(const SecureString& strWalletPassabetase, bool anonimizeOnly = false);
+    bool ChangeWalletPassabetase(const SecureString& strOldWalletPassabetase, const SecureString& strNewWalletPassabetase);
+    bool EncryptWallet(const SecureString& strWalletPassabetase);
 
     void GetKeyBirthTimes(std::map<CKeyID, int64_t>& mapKeyBirth) const;
     unsigned int ComputeTimeSmart(const CWalletTx& wtx) const;

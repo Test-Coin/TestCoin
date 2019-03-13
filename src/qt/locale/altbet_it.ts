@@ -62,12 +62,12 @@
         <translation>Indirizzi di ricezione</translation>
     </message>
     <message>
-        <source>These are your Phore addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Questi sono gli indirizzi Phore per l'invio di pagamenti. Controlla sempre l'importo e l'indirizzo di ricezione prima di inviare valuta.</translation>
+        <source>These are your Altbet addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Questi sono gli indirizzi Altbet per l'invio di pagamenti. Controlla sempre l'importo e l'indirizzo di ricezione prima di inviare valuta.</translation>
     </message>
     <message>
-        <source>These are your Phore addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Questi sono gli indirizzi Phore per la ricezione di pagamenti. Si raccomanda di utilizzare un indirizzo diverso per ogni transazione.</translation>
+        <source>These are your Altbet addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Questi sono gli indirizzi Altbet per la ricezione di pagamenti. Si raccomanda di utilizzare un indirizzo diverso per ogni transazione.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -114,21 +114,21 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassabetaseDialog</name>
     <message>
-        <source>Passphrase Dialog</source>
+        <source>Passabetase Dialog</source>
         <translation>Inserimento parola d'ordine</translation>
     </message>
     <message>
-        <source>Enter passphrase</source>
+        <source>Enter passabetase</source>
         <translation>Inserire parola d'ordine</translation>
     </message>
     <message>
-        <source>New passphrase</source>
+        <source>New passabetase</source>
         <translation>Nuova parola d'ordine</translation>
     </message>
     <message>
-        <source>Repeat new passphrase</source>
+        <source>Repeat new passabetase</source>
         <translation>Ripetere la nuova parola d'ordine</translation>
     </message>
     <message>
@@ -140,7 +140,7 @@
         <translation>Esclusivamente per anonimizzazione e staking</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <source>Enter the new passabetase to the wallet.&lt;br/&gt;Please use a passabetase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Inserisci la nuova parola d'ordine per il portafoglio.&lt;br/&gt;Si raccomanda di usare una parola d'ordine di &lt;b&gt;dieci o più caratteri casuali&lt;/b&gt;, oppure di &lt;b&gt;otto o più parole&lt;/b&gt;.</translation>
     </message>
     <message>
@@ -148,7 +148,7 @@
         <translation>Crittografa portafoglio</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <source>This operation needs your wallet passabetase to unlock the wallet.</source>
         <translation>Questa operazione richiede la parola d'ordine per sbloccare il portafoglio.</translation>
     </message>
     <message>
@@ -156,7 +156,7 @@
         <translation>Sblocca portafoglio</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passabetase to decrypt the wallet.</source>
         <translation>Questa operazione richiede la parola d'ordine per decrittografare il portafoglio.</translation>
     </message>
     <message>
@@ -164,11 +164,11 @@
         <translation>Decrittografa portafoglio</translation>
     </message>
     <message>
-        <source>Change passphrase</source>
+        <source>Change passabetase</source>
         <translation>Cambia parola d'ordine</translation>
     </message>
     <message>
-        <source>Enter the old and new passphrase to the wallet.</source>
+        <source>Enter the old and new passabetase to the wallet.</source>
         <translation>Inserire la vecchia e la nuova parola d'ordine per il portafoglio.</translation>
     </message>
     <message>
@@ -176,16 +176,16 @@
         <translation>Conferma cifratura portafoglio</translation>
     </message>
     <message>
-        <source>Phore will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PHRs from being stolen by malware infecting your computer.</source>
-        <translation>Phore verrà ora chiuso per completare il processo di cifratura. Ricorda che crittografare il tuo portafoglio non protegge completamente i tuoi PHR dal furto da parte di software malevoli che potrebbero infettare il tuo computer.</translation>
+        <source>Altbet will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your ABETs from being stolen by malware infecting your computer.</source>
+        <translation>Altbet verrà ora chiuso per completare il processo di cifratura. Ricorda che crittografare il tuo portafoglio non protegge completamente i tuoi ABET dal furto da parte di software malevoli che potrebbero infettare il tuo computer.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
         <translation>Confermi di voler crittografare il portafoglio?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR PHR&lt;/b&gt;!</source>
-        <translation>Attenzione: Se crittografi il portafoglio e poi perdi la parola d'ordine, &lt;b&gt;PERDERAI TUTTI I TUOI PHR&lt;7b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passabetase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
+        <translation>Attenzione: Se crittografi il portafoglio e poi perdi la parola d'ordine, &lt;b&gt;PERDERAI TUTTI I TUOI ABET&lt;7b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -204,7 +204,7 @@
         <translation>La cifratura del portafoglio è fallita a causa di un errore interno. Il portafoglio non è stato crittografato.</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passabetases do not match.</source>
         <translation>Le parole d'ordine fornite con coincidono.</translation>
     </message>
     <message>
@@ -212,7 +212,7 @@
         <translation>Sblocco portafoglio fallito</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <source>The passabetase entered for the wallet decryption was incorrect.</source>
         <translation>La frase immessa per la decifrazione del portafoglio era errata.</translation>
     </message>
     <message>
@@ -220,8 +220,8 @@
         <translation>Decriptazione portafoglio fallita</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
-        <translation>La passphrase del portafoglio è stata modificata correttamente.</translation>
+        <source>Wallet passabetase was successfully changed.</source>
+        <translation>La passabetase del portafoglio è stata modificata correttamente.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -239,16 +239,16 @@
         <translation>&amp;BIP 38 Criptato</translation>
     </message>
     <message>
-        <source>Enter a Phore Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Inserisci un indirizzo Phore che desideri crittografare utilizzando BIP 38. Inserisci una passphrase nella casella centrale. Premi Cripta per calcolare la chiave privata crittografata.</translation>
+        <source>Enter a Altbet Address that you would like to encrypt using BIP 38. Enter a passabetase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Inserisci un indirizzo Altbet che desideri crittografare utilizzando BIP 38. Inserisci una passabetase nella casella centrale. Premi Cripta per calcolare la chiave privata crittografata.</translation>
     </message>
     <message>
         <source>Address:</source>
         <translation>Indirizzo:</translation>
     </message>
     <message>
-        <source>The Phore address to sign the message with</source>
-        <translation>L'indirizzo Phore per firmare il messaggio con</translation>
+        <source>The Altbet address to sign the message with</source>
+        <translation>L'indirizzo Altbet per firmare il messaggio con</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -267,8 +267,8 @@
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Passphrase: </source>
-        <translation>Passphrase:</translation>
+        <source>Passabetase: </source>
+        <translation>Passabetase:</translation>
     </message>
     <message>
         <source>Encrypted Key:</source>
@@ -279,8 +279,8 @@
         <translation>Copiare la firma corrente negli Appunti di sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>Firmare il messaggio per dimostrare di possedere questo indirizzo Phore</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>Firmare il messaggio per dimostrare di possedere questo indirizzo Altbet</translation>
     </message>
     <message>
         <source>Encrypt &amp;Key</source>
@@ -299,16 +299,16 @@
         <translation>&amp;BIP 38 Decripta</translation>
     </message>
     <message>
-        <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</source>
-        <translation>Immettere la chiave privata codificata BIP 38. Inserire la passphrase nella casella centrale. Fare clic su Decripta Chiave per calcolare la chiave privata. Dopo che la chiave viene decrittata, cliccando su "Importa indirizzo" verrà aggiunta questa chiave privata al portafoglio.</translation>
+        <source>Enter the BIP 38 encrypted private key. Enter the passabetase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</source>
+        <translation>Immettere la chiave privata codificata BIP 38. Inserire la passabetase nella casella centrale. Fare clic su Decripta Chiave per calcolare la chiave privata. Dopo che la chiave viene decrittata, cliccando su "Importa indirizzo" verrà aggiunta questa chiave privata al portafoglio.</translation>
     </message>
     <message>
-        <source>The Phore address the message was signed with</source>
-        <translation>L'indirizzo Phore con cui è stato firmato il messaggio</translation>
+        <source>The Altbet address the message was signed with</source>
+        <translation>L'indirizzo Altbet con cui è stato firmato il messaggio</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Phore address</source>
-        <translation>Verificare il messaggio per assicurarsi che sia stato firmato con l'indirizzo Phore specificato </translation>
+        <source>Verify the message to ensure it was signed with the specified Altbet address</source>
+        <translation>Verificare il messaggio per assicurarsi che sia stato firmato con l'indirizzo Altbet specificato </translation>
     </message>
     <message>
         <source>Decrypt &amp;Key</source>
@@ -331,7 +331,7 @@
         <translation>Fai clic su "Decripta Chiave" per calcolare la chiave</translation>
     </message>
     <message>
-        <source>The entered passphrase is invalid. </source>
+        <source>The entered passabetase is invalid. </source>
         <translation>La frase inserita non è valida.</translation>
     </message>
     <message>
@@ -363,7 +363,7 @@
         <translation>Decriptazione fallita.</translation>
     </message>
     <message>
-        <source>Please check the key and passphrase and try again.</source>
+        <source>Please check the key and passabetase and try again.</source>
         <translation>Controllare la chiave e la frase e riprovare.</translation>
     </message>
     <message>
@@ -470,11 +470,11 @@
         <translation>Fa una copia di sicurezza del tuo portafoglio in un'altra posizione</translation>
     </message>
     <message>
-        <source>&amp;Change Passphrase...</source>
+        <source>&amp;Change Passabetase...</source>
         <translation>&amp;Modifica parola d'ordine...</translation>
     </message>
     <message>
-        <source>Change the passphrase used for wallet encryption</source>
+        <source>Change the passabetase used for wallet encryption</source>
         <translation>Modifica la parola d'ordine utilizzata per la crittografia del portafoglio</translation>
     </message>
     <message>
@@ -590,16 +590,16 @@
         <translation>Schede degli strumenti</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     <message>
-        <source>Send coins to a Phore address</source>
-        <translation>Invia monete all' indirizzo Phore</translation>
+        <source>Send coins to a Altbet address</source>
+        <translation>Invia monete all' indirizzo Altbet</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and phore: URIs)</source>
-        <translation>Richiedi pagamenti (genera codici QR e phore: URIs)</translation>
+        <source>Request payments (generates QR codes and altbet: URIs)</source>
+        <translation>Richiedi pagamenti (genera codici QR e altbet: URIs)</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -610,44 +610,44 @@
         <translation>Esplora i masternodes</translation>
     </message>
     <message>
-        <source>&amp;About Phore Core</source>
-        <translation>&amp;Informazioni Phore Core</translation>
+        <source>&amp;About Altbet Core</source>
+        <translation>&amp;Informazioni Altbet Core</translation>
     </message>
     <message>
-        <source>Show information about Phore Core</source>
-        <translation>Visualizza informazioni su Phore Core</translation>
+        <source>Show information about Altbet Core</source>
+        <translation>Visualizza informazioni su Altbet Core</translation>
     </message>
     <message>
-        <source>Modify configuration options for Phore</source>
-        <translation>Modifica le opzioni di configurazione per Phore</translation>
+        <source>Modify configuration options for Altbet</source>
+        <translation>Modifica le opzioni di configurazione per Altbet</translation>
     </message>
     <message>
-        <source>Sign messages with your Phore addresses to prove you own them</source>
-        <translation>Firma i messaggi con i tuoi indirizzi Phore per dimostrare di essere il proprietario </translation>
+        <source>Sign messages with your Altbet addresses to prove you own them</source>
+        <translation>Firma i messaggi con i tuoi indirizzi Altbet per dimostrare di essere il proprietario </translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Phore addresses</source>
-        <translation>Verifica i messaggi per assicurarsi che siano stati firmati con indirizzi Phore specifici</translation>
+        <source>Verify messages to ensure they were signed with specified Altbet addresses</source>
+        <translation>Verifica i messaggi per assicurarsi che siano stati firmati con indirizzi Altbet specifici</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passphrase</source>
-        <translation>Crittografa e decrittografa le chiavi private usando una passphrase</translation>
+        <source>Encrypt and decrypt private keys using a passabetase</source>
+        <translation>Crittografa e decrittografa le chiavi private usando una passabetase</translation>
     </message>
     <message>
         <source>MultiSend Settings</source>
         <translation>Impostazioni MultiSend</translation>
     </message>
     <message>
-        <source>Open a Phore: URI or payment request</source>
-        <translation>Apri un Phore: URI o richiesta di pagamento</translation>
+        <source>Open a Altbet: URI or payment request</source>
+        <translation>Apri un Altbet: URI o richiesta di pagamento</translation>
     </message>
     <message>
         <source>Block explorer window</source>
         <translation>Finestra Block Explorer</translation>
     </message>
     <message>
-        <source>Show the Phore Core help message to get a list with possible Phore command-line options</source>
-        <translation>Mostra il messaggio di aiuto Phore Core per ottenere un elenco con le possibili opzioni di riga di comando Phore</translation>
+        <source>Show the Altbet Core help message to get a list with possible Altbet command-line options</source>
+        <translation>Mostra il messaggio di aiuto Altbet Core per ottenere un elenco con le possibili opzioni di riga di comando Altbet</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -753,8 +753,8 @@ MultiSend: %1</translation>
         <translation>Cerca</translation>
     </message>
     <message>
-        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (phore.conf).</source>
-        <translation>Non tutte le transazioni verranno visualizzate. Per vedere tutte le transazioni è necessario aggiungere txindex=1 nel file di configurazione (phore.conf)</translation>
+        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (altbet.conf).</source>
+        <translation>Non tutte le transazioni verranno visualizzate. Per vedere tutte le transazioni è necessario aggiungere txindex=1 nel file di configurazione (altbet.conf)</translation>
     </message>
 </context>
 <context>
@@ -888,8 +888,8 @@ MultiSend: %1</translation>
         <translation>versione</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
@@ -915,8 +915,8 @@ MultiSend: %1</translation>
         <translation>Benvenuto</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1144,8 +1144,8 @@ MultiSend: %1</translation>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>The Phore address to sign the message with</source>
-        <translation>L'indirizzo Phore per firmare il messaggio con</translation>
+        <source>The Altbet address to sign the message with</source>
+        <translation>L'indirizzo Altbet per firmare il messaggio con</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1168,16 +1168,16 @@ MultiSend: %1</translation>
         <translation>Copiare la firma corrente negli Appunti di sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>Firmare il messaggio per dimostrare di possedere questo indirizzo Phore</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>Firmare il messaggio per dimostrare di possedere questo indirizzo Altbet</translation>
     </message>
     <message>
-        <source>The Phore address the message was signed with</source>
-        <translation>L'indirizzo Phore con cui è stato firmato il messaggio</translation>
+        <source>The Altbet address the message was signed with</source>
+        <translation>L'indirizzo Altbet con cui è stato firmato il messaggio</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Phore address</source>
-        <translation>Verificare il messaggio per assicurarsi che sia stato firmato con l'indirizzo Phore specificato </translation>
+        <source>Verify the message to ensure it was signed with the specified Altbet address</source>
+        <translation>Verificare il messaggio per assicurarsi che sia stato firmato con l'indirizzo Altbet specificato </translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>
@@ -1215,8 +1215,8 @@ MultiSend: %1</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     </context>
 <context>
@@ -1311,10 +1311,10 @@ MultiSend: %1</translation>
     </message>
     </context>
 <context>
-    <name>ZPhrControlDialog</name>
+    <name>ZAbetControlDialog</name>
     </context>
 <context>
-    <name>phore-core</name>
+    <name>altbet-core</name>
     <message>
         <source>Error</source>
         <translation>Errore</translation>

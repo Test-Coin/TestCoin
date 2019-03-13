@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ZPhrControlDialog</class>
- <widget class="QDialog" name="ZPhrControlDialog">
+ <class>ZAbetControlDialog</class>
+ <widget class="QDialog" name="ZAbetControlDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Select zPHR to Spend</string>
+   <string>Select zABET to Spend</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
    <item>
@@ -57,14 +57,14 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="labelZPhr">
+        <widget class="QLabel" name="labelZAbet">
          <property name="text">
-          <string>zPHR</string>
+          <string>zABET</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLabel" name="labelZPhr_int">
+        <widget class="QLabel" name="labelZAbet_int">
          <property name="text">
           <string>0</string>
          </property>
@@ -157,12 +157,12 @@
        </column>
        <column>
         <property name="text">
-         <string notr="true">zPHR ID</string>
+         <string notr="true">zABET ID</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string notr="true">zPHR Version</string>
+         <string notr="true">zABET Version</string>
         </property>
        </column>
        <column>
@@ -202,7 +202,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>ZPhrControlDialog</receiver>
+   <receiver>ZAbetControlDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -218,7 +218,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>ZPhrControlDialog</receiver>
+   <receiver>ZAbetControlDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

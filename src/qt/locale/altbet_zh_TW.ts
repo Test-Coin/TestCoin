@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>選擇要匯出Phore幣的位址</translation>
+        <translation>選擇要匯出Altbet幣的位址</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>選擇要接收Phore幣的位址</translation>
+        <translation>選擇要接收Altbet幣的位址</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -62,12 +62,12 @@
         <translation>接收的位址</translation>
     </message>
     <message>
-        <source>These are your Phore addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>這是你用來付款的 Phore 位址, 送出前, 請務必確認金額及接收位址是否正確.</translation>
+        <source>These are your Altbet addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>這是你用來付款的 Altbet 位址, 送出前, 請務必確認金額及接收位址是否正確.</translation>
     </message>
     <message>
-        <source>These are your Phore addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>這是你用來接收款項的 Phore 位址, 建議你每次付款都使用新的位址.</translation>
+        <source>These are your Altbet addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>這是你用來接收款項的 Altbet 位址, 建議你每次付款都使用新的位址.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -114,21 +114,21 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassabetaseDialog</name>
     <message>
-        <source>Passphrase Dialog</source>
+        <source>Passabetase Dialog</source>
         <translation>密碼輸入欄</translation>
     </message>
     <message>
-        <source>Enter passphrase</source>
+        <source>Enter passabetase</source>
         <translation>輸入密碼</translation>
     </message>
     <message>
-        <source>New passphrase</source>
+        <source>New passabetase</source>
         <translation>新的密碼</translation>
     </message>
     <message>
-        <source>Repeat new passphrase</source>
+        <source>Repeat new passabetase</source>
         <translation>重複新密碼</translation>
     </message>
     <message>
@@ -136,7 +136,7 @@
         <translation>錢包加密</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <source>This operation needs your wallet passabetase to unlock the wallet.</source>
         <translation>這項操作需要先用密碼解鎖你的錢包</translation>
     </message>
     <message>
@@ -144,7 +144,7 @@
         <translation>錢包解鎖</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passabetase to decrypt the wallet.</source>
         <translation>這項操作需要你的密碼來解密錢包</translation>
     </message>
     <message>
@@ -152,11 +152,11 @@
         <translation>錢包解密</translation>
     </message>
     <message>
-        <source>Change passphrase</source>
+        <source>Change passabetase</source>
         <translation>修改密碼</translation>
     </message>
     <message>
-        <source>Enter the old and new passphrase to the wallet.</source>
+        <source>Enter the old and new passabetase to the wallet.</source>
         <translation>請分別輸入錢包的舊密碼與新密碼</translation>
     </message>
     <message>
@@ -164,16 +164,16 @@
         <translation>錢包確認加密</translation>
     </message>
     <message>
-        <source>Phore will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PHRs from being stolen by malware infecting your computer.</source>
-        <translation>Phore 現在會關閉程式來處理加密流程, 請注意, 僅僅是加密你的錢包並不能完全保護你的 PHR 幣被可疑軟體或病毒偷走的風險.</translation>
+        <source>Altbet will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your ABETs from being stolen by malware infecting your computer.</source>
+        <translation>Altbet 現在會關閉程式來處理加密流程, 請注意, 僅僅是加密你的錢包並不能完全保護你的 ABET 幣被可疑軟體或病毒偷走的風險.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
         <translation>確定要加密你的錢包?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR PHR&lt;/b&gt;!</source>
-        <translation>請注意: 如果你加密了你的錢包但是卻忘記你設定的密碼, &lt;b&gt;你將會失去錢包裡的錢(PHR)&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passabetase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
+        <translation>請注意: 如果你加密了你的錢包但是卻忘記你設定的密碼, &lt;b&gt;你將會失去錢包裡的錢(ABET)&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -192,7 +192,7 @@
         <translation>錢包加密失敗因為程式上的錯誤, 你的錢包尚未被加密.</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passabetases do not match.</source>
         <translation>您輸入的密碼不符.</translation>
     </message>
     <message>
@@ -200,7 +200,7 @@
         <translation>錢包解鎖失敗</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <source>The passabetase entered for the wallet decryption was incorrect.</source>
         <translation>您輸入的密碼錯誤.</translation>
     </message>
     <message>
@@ -208,7 +208,7 @@
         <translation>錢包解密失敗</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
+        <source>Wallet passabetase was successfully changed.</source>
         <translation>錢包密碼修改成功</translation>
     </message>
     <message>
@@ -227,16 +227,16 @@
         <translation>&amp;BIP 38 加密</translation>
     </message>
     <message>
-        <source>Enter a Phore Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>輸入你想 BIP 38 加密的 Phore 位址, 輸入密碼在中間欄, 按下加密按鈕來產生加密私鑰.</translation>
+        <source>Enter a Altbet Address that you would like to encrypt using BIP 38. Enter a passabetase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>輸入你想 BIP 38 加密的 Altbet 位址, 輸入密碼在中間欄, 按下加密按鈕來產生加密私鑰.</translation>
     </message>
     <message>
         <source>Address:</source>
         <translation>位址:</translation>
     </message>
     <message>
-        <source>The Phore address to sign the message with</source>
-        <translation>對訊息簽名的 Phore 位址</translation>
+        <source>The Altbet address to sign the message with</source>
+        <translation>對訊息簽名的 Altbet 位址</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -255,7 +255,7 @@
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Passphrase: </source>
+        <source>Passabetase: </source>
         <translation>密碼:</translation>
     </message>
     <message>
@@ -267,8 +267,8 @@
         <translation>拷貝目前的簽章到系統剪貼簿</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>使用簽章來證明你是該  Phore 位址的擁有者,</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>使用簽章來證明你是該  Altbet 位址的擁有者,</translation>
     </message>
     <message>
         <source>Encrypt &amp;Key</source>
@@ -287,12 +287,12 @@
         <translation>&amp;BIP 38 解密</translation>
     </message>
     <message>
-        <source>The Phore address the message was signed with</source>
-        <translation>此訊息之 Phore 位址已簽章於</translation>
+        <source>The Altbet address the message was signed with</source>
+        <translation>此訊息之 Altbet 位址已簽章於</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Phore address</source>
-        <translation>驗證訊息以確保該  Phore 位址已被簽章</translation>
+        <source>Verify the message to ensure it was signed with the specified Altbet address</source>
+        <translation>驗證訊息以確保該  Altbet 位址已被簽章</translation>
     </message>
     <message>
         <source>Decrypt &amp;Key</source>
@@ -315,7 +315,7 @@
         <translation>點 "解密鑰匙" 來產生</translation>
     </message>
     <message>
-        <source>The entered passphrase is invalid. </source>
+        <source>The entered passabetase is invalid. </source>
         <translation>輸入的密碼不符合規定</translation>
     </message>
     <message>
@@ -347,7 +347,7 @@
         <translation>解密失敗</translation>
     </message>
     <message>
-        <source>Please check the key and passphrase and try again.</source>
+        <source>Please check the key and passabetase and try again.</source>
         <translation>請確認錢包私鑰的密碼是正確的.</translation>
     </message>
     <message>
@@ -454,11 +454,11 @@
         <translation>備份錢包到另外的位置</translation>
     </message>
     <message>
-        <source>&amp;Change Passphrase...</source>
+        <source>&amp;Change Passabetase...</source>
         <translation>&amp;更改密碼</translation>
     </message>
     <message>
-        <source>Change the passphrase used for wallet encryption</source>
+        <source>Change the passabetase used for wallet encryption</source>
         <translation>更改使用中的錢包密碼</translation>
     </message>
     <message>
@@ -582,16 +582,16 @@
         <translation>Tabs 工具列</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     <message>
-        <source>Send coins to a Phore address</source>
-        <translation>送出錢幣到 Phore 地址</translation>
+        <source>Send coins to a Altbet address</source>
+        <translation>送出錢幣到 Altbet 地址</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and phore: URIs)</source>
-        <translation>請求付款 (會產生 QR Code跟 phore 位址)</translation>
+        <source>Request payments (generates QR codes and altbet: URIs)</source>
+        <translation>請求付款 (會產生 QR Code跟 altbet 位址)</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -602,31 +602,31 @@
         <translation>瀏覽 Masternodes</translation>
     </message>
     <message>
-        <source>&amp;About Phore Core</source>
-        <translation>&amp;關於 Phore Core</translation>
+        <source>&amp;About Altbet Core</source>
+        <translation>&amp;關於 Altbet Core</translation>
     </message>
     <message>
-        <source>Show information about Phore Core</source>
-        <translation>顯示 Phore Core 相關資訊</translation>
+        <source>Show information about Altbet Core</source>
+        <translation>顯示 Altbet Core 相關資訊</translation>
     </message>
     <message>
-        <source>Modify configuration options for Phore</source>
-        <translation>修改 Phore 設定</translation>
+        <source>Modify configuration options for Altbet</source>
+        <translation>修改 Altbet 設定</translation>
     </message>
     <message>
-        <source>Sign messages with your Phore addresses to prove you own them</source>
-        <translation>使用你的 Phore 位址對訊息簽章, 來證明你是擁有者</translation>
+        <source>Sign messages with your Altbet addresses to prove you own them</source>
+        <translation>使用你的 Altbet 位址對訊息簽章, 來證明你是擁有者</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Phore addresses</source>
-        <translation>驗證訊息簽章與 Phore 位址吻合</translation>
+        <source>Verify messages to ensure they were signed with specified Altbet addresses</source>
+        <translation>驗證訊息簽章與 Altbet 位址吻合</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
         <translation>&amp;BIP38 工具</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passphrase</source>
+        <source>Encrypt and decrypt private keys using a passabetase</source>
         <translation>使用密碼對私鑰加密解密</translation>
     </message>
     <message>
@@ -650,8 +650,8 @@
         <translation>打開Masternode設定檔</translation>
     </message>
     <message>
-        <source>Open a Phore: URI or payment request</source>
-        <translation>打開Phore: 位址或付款請求 </translation>
+        <source>Open a Altbet: URI or payment request</source>
+        <translation>打開Altbet: 位址或付款請求 </translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -662,12 +662,12 @@
         <translation>區塊鏈瀏覽視窗</translation>
     </message>
     <message>
-        <source>Show the Phore Core help message to get a list with possible Phore command-line options</source>
-        <translation>顯示 Phore Core 幫助訊息以取得 Phore 命令列表選項</translation>
+        <source>Show the Altbet Core help message to get a list with possible Altbet command-line options</source>
+        <translation>顯示 Altbet Core 幫助訊息以取得 Altbet 命令列表選項</translation>
     </message>
     <message>
-        <source>Phore Core client</source>
-        <translation>Phore Core 客戶端</translation>
+        <source>Altbet Core client</source>
+        <translation>Altbet Core 客戶端</translation>
     </message>
     </context>
 <context>
@@ -696,15 +696,15 @@
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     </context>
 <context>
@@ -836,8 +836,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>The Phore address to sign the message with</source>
-        <translation>對訊息簽名的 Phore 位址</translation>
+        <source>The Altbet address to sign the message with</source>
+        <translation>對訊息簽名的 Altbet 位址</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -860,16 +860,16 @@
         <translation>拷貝目前的簽章到系統剪貼簿</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>使用簽章來證明你是該  Phore 位址的擁有者,</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>使用簽章來證明你是該  Altbet 位址的擁有者,</translation>
     </message>
     <message>
-        <source>The Phore address the message was signed with</source>
-        <translation>此訊息之 Phore 位址已簽章於</translation>
+        <source>The Altbet address the message was signed with</source>
+        <translation>此訊息之 Altbet 位址已簽章於</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Phore address</source>
-        <translation>驗證訊息以確保該  Phore 位址已被簽章</translation>
+        <source>Verify the message to ensure it was signed with the specified Altbet address</source>
+        <translation>驗證訊息以確保該  Altbet 位址已被簽章</translation>
     </message>
     <message>
         <source>Reset all sign message fields</source>
@@ -907,8 +907,8 @@
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Core</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Core</translation>
     </message>
     </context>
 <context>
@@ -971,9 +971,9 @@
     </message>
     </context>
 <context>
-    <name>ZPhrControlDialog</name>
+    <name>ZAbetControlDialog</name>
     </context>
 <context>
-    <name>phore-core</name>
+    <name>altbet-core</name>
     </context>
 </TS>

@@ -1,25 +1,25 @@
-# /etc/conf.d/phored: config file for /etc/init.d/phored
+# /etc/conf.d/altbetd: config file for /etc/init.d/altbetd
 
 # Config file location
-#BITCOIND_CONFIGFILE="/etc/phore/phore.conf"
+#BITCOIND_CONFIGFILE="/etc/altbet/altbet.conf"
 
 # What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
-#BITCOIND_PIDDIR="/var/run/phored"
+#BITCOIND_PIDDIR="/var/run/altbetd"
 
 # What filename to give the pidfile
-#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/phored.pid"
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/altbetd.pid"
 
-# Where to write phored data (be mindful that the blockchain is large)
-#BITCOIND_DATADIR="/var/lib/phored"
+# Where to write altbetd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/altbetd"
 
-# User and group to own phored process
-#BITCOIND_USER="phore"
-#BITCOIND_GROUP="phore"
+# User and group to own altbetd process
+#BITCOIND_USER="altbet"
+#BITCOIND_GROUP="altbet"
 
-# Path to phored executable
-#BITCOIND_BIN="/usr/bin/phored"
+# Path to altbetd executable
+#BITCOIND_BIN="/usr/bin/altbetd"
 
-# Nice value to run phored under
+# Nice value to run altbetd under
 #BITCOIND_NICE=0
 
 # Additional options (avoid -conf and -datadir, use flags above)

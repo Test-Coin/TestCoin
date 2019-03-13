@@ -9,8 +9,8 @@
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between phore-cli and phored)
- * of a given instance of the Phore system.
+ * CBaseChainParams defines the base parameters (shared between altbet-cli and altbetd)
+ * of a given instance of the Altbet system.
  */
 class CBaseChainParams
 {

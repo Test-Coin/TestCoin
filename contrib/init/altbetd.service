@@ -1,19 +1,19 @@
 [Unit]
-Description=Phore's distributed currency daemon
+Description=Altbet's distributed currency daemon
 After=network.target
 
 [Service]
-User=phore
-Group=phore
+User=altbet
+Group=altbet
 
 Type=forking
-PIDFile=/var/lib/phored/phored.pid
+PIDFile=/var/lib/altbetd/altbetd.pid
 
-ExecStart=/usr/bin/phored -daemon -pid=/var/lib/phored/phored.pid \
-          -conf=/etc/phore/phore.conf -datadir=/var/lib/phored
+ExecStart=/usr/bin/altbetd -daemon -pid=/var/lib/altbetd/altbetd.pid \
+          -conf=/etc/altbet/altbet.conf -datadir=/var/lib/altbetd
 
-ExecStop=-/usr/bin/phore-cli -conf=/etc/phore/phore.conf \
-         -datadir=/var/lib/phored stop
+ExecStop=-/usr/bin/altbet-cli -conf=/etc/altbet/altbet.conf \
+         -datadir=/var/lib/altbetd stop
 
 Restart=always
 PrivateTmp=true

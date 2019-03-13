@@ -94,17 +94,17 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassabetaseDialog</name>
     <message>
-        <source>Enter passphrase</source>
+        <source>Enter passabetase</source>
         <translation>Wpisz hasło</translation>
     </message>
     <message>
-        <source>New passphrase</source>
+        <source>New passabetase</source>
         <translation>Nowe hasło</translation>
     </message>
     <message>
-        <source>Repeat new passphrase</source>
+        <source>Repeat new passabetase</source>
         <translation>Powtórz nowe hasło</translation>
     </message>
     <message>
@@ -116,7 +116,7 @@
         <translation>Zakoduj portfel</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <source>This operation needs your wallet passabetase to unlock the wallet.</source>
         <translation>Ta operacja wymaga twojego hasła, by odblokować portfel</translation>
     </message>
     <message>
@@ -124,7 +124,7 @@
         <translation>Odblokuj portfel</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passabetase to decrypt the wallet.</source>
         <translation>Ta operacja wymaga twojego hasła, by zakodować portfel</translation>
     </message>
     <message>
@@ -132,11 +132,11 @@
         <translation>Zakoduj portfel</translation>
     </message>
     <message>
-        <source>Change passphrase</source>
+        <source>Change passabetase</source>
         <translation>Zmień hasło</translation>
     </message>
     <message>
-        <source>Enter the old and new passphrase to the wallet.</source>
+        <source>Enter the old and new passabetase to the wallet.</source>
         <translation>Wpisz stare oraz nowe hasło do portfela</translation>
     </message>
     <message>
@@ -148,8 +148,8 @@
         <translation>Czy na pewno chcesz zakodować portfel?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR PHR&lt;/b&gt;!</source>
-        <translation>Ostrzeżenie: Jeżeli zakodujesz portfel i stracisz do niego hasło , UTRACISZ WSZYSTKIE PHR!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passabetase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
+        <translation>Ostrzeżenie: Jeżeli zakodujesz portfel i stracisz do niego hasło , UTRACISZ WSZYSTKIE ABET!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -164,7 +164,7 @@
         <translation>Kodowanie portfela nieudane z powodu wewnętrznego błędu. Twój portfel nie został zakodowany</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passabetases do not match.</source>
         <translation>Podane hasła nie zgadzają się</translation>
     </message>
     <message>
@@ -172,7 +172,7 @@
         <translation>Odblokowanie portfela nieudane</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <source>The passabetase entered for the wallet decryption was incorrect.</source>
         <translation>Podane hasło do zakodowania portfela jest błędne</translation>
     </message>
     <message>
@@ -180,7 +180,7 @@
         <translation>Kodowanie portfela nieudane</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
+        <source>Wallet passabetase was successfully changed.</source>
         <translation>Hasło do portfela zostało zmienione</translation>
     </message>
     <message>
@@ -219,7 +219,7 @@
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Passphrase: </source>
+        <source>Passabetase: </source>
         <translation>Hasło:</translation>
     </message>
     <message>
@@ -227,8 +227,8 @@
         <translation>Zakodowany klucz:</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres Phore jest w twoim posiadaniu</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres Altbet jest w twoim posiadaniu</translation>
     </message>
     <message>
         <source>Encrypt &amp;Key</source>
@@ -255,7 +255,7 @@
         <translation>Adres importu</translation>
     </message>
     <message>
-        <source>The entered passphrase is invalid. </source>
+        <source>The entered passabetase is invalid. </source>
         <translation>Podane hasło jest nieprawidłowe</translation>
     </message>
     <message>
@@ -287,7 +287,7 @@
         <translation>Błąd kodowania</translation>
     </message>
     <message>
-        <source>Please check the key and passphrase and try again.</source>
+        <source>Please check the key and passabetase and try again.</source>
         <translation>Proszę sprawdzić klucz i hasło ponownie</translation>
     </message>
     <message>
@@ -394,11 +394,11 @@
         <translation>&amp;Kopia zapasowa portfela z innej lokacji</translation>
     </message>
     <message>
-        <source>&amp;Change Passphrase...</source>
+        <source>&amp;Change Passabetase...</source>
         <translation>&amp;Zmień hasło</translation>
     </message>
     <message>
-        <source>Change the passphrase used for wallet encryption</source>
+        <source>Change the passabetase used for wallet encryption</source>
         <translation>Zmień hasło do zakodowania portfela</translation>
     </message>
     <message>
@@ -518,16 +518,16 @@
         <translation>&amp;Pomoc</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>&amp;Rdzeń Phore</translation>
+        <source>Altbet Core</source>
+        <translation>&amp;Rdzeń Altbet</translation>
     </message>
     <message>
-        <source>Send coins to a Phore address</source>
-        <translation>Wyślij monety do adresu Phore</translation>
+        <source>Send coins to a Altbet address</source>
+        <translation>Wyślij monety do adresu Altbet</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and phore: URIs)</source>
-        <translation>Zarządaj płatności (generuje kod QR i phore:URI)</translation>
+        <source>Request payments (generates QR codes and altbet: URIs)</source>
+        <translation>Zarządaj płatności (generuje kod QR i altbet:URI)</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -538,31 +538,31 @@
         <translation>Przeglądaj masternodes</translation>
     </message>
     <message>
-        <source>&amp;About Phore Core</source>
+        <source>&amp;About Altbet Core</source>
         <translation>&amp;O rdzeniu bitcoina</translation>
     </message>
     <message>
-        <source>Show information about Phore Core</source>
+        <source>Show information about Altbet Core</source>
         <translation>Pokaż informacje o rdzeniu bitcoina</translation>
     </message>
     <message>
-        <source>Modify configuration options for Phore</source>
-        <translation>Modyfikuj opcje konfiguracji Phore</translation>
+        <source>Modify configuration options for Altbet</source>
+        <translation>Modyfikuj opcje konfiguracji Altbet</translation>
     </message>
     <message>
-        <source>Sign messages with your Phore addresses to prove you own them</source>
-        <translation>Zatwierdź wiadomość z twoimi adresami Phore, by udowodnić, że jesteś w ich posiadaniu</translation>
+        <source>Sign messages with your Altbet addresses to prove you own them</source>
+        <translation>Zatwierdź wiadomość z twoimi adresami Altbet, by udowodnić, że jesteś w ich posiadaniu</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Phore addresses</source>
-        <translation>Zweryfikuj wiadomości by upewnić się, że zostały zatwierdzone z podanego adresu Phore</translation>
+        <source>Verify messages to ensure they were signed with specified Altbet addresses</source>
+        <translation>Zweryfikuj wiadomości by upewnić się, że zostały zatwierdzone z podanego adresu Altbet</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
         <translation>&amp;BIP 38 narzędzie</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passphrase</source>
+        <source>Encrypt and decrypt private keys using a passabetase</source>
         <translation>Zakoduj i odkoduj prywatne klucze używając hasła</translation>
     </message>
     <message>
@@ -582,8 +582,8 @@
         <translation>Otwórz &amp;Plik konfiguracji Masternode</translation>
     </message>
     <message>
-        <source>Open a Phore: URI or payment request</source>
-        <translation>OtwórzPHRX: URI i żądanie zapłaty</translation>
+        <source>Open a Altbet: URI or payment request</source>
+        <translation>OtwórzABETX: URI i żądanie zapłaty</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -594,12 +594,12 @@
         <translation>Okno eksplorera bloków</translation>
     </message>
     <message>
-        <source>Show the Phore Core help message to get a list with possible Phore command-line options</source>
-        <translation>Pokaż wiadomość pomocy rdzenia Phore, aby dostać listę możliwych opcji Phore command-line</translation>
+        <source>Show the Altbet Core help message to get a list with possible Altbet command-line options</source>
+        <translation>Pokaż wiadomość pomocy rdzenia Altbet, aby dostać listę możliwych opcji Altbet command-line</translation>
     </message>
     <message>
-        <source>Phore Core client</source>
-        <translation>Rdzeń Phore klient</translation>
+        <source>Altbet Core client</source>
+        <translation>Rdzeń Altbet klient</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -912,8 +912,8 @@ MultiWysyłlka: %1</translation>
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Phore Core</source>
-        <translation>&amp;Rdzeń Phore</translation>
+        <source>Altbet Core</source>
+        <translation>&amp;Rdzeń Altbet</translation>
     </message>
     </context>
 <context>
@@ -927,8 +927,8 @@ MultiWysyłlka: %1</translation>
         <translation>Użyj niestandardowej ścieżki danych</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>&amp;Rdzeń Phore</translation>
+        <source>Altbet Core</source>
+        <translation>&amp;Rdzeń Altbet</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1188,12 +1188,12 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>Zezwól na przychodzące połączenia</translation>
     </message>
     <message>
-        <source>Automatically start Phore after logging in to the system.</source>
-        <translation>Automatycznie uruchom Phore po zalogowaniu do systemu</translation>
+        <source>Automatically start Altbet after logging in to the system.</source>
+        <translation>Automatycznie uruchom Altbet po zalogowaniu do systemu</translation>
     </message>
     <message>
-        <source>&amp;Start Phore on system login</source>
-        <translation>&amp;Uruchom Phore podczas logowania do systemu</translation>
+        <source>&amp;Start Altbet on system login</source>
+        <translation>&amp;Uruchom Altbet podczas logowania do systemu</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1212,18 +1212,18 @@ Proszę sprawdzić adres i spróbować ponownie</translation>
         <translation>&amp;Sieć</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Phore.</source>
-        <translation>Język interfejsu użytkownika może być wybrany tutaj. Ustawienia ulegną zmianie po restarcie Phore</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Altbet.</source>
+        <translation>Język interfejsu użytkownika może być wybrany tutaj. Ustawienia ulegną zmianie po restarcie Altbet</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/phore-project/phore-project-translations</source>
+https://www.transifex.com/altbet-project/altbet-project-translations</source>
         <translation>Brakuje języka bądź nieukończona pełnego tłumaczenia? Pomóż w tłumaczeniu tutaj:
-https://www.transifex.com/phore-project/phore-project-translations </translation>
+https://www.transifex.com/altbet-project/altbet-project-translations </translation>
     </message>
     <message>
-        <source>Connect to the Phore network through a SOCKS5 proxy.</source>
-        <translation>Połącz z siecią Phore poprzez SOCKS5 proxy.</translation>
+        <source>Connect to the Altbet network through a SOCKS5 proxy.</source>
+        <translation>Połącz z siecią Altbet poprzez SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1461,8 +1461,8 @@ https://www.transifex.com/phore-project/phore-project-translations </translation
         <translation>Liczba</translation>
     </message>
     <message>
-        <source>Enter a Phore address (e.g. %1)</source>
-        <translation>Wprowadź adres Phore (np. %1)</translation>
+        <source>Enter a Altbet address (e.g. %1)</source>
+        <translation>Wprowadź adres Altbet (np. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1900,8 +1900,8 @@ https://www.transifex.com/phore-project/phore-project-translations </translation
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres Phore jest w twoim posiadaniu</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>Zatwierdź wiadomość, aby udowodnić, że podany adres Altbet jest w twoim posiadaniu</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -1935,8 +1935,8 @@ https://www.transifex.com/phore-project/phore-project-translations </translation
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Phore Core</source>
-        <translation>&amp;Rdzeń Phore</translation>
+        <source>Altbet Core</source>
+        <translation>&amp;Rdzeń Altbet</translation>
     </message>
     </context>
 <context>
@@ -2027,14 +2027,14 @@ https://www.transifex.com/phore-project/phore-project-translations </translation
     </message>
     </context>
 <context>
-    <name>ZPhrControlDialog</name>
+    <name>ZAbetControlDialog</name>
     <message>
         <source>0</source>
         <translation>0</translation>
     </message>
     </context>
 <context>
-    <name>phore-core</name>
+    <name>altbet-core</name>
     <message>
         <source>Error</source>
         <translation>Błąd</translation>

@@ -7,12 +7,12 @@ reset-files.bash
 *.tar.gz
 
 *.exe
-src/phore
-src/phored
-src/phore-cli
-src/phore-tx
-src/test/test_phore
-src/qt/test/test_phore-qt
+src/altbet
+src/altbetd
+src/altbet-cli
+src/altbet-tx
+src/test/test_altbet
+src/qt/test/test_altbet-qt
 
 # autoreconf
 Makefile.in
@@ -38,8 +38,8 @@ confdefs.h
 conftest.cpp
 conftest.err
 libtool
-src/config/phore-config.h
-src/config/phore-config.h.in
+src/config/altbet-config.h
+src/config/altbet-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -64,7 +64,7 @@ src/leveldb/build_config.mk
 *.pyc
 *.o
 *.o-*
-.phore
+.altbet
 *.a
 *.pb.cc
 *.pb.h
@@ -84,12 +84,12 @@ src/leveldb/build_config.mk
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-phore-qt
-phore-Qt.app
+altbet-qt
+altbet-Qt.app
 
 # Unit-tests
 Makefile.test
-phore-qt_test
+altbet-qt_test
 src/test/buildenv.py
 
 # Resources cpp
@@ -105,7 +105,7 @@ build
 #lcov
 *.gcno
 /*.info
-test_phore.coverage/
+test_altbet.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -132,3 +132,5 @@ cache
 .vs/slnx.sqlite
 .vs/TestCoin/v15/Browse.VC.db
 .vs/TestCoin/v15/Browse.VC.opendb
+.vs/TestCoin/v15/.suo
+.vs/TestCoin/v15/ipch/AutoPCH/5a417e831afb7d67/RPCCONSOLE.ipch

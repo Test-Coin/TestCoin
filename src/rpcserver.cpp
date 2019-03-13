@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2019 The Phore Developers
+// Copyright (c) 2019 The Altbet Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -265,10 +265,10 @@ UniValue stop(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop Phore server.");
+            "\nStop Altbet server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "Phore server stopping";
+    return "Altbet server stopping";
 }
 
 
@@ -352,38 +352,38 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
 
-        /* Phore features */
-        {"phore", "masternode", &masternode, true, true, false},
-        {"phore", "listmasternodes", &listmasternodes, true, true, false},
-        {"phore", "createmasternodebroadcast", &createmasternodebroadcast, true, true, false},
-        {"phore", "decodemasternodebroadcast", &decodemasternodebroadcast, true, true, false},
-        {"phore", "relaymasternodebroadcast", &relaymasternodebroadcast, true, true, false},
-        {"phore", "getmasternodecount", &getmasternodecount, true, true, false},
-        {"phore", "masternodeconnect", &masternodeconnect, true, true, false},
-        {"phore", "masternodecurrent", &masternodecurrent, true, true, false},
-        {"phore", "masternodedebug", &masternodedebug, true, true, false},
-        {"phore", "startmasternode", &startmasternode, true, true, false},
-        {"phore", "createmasternodekey", &createmasternodekey, true, true, false},
-        {"phore", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
-        {"phore", "listmasternodeconf", &listmasternodeconf, true, true, false},
-        {"phore", "getmasternodestatus", &getmasternodestatus, true, true, false},
-        {"phore", "getmasternodewinners", &getmasternodewinners, true, true, false},
-        {"phore", "getmasternodescores", &getmasternodescores, true, true, false},
-        {"phore", "mnbudget", &mnbudget, true, true, false},
-        {"phore", "preparebudget", &preparebudget, true, true, false},
-        {"phore", "submitbudget", &submitbudget, true, true, false},
-        {"phore", "mnbudgetvote", &mnbudgetvote, true, true, false},
-        {"phore", "getbudgetvotes", &getbudgetvotes, true, true, false},
-        {"phore", "getnextsuperblock", &getnextsuperblock, true, true, false},
-        {"phore", "getbudgetprojection", &getbudgetprojection, true, true, false},
-        {"phore", "getbudgetinfo", &getbudgetinfo, true, true, false},
-        {"phore", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
-        {"phore", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        {"phore", "checkbudgets", &checkbudgets, true, true, false},
-        {"phore", "mnsync", &mnsync, true, true, false},
-        {"phore", "spork", &spork, true, true, false},
-        {"phore", "getpoolinfo", &getpoolinfo, true, true, false},
-        {"phore", "makekeypair", &makekeypair, true, true, false},
+        /* Altbet features */
+        {"altbet", "masternode", &masternode, true, true, false},
+        {"altbet", "listmasternodes", &listmasternodes, true, true, false},
+        {"altbet", "createmasternodebroadcast", &createmasternodebroadcast, true, true, false},
+        {"altbet", "decodemasternodebroadcast", &decodemasternodebroadcast, true, true, false},
+        {"altbet", "relaymasternodebroadcast", &relaymasternodebroadcast, true, true, false},
+        {"altbet", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"altbet", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"altbet", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"altbet", "masternodedebug", &masternodedebug, true, true, false},
+        {"altbet", "startmasternode", &startmasternode, true, true, false},
+        {"altbet", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"altbet", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"altbet", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"altbet", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"altbet", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"altbet", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"altbet", "mnbudget", &mnbudget, true, true, false},
+        {"altbet", "preparebudget", &preparebudget, true, true, false},
+        {"altbet", "submitbudget", &submitbudget, true, true, false},
+        {"altbet", "mnbudgetvote", &mnbudgetvote, true, true, false},
+        {"altbet", "getbudgetvotes", &getbudgetvotes, true, true, false},
+        {"altbet", "getnextsuperblock", &getnextsuperblock, true, true, false},
+        {"altbet", "getbudgetprojection", &getbudgetprojection, true, true, false},
+        {"altbet", "getbudgetinfo", &getbudgetinfo, true, true, false},
+        {"altbet", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
+        {"altbet", "mnfinalbudget", &mnfinalbudget, true, true, false},
+        {"altbet", "checkbudgets", &checkbudgets, true, true, false},
+        {"altbet", "mnsync", &mnsync, true, true, false},
+        {"altbet", "spork", &spork, true, true, false},
+        {"altbet", "getpoolinfo", &getpoolinfo, true, true, false},
+        {"altbet", "makekeypair", &makekeypair, true, true, false},
 #ifdef ENABLE_WALLET
         /* Wallet */
         {"wallet", "addmultisigaddress", &addmultisigaddress, true, false, true},
@@ -434,8 +434,8 @@ static const CRPCCommand vRPCCommands[] =
         {"wallet", "settxfee", &settxfee, true, false, true},
         {"wallet", "signmessage", &signmessage, true, false, true},
         {"wallet", "walletlock", &walletlock, true, false, true},
-        {"wallet", "walletpassphrasechange", &walletpassphrasechange, true, false, true},
-        {"wallet", "walletpassphrase", &walletpassphrase, true, false, true},
+        {"wallet", "walletpassabetasechange", &walletpassabetasechange, true, false, true},
+        {"wallet", "walletpassabetase", &walletpassabetase, true, false, true},
 
         {"zerocoin", "getzerocoinbalance", &getzerocoinbalance, false, false, true},
         {"zerocoin", "listmintedzerocoins", &listmintedzerocoins, false, false, true},
@@ -450,8 +450,8 @@ static const CRPCCommand vRPCCommands[] =
         {"zerocoin", "exportzerocoins", &exportzerocoins, false, false, true},
         {"zerocoin", "reconsiderzerocoins", &reconsiderzerocoins, false, false, true},
         {"zerocoin", "getspentzerocoinamount", &getspentzerocoinamount, false, false, false},
-        {"zerocoin", "getzphrseed", &getzphrseed, false, false, true},
-        {"zerocoin", "setzphrseed", &setzphrseed, false, false, true}
+        {"zerocoin", "getzabetseed", &getzabetseed, false, false, true},
+        {"zerocoin", "setzabetseed", &setzabetseed, false, false, true}
 
 #endif // ENABLE_WALLET
 };
@@ -615,7 +615,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(string methodname, string args)
 {
-    return "> phore-cli " + methodname + " " + args + "\n";
+    return "> altbet-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(string methodname, string args)

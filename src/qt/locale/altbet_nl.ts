@@ -63,12 +63,12 @@
         <translation>Ontvangstadressen</translation>
     </message>
     <message>
-        <source>These are your Phore addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dit zijn uw Phoreadressen om betalingen mee te verzenden. Controleer altijd zowel het bedrag als het ontvangstadres voor het verzenden.</translation>
+        <source>These are your Altbet addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Dit zijn uw Altbetadressen om betalingen mee te verzenden. Controleer altijd zowel het bedrag als het ontvangstadres voor het verzenden.</translation>
     </message>
     <message>
-        <source>These are your Phore addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dit zijn uw Phoreadressen waarop betalingen kunnen worden ontvangen. Het wordt aangeraden om een nieuw ontvangstadres voor elke transactie te gebruiken.</translation>
+        <source>These are your Altbet addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dit zijn uw Altbetadressen waarop betalingen kunnen worden ontvangen. Het wordt aangeraden om een nieuw ontvangstadres voor elke transactie te gebruiken.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -115,21 +115,21 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassabetaseDialog</name>
     <message>
-        <source>Passphrase Dialog</source>
+        <source>Passabetase Dialog</source>
         <translation>Wachtwoorddialoog</translation>
     </message>
     <message>
-        <source>Enter passphrase</source>
+        <source>Enter passabetase</source>
         <translation>Voer wachtwoord in</translation>
     </message>
     <message>
-        <source>New passphrase</source>
+        <source>New passabetase</source>
         <translation>Nieuw wachtwoord</translation>
     </message>
     <message>
-        <source>Repeat new passphrase</source>
+        <source>Repeat new passabetase</source>
         <translation>Herhaal nieuw wachtwoord</translation>
     </message>
     <message>
@@ -141,7 +141,7 @@
         <translation>Alleen voor anonimisering en staking</translation>
     </message>
     <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <source>Enter the new passabetase to the wallet.&lt;br/&gt;Please use a passabetase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Voer een nieuw wachtwoord in voor uw portemonnee.&lt;br/&gt;Gebruik een wachtwoord van &lt;b&gt;tien of meer willekeurige karakters&lt;/b&gt;, of &lt;b&gt;acht of meer woorden&lt;/b&gt;.</translation>
     </message>
     <message>
@@ -149,7 +149,7 @@
         <translation>Versleutel portemonnee</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
+        <source>This operation needs your wallet passabetase to unlock the wallet.</source>
         <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te openen.</translation>
     </message>
 	    <message>
@@ -161,7 +161,7 @@
         <translation>Open portemonnee</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passabetase to decrypt the wallet.</source>
         <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te ontsleutelen</translation>
     </message>
     <message>
@@ -169,11 +169,11 @@
         <translation>Ontsleutel portemonnee</translation>
     </message>
     <message>
-        <source>Change passphrase</source>
+        <source>Change passabetase</source>
         <translation>Wijzig wachtwoord</translation>
     </message>
     <message>
-        <source>Enter the old and new passphrase to the wallet.</source>
+        <source>Enter the old and new passabetase to the wallet.</source>
         <translation>Voer het oude en nieuwe wachtwoord voor uw portemonnee in.</translation>
     </message>
     <message>
@@ -181,16 +181,16 @@
         <translation>Bevestig versleuteling van de portemonnee</translation>
     </message>
     <message>
-        <source>Phore will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PHRs from being stolen by malware infecting your computer.</source>
-        <translation>Phore zal nu afsluiten om het versleutelingsproces te voltooien. Onthoud dat het versleutelen van uw portemonnee u niet volledig kan beschermen: Malware kan uw computer infecteren en uw PHRs stelen.</translation>
+        <source>Altbet will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your ABETs from being stolen by malware infecting your computer.</source>
+        <translation>Altbet zal nu afsluiten om het versleutelingsproces te voltooien. Onthoud dat het versleutelen van uw portemonnee u niet volledig kan beschermen: Malware kan uw computer infecteren en uw ABETs stelen.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
         <translation>Weet u zeker dat u uw portemonnee wilt versleutelen?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR PHR&lt;/b&gt;!</source>
-        <translation>Waarschuwing: Als u uw portemonnee versleutelt en uw wachtwoord vergeet, zult u &lt;b&gt;AL UW PHR VERLIEZEN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passabetase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
+        <translation>Waarschuwing: Als u uw portemonnee versleutelt en uw wachtwoord vergeet, zult u &lt;b&gt;AL UW ABET VERLIEZEN&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -209,7 +209,7 @@
         <translation>Portemonneeversleuteling mislukt door een interne fout. Uw portemonnee is niet versleuteld.</translation>
     </message>
     <message>
-        <source>The supplied passphrases do not match.</source>
+        <source>The supplied passabetases do not match.</source>
         <translation>De opgegeven wachtwoorden komen niet overeen.</translation>
     </message>
     <message>
@@ -217,7 +217,7 @@
         <translation>Portemonnee openen mislukt</translation>
     </message>
     <message>
-        <source>The passphrase entered for the wallet decryption was incorrect.</source>
+        <source>The passabetase entered for the wallet decryption was incorrect.</source>
         <translation>Het opgegeven wachtwoord voor de portemonnee-ontsleuteling is niet correct.</translation>
     </message>
     <message>
@@ -225,7 +225,7 @@
         <translation>Portemonnee-ontsleuteling mislukt</translation>
     </message>
     <message>
-        <source>Wallet passphrase was successfully changed.</source>
+        <source>Wallet passabetase was successfully changed.</source>
         <translation>Portemonneewachtwoord is met succes gewijzigd.</translation>
     </message>
     <message>
@@ -244,16 +244,16 @@
         <translation>&amp;BIP 38 Versleuteling</translation>
     </message>
     <message>
-        <source>Enter a Phore Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation>Voer een Phore adres in dat u wilt versleutelen met BIP 38. Voer een wachtwoord in, in het middelste veld. Druk op versleutelen om de versleutelde geheime sleutel te berekenen.</translation>
+        <source>Enter a Altbet Address that you would like to encrypt using BIP 38. Enter a passabetase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <translation>Voer een Altbet adres in dat u wilt versleutelen met BIP 38. Voer een wachtwoord in, in het middelste veld. Druk op versleutelen om de versleutelde geheime sleutel te berekenen.</translation>
     </message>
     <message>
         <source>Address:</source>
         <translation>Adres:</translation>
     </message>
     <message>
-        <source>The Phore address to sign the message with</source>
-        <translation>Het Phore adres om het bericht met te ondertekenen</translation>
+        <source>The Altbet address to sign the message with</source>
+        <translation>Het Altbet adres om het bericht met te ondertekenen</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -272,7 +272,7 @@
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Passphrase: </source>
+        <source>Passabetase: </source>
         <translation>Wachtwoord:</translation>
     </message>
     <message>
@@ -284,8 +284,8 @@
         <translation>Kopieer de huidige handtekening naar het systeemklembord</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>Onderteken het bericht om te bewijzen dat u het Phore adres bezit</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>Onderteken het bericht om te bewijzen dat u het Altbet adres bezit</translation>
     </message>
     <message>
         <source>Encrypt &amp;Key</source>
@@ -304,16 +304,16 @@
         <translation>&amp;BIP 38 ontsleuteling</translation>
     </message>
     <message>
-        <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking &apos;Import Address&apos; will add this private key to the wallet.</source>
+        <source>Enter the BIP 38 encrypted private key. Enter the passabetase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking &apos;Import Address&apos; will add this private key to the wallet.</source>
         <translation>Voer de BIP 38 versleutelde geheime sleutel in. Voer het wachtwoord in, in het middelste veld. Druk op Ontsleutelen Sleutel om de geheime sleutel te berekenen.  Nadat de geheime sleutel is ontsleuteld, zal het klikken op &apos;Adres Importerens&apos; de geheime sleutel toevoegen aan de portemonnee.</translation>
     </message>
     <message>
-        <source>The Phore address the message was signed with</source>
-        <translation>Het Phore adres waarmee het bericht was ondertekend</translation>
+        <source>The Altbet address the message was signed with</source>
+        <translation>Het Altbet adres waarmee het bericht was ondertekend</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Phore address</source>
-        <translation>Controleer een bericht om te verifiëren dat het ondertekend is door het gespecificeerde Phore adres</translation>
+        <source>Verify the message to ensure it was signed with the specified Altbet address</source>
+        <translation>Controleer een bericht om te verifiëren dat het ondertekend is door het gespecificeerde Altbet adres</translation>
     </message>
     <message>
         <source>Decrypt &amp;Key</source>
@@ -336,7 +336,7 @@
         <translation>Klik &quot;Ontsleutelen Sleutel&quot; om de sleutel te berekenen</translation>
     </message>
     <message>
-        <source>The entered passphrase is invalid. </source>
+        <source>The entered passabetase is invalid. </source>
         <translation>Het ingevoerde wachtwoord is ongeldig.</translation>
     </message>
     <message>
@@ -368,7 +368,7 @@
         <translation>Ontsleutelen mislukt.</translation>
     </message>
     <message>
-        <source>Please check the key and passphrase and try again.</source>
+        <source>Please check the key and passabetase and try again.</source>
         <translation>Controleer de sleutel en het wachtwoord en probeer het opnieuw.</translation>
     </message>
     <message>
@@ -475,11 +475,11 @@
         <translation>Backup portemonnee naar een andere locatie</translation>
     </message>
     <message>
-        <source>&amp;Change Passphrase...</source>
+        <source>&amp;Change Passabetase...</source>
         <translation>&amp;Wijzig Wachtwoord...</translation>
     </message>
     <message>
-        <source>Change the passphrase used for wallet encryption</source>
+        <source>Change the passabetase used for wallet encryption</source>
         <translation>Wijzig het wachtwoord voor uw portemonneversleuteling</translation>
     </message>
     <message>
@@ -607,24 +607,24 @@
         <translation>Tabblad werkbalk</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Kern</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Kern</translation>
     </message>
     <message>
-        <source>Send coins to a Phore address</source>
-        <translation>Verstuur munten naar een Phore adres</translation>
+        <source>Send coins to a Altbet address</source>
+        <translation>Verstuur munten naar een Altbet adres</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and phore: URIs)</source>
-        <translation>Vraag betaling aan (genereert QR-codes en Phore: URI's)</translation>
+        <source>Request payments (generates QR codes and altbet: URIs)</source>
+        <translation>Vraag betaling aan (genereert QR-codes en Altbet: URI's)</translation>
     </message>
     <message>
         <source>&amp;Privacy</source>
         <translation>&amp;Privacy</translation>
     </message>
     <message>
-        <source>Privacy Action for zPHR and Obfuscation</source>
-        <translation>Privacy Actie voor zPHR en verduistering</translation>
+        <source>Privacy Action for zABET and Obfuscation</source>
+        <translation>Privacy Actie voor zABET en verduistering</translation>
     </message>
     <message>
         <source>&amp;Masternodes</source>
@@ -635,31 +635,31 @@
         <translation>Bekijk masternodes</translation>
     </message>
     <message>
-        <source>&amp;About Phore Core</source>
-        <translation>&amp;Over Phore Kern</translation>
+        <source>&amp;About Altbet Core</source>
+        <translation>&amp;Over Altbet Kern</translation>
     </message>
     <message>
-        <source>Show information about Phore Core</source>
-        <translation>Toon informatie over Phore Kern</translation>
+        <source>Show information about Altbet Core</source>
+        <translation>Toon informatie over Altbet Kern</translation>
     </message>
     <message>
-        <source>Modify configuration options for Phore</source>
-        <translation>Wijzig Phore configuratie opties</translation>
+        <source>Modify configuration options for Altbet</source>
+        <translation>Wijzig Altbet configuratie opties</translation>
     </message>
     <message>
-        <source>Sign messages with your Phore addresses to prove you own them</source>
-        <translation>Onderteken berichten met uw Phore adressen om te bewijzen dat u deze adressen bezit</translation>
+        <source>Sign messages with your Altbet addresses to prove you own them</source>
+        <translation>Onderteken berichten met uw Altbet adressen om te bewijzen dat u deze adressen bezit</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Phore addresses</source>
-        <translation>Controleer berichten om te verifiëren dat deze ondertekend zijn met de gespecificeerde Phore adressen</translation>
+        <source>Verify messages to ensure they were signed with specified Altbet addresses</source>
+        <translation>Controleer berichten om te verifiëren dat deze ondertekend zijn met de gespecificeerde Altbet adressen</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
         <translation>&amp;BIP38 tool</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passphrase</source>
+        <source>Encrypt and decrypt private keys using a passabetase</source>
         <translation>Versleutelen en ontsleutelen door middel van een wachtwoord/wachtzin</translation>
     </message>
     <message>
@@ -683,8 +683,8 @@
         <translation>Open Masternode configuratiebestand</translation>
     </message>
     <message>
-        <source>Open a Phore: URI or payment request</source>
-        <translation>Open een Phore: URI of betaalverzoek</translation>
+        <source>Open a Altbet: URI or payment request</source>
+        <translation>Open een Altbet: URI of betaalverzoek</translation>
     </message>
     <message>
         <source>&amp;Blockchain explorer</source>
@@ -695,16 +695,16 @@
         <translation>Block verkenner venster</translation>
     </message>
     <message>
-        <source>Show the Phore Core help message to get a list with possible Phore command-line options</source>
-        <translation>Toon het Phore Core help bericht om een ​​lijst te krijgen met mogelijke Phore command line opties</translation>
+        <source>Show the Altbet Core help message to get a list with possible Altbet command-line options</source>
+        <translation>Toon het Altbet Core help bericht om een ​​lijst te krijgen met mogelijke Altbet command line opties</translation>
     </message>
     <message>
-        <source>Phore Core client</source>
-        <translation>Phore Core client</translation>
+        <source>Altbet Core client</source>
+        <translation>Altbet Core client</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Phore network</source>
-        <translation><numerusform>%n actieve verbinding naar het Phore netwerk</numerusform><numerusform>%n actieve verbinding(en) naar het Phore netwerk</numerusform></translation>
+        <source>%n active connection(s) to Altbet network</source>
+        <translation><numerusform>%n actieve verbinding naar het Altbet netwerk</numerusform><numerusform>%n actieve verbinding(en) naar het Altbet netwerk</numerusform></translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -847,8 +847,8 @@ MultiSend: %1</translation>
         <translation>&amp;Privacy</translation>
     </message>
     <message>
-        <source>Privacy Actions for zPHR</source>
-        <translation>Privacyacties voor zPHR</translation>
+        <source>Privacy Actions for zABET</source>
+        <translation>Privacyacties voor zABET</translation>
     </message>
     <message>
         <source>&amp;Multisignature creation...</source>
@@ -879,8 +879,8 @@ MultiSend: %1</translation>
         <translation>%1 achterop. Scannen van blok %2</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Phore can no longer continue safely and will quit.</source>
-        <translation>Er is een fatale fout opgetreden. Phore kan niet langer veilig uitgevoerd worden en zal afsluiten.</translation>
+        <source>A fatal error occurred. Altbet can no longer continue safely and will quit.</source>
+        <translation>Er is een fatale fout opgetreden. Altbet kan niet langer veilig uitgevoerd worden en zal afsluiten.</translation>
     </message>
     <message>
         <source>High Sierra not supported with this build</source>
@@ -914,8 +914,8 @@ MultiSend: %1</translation>
         <translation>TextLabel</translation>
     </message>
     <message>
-        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (phore.conf).</source>
-        <translation>Niet alle transacties worden getoond. Om alle transacties te bekijken moet u txindex=1 instellen in het configuratie bestand (phore.conf).</translation>
+        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (altbet.conf).</source>
+        <translation>Niet alle transacties worden getoond. Om alle transacties te bekijken moet u txindex=1 instellen in het configuratie bestand (altbet.conf).</translation>
     </message>
 </context>
 <context>
@@ -1223,8 +1223,8 @@ MultiSend: %1</translation>
         <translation>Wijzig verzendadres</translation>
     </message>
     <message>
-        <source>The entered address &quot;%1&quot; is not a valid Phore address.</source>
-        <translation>Het ingevoerde adres: &quot;%1&quot; is geen geldig Phore adres.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Altbet address.</source>
+        <translation>Het ingevoerde adres: &quot;%1&quot; is geen geldig Altbet adres.</translation>
     </message>
     <message>
         <source>The entered address &quot;%1&quot; is already in the address book.</source>
@@ -1269,16 +1269,16 @@ MultiSend: %1</translation>
         <translation>versie</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Kern</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Kern</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About Phore Core</source>
-        <translation>Over Phore Core</translation>
+        <source>About Altbet Core</source>
+        <translation>Over Altbet Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1324,16 +1324,16 @@ MultiSend: %1</translation>
         <translation>Welkom</translation>
     </message>
     <message>
-        <source>Welcome to Phore Core.</source>
-        <translation>Welkom bij Phore Core</translation>
+        <source>Welcome to Altbet Core.</source>
+        <translation>Welkom bij Altbet Core</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Phore Core will store its data.</source>
-        <translation>Aangezien dit de eerste keer is dat het programma is gestart, kun je kiezen waar Phore Core zijn gegevens opslaat.</translation>
+        <source>As this is the first time the program is launched, you can choose where Altbet Core will store its data.</source>
+        <translation>Aangezien dit de eerste keer is dat het programma is gestart, kun je kiezen waar Altbet Core zijn gegevens opslaat.</translation>
     </message>
     <message>
-        <source>Phore Core will download and store a copy of the Phore block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Phore Core zal een kopie van de Phore blockchain downloaden en opslaan. Tenminste %1GB aan data zal worden opgeslagen in deze map en het zal over de tijd groeien. De portemonnee wordt ook in deze map opgeslagen.</translation>
+        <source>Altbet Core will download and store a copy of the Altbet block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>Altbet Core zal een kopie van de Altbet blockchain downloaden en opslaan. Tenminste %1GB aan data zal worden opgeslagen in deze map en het zal over de tijd groeien. De portemonnee wordt ook in deze map opgeslagen.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1344,8 +1344,8 @@ MultiSend: %1</translation>
         <translation>Gebruik een aangepaste datafolder:</translation>
     </message>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Kern</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Kern</translation>
     </message>
     <message>
         <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
@@ -1486,12 +1486,12 @@ MultiSend: %1</translation>
         <translation>Vul het verzendadres in</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other Phore addresses after it matures.
-To Add: enter percentage to give and Phore address to add to the MultiSend vector.
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other Altbet addresses after it matures.
+To Add: enter percentage to give and Altbet address to add to the MultiSend vector.
 To Delete: Enter address to delete and press delete.
 MultiSend will not be activated unless you have clicked Activate</source>
-        <translation>MultiSend stelt je in staat om automatisch 100% van uw inzet of masternode-beloning automatisch te verzenden naar een lijst van andere Phore adressen nadat het volwassen is. 
-Toevoegen: voer percentage in om te geven en Phore adres om toe te voegen aan de MultiSend vector.
+        <translation>MultiSend stelt je in staat om automatisch 100% van uw inzet of masternode-beloning automatisch te verzenden naar een lijst van andere Altbet adressen nadat het volwassen is. 
+Toevoegen: voer percentage in om te geven en Altbet adres om toe te voegen aan de MultiSend vector.
 Verwijderen: Voer adres in om te verwijderen en druk op delete.
 MultiSend wordt niet geactiveerd, tenzij je op Activeer hebt geklikt</translation>
     </message>
@@ -1636,48 +1636,48 @@ Controleer het adres alsjeblieft en probeer het opnieuw.</translation>
         <translation>Selecteer de privacy level.</translation>
     </message>
     <message>
-        <source>Use 2 separate masternodes to mix funds up to 10000 PHR</source>
-        <translation>Gebruik 2 aparte masternodes om fondsen te mixen tot 10000 PHR</translation>
+        <source>Use 2 separate masternodes to mix funds up to 10000 ABET</source>
+        <translation>Gebruik 2 aparte masternodes om fondsen te mixen tot 10000 ABET</translation>
     </message>
     <message>
-        <source>Use 8 separate masternodes to mix funds up to 10000 PHR</source>
-        <translation>Gebruik 8 aparte masternodes om fondsen te mixen tot 10000 PHR</translation>
+        <source>Use 8 separate masternodes to mix funds up to 10000 ABET</source>
+        <translation>Gebruik 8 aparte masternodes om fondsen te mixen tot 10000 ABET</translation>
     </message>
     <message>
         <source>Use 16 separate masternodes</source>
         <translation>Gebruik 16 aparte masternodes</translation>
     </message>
     <message>
-        <source>This option is the quickest and will cost about ~0.025 PHR to anonymize 10000 PHR</source>
-        <translation>Deze optie is het snelst en kost ongeveer ~0,025 PHR om 10000 PHR te anonimiseren</translation>
+        <source>This option is the quickest and will cost about ~0.025 ABET to anonymize 10000 ABET</source>
+        <translation>Deze optie is het snelst en kost ongeveer ~0,025 ABET om 10000 ABET te anonimiseren</translation>
     </message>
     <message>
-        <source>This option is moderately fast and will cost about 0.05 PHR to anonymize 10000 PHR</source>
-        <translation>Deze optie is gematigd snel en kost ongeveer 0,05 PHR om 10000 PHR te anonimiseren</translation>
+        <source>This option is moderately fast and will cost about 0.05 ABET to anonymize 10000 ABET</source>
+        <translation>Deze optie is gematigd snel en kost ongeveer 0,05 ABET om 10000 ABET te anonimiseren</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
         <translation>Dit is de langzaamste en veiligste optie. Het gebruik van maximale anonimiteit kost</translation>
     </message>
     <message>
-        <source>0.1 PHR per 10000 PHR you anonymize.</source>
-        <translation>je anonimiseert 0,1 PHR per 10000 PHR.</translation>
+        <source>0.1 ABET per 10000 ABET you anonymize.</source>
+        <translation>je anonimiseert 0,1 ABET per 10000 ABET.</translation>
     </message>
     <message>
         <source>Obfuscation Configuration</source>
         <translation>Verduistering configuratie</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Phore&apos;s configuration screen.</source>
-        <translation>Verduistering is succesvol ingesteld op basic (%1 en 2 rondes). Je kunt dit op elk gewenst moment wijzigen door het configuratiescherm van Phore te openen.</translation>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Altbet&apos;s configuration screen.</source>
+        <translation>Verduistering is succesvol ingesteld op basic (%1 en 2 rondes). Je kunt dit op elk gewenst moment wijzigen door het configuratiescherm van Altbet te openen.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Phore&apos;s configuration screen.</source>
-        <translation>Verduistering is succesvol ingesteld op hoog (%1 en 8 rondes). U kunt dit op elk gewenst moment wijzigen door het configuratiescherm van Phore te openen.</translation>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Altbet&apos;s configuration screen.</source>
+        <translation>Verduistering is succesvol ingesteld op hoog (%1 en 8 rondes). U kunt dit op elk gewenst moment wijzigen door het configuratiescherm van Altbet te openen.</translation>
     </message>
     <message>
-        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Phore&apos;s configuration screen.</source>
-        <translation>Verduistering is succesvol ingesteld op hoog (%1 en 16 rondes). U kunt dit op elk gewenst moment wijzigen door het configuratiescherm van Phore te openen.</translation>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Altbet&apos;s configuration screen.</source>
+        <translation>Verduistering is succesvol ingesteld op hoog (%1 en 16 rondes). U kunt dit op elk gewenst moment wijzigen door het configuratiescherm van Altbet te openen.</translation>
     </message>
 </context>
 <context>
@@ -1730,8 +1730,8 @@ Controleer het adres alsjeblieft en probeer het opnieuw.</translation>
         <translation>(0 = auto, &lt;0 = laat dat aantal cores vrij)</translation>
     </message>
 	<message>
-        <source>Enable zPHR Automint</source>
-        <translation>zPHR automunting inschakelen</translation>
+        <source>Enable zABET Automint</source>
+        <translation>zABET automunting inschakelen</translation>
     </message>
     <message>
         <source>W&amp;allet</source>
@@ -1742,8 +1742,8 @@ Controleer het adres alsjeblieft en probeer het opnieuw.</translation>
         <translation>Als je de uitgaven van onbevestigde wijzigingen uitschakelt, de wijziging van een transactie&lt;br/&gt;kan niet worden gebruikt tot die transactie tenminste één bevestiging heeft.&lt;br/&gt;Dit beïnvloedt ook hoe uw saldo is berekend.</translation>
     </message>
     <message>
-        <source>Automatically open the Phore client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Open de Phore client poort automatisch op de router. Dit werkt alleen als je router UPnP ondersteunt en het is ingeschakeld.</translation>
+        <source>Automatically open the Altbet client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Open de Altbet client poort automatisch op de router. Dit werkt alleen als je router UPnP ondersteunt en het is ingeschakeld.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -1762,12 +1762,12 @@ Controleer het adres alsjeblieft en probeer het opnieuw.</translation>
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start Phore after logging in to the system.</source>
-        <translation>Phore automatisch opstarten na inloggen op het systeem.</translation>
+        <source>Automatically start Altbet after logging in to the system.</source>
+        <translation>Altbet automatisch opstarten na inloggen op het systeem.</translation>
     </message>
     <message>
-        <source>&amp;Start Phore on system login</source>
-        <translation>&amp;Phore starten bij systeemlogin</translation>
+        <source>&amp;Start Altbet on system login</source>
+        <translation>&amp;Altbet starten bij systeemlogin</translation>
     </message>
 	<message>
         <source>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</source>
@@ -1782,8 +1782,8 @@ Controleer het adres alsjeblieft en probeer het opnieuw.</translation>
         <translation>Deze hoeveelheid fungeert als een drempelwaarde om Verduistering uit te schakelen eenmaal het bereikt is.</translation>
     </message>
     <message>
-        <source>Amount of Phore to keep anonymized</source>
-        <translation>Amount of Phore to keep anonymized</translation>
+        <source>Amount of Altbet to keep anonymized</source>
+        <translation>Amount of Altbet to keep anonymized</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1810,22 +1810,22 @@ Controleer het adres alsjeblieft en probeer het opnieuw.</translation>
         <translation>&amp;Netwerk</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Phore.</source>
-        <translation>De gebruikersinterface taal kan hier ingesteld worden. Deze instelling zal uitgevoerd na herstart van Phore.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Altbet.</source>
+        <translation>De gebruikersinterface taal kan hier ingesteld worden. Deze instelling zal uitgevoerd na herstart van Altbet.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/phore-project/phore-project-translations</source>
+https://www.transifex.com/altbet-project/altbet-project-translations</source>
         <translation>Taal ontbreekt of vertaling onvolledig? Help om bij te dragen aan vertalingen:
-https://www.transifex.com/phore-project/phore-project-translations</translation>
+https://www.transifex.com/altbet-project/altbet-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Map poort gebruikt &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Phore network through a SOCKS5 proxy.</source>
-        <translation>Maak verbinding met het Phore netwerk via een SOCKS5 proxy.</translation>
+        <source>Connect to the Altbet network through a SOCKS5 proxy.</source>
+        <translation>Maak verbinding met het Altbet netwerk via een SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1944,20 +1944,20 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Het opgegeven proxyadres is ongeldig.</translation>
     </message>
 	<message>
-        <source>Percentage of incoming PHR which get automatically converted to zPHR via Zerocoin Protocol (min: 10%)</source>
-        <translation>Percentage inkomende PHR die automatisch wordt omgezet naar zPHR via Zerocoin Protocol (min: 10%)</translation>
+        <source>Percentage of incoming ABET which get automatically converted to zABET via Zerocoin Protocol (min: 10%)</source>
+        <translation>Percentage inkomende ABET die automatisch wordt omgezet naar zABET via Zerocoin Protocol (min: 10%)</translation>
     </message>
     <message>
-        <source>Percentage of autominted zPHR</source>
-        <translation>Percentage autominted zPHR</translation>
+        <source>Percentage of autominted zABET</source>
+        <translation>Percentage autominted zABET</translation>
     </message>
     <message>
-        <source>Wait with automatic conversion to Zerocoin until enough PHR for this denomination is available</source>
-        <translation>Wacht met automatische omzetting naar Zerocoin totdat er genoeg PHR voor deze denominatie beschikbaar is</translation>
+        <source>Wait with automatic conversion to Zerocoin until enough ABET for this denomination is available</source>
+        <translation>Wacht met automatische omzetting naar Zerocoin totdat er genoeg ABET voor deze denominatie beschikbaar is</translation>
     </message>
     <message>
-        <source>Preferred Automint zPHR Denomination</source>
-        <translation>Gewenste Automint zPHR denominatie</translation>
+        <source>Preferred Automint zABET Denomination</source>
+        <translation>Gewenste Automint zABET denominatie</translation>
     </message>
 	    <message>
         <source>I don&apos;t care</source>
@@ -1983,8 +1983,8 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Overzicht</translation>
     </message>
     <message>
-        <source>PHR Balances</source>
-        <translation>PHR Saldi</translation>
+        <source>ABET Balances</source>
+        <translation>ABET Saldi</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -2015,8 +2015,8 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Staked of masternode beloningen die nog niet volwassen zijn</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Phore network after a connection is established, but this process has not completed yet.</source>
-        <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Phore netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Altbet network after a connection is established, but this process has not completed yet.</source>
+        <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Altbet netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
     </message>
     <message>
         <source>Unconfirmed transactions to watch-only addresses</source>
@@ -2055,12 +2055,12 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Gecombineerde Saldi (inclusief onvolwassen munten)</translation>
     </message>
     <message>
-        <source>PHR:</source>
-        <translation>PHR:</translation>
+        <source>ABET:</source>
+        <translation>ABET:</translation>
     </message>
     <message>
-        <source>zPHR:</source>
-        <translation>zPHR:</translation>
+        <source>zABET:</source>
+        <translation>zABET:</translation>
     </message>
     <message>
         <source>0 %</source>
@@ -2102,12 +2102,12 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Ongeldig betalingsadres %1</translation>
     </message>
     <message>
-        <source>Cannot start phore: click-to-pay handler</source>
-        <translation>Kan phore niet starten: click-to-pay handler</translation>
+        <source>Cannot start altbet: click-to-pay handler</source>
+        <translation>Kan altbet niet starten: click-to-pay handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Phore address or malformed URI parameters.</source>
-        <translation>URL kan niet ontleed worden! Dit kan worden veroorzaakt door een ongeldig Phore adres of misvormde URL parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Altbet address or malformed URI parameters.</source>
+        <translation>URL kan niet ontleed worden! Dit kan worden veroorzaakt door een ongeldig Altbet adres of misvormde URL parameters.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2188,24 +2188,24 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
 <context>
     <name>PrivacyDialog</name>
     <message>
-        <source>PHR which were anonymized via Zerocin Protocol</source>
-        <translation>PHR die via het Zerocoin Protocol geanonimiseerd werden</translation>
+        <source>ABET which were anonymized via Zerocin Protocol</source>
+        <translation>ABET die via het Zerocoin Protocol geanonimiseerd werden</translation>
     </message>
     <message>
-        <source>Zerocoin PHR (zPHR)</source>
-        <translation>Zerocoin PHR (zPHR)</translation>
+        <source>Zerocoin ABET (zABET)</source>
+        <translation>Zerocoin ABET (zABET)</translation>
     </message>
     <message>
         <source>Zerocoin Actions:</source>
         <translation>Zerocoin Acties:</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Phore network after a connection is established, but this process has not completed yet.</source>
-        <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Phore netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Altbet network after a connection is established, but this process has not completed yet.</source>
+        <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Altbet netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
     </message>
     <message>
-        <source>Enter an amount of Phr to convert to zPhr</source>
-        <translation>Vul de hoeveleheid in om Phr te converteren naar zPhr</translation>
+        <source>Enter an amount of Abet to convert to zAbet</source>
+        <translation>Vul de hoeveleheid in om Abet te converteren naar zAbet</translation>
     </message>
     <message>
         <source>Mint Zerocoin</source>
@@ -2216,16 +2216,16 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>0</translation>
     </message>
     <message>
-        <source>zPHR</source>
-        <translation>zPHR</translation>
+        <source>zABET</source>
+        <translation>zABET</translation>
     </message>
     <message>
         <source>Available for Minting:</source>
         <translation>Beschikbaar voor minting:</translation>
     </message>
     <message>
-        <source>0.000 000 00 PHR</source>
-        <translation>0.000 000 00 PHR</translation>
+        <source>0.000 000 00 ABET</source>
+        <translation>0.000 000 00 ABET</translation>
     </message>
     <message>
         <source>Reset Zerocoin Wallet DB. Deletes transactions that did not make it into the blockchain.</source>
@@ -2260,12 +2260,12 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Status en/of Berichten van de laatste mint actie.</translation>
     </message>
     <message>
-        <source>zPhr Control</source>
-        <translation>zPhr controle</translation>
+        <source>zAbet Control</source>
+        <translation>zAbet controle</translation>
     </message>
     <message>
-        <source>zPhr Selected:</source>
-        <translation>zPhr geselecteerd:</translation>
+        <source>zAbet Selected:</source>
+        <translation>zAbet geselecteerd:</translation>
     </message>
     <message>
         <source>Quantity Selected:</source>
@@ -2284,8 +2284,8 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Beschikbaar saldo:</translation>
     </message>
     <message>
-        <source>0 zPHR</source>
-        <translation>0 zPHR</translation>
+        <source>0 zABET</source>
+        <translation>0 zABET</translation>
     </message>
     <message>
         <source>Security Level for Zerocoin Transactions. More is better, but needs more time and resources.</source>
@@ -2304,8 +2304,8 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Betaal &amp;Naar:</translation>
     </message>
     <message>
-        <source>The Phore address to send the payment to. Creates local payment to yourself when empty.</source>
-        <translation>Het Phore adres om de betaling naar te verzenden. Maakt lokale betaling aan jezelf als je leeg bent.</translation>
+        <source>The Altbet address to send the payment to. Creates local payment to yourself when empty.</source>
+        <translation>Het Altbet adres om de betaling naar te verzenden. Maakt lokale betaling aan jezelf als je leeg bent.</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2504,11 +2504,11 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Kopieer hoeveelheid</translation>
     </message>
     <message>
-        <source>Zerocoin functionality is not enabled on the Phore network yet.</source>
-        <translation>Zerocoin functionaliteit is nog niet ingeschakeld op het Phore netwerk.</translation>
+        <source>Zerocoin functionality is not enabled on the Altbet network yet.</source>
+        <translation>Zerocoin functionaliteit is nog niet ingeschakeld op het Altbet netwerk.</translation>
     </message>
     <message>
-        <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
+        <source>Error: Your wallet is locked. Please enter the wallet passabetase first.</source>
         <translation>Fout: Je portemonnee is vergrendeld. Voer alsjeblieft de wachtwoord zin voor de portemonnee in.</translation>
     </message>
     <message>
@@ -2524,8 +2524,8 @@ https://www.transifex.com/phore-project/phore-project-translations</translation>
         <translation>Succesvol gemint</translation>
     </message>
     <message>
-        <source> zPHR in </source>
-        <translation> zPHR in </translation>
+        <source> zABET in </source>
+        <translation> zABET in </translation>
     </message>
     <message>
         <source> sec. Used denominations:
@@ -2558,8 +2558,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Geen 'Betaal aan' adres verstrekt, lokale betaling wordt gemaakt</translation>
     </message>
     <message>
-        <source>Invalid Phore Address</source>
-        <translation>Ongeldig Phore addres</translation>
+        <source>Invalid Altbet Address</source>
+        <translation>Ongeldig Altbet addres</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -2603,8 +2603,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Bestede Zerocoin mislukt met status =</translation>
     </message>
     <message>
-        <source>zPhr Spend #: </source>
-        <translation>zPhr besteed #: </translation>
+        <source>zAbet Spend #: </source>
+        <translation>zAbet besteed #: </translation>
     </message>
     <message>
         <source>denomination: </source>
@@ -2627,8 +2627,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>adres:</translation>
     </message>
     <message>
-        <source>zPhr Mint</source>
-        <translation>zPhr Mint</translation>
+        <source>zAbet Mint</source>
+        <translation>zAbet Mint</translation>
     </message>
     <message>
         <source>Sending successful, return code: </source>
@@ -2661,8 +2661,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Hoeveelheid</translation>
     </message>
     <message>
-        <source>Enter a Phore address (e.g. %1)</source>
-        <translation>Voer een Phore adres in (b.v. %1)</translation>
+        <source>Enter a Altbet address (e.g. %1)</source>
+        <translation>Voer een Altbet adres in (b.v. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2721,8 +2721,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Fout bij het lezen van het masternode configuratiebestand: %1</translation>
     </message>
     <message>
-        <source>Phore Core didn&apos;t yet exit safely...</source>
-        <translation>Phore Core is nog niet veilig afgesloten...</translation>
+        <source>Altbet Core didn&apos;t yet exit safely...</source>
+        <translation>Altbet Core is nog niet veilig afgesloten...</translation>
     </message>
 </context>
 <context>
@@ -2819,8 +2819,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Blockchain</translation>
     </message>
     <message>
-        <source>Open the Phore debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open het Phore debug log bestand uit de huidige data directory. Dit kan enkele seconden duren voor grote logbestanden.</translation>
+        <source>Open the Altbet debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Open het Altbet debug log bestand uit de huidige data directory. Dit kan enkele seconden duren voor grote logbestanden.</translation>
     </message>
     <message>
         <source>Number of Masternodes</source>
@@ -2991,8 +2991,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Uit:</translation>
     </message>
     <message>
-        <source>Welcome to the Phore RPC console.</source>
-        <translation>Welkom bij de Phore RPC console.</translation>
+        <source>Welcome to the Altbet RPC console.</source>
+        <translation>Welkom bij de Altbet RPC console.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -3094,12 +3094,12 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Een optioneel label om te associëren met het nieuwe ontvangstadres.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Phore network.</source>
-        <translation>Een optioneel bericht dat aan het betalingsverzoek wordt gehecht, dat wordt weergegeven wanneer het verzoek wordt geopend. Opmerking: het bericht wordt niet verzonden met de betaling via het Phore netwerk.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Altbet network.</source>
+        <translation>Een optioneel bericht dat aan het betalingsverzoek wordt gehecht, dat wordt weergegeven wanneer het verzoek wordt geopend. Opmerking: het bericht wordt niet verzonden met de betaling via het Altbet netwerk.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Phore network.</source>
-        <translation>Een optioneel bericht dat aan het betalingsverzoek wordt gehecht, dat wordt weergegeven wanneer het verzoek wordt geopend.&lt;br&gt;Opmerking: het bericht wordt niet verzonden met de betaling via het Phore netwerk.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Altbet network.</source>
+        <translation>Een optioneel bericht dat aan het betalingsverzoek wordt gehecht, dat wordt weergegeven wanneer het verzoek wordt geopend.&lt;br&gt;Opmerking: het bericht wordt niet verzonden met de betaling via het Altbet netwerk.</translation>
     </message>
 	    <message>
         <source>An optional message to attach to the payment request.</source>
@@ -3339,8 +3339,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>UTXO grootte:</translation>
     </message>
     <message>
-        <source>0 PHR</source>
-        <translation>0 PHR</translation>
+        <source>0 ABET</source>
+        <translation>0 ABET</translation>
     </message>
     <message>
         <source>Transaction Fee:</source>
@@ -3395,16 +3395,16 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Munten automatisch geselecteerd</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 uPHRs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 uPHRs in fee,&lt;br /&gt;while "at least" pays 1000 uPHRs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Als de aangepaste vergoeding is ingesteld op 1000 uPHRs en de transactie is slechts 250 bytes, dan betaalt per kilobyte alleen 250 uPHR's in vergoeding,&lt;br /&gt;terwijl &quot;minstens&quot; 1000 uPHR's betaalt. Voor transacties die groter zijn dan een kilobyte, betalen beiden per kilobyte.</translation>
+        <source>If the custom fee is set to 1000 uABETs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 uABETs in fee,&lt;br /&gt;while "at least" pays 1000 uABETs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Als de aangepaste vergoeding is ingesteld op 1000 uABETs en de transactie is slechts 250 bytes, dan betaalt per kilobyte alleen 250 uABET's in vergoeding,&lt;br /&gt;terwijl &quot;minstens&quot; 1000 uABET's betaalt. Voor transacties die groter zijn dan een kilobyte, betalen beiden per kilobyte.</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 uPHRs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uPHRs in fee,&lt;br /&gt;while &quot;total at least&quot; pays 1000 uPHRs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Als de aangepaste vergoeding is ingesteld op 1000 uPHRs en de transactie is slechts 250 bytes, dan betaalt per kilobyte alleen 250 uPHR's in vergoeding,&lt;br /&gt;terwijl &quot;totaal minstens&quot; 1000 uPHR's betaalt. Voor transacties die groter zijn dan een kilobyte, betalen beiden per kilobyte.</translation>
+        <source>If the custom fee is set to 1000 uABETs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 uABETs in fee,&lt;br /&gt;while &quot;total at least&quot; pays 1000 uABETs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Als de aangepaste vergoeding is ingesteld op 1000 uABETs en de transactie is slechts 250 bytes, dan betaalt per kilobyte alleen 250 uABET's in vergoeding,&lt;br /&gt;terwijl &quot;totaal minstens&quot; 1000 uABET's betaalt. Voor transacties die groter zijn dan een kilobyte, betalen beiden per kilobyte.</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Phore transactions than the network can process.</source>
-        <translation>Alleen de minimale vergoeding betalen is prima, zolang er minder transactie volume is dan ruimte in de blokken. &lt;br /&gt;Maar wees ervan bewust dat dit kan leiden tot een nooit bevestigende transactie wanneer er meer vraag is naar Phore transacties dan het netwerk kan verwerken.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Altbet transactions than the network can process.</source>
+        <translation>Alleen de minimale vergoeding betalen is prima, zolang er minder transactie volume is dan ruimte in de blokken. &lt;br /&gt;Maar wees ervan bewust dat dit kan leiden tot een nooit bevestigende transactie wanneer er meer vraag is naar Altbet transacties dan het netwerk kan verwerken.</translation>
     </message>
     <message>
         <source>normal</source>
@@ -3451,8 +3451,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Voeg &amp;ontvanger toe</translation>
     </message>
     <message>
-        <source>Anonymized PHR</source>
-        <translation>Geanonimiseerde PHR</translation>
+        <source>Anonymized ABET</source>
+        <translation>Geanonimiseerde ABET</translation>
     </message>
     <message>
         <source>SwiftTX</source>
@@ -3511,8 +3511,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>anonieme financiën</translation>
     </message>
     <message>
-        <source>Warning: Invalid Phore address</source>
-        <translation>Waarschuwing: Ongeldig Phore adres</translation>
+        <source>Warning: Invalid Altbet address</source>
+        <translation>Waarschuwing: Ongeldig Altbet adres</translation>
     </message>
     <message>
         <source>any available funds (not recommended)</source>
@@ -3625,8 +3625,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Betaal &amp;Naar:</translation>
     </message>
     <message>
-        <source>The Phore address to send the payment to</source>
-        <translation>Het Phore adres om de betaling naar te verzenden</translation>
+        <source>The Altbet address to send the payment to</source>
+        <translation>Het Altbet adres om de betaling naar te verzenden</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3665,8 +3665,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Bericht:</translation>
     </message>
     <message>
-        <source>A message that was attached to the Phore: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Phore network.</source>
-        <translation>Een bericht dat is gehecht aan de Phore: URI die bij de transactie wordt opgeslagen voor uw referentie. Opmerking: dit bericht wordt niet verzonden via het Phore netwerk.</translation>
+        <source>A message that was attached to the Altbet: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Altbet network.</source>
+        <translation>Een bericht dat is gehecht aan de Altbet: URI die bij de transactie wordt opgeslagen voor uw referentie. Opmerking: dit bericht wordt niet verzonden via het Altbet netwerk.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>
@@ -3692,8 +3692,8 @@ Wees alsjeblieft geduldig...</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Phore Core is shutting down...</source>
-        <translation>Phore Core is aan het afsluiten...</translation>
+        <source>Altbet Core is shutting down...</source>
+        <translation>Altbet Core is aan het afsluiten...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -3715,8 +3715,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Je kunt berichten met je adressen ondertekenen om te bewijzen dat je ze bezit. Wees voorzichtig om niets vaags te ondertekenen, omdat phishing aanvallen je misschien kunnen proberen om je identiteit over te geven. Teken alleen volledig gedetailleerde verklaringen aan waar je mee akkoord gaat.</translation>
     </message>
     <message>
-        <source>The Phore address to sign the message with</source>
-        <translation>Het Phore adres om het bericht met te ondertekenen</translation>
+        <source>The Altbet address to sign the message with</source>
+        <translation>Het Altbet adres om het bericht met te ondertekenen</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3747,16 +3747,16 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Kopieer de huidige handtekening naar het systeemklembord</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Phore address</source>
-        <translation>Onderteken het bericht om te bewijzen dat u het Phore adres bezit</translation>
+        <source>Sign the message to prove you own this Altbet address</source>
+        <translation>Onderteken het bericht om te bewijzen dat u het Altbet adres bezit</translation>
     </message>
     <message>
-        <source>The Phore address the message was signed with</source>
-        <translation>Het Phore adres waarmee het bericht was ondertekend</translation>
+        <source>The Altbet address the message was signed with</source>
+        <translation>Het Altbet adres waarmee het bericht was ondertekend</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Phore address</source>
-        <translation>Controleer een bericht om te verifiëren dat het ondertekend is door het gespecificeerde Phore adres</translation>
+        <source>Verify the message to ensure it was signed with the specified Altbet address</source>
+        <translation>Controleer een bericht om te verifiëren dat het ondertekend is door het gespecificeerde Altbet adres</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -3842,8 +3842,8 @@ Wees alsjeblieft geduldig...</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Phore Core</source>
-        <translation>Phore Kern</translation>
+        <source>Altbet Core</source>
+        <translation>Altbet Kern</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -3858,8 +3858,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>De Dash Kernontwikkelaars</translation>
     </message>
     <message>
-        <source>The Phore Core developers</source>
-        <translation>De Phore Kernontwikkelaars</translation>
+        <source>The Altbet Core developers</source>
+        <translation>De Altbet Kernontwikkelaars</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4191,32 +4191,32 @@ Wees alsjeblieft geduldig...</translation>
         <translation>watch-only</translation>
     </message>
     <message>
-        <source>Converted Phr to zPhr</source>
-        <translation>Geconverteerde Phr naar zPhr</translation>
+        <source>Converted Abet to zAbet</source>
+        <translation>Geconverteerde Abet naar zAbet</translation>
     </message>
     <message>
-        <source>Spent zPhr</source>
-        <translation>Uitgegeven zPhr</translation>
+        <source>Spent zAbet</source>
+        <translation>Uitgegeven zAbet</translation>
     </message>
     <message>
-        <source>Received Phr from zPhr</source>
-        <translation>Verkregen Phr van zPhr</translation>
+        <source>Received Abet from zAbet</source>
+        <translation>Verkregen Abet van zAbet</translation>
     </message>
     <message>
-        <source>Minted Change as zPhr from zPhr Spend</source>
-        <translation>Minted wisselgeld als zPhr van uitgegeven zPhr</translation>
+        <source>Minted Change as zAbet from zAbet Spend</source>
+        <translation>Minted wisselgeld als zAbet van uitgegeven zAbet</translation>
     </message>
     <message>
-        <source>Converted zPhr to Phr</source>
-        <translation>Geconverteerde zPhr naar Phr</translation>
+        <source>Converted zAbet to Abet</source>
+        <translation>Geconverteerde zAbet naar Abet</translation>
     </message>
     <message>
         <source>watch-only</source>
         <translation>watch-only</translation>
     </message>
     <message>
-        <source>zPhr Accumulator</source>
-        <translation>zPhr Accumulator</translation>
+        <source>zAbet Accumulator</source>
+        <translation>zAbet Accumulator</translation>
     </message>
     <message>
         <source>(n/a)</source>
@@ -4326,8 +4326,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Masternode beloning</translation>
     </message>
     <message>
-        <source>Received Phr from zPhr</source>
-        <translation>Verkregen Phr van zPhr</translation>
+        <source>Received Abet from zAbet</source>
+        <translation>Verkregen Abet van zAbet</translation>
     </message>
     <message>
         <source>Zerocoin Mint</source>
@@ -4338,8 +4338,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Zerocoin uitgegeven</translation>
     </message>
     <message>
-        <source>Zerocoin Spend, Change in zPhr</source>
-        <translation>Zerocoin uitgegeven, wisselgeld in zPhr</translation>
+        <source>Zerocoin Spend, Change in zAbet</source>
+        <translation>Zerocoin uitgegeven, wisselgeld in zAbet</translation>
     </message>
     <message>
         <source>Zerocoin Spend to Self</source>
@@ -4463,8 +4463,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Verzend Munten</translation>
     </message>
     <message>
-        <source>SwiftTX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 PHR.</source>
-        <translation>SwiftTX ondersteunt geen verzendwaarden die zo hoog zijn. Transacties zijn momenteel beperkt tot %1 PHR.</translation>
+        <source>SwiftTX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 ABET.</source>
+        <translation>SwiftTX ondersteunt geen verzendwaarden die zo hoog zijn. Transacties zijn momenteel beperkt tot %1 ABET.</translation>
     </message>
 </context>
 <context>
@@ -4511,10 +4511,10 @@ Wees alsjeblieft geduldig...</translation>
     </message>
 </context>
 <context>
-    <name>ZPhrControlDialog</name>
+    <name>ZAbetControlDialog</name>
     <message>
-        <source>Select zPhr to Spend</source>
-        <translation>Selecteer zPhr om te spenderen</translation>
+        <source>Select zAbet to Spend</source>
+        <translation>Selecteer zAbet om te spenderen</translation>
     </message>
     <message>
         <source>Quantity</source>
@@ -4525,8 +4525,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>0</translation>
     </message>
     <message>
-        <source>zPhr</source>
-        <translation>zPhr</translation>
+        <source>zAbet</source>
+        <translation>zAbet</translation>
     </message>
     <message>
         <source>Select/Deselect All</source>
@@ -4538,7 +4538,7 @@ Wees alsjeblieft geduldig...</translation>
     </message>
 </context>
 <context>
-    <name>phore-core</name>
+    <name>altbet-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = houd tx meta data, bijvoorbeeld account eigenaar en betalingsverzoek informatie, 2 = drop tx meta data)</translation>
@@ -4564,8 +4564,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Bind naar het opgegeven adres om te luisteren naar JSON-RPC verbindingen. Gebruik [host]:poort notatie voor IPv6. Deze optie kan meerdere keren worden opgegeven (standaard: bind aan alle interfaces)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Phore Core is probably already running.</source>
-        <translation>Kan geen vergrendeling op data directory %s verkrijgen. Phore Core loopt waarschijnlijk al.</translation>
+        <source>Cannot obtain a lock on data directory %s. Altbet Core is probably already running.</source>
+        <translation>Kan geen vergrendeling op data directory %s verkrijgen. Altbet Core loopt waarschijnlijk al.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -4624,12 +4624,12 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Uitvoeren commando wanneer het beste blok verandert (%s in cmd is vervangen door block hash)</translation>
     </message>
     <message>
-        <source>Fees (in PHR/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation>Kosten (in PHR/Kb) kleiner dan dit worden beschouwd als zero fee voor heruitzending (standaard: %s)</translation>
+        <source>Fees (in ABET/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Kosten (in ABET/Kb) kleiner dan dit worden beschouwd als zero fee voor heruitzending (standaard: %s)</translation>
     </message>
     <message>
-        <source>Fees (in PHR/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Kosten (in PHR/Kb) kleiner dan dit worden beschouwd als zero fee voor transactie verrichting (standaard: %s)</translation>
+        <source>Fees (in ABET/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Kosten (in ABET/Kb) kleiner dan dit worden beschouwd als zero fee voor transactie verrichting (standaard: %s)</translation>
     </message>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
@@ -4732,20 +4732,20 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in de OpenSSL Toolkit &lt;https://www.openssl.org/&gt; en cryptografische software geschreven door Eric Young en UPnP software geschreven door Thomas Bernard.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Phore Core is probably already running.</source>
-        <translation>Niet mogelijk te binden aan %s op deze computer. Phore Core loopt waarschijnlijk al.</translation>
+        <source>Unable to bind to %s on this computer. Altbet Core is probably already running.</source>
+        <translation>Niet mogelijk te binden aan %s op deze computer. Altbet Core loopt waarschijnlijk al.</translation>
     </message>
     <message>
         <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
         <translation>Kan niet genoeg verduistering gedenomineerde fondsen voor deze transactie vinden.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10000 PHR.</source>
-        <translation>Kan niet genoeg verduistering niet gedenomineerde fondsen voor deze transactie vinden die niet gelijk zijn aan 10000 PHR.</translation>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10000 ABET.</source>
+        <translation>Kan niet genoeg verduistering niet gedenomineerde fondsen voor deze transactie vinden die niet gelijk zijn aan 10000 ABET.</translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 10000 PHR.</source>
-        <translation>Kan niet genoeg fondsen voor deze transactie vinden die niet gelijk zijn aan 10000 PHR.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 10000 ABET.</source>
+        <translation>Kan niet genoeg fondsen voor deze transactie vinden die niet gelijk zijn aan 10000 ABET.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -4760,8 +4760,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Waarschuwing: -paytxfee is zeer hoog ingesteld! Dit zijn de transactie kosten die je betaalt als je een transactie verstuurt.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Phore Core will not work properly.</source>
-        <translation>Waarschuwing: Controleer of de datum en tijd van je computer juist zijn! Als je klok verkeerd staat, werkt Phore Core niet goed.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Altbet Core will not work properly.</source>
+        <translation>Waarschuwing: Controleer of de datum en tijd van je computer juist zijn! Als je klok verkeerd staat, werkt Altbet Core niet goed.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4980,8 +4980,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Error tijdens het laden van wallet.dat: Portemonnee corrupt</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of Phore Core</source>
-        <translation>Fout bij het laden van wallet.dat: Portemonnee vereist een nieuwere versie van Phore Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Altbet Core</source>
+        <translation>Fout bij het laden van wallet.dat: Portemonnee vereist een nieuwere versie van Altbet Core</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -5032,8 +5032,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Mislukt om block te lezen</translation>
     </message>
     <message>
-        <source>Fee (in PHR/kB) to add to transactions you send (default: %s)</source>
-        <translation>Fee (in PHR/kB) om toe te voegen aan transacties die je verzendt (standaard: %s)</translation>
+        <source>Fee (in ABET/kB) to add to transactions you send (default: %s)</source>
+        <translation>Fee (in ABET/kB) om toe te voegen aan transacties die je verzendt (standaard: %s)</translation>
     </message>
     <message>
         <source>Finalizing transaction.</source>
@@ -5092,8 +5092,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Informatie</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Phore Core is shutting down.</source>
-        <translation>Initialisatie saniteitscontrole mislukt. Phore Core wordt afgesloten.</translation>
+        <source>Initialization sanity check failed. Altbet Core is shutting down.</source>
+        <translation>Initialisatie saniteitscontrole mislukt. Altbet Core wordt afgesloten.</translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -5210,8 +5210,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Activeer staking functionaliteit (0-1, standaard: %u)</translation>
     </message>
 	<message>
-        <source>Keep N PHR anonymized (default: %u)</source>
-        <translation>Houd N PHR geanonimiseerd (standaard: %u)</translation>
+        <source>Keep N ABET anonymized (default: %u)</source>
+        <translation>Houd N ABET geanonimiseerd (standaard: %u)</translation>
     </message>
     <message>
         <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
@@ -5718,8 +5718,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Portemonnee is vergrendeld.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Phore Core to complete</source>
-        <translation>Wallet moest worden herschreven: start Phore Core opnieuw om te voltooien</translation>
+        <source>Wallet needed to be rewritten: restart Altbet Core to complete</source>
+        <translation>Wallet moest worden herschreven: start Altbet Core opnieuw om te voltooien</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -5790,12 +5790,12 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Het berekende accumulatie controlepunt is niet wat wordt geregistreerd door de blokindex</translation>
     </message>
 	<message>
-        <source>Disable all Phore specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
-        <translation>Schakel alle Phore specifieke functionaliteit uit (Masternodes, Verduistering, SwiftTX, Budgeting) (0-1, standaard: %u)</translation>
+        <source>Disable all Altbet specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
+        <translation>Schakel alle Altbet specifieke functionaliteit uit (Masternodes, Verduistering, SwiftTX, Budgeting) (0-1, standaard: %u)</translation>
     </message>
 	<message>
-        <source>Enable automatic wallet backups triggered after each zPhr minting (0-1, default: %u)</source>
-        <translation>Schakel automatische portemonnee-backups in die geactiveerd worden na elke zPHR-munting (0-1, standaard: %u)</translation>
+        <source>Enable automatic wallet backups triggered after each zAbet minting (0-1, default: %u)</source>
+        <translation>Schakel automatische portemonnee-backups in die geactiveerd worden na elke zABET-munting (0-1, standaard: %u)</translation>
     </message>
 	<message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
@@ -5830,27 +5830,27 @@ Wees alsjeblieft geduldig...</translation>
         <translation>SwiftTX vereist invoeren moet minstens 6 bevestigingen, u moet mogelijks een paar minuten wachten en opnieuw proberen.</translation>
     </message>
 	<message>
-        <source>To use phored, or the -server option to phore-qt, you must set an rpcpassword in the configuration file:
+        <source>To use altbetd, or the -server option to altbet-qt, you must set an rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=phorerpc
+rpcuser=altbetrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Phore Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Altbet Alert&quot; admin@foo.com
 </source>
-        <translation>Om phored of de -server optie om phore-qt te gebruiken, moet je een rpcpassword instellen in het configuratiebestand:
+        <translation>Om altbetd of de -server optie om altbet-qt te gebruiken, moet je een rpcpassword instellen in het configuratiebestand:
 %s
 Het is aan te raden het volgende willekeurige wachtwoord te gebruiken:
-rpcuser=phorerpc
+rpcuser=altbetrpc
 rpcpassword=%s
 (je hoeft dit wachtwoord niet te onthouden)
 De gebruikersnaam en het wachtwoord MOETEN NIET hetzelfde zijn.
 Als het bestand niet bestaat, creëer het dan met owner-readable-only bestandsrechten.
 Het is ook aan te raden om alertnotify in te stellen, zodat je van problemen op de hoogte wordt gebracht;
-bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Phore Alert&quot; admin@foo.com
+bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Altbet Alert&quot; admin@foo.com
 </translation>
     </message>
 	    <message>
@@ -5866,8 +5866,8 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Phore Alert&quot; admin@foo
         <translation>Copyright (C) 2014-%i The Dash Kernontwikkelaars</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The Phore Developers</source>
-        <translation>Copyright (C) 2015-%i The Phore Kernontwikkelaars</translation>
+        <source>Copyright (C) 2015-%i The Altbet Developers</source>
+        <translation>Copyright (C) 2015-%i The Altbet Kernontwikkelaars</translation>
     </message>
 	   <message>
         <source>Delete blockchain folders and resync from scratch</source>
@@ -5975,10 +5975,10 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Phore Alert&quot; admin@foo
     </message>
 </context>
 <context>
-    <name>zphrcontroldialog</name>
+    <name>zabetcontroldialog</name>
     <message>
-        <source>Select zPhr to Spend</source>
-        <translation>Selecteer zPhr om te spenderen</translation>
+        <source>Select zAbet to Spend</source>
+        <translation>Selecteer zAbet om te spenderen</translation>
     </message>
     <message>
         <source>Quantity</source>
@@ -6000,32 +6000,32 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Phore Alert&quot; admin@foo
         <translation>Privacy</translation>
     </message>
 <message>
-        <source>zPhr Control</source>
-        <translation>zPhr controle</translation>
+        <source>zAbet Control</source>
+        <translation>zAbet controle</translation>
     </message>
     <message>
-        <source>zPhr Selected:</source>
-        <translation>zPhr geselecteerd:</translation>
+        <source>zAbet Selected:</source>
+        <translation>zAbet geselecteerd:</translation>
     </message>
     <message>
-        <source>PHR which were anonymized via Zerocin Protocol</source>
-        <translation>PHR die via het Zerocoin Protocol geanonimiseerd werden</translation>
+        <source>ABET which were anonymized via Zerocin Protocol</source>
+        <translation>ABET die via het Zerocoin Protocol geanonimiseerd werden</translation>
     </message>
     <message>
-        <source>Zerocoin PHR (zPHR)</source>
-        <translation>Zerocoin PHR (zPHR)</translation>
+        <source>Zerocoin ABET (zABET)</source>
+        <translation>Zerocoin ABET (zABET)</translation>
     </message>
     <message>
         <source>Zerocoin Actions:</source>
         <translation>Zerocoin Acties:</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Phore network after a connection is established, but this process has not completed yet.</source>
-        <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Phore netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Altbet network after a connection is established, but this process has not completed yet.</source>
+        <translation>De weergegeven informatie kan verouderd zijn. Je portemonnee synchroniseert automatisch met het Altbet netwerk nadat een verbinding is opgezet, maar dit proces is nog niet afgerond.</translation>
     </message>
     <message>
-        <source>Enter an amount of Phr to convert to zPhr</source>
-        <translation>Vul de hoeveleheid in om Phr te converteren naar zPhr</translation>
+        <source>Enter an amount of Abet to convert to zAbet</source>
+        <translation>Vul de hoeveleheid in om Abet te converteren naar zAbet</translation>
     </message>
     <message>
         <source>Mint Zerocoin</source>
@@ -6072,8 +6072,8 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Phore Alert&quot; admin@foo
         <translation>Status en/of Berichten van de laatste mint actie.</translation>
     </message>
     <message>
-        <source>zPhr Control</source>
-        <translation>zPhr controle</translation>
+        <source>zAbet Control</source>
+        <translation>zAbet controle</translation>
     </message>
     <message>
         <source>Quantity Selected:</source>
@@ -6088,20 +6088,20 @@ bijvoorbeeld: alertnotify = echo %%s | mail -s &quot;Phore Alert&quot; admin@foo
         <translation>Besteed Zerocoin</translation>
     </message>
     <message>
-        <source>Available (mature and spendable) zPHR for spending</source>
-        <translation>Beschikbare (mature en besteedbare) zPHR voor besteding</translation>
+        <source>Available (mature and spendable) zABET for spending</source>
+        <translation>Beschikbare (mature en besteedbare) zABET voor besteding</translation>
     </message>
     <message>
         <source>Available Balance:</source>
         <translation>Beschikbare saldo:</translation>
     </message>
     <message>
-        <source>Available (mature and spendable) zPHR for spending
+        <source>Available (mature and spendable) zABET for spending
 
-zPHR are mature when they have more than 20 confirmations AND more than 1 mint of the same denomination after them were minted</source>
-        <translation>Beschikbare (mature en besteedbare) zPHR voor besteding
+zABET are mature when they have more than 20 confirmations AND more than 1 mint of the same denomination after them were minted</source>
+        <translation>Beschikbare (mature en besteedbare) zABET voor besteding
 		
-		zPHR zijn matuur wanner zij meer dan 20 bevestigingen hebben EN meer dan 1 munting van dezelfde denonminatie nadat ze gemunt geweest zijn</translation>
+		zABET zijn matuur wanner zij meer dan 20 bevestigingen hebben EN meer dan 1 munting van dezelfde denonminatie nadat ze gemunt geweest zijn</translation>
     </message>
     <message>
         <source>Security Level for Zerocoin Transactions. More is better, but needs more time and resources.</source>
@@ -6120,16 +6120,16 @@ zPHR are mature when they have more than 20 confirmations AND more than 1 mint o
         <translation>Betaal &amp;Naar:</translation>
     </message>
     <message>
-        <source>The Phore address to send the payment to. Creates local payment to yourself when empty.</source>
-        <translation>Het Phore adres om de betaling naar te verzenden. Maakt lokale betaling aan jezelf als je leeg bent.</translation>
+        <source>The Altbet address to send the payment to. Creates local payment to yourself when empty.</source>
+        <translation>Het Altbet adres om de betaling naar te verzenden. Maakt lokale betaling aan jezelf als je leeg bent.</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
         <translation>Kies een eerder gebruikt adres</translation>
     </message>
     <message>
-        <source>Enter a Phore address (e.g. PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp)</source>
-        <translation>Voer een Phore adres in (bv.: PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp)</translation>
+        <source>Enter a Altbet address (e.g. PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp)</source>
+        <translation>Voer een Altbet adres in (bv.: PCYiHgGJJ6xGHqivmdZrYjRnhaYf6AJ2Mp)</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
@@ -6176,8 +6176,8 @@ zPHR are mature when they have more than 20 confirmations AND more than 1 mint o
         <translation>Informatie over de beschikbare Zerocoin fondsen.</translation>
     </message>
     <message>
-        <source>Total Balance including unconfirmed and immature zPHR</source>
-        <translation>Totale Balans inclusief onbevestigde en immature zPHR</translation>
+        <source>Total Balance including unconfirmed and immature zABET</source>
+        <translation>Totale Balans inclusief onbevestigde en immature zABET</translation>
     </message>
     <message>
         <source>Total Zerocoin  Balance:</source>
@@ -6306,24 +6306,24 @@ Immature: confirmed, but less than 2 mints of the same denomination after it was
         <translation>Wisselgeld:</translation>
     </message>
     <message>
-        <source>Show the current status of automatic zPHR minting.
+        <source>Show the current status of automatic zABET minting.
 
 To change the status (restart required):
-- enable: add &apos;enablezeromint=1&apos; to phore.conf
-- disable: add &apos;enablezeromint=0&apos; to phore.conf
+- enable: add &apos;enablezeromint=1&apos; to altbet.conf
+- disable: add &apos;enablezeromint=0&apos; to altbet.conf
 
 To change the percentage (no restart required):
-- menu Settings-&gt;Options-&gt;Percentage of autominted zPHR
+- menu Settings-&gt;Options-&gt;Percentage of autominted zABET
 
 </source>
-        <translation>Toon de huidige status van automatische zPHR munting.
+        <translation>Toon de huidige status van automatische zABET munting.
 
 Om de status te wijzigen (opnieuw starten vereist):
-- inschakelen: voeg &apos;enablezeromint=1&apos; toe aan phore.conf
-- uitschakelen: voeg &apos;enablezeromint=0&apos; toe aan phore.conf
+- inschakelen: voeg &apos;enablezeromint=1&apos; toe aan altbet.conf
+- uitschakelen: voeg &apos;enablezeromint=0&apos; toe aan altbet.conf
 
 Om het percentage te wijzigen (geen herstart vereist):
-- menu Instellingen-&gt;Opties-&gt;Percentage van automatische munting zPHR
+- menu Instellingen-&gt;Opties-&gt;Percentage van automatische munting zABET
 </translation>
     </message>
 	<message>
@@ -6347,11 +6347,11 @@ Om het percentage te wijzigen (geen herstart vereist):
         <translation>AutoMunting Status:</translation>
     </message>
     <message>
-        <source>zPHR is currently undergoing maintenance.</source>
-        <translation>zPHR wordt momenteel onderhouden.</translation>
+        <source>zABET is currently undergoing maintenance.</source>
+        <translation>zABET wordt momenteel onderhouden.</translation>
     </message>
     <message>
-        <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
+        <source>Error: Your wallet is locked. Please enter the wallet passabetase first.</source>
         <translation>Fout: Je portemonnee is vergrendeld. Voer alsjeblieft de wachtwoord zin voor de portemonnee in.</translation>
     </message>
     <message>
@@ -6367,8 +6367,8 @@ Om het percentage te wijzigen (geen herstart vereist):
         <translation>Succesvol gemunt</translation>
     </message>
     <message>
-        <source> zPHR in </source>
-        <translation> zPHR in </translation>
+        <source> zABET in </source>
+        <translation> zABET in </translation>
     </message>
     <message>
         <source> sec. Used denominations:
@@ -6399,8 +6399,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Geen 'Betaal aan' adres verstrekt, lokale betaling wordt gemaakt</translation>
     </message>
     <message>
-        <source>Invalid Phore Address</source>
-        <translation>Ongeldig Phore addres</translation>
+        <source>Invalid Altbet Address</source>
+        <translation>Ongeldig Altbet addres</translation>
     </message>
     <message>
         <source>Invalid Send Amount</source>
@@ -6431,12 +6431,12 @@ Wees alsjeblieft geduldig...</translation>
         <translation>Zerocoin besteden.\nComputationeel duur, zou mogelijk enkele minuten nodig hebben, afhankelijk van het geselecteerde beveiligingsniveau en je hardware. .\nWees alsjeblieft geduldig...</translation>
     </message>
     <message>
-        <source>Version 1 zPHR require a security level of 100 to successfully spend.</source>
-        <translation>Versie 1 zPHR vereist een beveiligingsniveau van 100 om succesvol te besteden.</translation>
+        <source>Version 1 zABET require a security level of 100 to successfully spend.</source>
+        <translation>Versie 1 zABET vereist een beveiligingsniveau van 100 om succesvol te besteden.</translation>
     </message>
     <message>
-        <source>Failed to spend zPHR</source>
-        <translation>Besteden van zPHR mislukt.</translation>
+        <source>Failed to spend zABET</source>
+        <translation>Besteden van zABET mislukt.</translation>
     </message>
     <message>
         <source>Failed to fetch mint associated with serial hash</source>
@@ -6455,8 +6455,8 @@ Wees alsjeblieft geduldig...</translation>
         <translation>kost: </translation>
     </message>
     <message>
-        <source>Enter an amount of PHR to convert to zPHR</source>
-        <translation>Voer de hoeveelheid van PHR in die geconverteerd moet worden naar zPHR</translation>
+        <source>Enter an amount of ABET to convert to zABET</source>
+        <translation>Voer de hoeveelheid van ABET in die geconverteerd moet worden naar zABET</translation>
     </message>
     <message>
         <source>\nEither mint higher denominations (so fewer inputs are needed) or reduce the amount to spend.</source>
@@ -6553,8 +6553,8 @@ Houd er rekening mee dat de portemonnee de blockchain opnieuw doorzoekt om trans
         <translation>Adres / Hoeveelheid:</translation>
     </message>
     <message>
-        <source>Add destinations to send PHR to</source>
-        <translation>Voeg bestemmingen toe om PHR naar te sturen</translation>
+        <source>Add destinations to send ABET to</source>
+        <translation>Voeg bestemmingen toe om ABET naar te sturen</translation>
     </message>
     <message>
         <source>Add &amp;Destination</source>

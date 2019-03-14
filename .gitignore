@@ -134,3 +134,8 @@ cache
 .vs/TestCoin/v15/Browse.VC.opendb
 .vs/TestCoin/v15/.suo
 .vs/TestCoin/v15/ipch/AutoPCH/5a417e831afb7d67/RPCCONSOLE.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/230faa6774393955/SPORK.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/7dc2224f416fa45a/INIT.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/9cc5fd5614ca8b1f/PRIVACYDIALOG.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/b53876725ddf2ce3/SPORKDB.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/c9df9b97bb550533/CLIENTVERSION.ipch

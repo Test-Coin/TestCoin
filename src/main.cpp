@@ -1513,10 +1513,10 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         *pfMissingInputs = false;
 
     //Temporarily disable zerocoin for maintenance
-    if (GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE) && tx.ContainsZerocoins())
+    if (GetAdjustedTime() > GetSporkValue(SPORK_23_ZEROCOIN_MAINTENANCE_MODE) && tx.ContainsZerocoins())
         return state.DoS(10, error("AcceptToMemoryPool : Zerocoin transactions are temporarily disabled for maintenance"), REJECT_INVALID, "bad-tx");
 
-    if (!CheckTransaction(tx, chainActive.Height() >= Params().Zerocoin_StartHeight(), true, state, GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < chainActive.Tip()->nTime)) {
+    if (!CheckTransaction(tx, chainActive.Height() >= Params().Zerocoin_StartHeight(), true, state, GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < chainActive.Tip()->nTime)) {
         return state.DoS(100, error("AcceptToMemoryPool: : CheckTransaction failed"), REJECT_INVALID, "bad-tx");
     }
 
@@ -1562,7 +1562,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
     }
 
     // Don't accept witness transactions before the final threshold passes
-    if (!GetBoolArg("-prematurewitness", false) && !tx.wit.IsNull() && !IsSporkActive(SPORK_17_SEGWIT_ACTIVATION)) {
+    if (!GetBoolArg("-prematurewitness", false) && !tx.wit.IsNull() && !IsSporkActive(SPORK_22_SEGWIT_ACTIVATION)) {
         return state.DoS(0, false, REJECT_NONSTANDARD, "no-witness-yet", true);
     }
 
@@ -1811,7 +1811,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
     if (pfMissingInputs)
         *pfMissingInputs = false;
 
-    if (!CheckTransaction(tx, chainActive.Height() >= Params().Zerocoin_StartHeight(), true, state, GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < chainActive.Tip()->nTime))
+    if (!CheckTransaction(tx, chainActive.Height() >= Params().Zerocoin_StartHeight(), true, state, GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < chainActive.Tip()->nTime))
         return error("AcceptableInputs: : CheckTransaction failed");
 
     // Coinbase is only valid in a block, not as a loose transaction
@@ -2161,24 +2161,132 @@ double ConvertBitsToDouble(unsigned int nBits)
 
 int64_t GetBlockValue(int nHeight)
 {
-    if (nHeight == 0) {
-        return 17500000 * COIN;
-    } else if (nHeight > 0 && nHeight <= 200) {
-        return 2500 * COIN;
-    } else if (nHeight > 200 && nHeight <= 775600) {
-        return 7 * COIN;
-    } else if (nHeight > 775600 && nHeight <= 1043999) {
-        return 4.5 * COIN;
-    } else if (nHeight > 1043999 && nHeight <= 1562398) {
-        return 3.6 * COIN;
-    } else {
-        return 2.7 * COIN;
-    }
+    int64_t nSubsidy = 0;
+
+    //if (IsTreasuryBlock(nHeight)) {
+      //  LogPrintf("GetBlockValue(): this is a treasury block\n");
+      //  nSubsidy = GetTreasuryAward(nHeight);
+
+    //} else {
+        if (nHeight == 0) {
+            nSubsidy = 210000 * COIN;
+        } else if (nHeight <= 1000) { //Before v1.1.0.0
+            nSubsidy = 0.1 * COIN;
+        } else if (nHeight <= 21160) { //Before v1.1.0.0
+            nSubsidy = 0.7 * COIN;
+        } else if (nHeight <= 31240) { //Before v1.1.0.0
+            nSubsidy = 2 * COIN;
+        } else if (nHeight <= 41320) { //Before v1.1.0.0
+            nSubsidy = 2.5 * COIN;
+        } else if (nHeight <= 51400 && nHeight > 41320) { // 7 days
+            nSubsidy = 3 * COIN;
+        } else if (nHeight <= 61480 && nHeight > 51400) { // 7 days
+            nSubsidy = 3.5 * COIN;
+        } else if (nHeight <= 71560 && nHeight > 61480) { // 7 days
+            nSubsidy = 4 * COIN;
+        } else if (nHeight <= 81640 && nHeight > 71560) { // 7 days
+            nSubsidy = 4.5 * COIN;
+        } else if (nHeight <= 91720 && nHeight > 81640) { // 7 days
+            nSubsidy = 5 * COIN;
+        } else if (nHeight <= 101800 && nHeight > 91720) { // 7 days
+            nSubsidy = 5.5 * COIN;
+        } else if (nHeight <= 111880 && nHeight > 101800) { // 7 days
+            nSubsidy = 6 * COIN;
+        } else if (nHeight <= 121960 && nHeight > 111880) { // 7 days
+            nSubsidy = 6.5 * COIN;
+        } else if (nHeight <= 132040 && nHeight > 121960) { // 7 days
+            nSubsidy = 7 * COIN;
+        } else if (nHeight <= 142120 && nHeight > 132040) { // 7 days
+            nSubsidy = 7.5 * COIN;
+        } else if (nHeight <= 152200 && nHeight > 142120) { // 7 days
+            nSubsidy = 8 * COIN;
+        } else if (nHeight <= 162280 && nHeight > 152200) { // 7 days
+            nSubsidy = 8.5 * COIN;
+        } else if (nHeight <= 172360 && nHeight > 162280) { // 7 days
+            nSubsidy = 9 * COIN;
+        } else if (nHeight <= 182440 && nHeight > 172360) { // 7 days
+            nSubsidy = 9.5 * COIN;
+        } else if (nHeight <= 192020 && nHeight > 182440) { // 7 days
+            nSubsidy = 10 * COIN;
+        } else if (nHeight <= 212180 && nHeight > 192020) { // 14 days
+            nSubsidy = 9.75 * COIN;
+        } else if (nHeight <= 232340 && nHeight > 212180) { // 14 days
+            nSubsidy = 9.5 * COIN;
+        } else if (nHeight <= 252500 && nHeight > 232340) { // 14 days
+            nSubsidy = 9.25 * COIN;
+        } else if (nHeight <= 272660 && nHeight > 252500) { // 14 days
+            nSubsidy = 9 * COIN;
+        } else if (nHeight <= 292820 && nHeight > 272660) { // 14 days
+            nSubsidy = 8.75 * COIN;
+        } else if (nHeight <= 312980 && nHeight > 292820) { // 14 days
+            nSubsidy = 8.5 * COIN;
+        } else if (nHeight <= 333140 && nHeight > 312980) { // 14 days
+            nSubsidy = 8.25 * COIN;
+        } else if (nHeight <= 353300 && nHeight > 333140) { // 14 days
+            nSubsidy = 8 * COIN;
+        } else if (nHeight <= 373460 && nHeight > 353300) { // 14 days
+            nSubsidy = 7.75 * COIN;
+        } else if (nHeight <= 393620 && nHeight > 373460) { // 14 days
+            nSubsidy = 7.5 * COIN;
+        } else if (nHeight <= 413780 && nHeight > 393620) { // 14 days
+            nSubsidy = 7.25 * COIN;
+        } else if (nHeight <= 433940 && nHeight > 413780) { // 14 days
+            nSubsidy = 7 * COIN;
+        } else if (nHeight <= 454100 && nHeight > 433940) { // 14 days
+            nSubsidy = 6.75 * COIN;
+        } else if (nHeight <= 474260 && nHeight > 454100) { // 14 days
+            nSubsidy = 6.5 * COIN;
+        } else if (nHeight <= 494420 && nHeight > 474260) { // 14 days
+            nSubsidy = 6.25 * COIN;
+        } else if (nHeight <= 514580 && nHeight > 494420) { // 14 days
+            nSubsidy = 6 * COIN;
+        } else if (nHeight <= 534740 && nHeight > 514580) { // 14 days
+            nSubsidy = 5.75 * COIN;
+        } else if (nHeight <= 554900 && nHeight > 534740) { // 14 days
+            nSubsidy = 5.5 * COIN;
+        } else if (nHeight <= 575060 && nHeight > 554900) { // 14 days
+            nSubsidy = 5.25 * COIN;
+        } else if (nHeight <= 618260 && nHeight > 575060) { // 30 days
+            nSubsidy = 5 * COIN;
+        } else if (nHeight <= 661460 && nHeight > 618260) { // 30 days
+            nSubsidy = 4.75 * COIN;
+        } else if (nHeight <= 791060 && nHeight > 661460) { // 90 days
+            nSubsidy = 4.5 * COIN;
+        } else if (nHeight <= 920660 && nHeight > 791060) { // 90 days
+            nSubsidy = 4.25 * COIN;
+        } else if (nHeight <= 1179860 && nHeight > 920660) { // 180 days
+            nSubsidy = 4 * COIN;
+        } else if (nHeight <= 1439060 && nHeight > 1179860) { // 180 days
+            nSubsidy = 3.5 * COIN;
+        } else if (nHeight <= 1957460 && nHeight > 1439060) { // 360 days
+            nSubsidy = 3 * COIN;
+        } else if (nHeight <= 2475860 && nHeight > 1957460) { // 360 days
+            nSubsidy = 2.5 * COIN;
+        } else if (nHeight > 2475860) { // Till Max Supply - 10 years
+            nSubsidy = 2 * COIN;
+        }
+        // Check if we reached the coin max supply.
+        int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
+        if (nMoneySupply + nSubsidy >= Params().MaxMoneyOut())
+            nSubsidy = Params().MaxMoneyOut() - nMoneySupply;
+        if (nMoneySupply >= Params().MaxMoneyOut())
+            nSubsidy = 0;
+        return nSubsidy;
+    //}
 }
 
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount)
 {
-    int64_t ret = blockValue / 5 * 3;
+    int64_t ret = 0;
+
+    if (nHeight < 101) {
+        ret = blockValue * 0;
+    } else if (nHeight <= 192021 && nHeight > 101) {
+        ret = blockValue * 0.8; //80% for nodes
+    } else if (nHeight > 192021) {
+        ret = blockValue * 0.9; //90% for nodes
+    }
+
     return ret;
 }
 
@@ -2960,7 +3068,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     unsigned int flags = SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_DERSIG;
 
-    if (GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < block.nTime) {
+    if (GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < block.nTime) {
         flags |= SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY | SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
     }
 
@@ -2970,7 +3078,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         nInputs += tx.vin.size();
 
         //Temporarily disable zerocoin transactions for maintenance
-        if (block.nTime > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE) && !IsInitialBlockDownload() && tx.ContainsZerocoins()) {
+        if (block.nTime > GetSporkValue(SPORK_23_ZEROCOIN_MAINTENANCE_MODE) && !IsInitialBlockDownload() && tx.ContainsZerocoins()) {
             return state.DoS(100, error("ConnectBlock() : zerocoin transactions are currently in maintenance mode"));
         }
         if (tx.IsZerocoinSpend()) {
@@ -4100,7 +4208,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     if (block.IsProofOfStake()) {
         int commitpos = GetWitnessCommitmentIndex(block);
         if (commitpos >= 0) {
-            if (IsSporkActive(SPORK_19_SEGWIT_ON_COINBASE)) {
+            if (IsSporkActive(SPORK_25_SEGWIT_ON_COINBASE)) {
                 if (block.vtx[0].vout.size() != 2)
                     return state.DoS(100, error("CheckBlock() : coinbase output has wrong size for proof-of-stake block"));
                 if (!block.vtx[0].vout[1].scriptPubKey.IsUnspendable())
@@ -4286,7 +4394,7 @@ void UpdateUncommittedBlockStructures(CBlock& block, const CBlockIndex* pindexPr
 {
     int commitpos = GetWitnessCommitmentIndex(block);
     static const std::vector<unsigned char> nonce(32, 0x00);
-    if (commitpos != -1 && GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < pindexPrev->nTime && block.vtx[0].wit.IsEmpty()) {
+    if (commitpos != -1 && GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < pindexPrev->nTime && block.vtx[0].wit.IsEmpty()) {
         block.vtx[0].wit.vtxinwit.resize(1);
         block.vtx[0].wit.vtxinwit[0].scriptWitness.stack.resize(1);
         block.vtx[0].wit.vtxinwit[0].scriptWitness.stack[0] = nonce;
@@ -4305,7 +4413,7 @@ std::vector<unsigned char> GenerateCoinbaseCommitment(CBlock& block, const CBloc
         }
     }
     std::vector<unsigned char> ret(32, 0x00);
-    if (fHaveWitness && GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < pindexPrev->nTime) {
+    if (fHaveWitness && GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < pindexPrev->nTime) {
         if (commitpos == -1) {
             uint256 witnessroot = BlockWitnessMerkleRoot(block, NULL);
             CHash256().Write(witnessroot.begin(), 32).Write(&ret[0], 32).Finalize(witnessroot.begin());
@@ -4364,7 +4472,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
 
         vector<CBigNum> vBlockSerials;
         for (const CTransaction& tx : block.vtx) {
-            if (!CheckTransaction(tx, true, chainActive.Height() + 1 >= Params().Zerocoin_StartHeight(), state, GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < block.nTime))
+            if (!CheckTransaction(tx, true, chainActive.Height() + 1 >= Params().Zerocoin_StartHeight(), state, GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < block.nTime))
                 return error("CheckBlock() : CheckTransaction failed");
 
             // double check that there are no double spent zABET spends in this block
@@ -4412,10 +4520,10 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
     //   {0xaa, 0x21, 0xa9, 0xed}, and the following 32 bytes are SHA256(witness root, witness nonce). In case there are
     //   multiple, the last one is used.
     bool fHaveWitness = false;
-    if (GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < pindexPrev->nTime) {
+    if (GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < pindexPrev->nTime) {
         int commitpos = GetWitnessCommitmentIndex(block);
         if (commitpos != -1) {
-            if (!IsSporkActive(SPORK_19_SEGWIT_ON_COINBASE)) {
+            if (!IsSporkActive(SPORK_25_SEGWIT_ON_COINBASE)) {
                 if (fDebug) {
                     LogPrintf("CheckBlock() : staking-on-segwit is not enabled.\n");
                 }
@@ -5102,7 +5210,7 @@ bool RewindBlockIndex(const CChainParams& params)
 
     int nHeight = 1;
     while (nHeight <= chainActive.Height()) {
-        if (GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < chainActive[nHeight - 1]->nTime && !(chainActive[nHeight]->nStatus & BLOCK_OPT_WITNESS)) {
+        if (GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < chainActive[nHeight - 1]->nTime && !(chainActive[nHeight]->nStatus & BLOCK_OPT_WITNESS)) {
             break;
         }
         nHeight++;
@@ -5125,7 +5233,7 @@ bool RewindBlockIndex(const CChainParams& params)
     // to disk before writing the chainstate, resulting in a failure to continue if interrupted.
     for (BlockMap::iterator it = mapBlockIndex.begin(); it != mapBlockIndex.end(); it++) {
         CBlockIndex* pindexIter = it->second;
-        if (GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) < pindexIter->nTime && !(pindexIter->nStatus & BLOCK_OPT_WITNESS)) {
+        if (GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) < pindexIter->nTime && !(pindexIter->nStatus & BLOCK_OPT_WITNESS)) {
             // Reduce validity
             pindexIter->nStatus = std::min<unsigned int>(pindexIter->nStatus & BLOCK_VALID_MASK, BLOCK_VALID_TREE) | (pindexIter->nStatus & ~BLOCK_VALID_MASK);
             // Remove have-data flags.
@@ -5869,8 +5977,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         }
         // broken releases with wrong blockchain data
         if (pfrom->cleanSubVer == "/Altbet Core:1.1.0/" ||
-            pfrom->cleanSubVer == "/Altbet Core:1.3.0/" ||
-            pfrom->cleanSubVer == "/Altbet Core:1.3.1/") {
+            pfrom->cleanSubVer == "/Altbet Core:1.3.0/" ) {
             LOCK(cs_main);
             Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
             return false;
@@ -5915,7 +6022,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         // Altbet: We use certain sporks during IBD, so check to see if they are
         // available. If not, ask the first peer connected for them.
-        bool fMissingSporks = !pSporkDB->SporkExists(SPORK_16_ZEROCOIN_MAINTENANCE_MODE);
+        bool fMissingSporks = !pSporkDB->SporkExists(SPORK_23_ZEROCOIN_MAINTENANCE_MODE);
 
         if (fMissingSporks || !fRequestedSporksIDB){
             LogPrintf("asking peer for sporks\n");
@@ -6101,7 +6208,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     // doing this will result in the received block being rejected as an orphan in case it is
                     // not a direct successor.
                     if (State(pfrom->GetId())->fHaveWitness &&
-                       (GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) > chainActive.Tip()->nTime || State(pfrom->GetId())->fHaveWitness)) {
+                       (GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) > chainActive.Tip()->nTime || State(pfrom->GetId())->fHaveWitness)) {
                         inv.type = MSG_WITNESS_BLOCK;
                     }
                     vToFetch.push_back(inv);
@@ -6728,7 +6835,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    if (IsSporkActive(SPORK_18_NEW_PROTOCOL_ENFORCEMENT_3))
+    if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
         return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
@@ -7034,7 +7141,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
             NodeId staller = -1;
             FindNextBlocksToDownload(pto->GetId(), MAX_BLOCKS_IN_TRANSIT_PER_PEER - state.nBlocksInFlight, vToDownload, staller);
             BOOST_FOREACH(CBlockIndex *pindex, vToDownload) {
-                if (State(pto->GetId())->fHaveWitness || GetSporkValue(SPORK_17_SEGWIT_ACTIVATION) > pindex->pprev->nTime) {
+                if (State(pto->GetId())->fHaveWitness || GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) > pindex->pprev->nTime) {
                     vGetData.push_back(CInv(State(staller)->fHaveWitness ? MSG_WITNESS_BLOCK : MSG_BLOCK, pindex->GetBlockHash()));
                     MarkBlockAsInFlight(pto->GetId(), pindex->GetBlockHash(), pindex);
                     LogPrint("net", "Requesting block %s (%d) peer=%d\n", pindex->GetBlockHash().ToString(),

@@ -118,7 +118,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     // -promiscuousmempoolflags is used.
     // TODO: replace this with a call to main to assess validity of a mempool
     // transaction (which in most cases can be a no-op).
-    bool fIncludeWitness = IsSporkActive(SPORK_17_SEGWIT_ACTIVATION);
+    bool fIncludeWitness = IsSporkActive(SPORK_22_SEGWIT_ACTIVATION);
 
     // Make sure to create the correct block version after zerocoin is enabled
     bool fZerocoinActive = chainActive.Height() >= Params().Zerocoin_StartHeight();
@@ -225,7 +225,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             if (tx.IsCoinBase() || tx.IsCoinStake() || !IsFinalTx(tx, nHeight)){
                 continue;
             }
-            if(GetAdjustedTime() > GetSporkValue(SPORK_16_ZEROCOIN_MAINTENANCE_MODE) && tx.ContainsZerocoins()){
+            if(GetAdjustedTime() > GetSporkValue(SPORK_23_ZEROCOIN_MAINTENANCE_MODE) && tx.ContainsZerocoins()){
                 continue;
             }
 
@@ -501,7 +501,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(pblock->vtx[0]);
 
         if (fProofOfStake) {
-            if (! IsSporkActive(SPORK_19_SEGWIT_ON_COINBASE)) {
+            if (! IsSporkActive(SPORK_25_SEGWIT_ON_COINBASE)) {
                 bool fHaveWitness = false;
                 for (size_t t = 1; t < pblock->vtx.size(); t++) {
                     if (!pblock->vtx[t].wit.IsNull()) {

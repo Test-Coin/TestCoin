@@ -94,7 +94,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassabetaseDialog</name>
+    <name>AskPassphraseDialog</name>
     <message>
         <source>Enter passabetase</source>
         <translation>Wpisz hasło</translation>

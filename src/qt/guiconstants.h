@@ -10,7 +10,7 @@
 /* Milliseconds between model updates */
 static const int MODEL_UPDATE_DELAY = 1000;
 
-/* AskPassabetaseDialog -- Maximum passabetase length */
+/* AskPassphraseDialog -- Maximum passabetase length */
 static const int MAX_PASSABETASE_SIZE = 1024;
 
 /* Altbet GUI -- Size of icons in status bar */

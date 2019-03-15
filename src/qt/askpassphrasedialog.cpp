@@ -4,8 +4,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "askpassabetasedialog.h"
-#include "ui_askpassabetasedialog.h"
+#include "askpassphrasedialog.h"
+#include "ui_askpassphrasedialog.h"
 
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -17,8 +17,8 @@
 #include <QMessageBox>
 #include <QPushButton>
 
-AskPassabetaseDialog::AskPassabetaseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
-                                                                                           ui(new Ui::AskPassabetaseDialog),
+askpassphrasedialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
+                                                                                           ui(new Ui::AskPassphraseDialog),
                                                                                            mode(mode),
                                                                                            model(model),
                                                                                            fCapsLock(false)
@@ -85,7 +85,7 @@ AskPassabetaseDialog::AskPassabetaseDialog(Mode mode, QWidget* parent, WalletMod
     connect(ui->passEdit3, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
 }
 
-AskPassabetaseDialog::~AskPassabetaseDialog()
+AskPassphraseDialog::~AskPassphraseDialog()
 {
     // Attempt to overwrite text so that they do not linger around in memory
     ui->passEdit1->setText(QString(" ").repeated(ui->passEdit1->text().size()));
@@ -94,7 +94,7 @@ AskPassabetaseDialog::~AskPassabetaseDialog()
     delete ui;
 }
 
-void AskPassabetaseDialog::accept()
+void AskPassphraseDialog::accept()
 {
     SecureString oldpass, newpass1, newpass2;
     if (!model)
@@ -181,7 +181,7 @@ void AskPassabetaseDialog::accept()
     }
 }
 
-void AskPassabetaseDialog::textChanged()
+void AskPassphraseDialog::textChanged()
 {
     // Validate input, set Ok button to enabled when acceptable
     bool acceptable = false;
@@ -201,7 +201,7 @@ void AskPassabetaseDialog::textChanged()
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(acceptable);
 }
 
-bool AskPassabetaseDialog::event(QEvent* event)
+bool AskPassphraseDialog::event(QEvent* event)
 {
     // Detect Caps Lock key press.
     if (event->type() == QEvent::KeyPress) {
@@ -218,7 +218,7 @@ bool AskPassabetaseDialog::event(QEvent* event)
     return QWidget::event(event);
 }
 
-bool AskPassabetaseDialog::eventFilter(QObject* object, QEvent* event)
+bool AskPassphraseDialog::eventFilter(QObject* object, QEvent* event)
 {
     /* Detect Caps Lock.
      * There is no good OS-independent way to check a key state in Qt, but we

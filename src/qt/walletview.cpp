@@ -5,7 +5,7 @@
 #include "walletview.h"
 
 #include "addressbookpage.h"
-#include "askpassabetasedialog.h"
+#include "askpassphrasedialog.h"
 #include "bip38tooldialog.h"
 #include "bitcoingui.h"
 #include "blockexplorer.h"
@@ -362,7 +362,7 @@ void WalletView::encryptWallet(bool status)
 {
     if (!walletModel)
         return;
-    AskPassabetaseDialog dlg(status ? AskPassabetaseDialog::Encrypt : AskPassabetaseDialog::Decrypt, this, walletModel);
+    AskPassphraseDialog dlg(status ? AskPassphraseDialog::Encrypt : AskPassphraseDialog::Decrypt, this, walletModel);
     dlg.exec();
 
     updateEncryptionStatus();
@@ -388,7 +388,7 @@ void WalletView::backupWallet()
 
 void WalletView::changePassabetase()
 {
-    AskPassabetaseDialog dlg(AskPassabetaseDialog::ChangePass, this, walletModel);
+    AskPassphraseDialog dlg(AskPassphraseDialog::ChangePass, this, walletModel);
     dlg.exec();
 }
 
@@ -399,7 +399,7 @@ void WalletView::unlockWallet()
     // Unlock wallet when requested by wallet model
 
     if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForAnonymizationOnly) {
-        AskPassabetaseDialog dlg(AskPassabetaseDialog::UnlockAnonymize, this, walletModel);
+        AskPassphraseDialog dlg(AskPassphraseDialog::UnlockAnonymize, this, walletModel);
         dlg.exec();
     }
 }
@@ -421,7 +421,7 @@ void WalletView::toggleLockWallet()
 
     // Unlock the wallet when requested
     if (encStatus == walletModel->Locked) {
-        AskPassabetaseDialog dlg(AskPassabetaseDialog::UnlockAnonymize, this, walletModel);
+        AskPassphraseDialog dlg(AskPassphraseDialog::UnlockAnonymize, this, walletModel);
         dlg.exec();
     }
 

@@ -143,9 +143,9 @@
     </message>
 </context>
 <context>
-    <name>AskPassabetaseDialog</name>
+    <name>AskPassphraseDialog</name>
     <message>
-        <location filename="../forms/askpassabetasedialog.ui" line="+26"/>
+        <location filename="../forms/askpassphrasedialog.ui" line="+26"/>
         <source>Passabetase Dialog</source>
         <translation>Passabetase Dialog</translation>
     </message>
@@ -175,7 +175,7 @@
         <translation>For anonymization and staking only</translation>
     </message>
     <message>
-        <location filename="../askpassabetasedialog.cpp" line="+44"/>
+        <location filename="../askpassphrasedialog.cpp" line="+44"/>
         <source>Enter the new passabetase to the wallet.&lt;br/&gt;Please use a passabetase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Enter the new passabetase to the wallet.&lt;br/&gt;Please use a passabetase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</translation>
     </message>

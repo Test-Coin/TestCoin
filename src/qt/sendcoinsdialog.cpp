@@ -8,7 +8,7 @@
 #include "ui_sendcoinsdialog.h"
 
 #include "addresstablemodel.h"
-#include "askpassabetasedialog.h"
+#include "askpassphrasedialog.h"
 #include "bitcoinunits.h"
 #include "clientmodel.h"
 #include "coincontroldialog.h"

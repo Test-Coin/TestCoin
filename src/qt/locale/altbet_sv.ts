@@ -106,7 +106,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassabetaseDialog</name>
+    <name>AskPassphraseDialog</name>
     <message>
         <source>Passabetase Dialog</source>
         <translation>Lösenfras Dialog</translation>

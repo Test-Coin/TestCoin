@@ -114,7 +114,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassPhraseDialog</name>
     <message>
         <source>Passphrase Dialog</source>
         <translation>密码输入框</translation>

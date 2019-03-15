@@ -78,7 +78,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassPhraseDialog</name>
     <message>
         <source>Unlock wallet</source>
         <translation>Otključaj novčanik</translation>

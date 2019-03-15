@@ -859,9 +859,9 @@ QWidget#PrivacyDialog QProgressBar#obfuscationProgress::chunk {
 
 /* Encrypt Wallet and Change Passphrase Dialog */
 
-QDialog#AskPassphraseDialog QLabel#passLabel1,
-QDialog#AskPassphraseDialog QLabel#passLabel2,
-QDialog#AskPassphraseDialog QLabel#passLabel3 {
+QDialog#AskPassPhraseDialog QLabel#passLabel1,
+QDialog#AskPassPhraseDialog QLabel#passLabel2,
+QDialog#AskPassPhraseDialog QLabel#passLabel3 {
 	qproperty-alignment: 'AlignVCenter | AlignRight';
 	min-width: 170px;
 	min-height: 33px;

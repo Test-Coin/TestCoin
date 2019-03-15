@@ -94,7 +94,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassPhraseDialog</name>
     <message>
         <source>Enter passphrase</source>
         <translation>Wpisz hasło</translation>

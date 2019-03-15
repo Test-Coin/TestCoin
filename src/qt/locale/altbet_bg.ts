@@ -114,7 +114,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassPhraseDialog</name>
     <message>
         <source>Passphrase Dialog</source>
         <translation>Поле за парола</translation>

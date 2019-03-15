@@ -106,7 +106,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassPhraseDialog</name>
     <message>
         <source>Enter passphrase</source>
         <translation>Entrer la abetase secrète</translation>

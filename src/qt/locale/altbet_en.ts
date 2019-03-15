@@ -143,7 +143,7 @@
     </message>
 </context>
 <context>
-    <name>AskPassphraseDialog</name>
+    <name>AskPassPhraseDialog</name>
     <message>
         <location filename="../forms/askpassphrasedialog.ui" line="+26"/>
         <source>Passphrase Dialog</source>

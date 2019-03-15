@@ -362,7 +362,7 @@ void WalletView::encryptWallet(bool status)
 {
     if (!walletModel)
         return;
-    AskPassphraseDialog dlg(status ? AskPassphraseDialog::Encrypt : AskPassphraseDialog::Decrypt, this, walletModel);
+    AskPassPhraseDialog dlg(status ? AskPassPhraseDialog::Encrypt : AskPassPhraseDialog::Decrypt, this, walletModel);
     dlg.exec();
 
     updateEncryptionStatus();
@@ -388,7 +388,7 @@ void WalletView::backupWallet()
 
 void WalletView::changePassphrase()
 {
-    AskPassphraseDialog dlg(AskPassphraseDialog::ChangePass, this, walletModel);
+    AskPassPhraseDialog dlg(AskPassPhraseDialog::ChangePass, this, walletModel);
     dlg.exec();
 }
 
@@ -399,7 +399,7 @@ void WalletView::unlockWallet()
     // Unlock wallet when requested by wallet model
 
     if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForAnonymizationOnly) {
-        AskPassphraseDialog dlg(AskPassphraseDialog::UnlockAnonymize, this, walletModel);
+        AskPassPhraseDialog dlg(AskPassPhraseDialog::UnlockAnonymize, this, walletModel);
         dlg.exec();
     }
 }
@@ -421,7 +421,7 @@ void WalletView::toggleLockWallet()
 
     // Unlock the wallet when requested
     if (encStatus == walletModel->Locked) {
-        AskPassphraseDialog dlg(AskPassphraseDialog::UnlockAnonymize, this, walletModel);
+        AskPassPhraseDialog dlg(AskPassPhraseDialog::UnlockAnonymize, this, walletModel);
         dlg.exec();
     }
 

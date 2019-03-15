@@ -17,8 +17,8 @@
 #include <QMessageBox>
 #include <QPushButton>
 
-askpassphrasedialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
-                                                                                           ui(new Ui::AskPassphraseDialog),
+askpassphrasedialog::AskPassPhraseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
+                                                                                           ui(new Ui::AskPassPhraseDialog),
                                                                                            mode(mode),
                                                                                            model(model),
                                                                                            fCapsLock(false)
@@ -85,7 +85,7 @@ askpassphrasedialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
     connect(ui->passEdit3, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
 }
 
-AskPassphraseDialog::~AskPassphraseDialog()
+AskPassPhraseDialog::~AskPassPhraseDialog()
 {
     // Attempt to overwrite text so that they do not linger around in memory
     ui->passEdit1->setText(QString(" ").repeated(ui->passEdit1->text().size()));
@@ -94,7 +94,7 @@ AskPassphraseDialog::~AskPassphraseDialog()
     delete ui;
 }
 
-void AskPassphraseDialog::accept()
+void AskPassPhraseDialog::accept()
 {
     SecureString oldpass, newpass1, newpass2;
     if (!model)
@@ -181,7 +181,7 @@ void AskPassphraseDialog::accept()
     }
 }
 
-void AskPassphraseDialog::textChanged()
+void AskPassPhraseDialog::textChanged()
 {
     // Validate input, set Ok button to enabled when acceptable
     bool acceptable = false;
@@ -201,7 +201,7 @@ void AskPassphraseDialog::textChanged()
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(acceptable);
 }
 
-bool AskPassphraseDialog::event(QEvent* event)
+bool AskPassPhraseDialog::event(QEvent* event)
 {
     // Detect Caps Lock key press.
     if (event->type() == QEvent::KeyPress) {
@@ -218,7 +218,7 @@ bool AskPassphraseDialog::event(QEvent* event)
     return QWidget::event(event);
 }
 
-bool AskPassphraseDialog::eventFilter(QObject* object, QEvent* event)
+bool AskPassPhraseDialog::eventFilter(QObject* object, QEvent* event)
 {
     /* Detect Caps Lock.
      * There is no good OS-independent way to check a key state in Qt, but we

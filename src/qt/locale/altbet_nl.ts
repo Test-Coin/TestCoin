@@ -117,19 +117,19 @@
 <context>
     <name>AskPassphraseDialog</name>
     <message>
-        <source>Passabetase Dialog</source>
+        <source>Passphrase Dialog</source>
         <translation>Wachtwoorddialoog</translation>
     </message>
     <message>
-        <source>Enter passabetase</source>
+        <source>Enter passphrase</source>
         <translation>Voer wachtwoord in</translation>
     </message>
     <message>
-        <source>New passabetase</source>
+        <source>New passphrase</source>
         <translation>Nieuw wachtwoord</translation>
     </message>
     <message>
-        <source>Repeat new passabetase</source>
+        <source>Repeat new passphrase</source>
         <translation>Herhaal nieuw wachtwoord</translation>
     </message>
     <message>
@@ -141,7 +141,7 @@
         <translation>Alleen voor anonimisering en staking</translation>
     </message>
     <message>
-        <source>Enter the new passabetase to the wallet.&lt;br/&gt;Please use a passabetase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Voer een nieuw wachtwoord in voor uw portemonnee.&lt;br/&gt;Gebruik een wachtwoord van &lt;b&gt;tien of meer willekeurige karakters&lt;/b&gt;, of &lt;b&gt;acht of meer woorden&lt;/b&gt;.</translation>
     </message>
     <message>
@@ -149,7 +149,7 @@
         <translation>Versleutel portemonnee</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passabetase to unlock the wallet.</source>
+        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te openen.</translation>
     </message>
 	    <message>
@@ -161,7 +161,7 @@
         <translation>Open portemonnee</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passabetase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
         <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te ontsleutelen</translation>
     </message>
     <message>
@@ -169,11 +169,11 @@
         <translation>Ontsleutel portemonnee</translation>
     </message>
     <message>
-        <source>Change passabetase</source>
+        <source>Change passphrase</source>
         <translation>Wijzig wachtwoord</translation>
     </message>
     <message>
-        <source>Enter the old and new passabetase to the wallet.</source>
+        <source>Enter the old and new passphrase to the wallet.</source>
         <translation>Voer het oude en nieuwe wachtwoord voor uw portemonnee in.</translation>
     </message>
     <message>
@@ -189,7 +189,7 @@
         <translation>Weet u zeker dat u uw portemonnee wilt versleutelen?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passabetase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
         <translation>Waarschuwing: Als u uw portemonnee versleutelt en uw wachtwoord vergeet, zult u &lt;b&gt;AL UW ABET VERLIEZEN&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -209,7 +209,7 @@
         <translation>Portemonneeversleuteling mislukt door een interne fout. Uw portemonnee is niet versleuteld.</translation>
     </message>
     <message>
-        <source>The supplied passabetases do not match.</source>
+        <source>The supplied passphrases do not match.</source>
         <translation>De opgegeven wachtwoorden komen niet overeen.</translation>
     </message>
     <message>
@@ -217,7 +217,7 @@
         <translation>Portemonnee openen mislukt</translation>
     </message>
     <message>
-        <source>The passabetase entered for the wallet decryption was incorrect.</source>
+        <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>Het opgegeven wachtwoord voor de portemonnee-ontsleuteling is niet correct.</translation>
     </message>
     <message>
@@ -225,7 +225,7 @@
         <translation>Portemonnee-ontsleuteling mislukt</translation>
     </message>
     <message>
-        <source>Wallet passabetase was successfully changed.</source>
+        <source>Wallet passphrase was successfully changed.</source>
         <translation>Portemonneewachtwoord is met succes gewijzigd.</translation>
     </message>
     <message>
@@ -244,7 +244,7 @@
         <translation>&amp;BIP 38 Versleuteling</translation>
     </message>
     <message>
-        <source>Enter a Altbet Address that you would like to encrypt using BIP 38. Enter a passabetase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <source>Enter a Altbet Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
         <translation>Voer een Altbet adres in dat u wilt versleutelen met BIP 38. Voer een wachtwoord in, in het middelste veld. Druk op versleutelen om de versleutelde geheime sleutel te berekenen.</translation>
     </message>
     <message>
@@ -272,7 +272,7 @@
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Passabetase: </source>
+        <source>Passphrase: </source>
         <translation>Wachtwoord:</translation>
     </message>
     <message>
@@ -304,7 +304,7 @@
         <translation>&amp;BIP 38 ontsleuteling</translation>
     </message>
     <message>
-        <source>Enter the BIP 38 encrypted private key. Enter the passabetase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking &apos;Import Address&apos; will add this private key to the wallet.</source>
+        <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking &apos;Import Address&apos; will add this private key to the wallet.</source>
         <translation>Voer de BIP 38 versleutelde geheime sleutel in. Voer het wachtwoord in, in het middelste veld. Druk op Ontsleutelen Sleutel om de geheime sleutel te berekenen.  Nadat de geheime sleutel is ontsleuteld, zal het klikken op &apos;Adres Importerens&apos; de geheime sleutel toevoegen aan de portemonnee.</translation>
     </message>
     <message>
@@ -336,7 +336,7 @@
         <translation>Klik &quot;Ontsleutelen Sleutel&quot; om de sleutel te berekenen</translation>
     </message>
     <message>
-        <source>The entered passabetase is invalid. </source>
+        <source>The entered passphrase is invalid. </source>
         <translation>Het ingevoerde wachtwoord is ongeldig.</translation>
     </message>
     <message>
@@ -368,7 +368,7 @@
         <translation>Ontsleutelen mislukt.</translation>
     </message>
     <message>
-        <source>Please check the key and passabetase and try again.</source>
+        <source>Please check the key and passphrase and try again.</source>
         <translation>Controleer de sleutel en het wachtwoord en probeer het opnieuw.</translation>
     </message>
     <message>
@@ -475,11 +475,11 @@
         <translation>Backup portemonnee naar een andere locatie</translation>
     </message>
     <message>
-        <source>&amp;Change Passabetase...</source>
+        <source>&amp;Change Passphrase...</source>
         <translation>&amp;Wijzig Wachtwoord...</translation>
     </message>
     <message>
-        <source>Change the passabetase used for wallet encryption</source>
+        <source>Change the passphrase used for wallet encryption</source>
         <translation>Wijzig het wachtwoord voor uw portemonneversleuteling</translation>
     </message>
     <message>
@@ -659,7 +659,7 @@
         <translation>&amp;BIP38 tool</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passabetase</source>
+        <source>Encrypt and decrypt private keys using a passphrase</source>
         <translation>Versleutelen en ontsleutelen door middel van een wachtwoord/wachtzin</translation>
     </message>
     <message>
@@ -2508,7 +2508,7 @@ https://www.transifex.com/altbet-project/altbet-project-translations</translatio
         <translation>Zerocoin functionaliteit is nog niet ingeschakeld op het Altbet netwerk.</translation>
     </message>
     <message>
-        <source>Error: Your wallet is locked. Please enter the wallet passabetase first.</source>
+        <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
         <translation>Fout: Je portemonnee is vergrendeld. Voer alsjeblieft de wachtwoord zin voor de portemonnee in.</translation>
     </message>
     <message>
@@ -6351,7 +6351,7 @@ Om het percentage te wijzigen (geen herstart vereist):
         <translation>zABET wordt momenteel onderhouden.</translation>
     </message>
     <message>
-        <source>Error: Your wallet is locked. Please enter the wallet passabetase first.</source>
+        <source>Error: Your wallet is locked. Please enter the wallet passphrase first.</source>
         <translation>Fout: Je portemonnee is vergrendeld. Voer alsjeblieft de wachtwoord zin voor de portemonnee in.</translation>
     </message>
     <message>

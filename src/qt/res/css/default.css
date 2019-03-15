@@ -857,7 +857,7 @@ QWidget#PrivacyDialog QProgressBar#obfuscationProgress::chunk {
 }
 /**************************** SETTINGS MENU *********************************************/
 
-/* Encrypt Wallet and Change Passabetase Dialog */
+/* Encrypt Wallet and Change Passphrase Dialog */
 
 QDialog#AskPassphraseDialog QLabel#passLabel1,
 QDialog#AskPassphraseDialog QLabel#passLabel2,

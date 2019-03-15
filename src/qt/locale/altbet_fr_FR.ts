@@ -108,15 +108,15 @@
 <context>
     <name>AskPassphraseDialog</name>
     <message>
-        <source>Enter passabetase</source>
+        <source>Enter passphrase</source>
         <translation>Entrer la abetase secrète</translation>
     </message>
     <message>
-        <source>New passabetase</source>
+        <source>New passphrase</source>
         <translation>Nouvelle abetase secrète</translation>
     </message>
     <message>
-        <source>Repeat new passabetase</source>
+        <source>Repeat new passphrase</source>
         <translation>Confirmer la nouvelle abetase secrète</translation>
     </message>
     <message>
@@ -124,7 +124,7 @@
         <translation>Crypter le portefeuille</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passabetase to unlock the wallet.</source>
+        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
         <translation>Cette opération requiert votre abetase secrète pour déverrouiller votre portefeuille.</translation>
     </message>
     <message>
@@ -132,7 +132,7 @@
         <translation>Déverrouiller le portefeuille</translation>
     </message>
     <message>
-        <source>This operation needs your wallet passabetase to decrypt the wallet.</source>
+        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
         <translation>Cette opération nécessite votre abetase secrète de portefeuille pour décrypter le portefeuille </translation>
     </message>
     <message>
@@ -140,11 +140,11 @@
         <translation>Décrypter le portefeuille</translation>
     </message>
     <message>
-        <source>Change passabetase</source>
+        <source>Change passphrase</source>
         <translation>Changer la abetase secrète</translation>
     </message>
     <message>
-        <source>Enter the old and new passabetase to the wallet.</source>
+        <source>Enter the old and new passphrase to the wallet.</source>
         <translation>Entrer l'ancienne et la nouvelle abetase secrète dans le portefeuille</translation>
     </message>
     <message>
@@ -160,7 +160,7 @@
         <translation>Êtes-vous sûr de vouloir crypter votre portefeuille?</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passabetase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR ABET&lt;/b&gt;!</source>
         <translation>Attention : si vous cryptez votre portefeuille et perdez votre abetase secrète, vous &lt;b&gt;PERDREZ TOUS VOS ABET&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -176,7 +176,7 @@
         <translation>Le cryptage du portefeuille a échoué en raison d'une erreur interne. Votre portefeuille n'a pas été crypté.</translation>
     </message>
     <message>
-        <source>The supplied passabetases do not match.</source>
+        <source>The supplied passphrases do not match.</source>
         <translation>Les abetases secrètes fournies ne correspondent pas.</translation>
     </message>
     <message>
@@ -184,7 +184,7 @@
         <translation>Le déverrouillage de votre portefeuille a échoué</translation>
     </message>
     <message>
-        <source>The passabetase entered for the wallet decryption was incorrect.</source>
+        <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>La abetase secrète entrée pour le décryptage de votre portefeuille était incorrecte.</translation>
     </message>
     <message>
@@ -192,7 +192,7 @@
         <translation>Le décryptage de votre portefeuille a échoué.</translation>
     </message>
     <message>
-        <source>Wallet passabetase was successfully changed.</source>
+        <source>Wallet passphrase was successfully changed.</source>
         <translation>La abetase secrète de votre portefeuille a été changée avec succès.</translation>
     </message>
     <message>
@@ -211,7 +211,7 @@
         <translation>BIP 38 crypter</translation>
     </message>
     <message>
-        <source>Enter a Altbet Address that you would like to encrypt using BIP 38. Enter a passabetase in the middle box. Press encrypt to compute the encrypted private key.</source>
+        <source>Enter a Altbet Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
         <translation>Entrez une adresse Altbet que vous voulez crypter en utilisant BIP 38. Entrez une abetase secrète dans le champ du milieu. Cliquez sur crypter pour calculer la clé de cryptage privée.</translation>
     </message>
     <message>
@@ -239,7 +239,7 @@
         <translation>Alt+P</translation>
     </message>
     <message>
-        <source>Passabetase: </source>
+        <source>Passphrase: </source>
         <translation>Abetase secrète :</translation>
     </message>
     <message>
@@ -295,7 +295,7 @@
         <translation>Cliquez sur "Décrypter la clé" pour calculer la clé</translation>
     </message>
     <message>
-        <source>The entered passabetase is invalid. </source>
+        <source>The entered passphrase is invalid. </source>
         <translation>La abetase secrète entrée est incorrect.</translation>
     </message>
     <message>
@@ -327,7 +327,7 @@
         <translation>Échec du décryptage.</translation>
     </message>
     <message>
-        <source>Please check the key and passabetase and try again.</source>
+        <source>Please check the key and passphrase and try again.</source>
         <translation>Veuillez vérifier la clé et la abetase secrète et réessayer.</translation>
     </message>
     <message>
@@ -422,11 +422,11 @@
         <translation>Sauvegarder ailleurs le portefeuille </translation>
     </message>
     <message>
-        <source>&amp;Change Passabetase...</source>
+        <source>&amp;Change Passphrase...</source>
         <translation>Changer la abetase de sécurité...</translation>
     </message>
     <message>
-        <source>Change the passabetase used for wallet encryption</source>
+        <source>Change the passphrase used for wallet encryption</source>
         <translation>Changer la abetase secrète utilisée pour l'encryptage du portefeuille</translation>
     </message>
     <message>
@@ -562,7 +562,7 @@
         <translation>Outil BIP38</translation>
     </message>
     <message>
-        <source>Encrypt and decrypt private keys using a passabetase</source>
+        <source>Encrypt and decrypt private keys using a passphrase</source>
         <translation>Crypter et décrypter les clés privées en utilisant une abetase secrète</translation>
     </message>
     <message>

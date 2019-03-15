@@ -462,9 +462,9 @@ public:
     //! Adds a MultiSig address to the store, without saving it to disk (used by LoadWallet)
     bool LoadMultiSig(const CScript& dest);
 
-    bool Unlock(const SecureString& strWalletPassabetase, bool anonimizeOnly = false);
-    bool ChangeWalletPassabetase(const SecureString& strOldWalletPassabetase, const SecureString& strNewWalletPassabetase);
-    bool EncryptWallet(const SecureString& strWalletPassabetase);
+    bool Unlock(const SecureString& strWalletPassphrase, bool anonimizeOnly = false);
+    bool ChangeWalletPassphrase(const SecureString& strOldWalletPassphrase, const SecureString& strNewWalletPassphrase);
+    bool EncryptWallet(const SecureString& strWalletPassphrase);
 
     void GetKeyBirthTimes(std::map<CKeyID, int64_t>& mapKeyBirth) const;
     unsigned int ComputeTimeSmart(const CWalletTx& wtx) const;

@@ -17,7 +17,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 
-askpassphrasedialog::AskPassPhraseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
+AskPassphraseDialog::AskPassPhraseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
                                                                                            ui(new Ui::AskPassPhraseDialog),
                                                                                            mode(mode),
                                                                                            model(model),

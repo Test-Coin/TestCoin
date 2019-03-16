@@ -27,14 +27,25 @@ static const int GETHEADERS_VERSION = 70077;
 static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 72004;
 static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 72005;
 
-static const int MIN_PEER_VERSION_FIXED_SIGTIME = 70004;
+static const int MIN_PEER_VERSION_FIXED_SIGTIME = 72004;
 
 //! masternodes older than this proto version use old strMessage format for mnannounce
 static const int MIN_PEER_MNANNOUNCE = 70003;
+//! In this version, "Fake Stake" vulnerability mitigations were introduced.
+// Corrected to last current release 72004 instead of 72002
+// Both 72002 and 72004 correlate to the same Fake Stake update.
+static const int FAKE_STAKE_VERSION = 72004;
+
+// In this version we change the min amount to stake with from any amount to 15 coins
+static const int STAKEV2_VERSION = 72005;
 
 //! nTime field added to CAddress, starting with this version;
 //! if possible, avoid requesting addresses nodes older than this
 static const int CADDR_TIME_VERSION = 31402;
+
+//! only request blocks from nodes outside this range of versions
+static const int NOBLKS_VERSION_START = 32000;
+static const int NOBLKS_VERSION_END = 70700;
 
 //! BIP 0031, pong message, is enabled for all versions AFTER this one
 static const int BIP0031_VERSION = 60000;

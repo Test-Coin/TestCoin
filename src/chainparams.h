@@ -95,6 +95,17 @@ public:
     std::string ObfuscationPoolDummyAddress() const { return strObfuscationPoolDummyAddress; }
     int64_t BudgetFeeConfirmations() const { return nBudgetFeeConfirmations; }
     CBaseChainParams::Network NetworkID() const { return networkID; }
+     int MasternodeCollateralLimit() const { return nMasternodeCollateralLimit; }
+     //Treasury Related
+         std::string vTreasuryRewardAddress;
+     std::string GetTreasuryRewardAddressAtHeight(int height) const;
+     CScript GetTreasuryRewardScriptAtHeight(int height) const;
+     // Min amount in order to stake
+         CAmount StakeInput() const
+    {
+        return nMinStakeInput;
+    }
+     int64_t StartMasternodePayments() const { return nStartMasternodePayments; }
 
     /** Zerocoin **/
     std::string Zerocoin_Modulus() const { return zerocoinModulus; }
@@ -131,9 +142,11 @@ protected:
     int64_t nTargetSpacing;
     int nLastPOWBlock;
     int nMasternodeCountDrift;
+    int nMasternodeCollateralLimit;
     int nMaturity;
     unsigned int nStakeMaturity;
     int nModifierUpdateBlock;
+    CAmount nMinStakeInput;
     CAmount nMaxMoneyOut;
     int nMinerThreads;
     std::vector<CDNSSeedData> vSeeds;
@@ -165,6 +178,7 @@ protected:
     int64_t nBudgetFeeConfirmations;
     int nZerocoinStartHeight;
     int nZerocoinLastOldParams;
+    int64_t nStartMasternodePayments;
 };
 
 /**

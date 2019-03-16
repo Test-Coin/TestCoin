@@ -171,8 +171,8 @@ public:
         hashGenesisBlock = genesis.GetHash();
 		printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
 		printf("genesis.hashMerkleRoot = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0x36991ec60bc06b4aa202857bc86549b1678fec4c9cf0cca68d98b826d75c1d09"));
-        assert(genesis.hashMerkleRoot == uint256("0x733c787ebb582526c6a2deb1e9b53a3a12cccf4eba73972c7649aaeb78522ac6"));
+        assert(hashGenesisBlock == uint256("0000005088ab9f67a8f3edbf670f0df1fa5702aea8eafc78307667534472c37d"));
+        assert(genesis.hashMerkleRoot == uint256("73b17d2797b7b4d0a6fe09204aa736b6c1d290d3a6a6f944b7eab02f7029d0af"));
 
         vSeeds.push_back(CDNSSeedData("clubs.seed.altbet.io", "clubs.seed.altbet.io"));
         vSeeds.push_back(CDNSSeedData("hearts.seed.altbet.io", "hearts.seed.altbet.io"));

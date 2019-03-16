@@ -226,10 +226,10 @@ QT_TRANSLATE_NOOP("altbet-core", ""
 QT_TRANSLATE_NOOP("altbet-core", ""
 "You must specify a masternodeprivkey in the configuration. Please see "
 "documentation for help."),
-QT_TRANSLATE_NOOP("altbet-core", "(11771 could be used only on mainnet)"),
+QT_TRANSLATE_NOOP("altbet-core", "(2238 could be used only on mainnet)"),
 QT_TRANSLATE_NOOP("altbet-core", "(default: %s)"),
 QT_TRANSLATE_NOOP("altbet-core", "(default: 1)"),
-QT_TRANSLATE_NOOP("altbet-core", "(must be 11771 for mainnet)"),
+QT_TRANSLATE_NOOP("altbet-core", "(must be 2238 for mainnet)"),
 QT_TRANSLATE_NOOP("altbet-core", "<category> can be:"),
 QT_TRANSLATE_NOOP("altbet-core", "Accept command line and JSON-RPC commands"),
 QT_TRANSLATE_NOOP("altbet-core", "Accept connections from outside (default: 1 if no -proxy or -connect)"),

@@ -195,6 +195,7 @@ public:
         nStartMasternodePayments = 1539605437;
 
         /** Zerocoin */
+        /*
         zerocoinModulus = "25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784"
             "4069182906412495150821892985591491761845028084891200728449926873928072877767359714183472702618963750149718246911"
             "6507761337985909570009733045974880842840179742910064245869181719511874612151517265463228221686998754918242243363"
@@ -212,6 +213,7 @@ public:
         nDefaultSecurityLevel = 100; //full security level for accumulators
         nZerocoinHeaderVersion = 4; //Block headers must be this version once zerocoin is active
         nBudgetFeeConfirmations = 6; // Number of confirmations for the finalization fee
+		*/
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const

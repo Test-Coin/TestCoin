@@ -256,9 +256,9 @@ public:
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
         nMinerThreads = 0;
-        +nTargetTimespan = 1 * 60; // Altbet: 1 day
-        +nTargetSpacing = 1 * 60;  // Altbet: 1 minute
-        +nLastPOWBlock = 200;
+        nTargetTimespan = 1 * 60; // Altbet: 1 day
+        nTargetSpacing = 1 * 60;  // Altbet: 1 minute
+        nLastPOWBlock = 200;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
         nMasternodeCollateralLimit = 1000;

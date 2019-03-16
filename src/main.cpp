@@ -3195,6 +3195,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
         nInputs += tx.vin.size();
 
+		#if 0
         //Temporarily disable zerocoin transactions for maintenance
         if (block.nTime > GetSporkValue(SPORK_23_ZEROCOIN_MAINTENANCE_MODE) && !IsInitialBlockDownload() && tx.ContainsZerocoins()) {
             return state.DoS(100, error("ConnectBlock() : zerocoin transactions are currently in maintenance mode"));
@@ -3242,7 +3243,8 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                     vMints.emplace_back(make_pair(coin, tx.GetHash()));
                 }
             }
-        } else if (!tx.IsCoinBase()) {
+        #endif
+        if (!tx.IsCoinBase()) {
             if (!view.HaveInputs(tx))
                 return state.DoS(100, error("ConnectBlock() : inputs missing/spent"),
                     REJECT_INVALID, "bad-txns-inputs-missingorspent");
@@ -3334,13 +3336,14 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         return state.DoS(100, error("ConnectBlock() : reward pays too much (actual=%s vs limit=%s)",
                 FormatMoney(pindex->nMint), FormatMoney(nExpectedMint)), REJECT_INVALID, "bad-cb-amount");
     }
+#if 0
 
     // Ensure that accumulator checkpoints are valid and in the same state as this instance of the chain
     AccumulatorMap mapAccumulators(GetZerocoinParams(pindex->nHeight));
     if (!ValidateAccumulatorCheckpoint(block, pindex, mapAccumulators))
         return state.DoS(100, error("%s: Failed to validate accumulator checkpoint for block=%s height=%d", __func__,
                                     block.GetHash().GetHex(), pindex->nHeight), REJECT_INVALID, "bad-acc-checkpoint");
-
+#endif
     if (!control.Wait())
         return state.DoS(100, false);
     int64_t nTime2 = GetTimeMicros();
@@ -3399,7 +3402,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             }
         }
     }
-
+#if 0
     //Record mints to db
     for (pair<PublicCoin, uint256> pMint : vMints) {
         if (!zerocoinDB->WriteCoinMint(pMint.first, pMint.second))
@@ -3408,7 +3411,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     //Record accumulator checksums
     DatabaseChecksums(mapAccumulators);
-
+#endif 
     if (fTxIndex)
         if (!pblocktree->WriteTxIndex(vPosTxid))
             return state.Error("Failed to write transaction index");
@@ -4607,9 +4610,9 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
             }
         }
     } else {
-        if (block.nVersion >= Params().Zerocoin_HeaderVersion())
-            return state.DoS(50, error("CheckBlockHeader() : block version must be below 4 before ZerocoinStartHeight"),
-            REJECT_INVALID, "block-version");
+        //if (block.nVersion >= Params().Zerocoin_HeaderVersion())
+            //return state.DoS(50, error("CheckBlockHeader() : block version must be below 4 before ZerocoinStartHeight"),
+            //REJECT_INVALID, "block-version");
     }
 
     // Check that all transactions are finalized

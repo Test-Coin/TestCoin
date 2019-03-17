@@ -154,3 +154,15 @@ cache
 .vs/TestCoin/v15/ipch/AutoPCH/9faf28b2403d6db7/NET.ipch
 .vs/TestCoin/v15/ipch/AutoPCH/ab2d1c1085bc76c4/ZEROCOIN_IMPLEMENTATION_TESTS.ipch
 .vs/TestCoin/v15/ipch/AutoPCH/fb7872a8181d4424/MASTERNODE.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/2ee90cad7231aa2f/SKIPLIST_TEST.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/392c7ce33c8451d6/DB_BENCH.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/426ec8e2210f3c69/CORRUPTION_TEST.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/659b556d77029ea5/BLOOM_TEST.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/771604088a7bfe17/HISTOGRAM.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/7847d7495881321e/BITCOINGUI.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/ad6bc305d2c209ea/TABLE_TEST.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/b1a4f32c06396a44/PORT_WIN.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/b6ea97477288f6a/DB_TEST.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/cfb51ed16dc7906c/DB_BENCH_SQLITE3.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/da38c0d19848ff26/DB_BENCH_TREE_DB.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/f48c6ecc877dd948/LOG_TEST.ipch

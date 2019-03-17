@@ -1548,32 +1548,32 @@ Please check the address and try again.</source>
         <translation>Изберете ниво на поверителност.</translation>
     </message>
     <message>
-        <source>Use 2 separate masternodes to mix funds up to 10000 ABET</source>
-        <translation>Използвай 2 различни мастърноуда за смесване на средства над 10000 ABET</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 ABET</source>
+        <translation>Използвай 2 различни мастърноуда за смесване на средства над 1000 ABET</translation>
     </message>
     <message>
-        <source>Use 8 separate masternodes to mix funds up to 10000 ABET</source>
-        <translation>Използвай 8 различни мастърноуда за да смесите средства до 10000 ABET</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 ABET</source>
+        <translation>Използвай 8 различни мастърноуда за да смесите средства до 1000 ABET</translation>
     </message>
     <message>
         <source>Use 16 separate masternodes</source>
         <translation>Използвай 16 различни мастърноуда</translation>
     </message>
     <message>
-        <source>This option is the quickest and will cost about ~0.025 ABET to anonymize 10000 ABET</source>
-        <translation>Това е най-бързия метод и ще струва около 0.025 ABET за да скриете 10000 ABET</translation>
+        <source>This option is the quickest and will cost about ~0.025 ABET to anonymize 1000 ABET</source>
+        <translation>Това е най-бързия метод и ще струва около 0.025 ABET за да скриете 1000 ABET</translation>
     </message>
     <message>
-        <source>This option is moderately fast and will cost about 0.05 ABET to anonymize 10000 ABET</source>
-        <translation>Тази опция е сравнително бърза и ще струва около 0.05 ABET за да скриете 10000 ABET</translation>
+        <source>This option is moderately fast and will cost about 0.05 ABET to anonymize 1000 ABET</source>
+        <translation>Тази опция е сравнително бърза и ще струва около 0.05 ABET за да скриете 1000 ABET</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
         <translation>Това е най-бавния и най-сигурен вариант за скриване на ABET. Използването й ще струва</translation>
     </message>
     <message>
-        <source>0.1 ABET per 10000 ABET you anonymize.</source>
-        <translation>0.1 ABET за 10000 скрити ABET</translation>
+        <source>0.1 ABET per 1000 ABET you anonymize.</source>
+        <translation>0.1 ABET за 1000 скрити ABET</translation>
     </message>
     <message>
         <source>Obfuscation Configuration</source>

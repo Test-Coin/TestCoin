@@ -146,3 +146,5 @@ cache
 .vs/VSWorkspaceState.json
 .vs/TestCoin/v15/ipch/AutoPCH/aad4a014e16670b0/HASH.ipch
 .vs/TestCoin/v15/ipch/AutoPCH/1629a0f4201e7848/BASE58.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/17240ac6ca8f0b4/NET.ipch
+.vs/TestCoin/v15/ipch/AutoPCH/a874446581354429/KERNEL.ipch

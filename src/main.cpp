@@ -1427,7 +1427,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
     }
 
     // Check for duplicate inputs
-    set<COutPoint> vInOutPoints;
+    set<COutPoint> vInOutPoints; /*
     BOOST_FOREACH (const CTxIn& txin, tx.vin) {
         CTransaction txPrev;
         uint256 hash;
@@ -2053,7 +2053,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 }
             }
         }
-    }
+    }*/
 
     // Check for duplicate inputs    
     set<CBigNum> vZerocoinSpendSerials;

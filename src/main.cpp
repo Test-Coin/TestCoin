@@ -26,8 +26,8 @@
 #include "merkleblock.h"
 #include "net.h"
 #include "obfuscation.h"
-#include "protocol.h"
 #include "pow.h"
+#include "protocol.h"
 #include "spork.h"
 #include "sporkdb.h"
 #include "swifttx.h"
@@ -38,9 +38,9 @@
 #include "utilmoneystr.h"
 #include "validationinterface.h"
 
-#include "primitives/zerocoin.h"
-#include "libzerocoin/Denominations.h"
 #include "accumulatormap.h"
+#include "libzerocoin/Denominations.h"
+#include "primitives/zerocoin.h"
 
 #include <sstream>
 
@@ -60,7 +60,7 @@ using namespace libzerocoin;
 // 6 comes from OPCODE (1) + vch.size() (1) + BIGNUM size (4)
 #define SCRIPT_OFFSET 6
 // For Script size (BIGNUM/Uint256 size)
-#define BIGNUM_SIZE   4
+#define BIGNUM_SIZE 4
 /**
  * Global state
  */
@@ -99,9 +99,9 @@ bool fAlerts = DEFAULT_ALERTS;
 unsigned int nStakeMinAge = 1 * 60 * 60;
 unsigned int StakeMinAgev2()
 {
-	if (chainActive.Height() > 192021)
-		return 3 * 60 * 60;
-	return nStakeMinAge;
+    if (chainActive.Height() > 192021)
+        return 3 * 60 * 60;
+    return nStakeMinAge;
 }
 
 int64_t nReserveBalance = 0;
@@ -208,7 +208,7 @@ set<CBlockIndex*> setDirtyBlockIndex;
 
 /** Dirty block file entries. */
 set<int> setDirtyFileInfo;
-} // anon namespace
+} // namespace
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -506,7 +506,7 @@ void FindNextBlocksToDownload(NodeId nodeid, unsigned int count, std::vector<CBl
     }
 }
 
-} // anon namespace
+} // namespace
 
 bool GetNodeStateStats(NodeId nodeid, CNodeStateStats& stats)
 {
@@ -764,8 +764,7 @@ bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
     if (tx.IsCoinBase() || tx.IsZerocoinSpend())
         return true; // Coinbases don't use vin normally
 
-    for (unsigned int i = 0; i < tx.vin.size(); i++)
-    {
+    for (unsigned int i = 0; i < tx.vin.size(); i++) {
         const CTxOut& prev = mapInputs.GetOutputFor(tx.vin[i]);
 
         std::vector<std::vector<unsigned char> > vSolutions;
@@ -775,8 +774,7 @@ bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
         if (!Solver(prevScript, whichType, vSolutions))
             return false;
 
-        if (whichType == TX_SCRIPTHASH)
-        {
+        if (whichType == TX_SCRIPTHASH) {
             std::vector<std::vector<unsigned char> > stack;
             // convert the scriptSig into a stack, so we can inspect the redeemScript
             if (!EvalScript(stack, tx.vin[i].scriptSig, SCRIPT_VERIFY_NONE, BaseSignatureChecker(), SIGVERSION_BASE))
@@ -793,7 +791,8 @@ bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
     return true;
 }
 
-int64_t GetVirtualTransactionSize(int64_t nCost) {
+int64_t GetVirtualTransactionSize(int64_t nCost)
+{
     return (nCost + WITNESS_SCALE_FACTOR - 1) / WITNESS_SCALE_FACTOR;
 }
 
@@ -858,9 +857,8 @@ int64_t GetTransactionSigOpCost(const CTransaction& tx, const CCoinsViewCache& i
         nSigOps += GetP2SHSigOpCount(tx, inputs) * WITNESS_SCALE_FACTOR;
     }
 
-    for (unsigned int i = 0; i < tx.vin.size(); i++)
-    {
-        const CTxOut &prevout = inputs.GetOutputFor(tx.vin[i]);
+    for (unsigned int i = 0; i < tx.vin.size(); i++) {
+        const CTxOut& prevout = inputs.GetOutputFor(tx.vin[i]);
         nSigOps += CountWitnessSigOps(tx.vin[i].scriptSig, prevout.scriptPubKey, i < tx.wit.vtxinwit.size() ? &tx.wit.vtxinwit[i].scriptWitness : NULL, flags);
     }
     return nSigOps;
@@ -961,7 +959,8 @@ int GetZerocoinStartHeight()
     return Params().Zerocoin_StartHeight();
 }
 
-libzerocoin::ZerocoinParams* GetZerocoinParams(int nHeight) {
+libzerocoin::ZerocoinParams* GetZerocoinParams(int nHeight)
+{
     return nHeight > Params().Zerocoin_LastOldParams() ? Params().Zerocoin_Params() : Params().OldZerocoin_Params();
 }
 
@@ -1062,7 +1061,8 @@ bool IsSerialKnown(const CBigNum& bnSerial)
     return zerocoinDB->ReadCoinSpend(bnSerial, txHash);
 }
 
-bool IsSerialInBlockchain(const CBigNum& bnSerial, int& nHeightTx) {
+bool IsSerialInBlockchain(const CBigNum& bnSerial, int& nHeightTx)
+{
     uint256 txHash = 0;
     // if not in zerocoinDB then its not in the blockchain
     if (!zerocoinDB->ReadCoinSpend(bnSerial, txHash))
@@ -1071,12 +1071,14 @@ bool IsSerialInBlockchain(const CBigNum& bnSerial, int& nHeightTx) {
     return IsTransactionInChain(txHash, nHeightTx);
 }
 
-bool IsSerialInBlockchain(const uint256& hashSerial, int& nHeightTx, uint256& txidSpend) {
+bool IsSerialInBlockchain(const uint256& hashSerial, int& nHeightTx, uint256& txidSpend)
+{
     CTransaction tx;
     return IsSerialInBlockchain(hashSerial, nHeightTx, txidSpend, tx);
 }
 
-bool IsSerialInBlockchain(const uint256& hashSerial, int& nHeightTx, uint256& txidSpend, CTransaction& tx) {
+bool IsSerialInBlockchain(const uint256& hashSerial, int& nHeightTx, uint256& txidSpend, CTransaction& tx)
+{
     txidSpend = 0;
     // if not in zerocoinDB then its not in the blockchain
     if (!zerocoinDB->ReadCoinSpend(hashSerial, txidSpend))
@@ -1098,7 +1100,7 @@ bool RecordMintToDB(PublicCoin publicZerocoin, const uint256& txHash)
     CZerocoinMint pubCoinTx;
     uint256 hashFromDB;
     if (zerocoinDB->ReadCoinMint(publicZerocoin.getValue(), hashFromDB)) {
-        if(hashFromDB == txHash)
+        if (hashFromDB == txHash)
             return true;
 
         LogPrintf("RecordMintToDB: failed, we already have this public coin recorded\n");
@@ -1118,7 +1120,7 @@ bool TxOutToPublicCoin(const CTxOut txout, PublicCoin& pubCoin, CValidationState
     CBigNum publicZerocoin;
     vector<unsigned char> vchZeroMint;
     vchZeroMint.insert(vchZeroMint.end(), txout.scriptPubKey.begin() + SCRIPT_OFFSET,
-                           txout.scriptPubKey.begin() + txout.scriptPubKey.size());
+        txout.scriptPubKey.begin() + txout.scriptPubKey.size());
     publicZerocoin.setvch(vchZeroMint);
 
     CoinDenomination denomination = AmountToZerocoinDenomination(txout.nValue);
@@ -1135,18 +1137,17 @@ bool TxOutToPublicCoin(const CTxOut txout, PublicCoin& pubCoin, CValidationState
 bool BlockToPubcoinList(const CBlock& block, list<PublicCoin>& listPubcoins)
 {
     for (const CTransaction tx : block.vtx) {
-        if(!tx.IsZerocoinMint())
+        if (!tx.IsZerocoinMint())
             continue;
 
         for (unsigned int i = 0; i < tx.vout.size(); i++) {
-
             const CTxOut txOut = tx.vout[i];
-            if(!txOut.scriptPubKey.IsZerocoinMint())
+            if (!txOut.scriptPubKey.IsZerocoinMint())
                 continue;
 
             CValidationState state;
             PublicCoin pubCoin(Params().Zerocoin_Params());
-            if(!TxOutToPublicCoin(txOut, pubCoin, state))
+            if (!TxOutToPublicCoin(txOut, pubCoin, state))
                 return false;
 
             listPubcoins.emplace_back(pubCoin);
@@ -1160,17 +1161,17 @@ bool BlockToPubcoinList(const CBlock& block, list<PublicCoin>& listPubcoins)
 bool BlockToZerocoinMintList(const CBlock& block, std::list<CZerocoinMint>& vMints)
 {
     for (const CTransaction tx : block.vtx) {
-        if(!tx.IsZerocoinMint())
+        if (!tx.IsZerocoinMint())
             continue;
 
         for (unsigned int i = 0; i < tx.vout.size(); i++) {
             const CTxOut txOut = tx.vout[i];
-            if(!txOut.scriptPubKey.IsZerocoinMint())
+            if (!txOut.scriptPubKey.IsZerocoinMint())
                 continue;
 
             CValidationState state;
             PublicCoin pubCoin(Params().Zerocoin_Params());
-            if(!TxOutToPublicCoin(txOut, pubCoin, state))
+            if (!TxOutToPublicCoin(txOut, pubCoin, state))
                 return false;
 
             CZerocoinMint mint = CZerocoinMint(pubCoin.getDenomination(), pubCoin.getValue(), 0, 0, false, 1, nullptr);
@@ -1185,16 +1186,16 @@ bool BlockToZerocoinMintList(const CBlock& block, std::list<CZerocoinMint>& vMin
 bool BlockToMintValueVector(const CBlock& block, const CoinDenomination denom, vector<CBigNum>& vValues)
 {
     for (const CTransaction tx : block.vtx) {
-        if(!tx.IsZerocoinMint())
+        if (!tx.IsZerocoinMint())
             continue;
 
         for (const CTxOut txOut : tx.vout) {
-            if(!txOut.scriptPubKey.IsZerocoinMint())
+            if (!txOut.scriptPubKey.IsZerocoinMint())
                 continue;
 
             CValidationState state;
             PublicCoin coin(Params().Zerocoin_Params());
-            if(!TxOutToPublicCoin(txOut, coin, state))
+            if (!TxOutToPublicCoin(txOut, coin, state))
                 return false;
 
             if (coin.getDenomination() != denom)
@@ -1229,7 +1230,7 @@ std::list<libzerocoin::CoinDenomination> ZerocoinSpendListFromBlock(const CBlock
 bool CheckZerocoinMint(const uint256& txHash, const CTxOut& txout, CValidationState& state, bool fCheckOnly)
 {
     PublicCoin pubCoin(Params().Zerocoin_Params());
-    if(!TxOutToPublicCoin(txout, pubCoin, state))
+    if (!TxOutToPublicCoin(txout, pubCoin, state))
         return state.DoS(100, error("CheckZerocoinMint(): TxOutToPublicCoin() failed"));
 
     if (!pubCoin.validate())
@@ -1248,19 +1249,21 @@ CoinSpend TxInToZerocoinSpend(const CTxIn& txin)
     return CoinSpend(Params().Zerocoin_Params(), GetZerocoinParams(chainActive.Height()), serializedCoinSpend);
 }
 
-bool ContextualCheckZerocoinMint(const CTransaction& tx, const PublicCoin& coin, const CBlockIndex* pindex) {
-   if (pindex->nHeight > Params().Zerocoin_LastOldParams() && Params().NetworkID() != CBaseChainParams::TESTNET) {
+bool ContextualCheckZerocoinMint(const CTransaction& tx, const PublicCoin& coin, const CBlockIndex* pindex)
+{
+    if (pindex->nHeight > Params().Zerocoin_LastOldParams() && Params().NetworkID() != CBaseChainParams::TESTNET) {
         //See if this coin has already been added to the blockchain
         uint256 txid;
-        if(zerocoinDB->ReadCoinMint(coin.getValue(), txid))
+        if (zerocoinDB->ReadCoinMint(coin.getValue(), txid))
             return error("%s: pubcoin %s was already accumulated in tx %s", __func__,
-                         coin.getValue().GetHex().substr(0, 10),
-                         txid.GetHex());
+                coin.getValue().GetHex().substr(0, 10),
+                txid.GetHex());
     }
     return true;
 }
 
-bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend, CBlockIndex* pindex, const uint256& hashBlock) {
+bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend, CBlockIndex* pindex, const uint256& hashBlock)
+{
     //Check to see if the zABET is properly signed
     if (pindex->nHeight > Params().Zerocoin_LastOldParams()) {
         if (!spend.HasValidSignature())
@@ -1271,7 +1274,7 @@ bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend
             expectedType = libzerocoin::SpendType::STAKE;
         if (spend.getSpendType() != expectedType) {
             return error("%s: trying to spend zABET without the correct spend type. txid=%s", __func__,
-                         tx.GetHash().GetHex());
+                tx.GetHash().GetHex());
         }
     }
 
@@ -1279,13 +1282,13 @@ bool ContextualCheckZerocoinSpend(const CTransaction& tx, const CoinSpend& spend
     int nHeightTx = 0;
     if (IsSerialInBlockchain(spend.getCoinSerialNumber(), nHeightTx))
         return error("%s : zABET spend with serial %s is already in block %d\n", __func__,
-                     spend.getCoinSerialNumber().GetHex(), nHeightTx);
+            spend.getCoinSerialNumber().GetHex(), nHeightTx);
 
     //Reject serial's that are not in the acceptable value range
     libzerocoin::ZerocoinParams* paramsToUse = spend.getVersion() < libzerocoin::PrivateCoin::PUBKEY_VERSION ? Params().OldZerocoin_Params() : Params().Zerocoin_Params();
     if (!spend.HasValidSerial(paramsToUse))
         return error("%s : zABET spend with serial %s from tx %s is not in valid range\n", __func__,
-                     spend.getCoinSerialNumber().GetHex(), tx.GetHash().GetHex());
+            spend.getCoinSerialNumber().GetHex(), tx.GetHash().GetHex());
 
     return true;
 }
@@ -1316,7 +1319,6 @@ bool CheckZerocoinSpend(const CTransaction tx, bool fVerifySignature, CValidatio
     list<CoinSpend> vSpends;
     CAmount nTotalRedeemed = 0;
     for (const CTxIn& txin : tx.vin) {
-
         //only check txin that is a zcspend
         if (!txin.scriptSig.IsZerocoinSpend())
             continue;
@@ -1348,7 +1350,7 @@ bool CheckZerocoinSpend(const CTransaction tx, bool fVerifySignature, CValidatio
             Accumulator accumulator(GetZerocoinParams(nHeight), newSpend.getDenomination(), bnAccumulatorValue);
 
             //Check that the coin has been accumulated
-            if(!newSpend.Verify(accumulator))
+            if (!newSpend.Verify(accumulator))
                 return state.DoS(100, error("CheckZerocoinSpend(): zerocoin spend did not verify"));
         }
 
@@ -1371,22 +1373,22 @@ bool CheckZerocoinSpend(const CTransaction tx, bool fVerifySignature, CValidatio
 
 bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fRejectBadUTXO, CValidationState& state, bool fWitnessEnabled)
 {
-	// Basic checks that don't depend on any context
-	if (tx.vin.empty())
-		return state.DoS(10, error("CheckTransaction() : vin empty"),
-			REJECT_INVALID, "bad-txns-vin-empty");
-	if (tx.vout.empty())
-		return state.DoS(10, error("CheckTransaction() : vout empty"),
-			REJECT_INVALID, "bad-txns-vout-empty");
+    // Basic checks that don't depend on any context
+    if (tx.vin.empty())
+        return state.DoS(10, error("CheckTransaction() : vin empty"),
+            REJECT_INVALID, "bad-txns-vin-empty");
+    if (tx.vout.empty())
+        return state.DoS(10, error("CheckTransaction() : vout empty"),
+            REJECT_INVALID, "bad-txns-vout-empty");
 
-	// Size limits (this doesn't take the witness into account, as that hasn't been checked for malleability)
-	if (::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) > MAX_BLOCK_BASE_SIZE)
-		return state.DoS(100, false, REJECT_INVALID, "bad-txns-oversize");
+    // Size limits (this doesn't take the witness into account, as that hasn't been checked for malleability)
+    if (::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) > MAX_BLOCK_BASE_SIZE)
+        return state.DoS(100, false, REJECT_INVALID, "bad-txns-oversize");
 
     // Check for negative or overflow output values
     CAmount nValueOut = 0;
     int nZCSpendCount = 0;
-	BOOST_FOREACH (const CTxOut& txout, tx.vout) {
+    BOOST_FOREACH (const CTxOut& txout, tx.vout) {
         if (txout.nValue < 0)
             return state.DoS(100, error("CheckTransaction() : txout.nValue negative"),
                 REJECT_INVALID, "bad-txns-vout-negative");
@@ -1398,12 +1400,12 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             return state.DoS(100, error("CheckTransaction() : txout total out of range"),
                 REJECT_INVALID, "bad-txns-txouttotal-toolarge");
         if (fZerocoinActive && txout.IsZerocoinMint()) {
-            if(!CheckZerocoinMint(tx.GetHash(), txout, state, true))
+            if (!CheckZerocoinMint(tx.GetHash(), txout, state, true))
                 return state.DoS(100, error("CheckTransaction() : invalid zerocoin mint"));
         }
         if (fZerocoinActive && txout.scriptPubKey.IsZerocoinSpend())
             nZCSpendCount++;
-	}
+    }
 
     if (fZerocoinActive) {
         if (nZCSpendCount > Params().Zerocoin_MaxSpendsPerTransaction())
@@ -1414,11 +1416,11 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             for (const CTxIn in : tx.vin) {
                 if (!in.scriptSig.IsZerocoinSpend())
                     return state.DoS(100,
-                                     error("CheckTransaction() : zerocoinspend contains inputs that are not zerocoins"));
+                        error("CheckTransaction() : zerocoinspend contains inputs that are not zerocoins"));
             }
 
             // Do not require signature verification if this is initial sync and a block over 24 hours old
-            bool fVerifySignature = !IsInitialBlockDownload() && (GetTime() - chainActive.Tip()->GetBlockTime() < (60*60*24));
+            bool fVerifySignature = !IsInitialBlockDownload() && (GetTime() - chainActive.Tip()->GetBlockTime() < (60 * 60 * 24));
             if (!CheckZerocoinSpend(tx, fVerifySignature, state, chainActive.Height()))
                 return state.DoS(100, error("CheckTransaction() : invalid zerocoin spend"));
         }
@@ -1427,633 +1429,634 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
     // Check for duplicate inputs
     set<COutPoint> vInOutPoints;
     BOOST_FOREACH (const CTxIn& txin, tx.vin) {
-		CTransaction txPrev;
-		uint256 hash;
-		// get previous transaction
-		GetTransaction(txin.prevout.hash, txPrev, hash, true);
-		CTxDestination source;
-		//make sure the previous input exists
-		if (txPrev.vout.size() > txin.prevout.n) {
-			if (chainActive.Height() >= 156000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
-				// extract the destination of the previous transactions vout[n]
-				ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
-				// convert to an address
-				CBitcoinAddress addressSource(source);
+        CTransaction txPrev;
+        uint256 hash;
+        // get previous transaction
+        GetTransaction(txin.prevout.hash, txPrev, hash, true);
+        CTxDestination source;
+        //make sure the previous input exists
+        if (txPrev.vout.size() > txin.prevout.n) {
+            if (chainActive.Height() >= 156000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
+                // extract the destination of the previous transactions vout[n]
+                ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
+                // convert to an address
+                CBitcoinAddress addressSource(source);
 
-            if (strcmp(addressSource.ToString().c_str(), "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Aae7h7dPHypikAQHC5mC5uFCxhmE6FQrUb") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AajgZNr39CLHG4hHtaB2kYp2qmssfnsdyJ") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AaLjTg7JT71gAbTDCxKvJYs5GAqnTWawYB") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AaoiXuy7J82u32vhvGEMKfDRHUurwTWMWv") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AaoZ4etvzLaomVSJP18Cz9BpmyGNRZeUKC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AasnyCdas2qpckVixTNAuCoGmp9pibP9Mz") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AaUN23VJv6VNHbNfCcUqL8tjtc7nwwRkqC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AazmnoVLjE8ASJ1WeTq2znSQzNButy4HEU") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Ab9nJK67UgUwP1QGwpcuwv5oenRCytde4n") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AbE3H6NKSSBTwTs5BzR6TCbqVNRhdnnptt") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AbFMNnL2J8WLjvGM3JYvsncg7ECiYg8aod") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AbhfGWrCaUf6ZLpZBTvskd4phgAWAECUzv") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Ac4PB1GDDFHxAc3LCWedNFwi6aXYqa9DJa") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Ac87xuLCknNGoeVeQbTBsooHveGB66wkQs") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Ac8dKdrZdtKLLuNWWTHB5iJYNcR7esuCEG") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Acj29Yi2XdZJtHjitbRN4wSSsD8qS4YHpY") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AcjPakjdnz4zHcP7HkhoRLg6vs95KwYhaR") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Acm3eowZLVY4XKn6t7EGmgAkfCE3saVvLG") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AcMeChtV6WyynHDk1U5Kgvk5YUGss7K5gy") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AcnQWshXPbuTxjqc49Ni5WPcbspR1TuBbF") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Act5pUdqZcURMunSYM59xYxGPAEdENQH4o") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AcZajYwytuRdNz2BKLx1GDa22AJRCwGUBS") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AddMFE17HfmZYR3fubfo24dGmXkaRZNkBp") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AdejZE713HDKovqr6G5uT31U6zja7KSyHS") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AdePW7oHAqNH7d7apEj75yjWCpBgtwe7Tk") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AdK6HZS2aTQeAbCrRdqu4NsdcNWsMX7nGx") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AdNw5QtxBHKowKpG7kbRGm2en9Ci1pv6hA") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AdQRLtsZoJNKSHyZYyhgFVHyWddoQgWXE5") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AdTebzNJYasPXTe7QK5L8WdZnqruGhowaf") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AduHQy7XEbvvPVcv4UGfBA9o7W9kybWaeF") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AdZn8Vcci1zQGVMdBb7afd8iW1cm9VXXeL") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AeCMNReq5TegieKpncZpx1NYwv5BohzVqz") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AehUQnCunEKfmAPsNsak72MjTpDz9qC3Kr") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AekVJg9Gv3recogGbRbBsP6eg81JDs5e5y") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AeL426qjTvixw7eLy9HgkYpuU2YUzA3uDS") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "Aeq4HBm453EwkFjxsWFjEwZm4gPmnv8vpF") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AeRQZj9c6EhRgPrTq25ko2T3LfFDvGQv7C") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AeXBEKQ78B5ZUiZPqPTqGpyJK4NrFB1CNg") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AFuLVpZBHirH6Cw7VrPJA2p3rE5urDErsA") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGAe43Rc3yeJrqJ7XKT1J8bCVnstcn5F9T") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGbqULj2sNhnRqYLbjmgZRstYioHCMJ5Mi") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGDHCKBatYZNPkCZY58XhoKMqoineuLEdf") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGDky2wfk9zNDBEeujZED2GTxFexTkod3D") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGdo2isaBrQeFmGeC5Mn6Pds9zE8wX5DSe") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGgXnG5jgGuYCYg58fFM4vzcH5T6eEkzMH") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGhXfmp1BDbtavNKWWGn8gy98Kvj9kLp1n") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGjkMQPPQyS9T2mpv1HF7GtSq2pV9czZLL") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGKAFaLW4i9H1WxaEDd43eEqDBqQ9drzp7") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGUGnWpBuuiUnAp1sxaJRMWERhGutrZK4e") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGv97VxVLWr7kfdFWZe5HSLvg28JwnyFKE") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGWijpgKPJq41Rf9PFxS2WEbR9c1TiohJe") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGx2dQUeHhUcLNYDk4ZvXHifPCqi6MapYN") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AGzdsw2LaGdML9jZaLbXXHw1dpwZ7tLfQk") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AHHzxEcHK8a2cckjjdsB161YhRVDzqbfZm") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AHm5J4KDdHxSZCJ2j3xGbgzYUFRRt9QE1H") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AHMfzE7RREUHUAYXwdrUDfmTKB1o7HpN1C") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AHnZ5hX9D4AShYZMupZkJLoLRBgWZbCn12") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AHx6KDzxPUAhWn53QCZbMbYp43rN23949H") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AHZMq4xkmXd3MrqzCsTVVJZFu78tSuijnj") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJjFYKyHSMU2PNxt2btrxdGGV282FXHhUF") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJMGWqkFYTQR3jFxNV1XDMbL6R6MGGdsUx") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJnCfE7XhE42Pm5qA66Hc9DuDQkk8NDVv6") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJNz9t3nsgGXQt9tYcVHbpVgD78Pfonra3") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJrjze3k76zuUWnptgwKnHaerFHjBqqYe4") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJw51w5ZcAxSx3F4szMx1sWB8SWt8GD7ME") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJwk6e8ZCyZi7vBaZriefajEMre6HJ8mMW") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AJyEVm3c4MnBwJpXdPvH9RgoHG61qnNCbr") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AK3RRQXBFT4e8feceLDm4BWMoQjj1rvJHh") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AK3zNgRYK8Fbu8Es4LKfNhMNRDQVUzEiQ4") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKC471thQfcpCUaBbP9dgxKZnkRsSuWdYY") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKHfvfWaYNb4A5rf67ECuXVcJD11ez1qxz") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKhJFMgTxSt3KNHSRqGJNPp91sEDMgXNgB") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKnHXiBz7Ww83AZ7LpzsFVAeFoSgUEsAHW") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKPLoYGFPR1qbCRjbNUSuoP2RU6tRqyYzK") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKs4uz7RE6zQqMLhrqDgy4cEjjDXkhT1ek") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKUuBtZGT8WVLpqyzTcj9UUnucRQvWNjVP") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AKyu17SjcztoYXEUMGysK7z929afyhSADX") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AL8fjjZZVJGMn3zwa6PL88keDuxwFnT6gR") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AL8SbHA1H8WyN1SoahXv3FESESLCgCctmU") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ALaE9sgtLjDAVBrXSd95SPsrwKvfDgZF1t") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ALhggXxrcqHUqdCXwSDjQWqHY34KYd6cMa") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ALHZ2Q4KVdsbwcDexCMuy3j4A3wYLNPYRU") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ALkPde6Xvcz9QPvBRpEEf8kmbdiZZd21aV") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AMBW5kN11UiW7nedFjjLMBDQ2P34zA5uCe") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AMFbKZVio92oRu8C6zPye8f9thFcuyjxys") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AMfwTXNeoC1VWHVwn7QH8G6oiyUwU2fjFC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AMJHVGNVbH6ASmL42fwDR8gWQ4F7PgSjHv") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AMKb6XhrsJiiGWQHvZrUed6Zm8qhvgHzut") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AMxFbVWGWMW3DWTzhu215ft3KKybxWorCm") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AMYuDF9iSVwCazxk6sjEtRwedxYGJRqQLj") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AN5R5Y2tkKDiKv4XrQWAGFbVZJKnMW9MsV") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANCpo3RSUBTD1Ym2nfm7ic5YUXZbZcBGR7") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANfZ9zuKDxygghp3EmtBiPS2C2qj2SRxRD") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANjYLeqwqGz77kdzwUg3Mgeu8tDU2JYRxF") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANKeNJVRfuehwdTgPnn9n9h5oz6pxPTCV1") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANmHzjKhXbvBcciyEbz5ArSEQRwMn1RXGs") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANMnQMuJUbV9Hy6X3dyXMkgdTBtCMvwDkC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANUkCbtNXkEdLVjChyd6bqZdnCRSDxcQXR") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANW1r76UqBibK5oQYH7GwgQJpHkGuqRM5F") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANxgPNkTg4RYBSjH7gM8M9wAkK4yB7SHws") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ANzYAGiwQEnQFcU1uVRSaQbybERC1Lg91J") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "APcnJAhHDdB4TE4muLH9ywwGei6sgikJJ3") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "APDJqZWCePYe9PV2Roo6LTePTFCmzmg2Ku") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "APdz8YkgEBzHeaCnT3xHgfhxvczToRBN63") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "APp8ruJuMs3sJT1GewK6uL1zV2D9ngPNUF") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "APwJSKvoLLYWW8fd1cTeP2BcC3wyByvUjo") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQ3rU7CFUg5f4kxarfZrPVu5jRYAqbSuL8") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQAMJGidK4aXJV6EWh7H3JEuFs2XdBzZoM") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQDHrpq3pP6V78MWHLr7cj2sw8SQKtadKx") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQfHSwQjMi2eN8uPBh15yBVh2uHosq6VPd") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQFtdiQGzTP9JAP3F82qKpY4aDarXK8Hvo") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQhezkAmLaX3z2WUMwSQsDqMjRfmvyaj2u") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQhqqzSh6c6pe6KBbgomduQjiJ7Va6GF5B") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQTQmthD8g1EXU566kdgwoxYpDuVVEv2oN") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQVz4EuBsUN9sjtPzQGRA66wxeronZyz73") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AQW2wdHVU44uXeTBDDYhzHDGEsNvTKSQTb") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ARaWFscUbQvfi8m1iftNuC9xt56FcYTQP8") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ARcQfBPbYqRs3PprDctXTyZoGx94uQr5bS") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ARGb5i7MWxe69Me4EkvW5MTGvUnNB21YNY") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ARHB1bFk9vnqpbfMTPTWsoxPpVeqjHsXCY") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ARnndqPrxfHDK3mibW3uUvtiH9Y8SFnhrB") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ARoXfVzUw1At2EiHZzm7dUFLeAkR5DHuxM") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ASA98WixLU7KRyYqBqNT2HbaeoBQqJjent") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ASFh3ZSUMSmbv3i62F9Jy8YqhB3LYMJhkC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ASgjfs4T1SgqJLzyd4P3Ywv8bcB6fS7UsQ") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ASJLEfixF4nCPCLBbjF9fEQhbPU6W7XJtX") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ASKE6Uu1CuMFB88mUZpwRsfbpAqLfFG2uR") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ASZFN2nS7mvxLHQcuNsSHzTu6z8SrHMd16") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AT29ncRdDr8sKcHgKo1zYMmc51UuDZBZg2") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AT2koUKowQstHq5YE8FEdqDFXdDsrthRV9") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AT92sZHdwpWCbp2LEULpGEDeCAZNvpuNFj") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AT9undynPdpXJVhQQsfD9th68QBPJYkNTD") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ATFL5Eb79CcNRJGb4hWmUuH3p7EDhKmSJX") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AThLPzKTuRTRmuyRn7SLKmg77b6oXHseDQ") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ATkP7Y7VmDYbGVjC3zGMJHtAUEFQeAwzJg") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ATqsSQWxy8KsWsqR9aAUU9q85i8xhUHYJ6") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ATrmatFVRQ3wUxntMrGJT5nyR3AUuZcpqQ") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ATxaEeKTJFMikNhDjTKSp9E5DXGA44DcbW") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "ATycywFh3iRLf4So4VV6XT8SftjFnVknaH") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AU5hKjPdvDZhs5N3kJLSQMBA3UbrnE7VoC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AUAVb9Tsk7zNjb4v1d67QBWmFurdivSjic") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AUdD18nERTTDhQUfM6VWnJjnkWu76wxnpa") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AUgdTHjGRpStx8Mwy7FHRg3HTu6G5fJhaB") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AUjPFoWz76T2Gz38mMnHu5EudvfDN41J1x") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AUjtqZK7RQstx4Q3RnZL9ybCMmRdwM5Fep") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AUNfopFXpj2WxgBcEKAavQ8XRw9LhPvDPw") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AUVNg586VuvoC142FvKG4iteuL7aCikViA") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AV9fyQgWHJGYCYZ4QJVvYNRe6YrSTwsDB4") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVb11DsuwQu4oW4LoVndqA5WyskEGxpLeb") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVb6QL19jFy5hFQJtuHoGwuYbNWpxBHAsQ") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVgMXp3s8HU9aziUfi7HhVc6rCKsLc46nC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVgYxGQidDnYYQJEGsYrEqdj3y2BTe4PL1") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVpxB7fDYCFgLV9MJ4LcWYxPyeEaFFU8RX") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVQqyFT7CBSsQEeGSjxmsHoFRXU5PwHjbj") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVRXBRQh5iJPw4cjgNZ7LH97gHxyxaxnJv") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVt15fH21QcDkpkf75pmmoebenjhXu8om2") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVt1hffz3n3vLAFd5YF7X8iEx58GxJFim1") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVYdvRn58wNqW8JUSk1gugVda5D2iSRZGG") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AVzPqbjRGYitxahoFwgj6VBNBWfYgUBdUy") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AW4K2vE48phZcbuZ9LbJSpuGDosGrK6UXH") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AWa5hjMvPjBgoc8Kivpuc4gZfqCjVexzFH") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AWaLekM34R2sfV5tMa5j7SJnFAE6RHjk3d") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AWecrxwNbskTSopQw91V5ybkVVHK6F4axP") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AWF2UReo78ZsK8HuoeDhhFQZmWhrkLCA5y") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AWfXPwUYuLYcLtjJEiTXe8L3Ffk2PfVMC6") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AWRbrSw1t41YSQPMLjh3aaaDna8fW3VXUj") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AWVvb1zCjfFCBVSMScTLJVubFmTXZxSXus") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AX3bQwmuo6mDK8qtNJXPCciAgNcbU7vfqQ") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AX4gK27amGhzkwJ1ufBi63BMNEBtaYCqs8") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AX9rPK142J4YdreEbXWp939fCX3xxzSTK8") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXCVvFMqm8kBjZaEFjh6HqjrogSxo5iu4J") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXE41XcLVrkzpKE5S5L9ZFXAbvRHvTkZjC") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXfqTAptfVG6Szz5KnC13VB1giXxHUWz4k") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXG8pPkDWhxA1HNNEnfG5umWiJ3aDvUfpv") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXJW7yE8qZ3shEEFbtaDmbtgsxgWvP7dhN") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXmGZLTMnnmyEhaut6ynXUNR7y1b8HN7gh") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXmwZqJJG2iTi9YA8xH1M6jpuzJbP6ZSG8") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXRA3e5gwYkvVhUNmHJscpvvrrzrL5jMZY") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXTtN8bMRVKmtd7Ft39NTkNUd56v3VhPjv") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXuzGycTq567gfVFfDChUU3ZnGv1Mu3GDH") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AXyUBv19Lb8fZN7vDbcK1ga35TiyncTGzE") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AY9N2FDJ3YTiQFen5Cr5fcecUwyhehmERJ") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYbKUxJa3kyTgpvtKWzBcSxUEnKSUkY3FN") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYbXimKftwveeRGoweEcaCZHYSC9iZWUBK") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYJEjYeUnp2v8CLJq4nSZVdWL69ixUhaW1") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYkiEZuJXwUaKwyirNGbtqa5XMA3xcuBd7") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYnnqRb8zPnAzEgr4G1ppbDFsnmNUX2sA8") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYVP9PQzrTdU4h9v2pmRsXZCyVZKn3onGH") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYZPE24DsuQPb2YxWNnrxpSYQMGgAeRnMi") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYZZfKpopxvtwxENx68gKH3oZM7NbmeSRE") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZASSeJFzvrxWYotoiXucm7ruBUrRdV4n3") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZcFmwJAoDg2EJA1KjNk3NFMfn4ZnafpYm") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZdXqASf7C4iJY2YKnrMvP6xi94kpD4ZiL") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZGCZ7c1GrntN8udyNL8t2ed6dgNCYpuPP") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZJyMQYhstsr7p4BLde6SsrKpJ7NKMAhdx") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZoQSSvg2jcdD3Cdy6fMZFndbs33qT3Fo4") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZqFXJeDqGDkPnKFs6hnrLUGynqLzv6yVo") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AZXLwnDyzDA1HvaVK3qJseopJQw43vmFa7") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-            else if (strcmp(addressSource.ToString().c_str(), "AYvjRpPLD3efozDHRAHDNxNjRPygeV831z") == 0)
-                return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                if (strcmp(addressSource.ToString().c_str(), "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Aae7h7dPHypikAQHC5mC5uFCxhmE6FQrUb") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AajgZNr39CLHG4hHtaB2kYp2qmssfnsdyJ") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AaLjTg7JT71gAbTDCxKvJYs5GAqnTWawYB") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AaoiXuy7J82u32vhvGEMKfDRHUurwTWMWv") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AaoZ4etvzLaomVSJP18Cz9BpmyGNRZeUKC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AasnyCdas2qpckVixTNAuCoGmp9pibP9Mz") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AaUN23VJv6VNHbNfCcUqL8tjtc7nwwRkqC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AazmnoVLjE8ASJ1WeTq2znSQzNButy4HEU") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Ab9nJK67UgUwP1QGwpcuwv5oenRCytde4n") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AbE3H6NKSSBTwTs5BzR6TCbqVNRhdnnptt") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AbFMNnL2J8WLjvGM3JYvsncg7ECiYg8aod") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AbhfGWrCaUf6ZLpZBTvskd4phgAWAECUzv") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Ac4PB1GDDFHxAc3LCWedNFwi6aXYqa9DJa") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Ac87xuLCknNGoeVeQbTBsooHveGB66wkQs") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Ac8dKdrZdtKLLuNWWTHB5iJYNcR7esuCEG") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Acj29Yi2XdZJtHjitbRN4wSSsD8qS4YHpY") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AcjPakjdnz4zHcP7HkhoRLg6vs95KwYhaR") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Acm3eowZLVY4XKn6t7EGmgAkfCE3saVvLG") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AcMeChtV6WyynHDk1U5Kgvk5YUGss7K5gy") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AcnQWshXPbuTxjqc49Ni5WPcbspR1TuBbF") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Act5pUdqZcURMunSYM59xYxGPAEdENQH4o") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AcZajYwytuRdNz2BKLx1GDa22AJRCwGUBS") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AddMFE17HfmZYR3fubfo24dGmXkaRZNkBp") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AdejZE713HDKovqr6G5uT31U6zja7KSyHS") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AdePW7oHAqNH7d7apEj75yjWCpBgtwe7Tk") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AdK6HZS2aTQeAbCrRdqu4NsdcNWsMX7nGx") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AdNw5QtxBHKowKpG7kbRGm2en9Ci1pv6hA") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AdQRLtsZoJNKSHyZYyhgFVHyWddoQgWXE5") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AdTebzNJYasPXTe7QK5L8WdZnqruGhowaf") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AduHQy7XEbvvPVcv4UGfBA9o7W9kybWaeF") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AdZn8Vcci1zQGVMdBb7afd8iW1cm9VXXeL") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AeCMNReq5TegieKpncZpx1NYwv5BohzVqz") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AehUQnCunEKfmAPsNsak72MjTpDz9qC3Kr") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AekVJg9Gv3recogGbRbBsP6eg81JDs5e5y") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AeL426qjTvixw7eLy9HgkYpuU2YUzA3uDS") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "Aeq4HBm453EwkFjxsWFjEwZm4gPmnv8vpF") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AeRQZj9c6EhRgPrTq25ko2T3LfFDvGQv7C") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AeXBEKQ78B5ZUiZPqPTqGpyJK4NrFB1CNg") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AFuLVpZBHirH6Cw7VrPJA2p3rE5urDErsA") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGAe43Rc3yeJrqJ7XKT1J8bCVnstcn5F9T") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGbqULj2sNhnRqYLbjmgZRstYioHCMJ5Mi") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGDHCKBatYZNPkCZY58XhoKMqoineuLEdf") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGDky2wfk9zNDBEeujZED2GTxFexTkod3D") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGdo2isaBrQeFmGeC5Mn6Pds9zE8wX5DSe") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGgXnG5jgGuYCYg58fFM4vzcH5T6eEkzMH") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGhXfmp1BDbtavNKWWGn8gy98Kvj9kLp1n") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGjkMQPPQyS9T2mpv1HF7GtSq2pV9czZLL") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGKAFaLW4i9H1WxaEDd43eEqDBqQ9drzp7") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGUGnWpBuuiUnAp1sxaJRMWERhGutrZK4e") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGv97VxVLWr7kfdFWZe5HSLvg28JwnyFKE") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGWijpgKPJq41Rf9PFxS2WEbR9c1TiohJe") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGx2dQUeHhUcLNYDk4ZvXHifPCqi6MapYN") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AGzdsw2LaGdML9jZaLbXXHw1dpwZ7tLfQk") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AHHzxEcHK8a2cckjjdsB161YhRVDzqbfZm") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AHm5J4KDdHxSZCJ2j3xGbgzYUFRRt9QE1H") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AHMfzE7RREUHUAYXwdrUDfmTKB1o7HpN1C") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AHnZ5hX9D4AShYZMupZkJLoLRBgWZbCn12") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AHx6KDzxPUAhWn53QCZbMbYp43rN23949H") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AHZMq4xkmXd3MrqzCsTVVJZFu78tSuijnj") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJjFYKyHSMU2PNxt2btrxdGGV282FXHhUF") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJMGWqkFYTQR3jFxNV1XDMbL6R6MGGdsUx") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJnCfE7XhE42Pm5qA66Hc9DuDQkk8NDVv6") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJNz9t3nsgGXQt9tYcVHbpVgD78Pfonra3") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJrjze3k76zuUWnptgwKnHaerFHjBqqYe4") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJw51w5ZcAxSx3F4szMx1sWB8SWt8GD7ME") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJwk6e8ZCyZi7vBaZriefajEMre6HJ8mMW") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AJyEVm3c4MnBwJpXdPvH9RgoHG61qnNCbr") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AK3RRQXBFT4e8feceLDm4BWMoQjj1rvJHh") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AK3zNgRYK8Fbu8Es4LKfNhMNRDQVUzEiQ4") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKC471thQfcpCUaBbP9dgxKZnkRsSuWdYY") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKHfvfWaYNb4A5rf67ECuXVcJD11ez1qxz") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKhJFMgTxSt3KNHSRqGJNPp91sEDMgXNgB") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKnHXiBz7Ww83AZ7LpzsFVAeFoSgUEsAHW") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKPLoYGFPR1qbCRjbNUSuoP2RU6tRqyYzK") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKs4uz7RE6zQqMLhrqDgy4cEjjDXkhT1ek") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKUuBtZGT8WVLpqyzTcj9UUnucRQvWNjVP") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AKyu17SjcztoYXEUMGysK7z929afyhSADX") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AL8fjjZZVJGMn3zwa6PL88keDuxwFnT6gR") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AL8SbHA1H8WyN1SoahXv3FESESLCgCctmU") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ALaE9sgtLjDAVBrXSd95SPsrwKvfDgZF1t") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ALhggXxrcqHUqdCXwSDjQWqHY34KYd6cMa") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ALHZ2Q4KVdsbwcDexCMuy3j4A3wYLNPYRU") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ALkPde6Xvcz9QPvBRpEEf8kmbdiZZd21aV") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AMBW5kN11UiW7nedFjjLMBDQ2P34zA5uCe") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AMFbKZVio92oRu8C6zPye8f9thFcuyjxys") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AMfwTXNeoC1VWHVwn7QH8G6oiyUwU2fjFC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AMJHVGNVbH6ASmL42fwDR8gWQ4F7PgSjHv") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AMKb6XhrsJiiGWQHvZrUed6Zm8qhvgHzut") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AMxFbVWGWMW3DWTzhu215ft3KKybxWorCm") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AMYuDF9iSVwCazxk6sjEtRwedxYGJRqQLj") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AN5R5Y2tkKDiKv4XrQWAGFbVZJKnMW9MsV") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANCpo3RSUBTD1Ym2nfm7ic5YUXZbZcBGR7") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANfZ9zuKDxygghp3EmtBiPS2C2qj2SRxRD") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANjYLeqwqGz77kdzwUg3Mgeu8tDU2JYRxF") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANKeNJVRfuehwdTgPnn9n9h5oz6pxPTCV1") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANmHzjKhXbvBcciyEbz5ArSEQRwMn1RXGs") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANMnQMuJUbV9Hy6X3dyXMkgdTBtCMvwDkC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANUkCbtNXkEdLVjChyd6bqZdnCRSDxcQXR") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANW1r76UqBibK5oQYH7GwgQJpHkGuqRM5F") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANxgPNkTg4RYBSjH7gM8M9wAkK4yB7SHws") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ANzYAGiwQEnQFcU1uVRSaQbybERC1Lg91J") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "APcnJAhHDdB4TE4muLH9ywwGei6sgikJJ3") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "APDJqZWCePYe9PV2Roo6LTePTFCmzmg2Ku") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "APdz8YkgEBzHeaCnT3xHgfhxvczToRBN63") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "APp8ruJuMs3sJT1GewK6uL1zV2D9ngPNUF") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "APwJSKvoLLYWW8fd1cTeP2BcC3wyByvUjo") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQ3rU7CFUg5f4kxarfZrPVu5jRYAqbSuL8") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQAMJGidK4aXJV6EWh7H3JEuFs2XdBzZoM") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQDHrpq3pP6V78MWHLr7cj2sw8SQKtadKx") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQfHSwQjMi2eN8uPBh15yBVh2uHosq6VPd") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQFtdiQGzTP9JAP3F82qKpY4aDarXK8Hvo") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQhezkAmLaX3z2WUMwSQsDqMjRfmvyaj2u") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQhqqzSh6c6pe6KBbgomduQjiJ7Va6GF5B") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQTQmthD8g1EXU566kdgwoxYpDuVVEv2oN") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQVz4EuBsUN9sjtPzQGRA66wxeronZyz73") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AQW2wdHVU44uXeTBDDYhzHDGEsNvTKSQTb") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ARaWFscUbQvfi8m1iftNuC9xt56FcYTQP8") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ARcQfBPbYqRs3PprDctXTyZoGx94uQr5bS") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ARGb5i7MWxe69Me4EkvW5MTGvUnNB21YNY") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ARHB1bFk9vnqpbfMTPTWsoxPpVeqjHsXCY") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ARnndqPrxfHDK3mibW3uUvtiH9Y8SFnhrB") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ARoXfVzUw1At2EiHZzm7dUFLeAkR5DHuxM") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ASA98WixLU7KRyYqBqNT2HbaeoBQqJjent") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ASFh3ZSUMSmbv3i62F9Jy8YqhB3LYMJhkC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ASgjfs4T1SgqJLzyd4P3Ywv8bcB6fS7UsQ") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ASJLEfixF4nCPCLBbjF9fEQhbPU6W7XJtX") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ASKE6Uu1CuMFB88mUZpwRsfbpAqLfFG2uR") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ASZFN2nS7mvxLHQcuNsSHzTu6z8SrHMd16") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AT29ncRdDr8sKcHgKo1zYMmc51UuDZBZg2") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AT2koUKowQstHq5YE8FEdqDFXdDsrthRV9") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AT92sZHdwpWCbp2LEULpGEDeCAZNvpuNFj") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AT9undynPdpXJVhQQsfD9th68QBPJYkNTD") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ATFL5Eb79CcNRJGb4hWmUuH3p7EDhKmSJX") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AThLPzKTuRTRmuyRn7SLKmg77b6oXHseDQ") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ATkP7Y7VmDYbGVjC3zGMJHtAUEFQeAwzJg") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ATqsSQWxy8KsWsqR9aAUU9q85i8xhUHYJ6") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ATrmatFVRQ3wUxntMrGJT5nyR3AUuZcpqQ") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ATxaEeKTJFMikNhDjTKSp9E5DXGA44DcbW") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "ATycywFh3iRLf4So4VV6XT8SftjFnVknaH") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AU5hKjPdvDZhs5N3kJLSQMBA3UbrnE7VoC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AUAVb9Tsk7zNjb4v1d67QBWmFurdivSjic") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AUdD18nERTTDhQUfM6VWnJjnkWu76wxnpa") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AUgdTHjGRpStx8Mwy7FHRg3HTu6G5fJhaB") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AUjPFoWz76T2Gz38mMnHu5EudvfDN41J1x") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AUjtqZK7RQstx4Q3RnZL9ybCMmRdwM5Fep") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AUNfopFXpj2WxgBcEKAavQ8XRw9LhPvDPw") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AUVNg586VuvoC142FvKG4iteuL7aCikViA") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AV9fyQgWHJGYCYZ4QJVvYNRe6YrSTwsDB4") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVb11DsuwQu4oW4LoVndqA5WyskEGxpLeb") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVb6QL19jFy5hFQJtuHoGwuYbNWpxBHAsQ") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVgMXp3s8HU9aziUfi7HhVc6rCKsLc46nC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVgYxGQidDnYYQJEGsYrEqdj3y2BTe4PL1") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVpxB7fDYCFgLV9MJ4LcWYxPyeEaFFU8RX") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVQqyFT7CBSsQEeGSjxmsHoFRXU5PwHjbj") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVRXBRQh5iJPw4cjgNZ7LH97gHxyxaxnJv") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVt15fH21QcDkpkf75pmmoebenjhXu8om2") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVt1hffz3n3vLAFd5YF7X8iEx58GxJFim1") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVYdvRn58wNqW8JUSk1gugVda5D2iSRZGG") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AVzPqbjRGYitxahoFwgj6VBNBWfYgUBdUy") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AW4K2vE48phZcbuZ9LbJSpuGDosGrK6UXH") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AWa5hjMvPjBgoc8Kivpuc4gZfqCjVexzFH") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AWaLekM34R2sfV5tMa5j7SJnFAE6RHjk3d") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AWecrxwNbskTSopQw91V5ybkVVHK6F4axP") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AWF2UReo78ZsK8HuoeDhhFQZmWhrkLCA5y") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AWfXPwUYuLYcLtjJEiTXe8L3Ffk2PfVMC6") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AWRbrSw1t41YSQPMLjh3aaaDna8fW3VXUj") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AWVvb1zCjfFCBVSMScTLJVubFmTXZxSXus") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AX3bQwmuo6mDK8qtNJXPCciAgNcbU7vfqQ") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AX4gK27amGhzkwJ1ufBi63BMNEBtaYCqs8") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AX9rPK142J4YdreEbXWp939fCX3xxzSTK8") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXCVvFMqm8kBjZaEFjh6HqjrogSxo5iu4J") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXE41XcLVrkzpKE5S5L9ZFXAbvRHvTkZjC") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXfqTAptfVG6Szz5KnC13VB1giXxHUWz4k") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXG8pPkDWhxA1HNNEnfG5umWiJ3aDvUfpv") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXJW7yE8qZ3shEEFbtaDmbtgsxgWvP7dhN") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXmGZLTMnnmyEhaut6ynXUNR7y1b8HN7gh") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXmwZqJJG2iTi9YA8xH1M6jpuzJbP6ZSG8") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXRA3e5gwYkvVhUNmHJscpvvrrzrL5jMZY") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXTtN8bMRVKmtd7Ft39NTkNUd56v3VhPjv") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXuzGycTq567gfVFfDChUU3ZnGv1Mu3GDH") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AXyUBv19Lb8fZN7vDbcK1ga35TiyncTGzE") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AY9N2FDJ3YTiQFen5Cr5fcecUwyhehmERJ") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYbKUxJa3kyTgpvtKWzBcSxUEnKSUkY3FN") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYbXimKftwveeRGoweEcaCZHYSC9iZWUBK") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYJEjYeUnp2v8CLJq4nSZVdWL69ixUhaW1") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYkiEZuJXwUaKwyirNGbtqa5XMA3xcuBd7") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYnnqRb8zPnAzEgr4G1ppbDFsnmNUX2sA8") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYVP9PQzrTdU4h9v2pmRsXZCyVZKn3onGH") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYZPE24DsuQPb2YxWNnrxpSYQMGgAeRnMi") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYZZfKpopxvtwxENx68gKH3oZM7NbmeSRE") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZASSeJFzvrxWYotoiXucm7ruBUrRdV4n3") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZcFmwJAoDg2EJA1KjNk3NFMfn4ZnafpYm") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZdXqASf7C4iJY2YKnrMvP6xi94kpD4ZiL") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZGCZ7c1GrntN8udyNL8t2ed6dgNCYpuPP") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZJyMQYhstsr7p4BLde6SsrKpJ7NKMAhdx") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZoQSSvg2jcdD3Cdy6fMZFndbs33qT3Fo4") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZqFXJeDqGDkPnKFs6hnrLUGynqLzv6yVo") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AZXLwnDyzDA1HvaVK3qJseopJQw43vmFa7") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                else if (strcmp(addressSource.ToString().c_str(), "AYvjRpPLD3efozDHRAHDNxNjRPygeV831z") == 0)
+                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
 
-            if (chainActive.Height() >= 179000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
-                if (strcmp(addressSource.ToString().c_str(), "AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AU58ruEqmKficxi2YpRnFnH8RSbTqX4x73") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AGYZgAfxakZDMwt4fxrSiBUwWhtxQhqg7f") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AM36kMDzffAVqynPUgp8mXKVYK3XxTgb7J") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AG4dVZeUHatsMCvbM5XvTGSLyY7z8dQeuF") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "Af4rV93dyRcsTWwkxsMpjUdm3Yo9baBNXs") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ASXMvsAU46KUBBJjhGLax3jr1JHGnGARiM") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJeyspBJq7JNYjdcGyA8taz8hASQysNHnk") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ActU2YyUDCWFgtihEuxHzTJbwQQWYHCWcE") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AHRWs8qqM8rhiKG7EBQSkNKt69PJqd2VwW") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AHVxoJhz58uNLj1233PbKX93fm2eFwRTYW") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJVL7qFLNZasC692RkvqkN3AUkjAYmJFu1") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AScj9UbL3tYCTPdDPwPXxXBBEALf5zd8m7") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJ5Xx3fawHqfWZ7iBap64b6AKwLccZUxfH") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AKbsMQedXwpkYH8NifhmJhNdYVrQV9u7pv") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AdRz5YmaUDzZnC9s7syg3chhhJXBkCkvUg") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AG3BK3psgc5dyBn2nq1gNAKkWSiW9d2Dxc") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AHDVRse5sBVnhiKuLuVZfAVUhJyLgNM9uZ") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AN1FpXcRAUBpAMgzmGLSTzcCWqkWeR4xuh") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AMXtFke2pzrpgV51GJcLZMwEWrXyH284Co") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AZKAyrUM1AdKW36BDq3HQ3UTeyZfFhroiy") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "Aam8ntHoEtdCGnBMqBpzZtKbituVPHw24N") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AKjMZsiK2HsZA5F5aPbzbAHxBjzmHx4THv") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "Aa7EMRSpLbZgvgkhyUx9pB42466MoivLt5") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AZbFmPfSiXkSHWvxsmuvipX2YAZfzYGzxq") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AUgyqYHrVEEjScfGXsRTPJ73iVS7ZAZqZF") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AWUfKNKYKoZeezQLzUoLC9diAi9nUfXySy") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AN6ZKTZkAacwHuretjeyhbjWEnvtkytjVt") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AQuZoN6FrorDt9MhVVq65VTPzo2H4yqdQC") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ATZgr4qCwGJmSjebeADo3dAGRtorQcSiVF") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AKVdhgEBwHRfPuQTjmbxZ8JAvL9FEofo8z") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AUkjdUynaBzKoqSHQSS2CCjUk74NVYz2En") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJS3brxiYbW1TrNrunbjQUpbgtY9RdcCzX") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AcHSh9pruvaa59rCw8w71GRAZrK9vipSeq") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AMQNmFr1kVUiS2gWh4NJxpB7qmGtz2Dc6v") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ARecQAWVNCcJJaAs339Pm8pN8GdhDFeMaT") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AMKN4QL4NzaqtckL6DgUvpdgPXK8VBpyVQ") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AWJr6e4DUsZsynxqXHu1pr8tVEJgkHAJC1") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ARU76W254stLyYHBFauRbRHjE7wJPCHtfX") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJxWmBMyRegkbRmiBWJTUXjqmnuoah1Ujm") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ARHMmwEbcFKmatahdxSo8NDo5NH8xfYcD5") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ARQqBGiEG2qabNEbYboWd8UVBdNnaM4MTZ") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AUhRj6sYXPrq5LGoyFLG7tUc69R4B3bdXN") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "APBSxK84UjcSxHES9Pe27pqXCMrWajPtTN") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ARFrmJiRPw4fvvBDkLcLpT31RnkCxjjXpj") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AVPgLCZkG2pcL3hhjhMnpuxRJqs88jyPAT") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AWGAStiJ6hpiJoYpAxrBUSPT7gnBJ6Zyz8") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ATrJ72YEbAojrx8pMpruEkosJKcKxphtPN") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AL9GoaaurkpQzPdnwUj9QWJGj6PV8EnEt4") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AYWSeGT25qUG69XiK24Y8cVEzAPcTJHb8Z") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AXbep6MmpRnxj6RSK1vJzeo2uhuZ89kVys") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AQqM7qB7VpsLA1cir2Vutm3rknEeZfJUzd") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ANhvyNZ6LPYLYdkYvFt3pabt3RUC7sV3X6") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AG3EqDWPWGEy8H3sccxC9Qhng25CNkzKdA") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJ5HR22HMwsDLKoyZqmaP5h2jn5xyEMaB1") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AdaGXtnponAHfDyZQnWxUJkSShXHFFifKz") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AXGFuunqixtsMC69N9wBVitJSHspKrBrUe") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AdBM35DwoxeFjrLD3acA5o5jpWLa3i7L4T") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ANYfGJRFtcquwhXzxnM9u729WG4SrtuyRd") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AazboNChTdqfj87jdA8LnRGdsVTsWHSkPy") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AGn9JxvNtmAYZma2c2FEH5X6n6So9QJubi") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ATaDcD6Dg7Um9kMdNBTiVpf1zUT6sksAXY") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AWzo4JygcEenEXFihSHGg8QcWQuKPDUtVy") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AUhFgu8cn1TMa835HBFVz3SMGhSx7tJ8XL") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AczzqWeNZ9gQ7sAKwyvGLuz8q7aXsEQC4f") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AR4pWDatRfxfxLW51PdeBysVe4iLEnouNb") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AXtiwvbzjZwzXLtETNPiaUuLLUShyhD91P") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AGoXtBDr1RnCPRHqQz791ShN5QN3vMVPhQ") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AXJ951PCTHvCn1ip3FQeiqQtU4oertgjpf") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AR8riVyP1Z3hGpsX2K2uDWSGyXj8jHZcjk") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "APSAYWTUA87jMH63ZzeEfydjbookAyew2u") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AcXWsYuRbJPwxrfegNprJ3LRkCBXjkVnnQ") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AVZeCbJmnpXJiyrS5z3FmHyc6EKmsmBARz") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AajfKWh9uT3iHEkPRexhejFmYgJ8ufjPjN") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AaeMguBQVfAnCsZsKCN5A2KVSiSgJHefGV") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AeRUpyGMidykbc3aWt3aPb3HWSBPjVFFpe") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJtqzq3TWEnqLxkdN7zPPdJFShdVjP9ti9") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ARezKgRbianJouPqvyw14mU9G9xBxpfxTq") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AcaTumP4PkuXpuwGBVitq8UWyQJLfqfWWu") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "Abi7191dHnVaDiWcukSEEgRwMTei5vgdVT") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AddQHhSBhamwmXpC9T8YsS8vb9Avqy4HwS") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ATDUgPRHEAGixYJtjDXyk8ArRw6v9zZbjs") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ALWVaG7PmiggcVEXxR6mJnk7mjyeSVg7ct") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ALc5ojJXtYkYaNYYrhEPLacKN6zztqMcBT") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AP9AyF7hbwStRmbctSh1bMsVPWv7ETFs8S") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AMFxAzsHugNaBxBv9p1hcM3vvTFqRiQs4M") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "Ac3ePssMUJ75wT5rntnGg46DnrwEM4bWwo") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ALs75CSZs8ZhactS83xnBBHJVPS8HRFEKQ") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AKdr7wYTmySpggDUtbv4DN6i7tvuxPCHFM") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "APSayvJqnaRc8U4HaA8rnVv8EVHYu72Q5Y") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AJLREMXeqNbwBV5k9n3gTgp7c7Xp7ZihSE") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AUQzGQmbdsMQdtRp4Erko5hYVKqMep9xZF") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AQteiXRh3XuLZvLZ41hNR6MLEECmBkuGbV") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "ATo8csqDGxucw6P7qdLnfHeSeTLMAmqkN5") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AauErFJMkMb638jWA2A4PfxqGLH7js7NwT") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AbeBuJ1D32Fct8mvNNUHXkVg53HMYAdrFw") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AdM3v42HCCRx8WyjvTBPy4no9f3Rjp2DLQ") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AFxaL7iaswzuVSQqc3MC2mTMReXRjaNfYm") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                else if (strcmp(addressSource.ToString().c_str(), "AbpqUePcK5NtzYTbN4YL72mSsj9PoR1Kh6") == 0)
-                    return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-				}
-			}
+                if (chainActive.Height() >= 179000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
+                    if (strcmp(addressSource.ToString().c_str(), "AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AU58ruEqmKficxi2YpRnFnH8RSbTqX4x73") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AGYZgAfxakZDMwt4fxrSiBUwWhtxQhqg7f") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AM36kMDzffAVqynPUgp8mXKVYK3XxTgb7J") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AG4dVZeUHatsMCvbM5XvTGSLyY7z8dQeuF") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "Af4rV93dyRcsTWwkxsMpjUdm3Yo9baBNXs") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ASXMvsAU46KUBBJjhGLax3jr1JHGnGARiM") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJeyspBJq7JNYjdcGyA8taz8hASQysNHnk") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ActU2YyUDCWFgtihEuxHzTJbwQQWYHCWcE") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AHRWs8qqM8rhiKG7EBQSkNKt69PJqd2VwW") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AHVxoJhz58uNLj1233PbKX93fm2eFwRTYW") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJVL7qFLNZasC692RkvqkN3AUkjAYmJFu1") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AScj9UbL3tYCTPdDPwPXxXBBEALf5zd8m7") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJ5Xx3fawHqfWZ7iBap64b6AKwLccZUxfH") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AKbsMQedXwpkYH8NifhmJhNdYVrQV9u7pv") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AdRz5YmaUDzZnC9s7syg3chhhJXBkCkvUg") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AG3BK3psgc5dyBn2nq1gNAKkWSiW9d2Dxc") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AHDVRse5sBVnhiKuLuVZfAVUhJyLgNM9uZ") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AN1FpXcRAUBpAMgzmGLSTzcCWqkWeR4xuh") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AMXtFke2pzrpgV51GJcLZMwEWrXyH284Co") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AZKAyrUM1AdKW36BDq3HQ3UTeyZfFhroiy") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "Aam8ntHoEtdCGnBMqBpzZtKbituVPHw24N") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AKjMZsiK2HsZA5F5aPbzbAHxBjzmHx4THv") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "Aa7EMRSpLbZgvgkhyUx9pB42466MoivLt5") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AZbFmPfSiXkSHWvxsmuvipX2YAZfzYGzxq") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AUgyqYHrVEEjScfGXsRTPJ73iVS7ZAZqZF") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AWUfKNKYKoZeezQLzUoLC9diAi9nUfXySy") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AN6ZKTZkAacwHuretjeyhbjWEnvtkytjVt") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AQuZoN6FrorDt9MhVVq65VTPzo2H4yqdQC") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ATZgr4qCwGJmSjebeADo3dAGRtorQcSiVF") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AKVdhgEBwHRfPuQTjmbxZ8JAvL9FEofo8z") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AUkjdUynaBzKoqSHQSS2CCjUk74NVYz2En") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJS3brxiYbW1TrNrunbjQUpbgtY9RdcCzX") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AcHSh9pruvaa59rCw8w71GRAZrK9vipSeq") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AMQNmFr1kVUiS2gWh4NJxpB7qmGtz2Dc6v") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ARecQAWVNCcJJaAs339Pm8pN8GdhDFeMaT") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AMKN4QL4NzaqtckL6DgUvpdgPXK8VBpyVQ") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AWJr6e4DUsZsynxqXHu1pr8tVEJgkHAJC1") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ARU76W254stLyYHBFauRbRHjE7wJPCHtfX") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJxWmBMyRegkbRmiBWJTUXjqmnuoah1Ujm") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ARHMmwEbcFKmatahdxSo8NDo5NH8xfYcD5") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ARQqBGiEG2qabNEbYboWd8UVBdNnaM4MTZ") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AUhRj6sYXPrq5LGoyFLG7tUc69R4B3bdXN") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "APBSxK84UjcSxHES9Pe27pqXCMrWajPtTN") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ARFrmJiRPw4fvvBDkLcLpT31RnkCxjjXpj") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AVPgLCZkG2pcL3hhjhMnpuxRJqs88jyPAT") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AWGAStiJ6hpiJoYpAxrBUSPT7gnBJ6Zyz8") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ATrJ72YEbAojrx8pMpruEkosJKcKxphtPN") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AL9GoaaurkpQzPdnwUj9QWJGj6PV8EnEt4") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AYWSeGT25qUG69XiK24Y8cVEzAPcTJHb8Z") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AXbep6MmpRnxj6RSK1vJzeo2uhuZ89kVys") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AQqM7qB7VpsLA1cir2Vutm3rknEeZfJUzd") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ANhvyNZ6LPYLYdkYvFt3pabt3RUC7sV3X6") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AG3EqDWPWGEy8H3sccxC9Qhng25CNkzKdA") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJ5HR22HMwsDLKoyZqmaP5h2jn5xyEMaB1") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AdaGXtnponAHfDyZQnWxUJkSShXHFFifKz") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AXGFuunqixtsMC69N9wBVitJSHspKrBrUe") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AdBM35DwoxeFjrLD3acA5o5jpWLa3i7L4T") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ANYfGJRFtcquwhXzxnM9u729WG4SrtuyRd") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AazboNChTdqfj87jdA8LnRGdsVTsWHSkPy") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AGn9JxvNtmAYZma2c2FEH5X6n6So9QJubi") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ATaDcD6Dg7Um9kMdNBTiVpf1zUT6sksAXY") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AWzo4JygcEenEXFihSHGg8QcWQuKPDUtVy") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AUhFgu8cn1TMa835HBFVz3SMGhSx7tJ8XL") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AczzqWeNZ9gQ7sAKwyvGLuz8q7aXsEQC4f") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AR4pWDatRfxfxLW51PdeBysVe4iLEnouNb") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AXtiwvbzjZwzXLtETNPiaUuLLUShyhD91P") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AGoXtBDr1RnCPRHqQz791ShN5QN3vMVPhQ") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AXJ951PCTHvCn1ip3FQeiqQtU4oertgjpf") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AR8riVyP1Z3hGpsX2K2uDWSGyXj8jHZcjk") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "APSAYWTUA87jMH63ZzeEfydjbookAyew2u") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AcXWsYuRbJPwxrfegNprJ3LRkCBXjkVnnQ") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AVZeCbJmnpXJiyrS5z3FmHyc6EKmsmBARz") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AajfKWh9uT3iHEkPRexhejFmYgJ8ufjPjN") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AaeMguBQVfAnCsZsKCN5A2KVSiSgJHefGV") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AeRUpyGMidykbc3aWt3aPb3HWSBPjVFFpe") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJtqzq3TWEnqLxkdN7zPPdJFShdVjP9ti9") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ARezKgRbianJouPqvyw14mU9G9xBxpfxTq") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AcaTumP4PkuXpuwGBVitq8UWyQJLfqfWWu") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "Abi7191dHnVaDiWcukSEEgRwMTei5vgdVT") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AddQHhSBhamwmXpC9T8YsS8vb9Avqy4HwS") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ATDUgPRHEAGixYJtjDXyk8ArRw6v9zZbjs") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ALWVaG7PmiggcVEXxR6mJnk7mjyeSVg7ct") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ALc5ojJXtYkYaNYYrhEPLacKN6zztqMcBT") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AP9AyF7hbwStRmbctSh1bMsVPWv7ETFs8S") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AMFxAzsHugNaBxBv9p1hcM3vvTFqRiQs4M") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "Ac3ePssMUJ75wT5rntnGg46DnrwEM4bWwo") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ALs75CSZs8ZhactS83xnBBHJVPS8HRFEKQ") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AKdr7wYTmySpggDUtbv4DN6i7tvuxPCHFM") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "APSayvJqnaRc8U4HaA8rnVv8EVHYu72Q5Y") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AJLREMXeqNbwBV5k9n3gTgp7c7Xp7ZihSE") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AUQzGQmbdsMQdtRp4Erko5hYVKqMep9xZF") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AQteiXRh3XuLZvLZ41hNR6MLEECmBkuGbV") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "ATo8csqDGxucw6P7qdLnfHeSeTLMAmqkN5") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AauErFJMkMb638jWA2A4PfxqGLH7js7NwT") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AbeBuJ1D32Fct8mvNNUHXkVg53HMYAdrFw") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AdM3v42HCCRx8WyjvTBPy4no9f3Rjp2DLQ") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AFxaL7iaswzuVSQqc3MC2mTMReXRjaNfYm") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                    else if (strcmp(addressSource.ToString().c_str(), "AbpqUePcK5NtzYTbN4YL72mSsj9PoR1Kh6") == 0)
+                        return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+                }
+            }
         }
     }
 
     // Check for duplicate inputs
+    set<COutPoint> vInOutPoints;
     set<CBigNum> vZerocoinSpendSerials;
     for (const CTxIn& txin : tx.vin) {
         if (vInOutPoints.count(txin.prevout))
@@ -2070,7 +2073,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             return state.DoS(100, error("CheckTransaction() : coinbase script size=%d", tx.vin[0].scriptSig.size()),
                 REJECT_INVALID, "bad-cb-length");
     } else if (fZerocoinActive && tx.IsZerocoinSpend()) {
-        if(tx.vin.size() < 1 || static_cast<int>(tx.vin.size()) > Params().Zerocoin_MaxSpendsPerTransaction())
+        if (tx.vin.size() < 1 || static_cast<int>(tx.vin.size()) > Params().Zerocoin_MaxSpendsPerTransaction())
             return state.DoS(10, error("CheckTransaction() : Zerocoin Spend has more than allowed txin's"), REJECT_INVALID, "bad-zerocoinspend");
     } else {
         BOOST_FOREACH (const CTxIn& txin, tx.vin)
@@ -2212,14 +2215,15 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         CCoinsViewCache view(&dummy);
 
         CAmount nValueIn = 0;
-        if(tx.IsZerocoinSpend()){
+        if (tx.IsZerocoinSpend()) {
             nValueIn = tx.GetZerocoinSpent();
 
             //Check that txid is not already in the chain
             int nHeightTx = 0;
             if (IsTransactionInChain(tx.GetHash(), nHeightTx))
                 return state.Invalid(error("AcceptToMemoryPool : zABET spend tx %s already in block %d",
-                                           tx.GetHash().GetHex(), nHeightTx), REJECT_DUPLICATE, "bad-txns-inputs-spent");
+                                         tx.GetHash().GetHex(), nHeightTx),
+                    REJECT_DUPLICATE, "bad-txns-inputs-spent");
 
             //Check for double spending of serial #'s
             for (const CTxIn& txIn : tx.vin) {
@@ -2228,7 +2232,8 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
                 CoinSpend spend = TxInToZerocoinSpend(txIn);
                 if (!ContextualCheckZerocoinSpend(tx, spend, chainActive.Tip(), 0))
                     return state.Invalid(error("%s: ContextualCheckZerocoinSpend failed for tx %s", __func__,
-                                               tx.GetHash().GetHex()), REJECT_INVALID, "bad-txns-invalid-zabet");
+                                             tx.GetHash().GetHex()),
+                        REJECT_INVALID, "bad-txns-invalid-zabet");
             }
         } else {
             LOCK(pool.cs);
@@ -2313,13 +2318,12 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         } else if (!ignoreFees) {
             CAmount txMinFee = GetMinRelayFee(tx, nSize, true);
             if (fLimitFree && nFees < txMinFee && !tx.IsZerocoinSpend())
-                return state.DoS(0, error("AcceptToMemoryPool : not enough fees %s, %d < %d",
-                                        hash.ToString(), nFees, txMinFee),
+                return state.DoS(0, error("AcceptToMemoryPool : not enough fees %s, %d < %d", hash.ToString(), nFees, txMinFee),
                     REJECT_INSUFFICIENTFEE, "insufficient fee");
 
             // Require that free transactions have sufficient priority to be mined in the next block.
             if (tx.IsZerocoinMint()) {
-                if(nFees < Params().Zerocoin_MintFee() * tx.GetZerocoinMintCount())
+                if (nFees < Params().Zerocoin_MintFee() * tx.GetZerocoinMintCount())
                     return state.DoS(0, false, REJECT_INSUFFICIENTFEE, "insufficient fee for zerocoinmint");
             } else if (!tx.IsZerocoinSpend() && GetBoolArg("-relaypriority", true) && nFees < ::minRelayTxFee.GetFee(nSize) && !AllowFree(view.GetPriority(tx, chainActive.Height() + 1))) {
                 LogPrintf("%d\n", nFees);
@@ -2402,27 +2406,29 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
     return true;
 }
 
-bool ReadTransaction(CTransaction& tx, const CDiskTxPos &pos, uint256 &hashBlock) {
+bool ReadTransaction(CTransaction& tx, const CDiskTxPos& pos, uint256& hashBlock)
+{
     CAutoFile file(OpenBlockFile(pos, true), SER_DISK, CLIENT_VERSION);
     CBlockHeader header;
     try {
         file >> header;
         fseek(file.Get(), pos.nTxOffset, SEEK_CUR);
         file >> tx;
-    } catch (std::exception &e) {
+    } catch (std::exception& e) {
         return error("%s() : deserialize or I/O error", __PRETTY_FUNCTION__);
     }
     hashBlock = header.GetHash();
     return true;
 }
 
-bool FindTransactionsByDestination(const CTxDestination &dest, std::set<CExtDiskTxPos> &setpos) {
+bool FindTransactionsByDestination(const CTxDestination& dest, std::set<CExtDiskTxPos>& setpos)
+{
     uint160 addrid;
-    const CKeyID *pkeyid = boost::get<CKeyID>(&dest);
+    const CKeyID* pkeyid = boost::get<CKeyID>(&dest);
     if (pkeyid) {
         addrid = static_cast<uint160>(*pkeyid);
     } else {
-        const CScriptID *pscriptid = boost::get<CScriptID>(&dest);
+        const CScriptID* pscriptid = boost::get<CScriptID>(&dest);
         if (pscriptid) {
             addrid = static_cast<uint160>(*pscriptid);
         } else {
@@ -2576,8 +2582,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
         } else { // same as !ignoreFees for AcceptToMemoryPool
             CAmount txMinFee = GetMinRelayFee(tx, nSize, true);
             if (fLimitFree && nFees < txMinFee && !tx.IsZerocoinSpend())
-                return state.DoS(0, error("AcceptableInputs : not enough fees %s, %d < %d",
-                                        hash.ToString(), nFees, txMinFee),
+                return state.DoS(0, error("AcceptableInputs : not enough fees %s, %d < %d", hash.ToString(), nFees, txMinFee),
                     REJECT_INSUFFICIENTFEE, "insufficient fee");
 
             // Require that free transactions have sufficient priority to be mined in the next block.
@@ -2926,121 +2931,90 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
     return ret;
 }
 
- //Treasury blocks start from 192021 and then each 1440 block
-     int nStartTreasuryBlock = 192021;
- int nTreasuryBlockStep = 1440;
+//Treasury blocks start from 192021 and then each 1440 block
+int nStartTreasuryBlock = 192021;
+int nTreasuryBlockStep = 1440;
 
-    
-    bool IsTreasuryBlock(int nHeight) 
+
+bool IsTreasuryBlock(int nHeight)
 {
-        // Spork to allow dev fee to be turned on and off
-        // If spork is on dev fee is turned off
-        if (nHeight < nStartTreasuryBlock) 
+    // Spork to allow dev fee to be turned on and off
+    // If spork is on dev fee is turned off
+    if (nHeight < nStartTreasuryBlock)
         return false;
-    else if (IsSporkActive(SPORK_21_TREASURY_PAYMENT_ENFORCEMENT)) 
-		 return false;
-    else if ((nHeight - nStartTreasuryBlock) % nTreasuryBlockStep == 0) 
-		return true;
-    else 
-		return false;
-    
+    else if (IsSporkActive(SPORK_21_TREASURY_PAYMENT_ENFORCEMENT))
+        return false;
+    else if ((nHeight - nStartTreasuryBlock) % nTreasuryBlockStep == 0)
+        return true;
+    else
+        return false;
 }
 
-     int64_t GetTreasuryAward(int nHeight) 
+int64_t GetTreasuryAward(int nHeight)
 {
-    if (IsTreasuryBlock(nHeight))
-    {
-        if (nHeight <= 212180 && nHeight > 192020)
-        { // 14 days
+    if (IsTreasuryBlock(nHeight)) {
+        if (nHeight <= 212180 && nHeight > 192020) { // 14 days
             return 702 * COIN;
-            
-        }else if (nHeight <= 232340 && nHeight > 212180)
-        { // 14 days
-            return 684 * COIN;            
-        }else if (nHeight <= 252500 && nHeight > 232340)
-        { // 14 days
-            return 666 * COIN;            
-        }else if (nHeight <= 272660 && nHeight > 252500)
-        { // 14 days
-            return 648 * COIN;            
-        }else if (nHeight <= 292820 && nHeight > 272660)
-        { // 14 days
+
+        } else if (nHeight <= 232340 && nHeight > 212180) { // 14 days
+            return 684 * COIN;
+        } else if (nHeight <= 252500 && nHeight > 232340) { // 14 days
+            return 666 * COIN;
+        } else if (nHeight <= 272660 && nHeight > 252500) { // 14 days
+            return 648 * COIN;
+        } else if (nHeight <= 292820 && nHeight > 272660) { // 14 days
             return 630 * COIN;
-        }else if (nHeight <= 312980 && nHeight > 292820)
-        { // 14 days
-            return 612 * COIN;            
-        }else if (nHeight <= 333140 && nHeight > 312980)
-        { // 14 days
-            return 594 * COIN;            
-        }else if (nHeight <= 353300 && nHeight > 333140)
-        { // 14 days
-            return 576 * COIN;            
-        }else if (nHeight <= 373460 && nHeight > 353300)
-        { // 14 days
-            return 558 * COIN;            
-        }else if (nHeight <= 393620 && nHeight > 373460)
-        { // 14 days
-            return 540 * COIN;            
-        }else if (nHeight <= 413780 && nHeight > 393620)
-        { // 14 days
-            return 522 * COIN;            
-        }else if (nHeight <= 433940 && nHeight > 413780)
-        { // 14 days
-            return 504 * COIN;            
-        }else if (nHeight <= 454100 && nHeight > 433940)
-        { // 14 days
-            return 486 * COIN;            
-        }else if (nHeight <= 474260 && nHeight > 454100)
-        { // 14 days
+        } else if (nHeight <= 312980 && nHeight > 292820) { // 14 days
+            return 612 * COIN;
+        } else if (nHeight <= 333140 && nHeight > 312980) { // 14 days
+            return 594 * COIN;
+        } else if (nHeight <= 353300 && nHeight > 333140) { // 14 days
+            return 576 * COIN;
+        } else if (nHeight <= 373460 && nHeight > 353300) { // 14 days
+            return 558 * COIN;
+        } else if (nHeight <= 393620 && nHeight > 373460) { // 14 days
+            return 540 * COIN;
+        } else if (nHeight <= 413780 && nHeight > 393620) { // 14 days
+            return 522 * COIN;
+        } else if (nHeight <= 433940 && nHeight > 413780) { // 14 days
+            return 504 * COIN;
+        } else if (nHeight <= 454100 && nHeight > 433940) { // 14 days
+            return 486 * COIN;
+        } else if (nHeight <= 474260 && nHeight > 454100) { // 14 days
             return 468 * COIN;
-        }else if (nHeight <= 494420 && nHeight > 474260)
-        { // 14 days
+        } else if (nHeight <= 494420 && nHeight > 474260) { // 14 days
             return 450 * COIN;
-        }else if (nHeight <= 514580 && nHeight > 494420)
-        { // 14 days
+        } else if (nHeight <= 514580 && nHeight > 494420) { // 14 days
             return 432 * COIN;
-        }else if (nHeight <= 534740 && nHeight > 514580)
-        { // 14 days
+        } else if (nHeight <= 534740 && nHeight > 514580) { // 14 days
             return 414 * COIN;
-        }else if (nHeight <= 554900 && nHeight > 534740)
-        { // 14 days
+        } else if (nHeight <= 554900 && nHeight > 534740) { // 14 days
             return 396 * COIN;
-        }else if (nHeight <= 575060 && nHeight > 554900)
-        { // 14 days
-            return 378 * COIN;            
-        }else if (nHeight <= 618260 && nHeight > 575060)
-        { // 30 days
-            return 360 * COIN;            
-        }else if (nHeight <= 661460 && nHeight > 618260)
-        { // 30 days
-            return 342 * COIN;            
-        }else if (nHeight <= 791060 && nHeight > 661460)
-        { // 90 days
-            return 324 * COIN;            
-        }else if (nHeight <= 920660 && nHeight > 791060)
-        { // 90 days
-            return 306 * COIN;            
-        }else if (nHeight <= 1179860 && nHeight > 920660)
-        { // 180 days
-            return 288 * COIN;            
-        }else if (nHeight <= 1439060 && nHeight > 1179860)
-        { // 180 days
-            return 252 * COIN;            
-        }else if (nHeight <= 1957460 && nHeight > 1439060)
-        { // 360 days
-            return 216 * COIN;            
-        }else if (nHeight <= 2475860 && nHeight > 1957460)
-        { // 360 days
-            return 180 * COIN;            
-        }else if (nHeight > 2475860)
-        { // Till Max Supply - 10 years
-            return 140 * COIN;            
-        }else 
-			 return 140;
-        
-    }
-    else 
-		 return 0;
+        } else if (nHeight <= 575060 && nHeight > 554900) { // 14 days
+            return 378 * COIN;
+        } else if (nHeight <= 618260 && nHeight > 575060) { // 30 days
+            return 360 * COIN;
+        } else if (nHeight <= 661460 && nHeight > 618260) { // 30 days
+            return 342 * COIN;
+        } else if (nHeight <= 791060 && nHeight > 661460) { // 90 days
+            return 324 * COIN;
+        } else if (nHeight <= 920660 && nHeight > 791060) { // 90 days
+            return 306 * COIN;
+        } else if (nHeight <= 1179860 && nHeight > 920660) { // 180 days
+            return 288 * COIN;
+        } else if (nHeight <= 1439060 && nHeight > 1179860) { // 180 days
+            return 252 * COIN;
+        } else if (nHeight <= 1957460 && nHeight > 1439060) { // 360 days
+            return 216 * COIN;
+        } else if (nHeight <= 2475860 && nHeight > 1957460) { // 360 days
+            return 180 * COIN;
+        } else if (nHeight > 2475860) { // Till Max Supply - 10 years
+            return 140 * COIN;
+        } else
+            return 140;
+
+    } else
+        return 0;
 }
 
 bool IsInitialBlockDownload()
@@ -3157,8 +3131,7 @@ void static InvalidChainFound(CBlockIndex* pindexNew)
 
     LogPrintf("InvalidChainFound: invalid block=%s  height=%d  log2_work=%.8g  date=%s\n",
         pindexNew->GetBlockHash().ToString(), pindexNew->nHeight,
-        log(pindexNew->nChainWork.getdouble()) / log(2.0), DateTimeStrFormat("%Y-%m-%d %H:%M:%S",
-                                                               pindexNew->GetBlockTime()));
+        log(pindexNew->nChainWork.getdouble()) / log(2.0), DateTimeStrFormat("%Y-%m-%d %H:%M:%S", pindexNew->GetBlockTime()));
     LogPrintf("InvalidChainFound:  current best=%s  height=%d  log2_work=%.8g  date=%s\n",
         chainActive.Tip()->GetBlockHash().ToString(), chainActive.Height(), log(chainActive.Tip()->nChainWork.getdouble()) / log(2.0),
         DateTimeStrFormat("%Y-%m-%d %H:%M:%S", chainActive.Tip()->GetBlockTime()));
@@ -3204,7 +3177,7 @@ void UpdateCoins(const CTransaction& tx, CValidationState& state, CCoinsViewCach
 bool CScriptCheck::operator()()
 {
     const CScript& scriptSig = ptxTo->vin[nIn].scriptSig;
-    const CScriptWitness *witness = (nIn < ptxTo->wit.vtxinwit.size()) ? &ptxTo->wit.vtxinwit[nIn].scriptWitness : NULL;
+    const CScriptWitness* witness = (nIn < ptxTo->wit.vtxinwit.size()) ? &ptxTo->wit.vtxinwit[nIn].scriptWitness : NULL;
     if (!VerifyScript(scriptSig, scriptPubKey, witness, nFlags, CachingTransactionSignatureChecker(ptxTo, nIn, amount, cacheStore), &error)) {
         return ::error("CScriptCheck(): %s:%d VerifySignature failed: %s", ptxTo->GetHash().ToString(), nIn, ScriptErrorString(error));
     }
@@ -3250,8 +3223,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
 
         if (!tx.IsCoinStake()) {
             if (nValueIn < tx.GetValueOut())
-                return state.DoS(100, error("CheckInputs() : %s value in (%s) < value out (%s)",
-                                          tx.GetHash().ToString(), FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())),
+                return state.DoS(100, error("CheckInputs() : %s value in (%s) < value out (%s)", tx.GetHash().ToString(), FormatMoney(nValueIn), FormatMoney(tx.GetValueOut())),
                     REJECT_INVALID, "bad-txns-in-belowout");
 
             // Tally transaction fees
@@ -3362,7 +3334,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
                     if (!TxOutToPublicCoin(txout, pubCoin, state))
                         return error("DisconnectBlock(): TxOutToPublicCoin() failed");
 
-                    if(!zerocoinDB->EraseCoinMint(pubCoin.getValue()))
+                    if (!zerocoinDB->EraseCoinMint(pubCoin.getValue()))
                         return error("DisconnectBlock(): Failed to erase coin mint");
                 }
             }
@@ -3431,8 +3403,8 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
     if (!fVerifyingBlocks) {
         //if block is an accumulator checkpoint block, remove checkpoint and checksums from db
         uint256 nCheckpoint = pindex->nAccumulatorCheckpoint;
-        if(nCheckpoint != pindex->pprev->nAccumulatorCheckpoint) {
-            if(!EraseAccumulatorValues(nCheckpoint, pindex->pprev->nAccumulatorCheckpoint))
+        if (nCheckpoint != pindex->pprev->nAccumulatorCheckpoint) {
+            if (!EraseAccumulatorValues(nCheckpoint, pindex->pprev->nAccumulatorCheckpoint))
                 return error("DisconnectBlock(): failed to erase checkpoint");
         }
     }
@@ -3480,7 +3452,7 @@ void ThreadScriptCheck()
 
 void RecalculateZABETMinted()
 {
-    CBlockIndex *pindex = chainActive[Params().Zerocoin_StartHeight()];
+    CBlockIndex* pindex = chainActive[Params().Zerocoin_StartHeight()];
     int nHeightEnd = chainActive.Height();
     while (true) {
         if (pindex->nHeight % 1000 == 0)
@@ -3716,7 +3688,7 @@ static int64_t nTimeCallbacks = 0;
 static int64_t nTimeTotal = 0;
 
 // Index either: a) every data push >=8 bytes,  b) if no such pushes, the entire script
-void static BuildAddrIndex(const CScript &script, const CExtDiskTxPos &pos, std::vector<std::pair<uint160, CExtDiskTxPos> > &out)
+void static BuildAddrIndex(const CScript& script, const CExtDiskTxPos& pos, std::vector<std::pair<uint160, CExtDiskTxPos> >& out)
 {
     CScript::const_iterator pc = script.begin();
     CScript::const_iterator pend = script.end();
@@ -3830,7 +3802,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
         nInputs += tx.vin.size();
 
-		#if 0
+#if 0
         //Temporarily disable zerocoin transactions for maintenance
         if (block.nTime > GetSporkValue(SPORK_23_ZEROCOIN_MAINTENANCE_MODE) && !IsInitialBlockDownload() && tx.ContainsZerocoins()) {
             return state.DoS(100, error("ConnectBlock() : zerocoin transactions are currently in maintenance mode"));
@@ -3878,7 +3850,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                     vMints.emplace_back(make_pair(coin, tx.GetHash()));
                 }
             }
-        #endif
+#endif
         if (!tx.IsCoinBase()) {
             if (!view.HaveInputs(tx))
                 return state.DoS(100, error("ConnectBlock() : inputs missing/spent"),
@@ -3914,7 +3886,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             nSigOpsCost += GetTransactionSigOpCost(tx, view, flags);
             if (nSigOpsCost > MAX_BLOCK_SIGOPS_COST)
                 return state.DoS(100, error("ConnectBlock(): too many sigops"),
-                                REJECT_INVALID, "bad-blk-sigops");
+                    REJECT_INVALID, "bad-blk-sigops");
 
             if (!CheckInputs(tx, state, view, fScriptChecks, flags, false, nScriptCheckThreads ? &vChecks : NULL))
                 return false;
@@ -3930,7 +3902,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             vPosTxid.push_back(std::make_pair(tx.GetHash(), pos));
         if (fAddrIndex) {
             if (!tx.IsCoinBase()) {
-                BOOST_FOREACH(const CTxIn &txin, tx.vin) {
+                BOOST_FOREACH (const CTxIn& txin, tx.vin) {
                     CCoins coins;
                     view.GetCoins(txin.prevout.hash, coins);
                     if (coins.IsAvailable(txin.prevout.n)) {
@@ -3938,8 +3910,8 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
                     }
                 }
             }
-            BOOST_FOREACH(const CTxOut &txout, tx.vout)
-            BuildAddrIndex(txout.scriptPubKey, pos, vPosAddrid);
+            BOOST_FOREACH (const CTxOut& txout, tx.vout)
+                BuildAddrIndex(txout.scriptPubKey, pos, vPosAddrid);
         }
 
         UpdateCoins(tx, state, view, i == 0 ? undoDummy : blockundo.vtxundo.back(), pindex->nHeight);
@@ -3953,9 +3925,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     pindex->nMoneySupply = nMoneySupplyPrev + nValueOut - nValueIn;
     pindex->nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
 
-//    LogPrintf("XX69----------> ConnectBlock(): nValueOut: %s, nValueIn: %s, nFees: %s, nMint: %s zABETSpent: %s\n",
-//              FormatMoney(nValueOut), FormatMoney(nValueIn),
-//              FormatMoney(nFees), FormatMoney(pindex->nMint), FormatMoney(nAmountZerocoinSpent));
+    //    LogPrintf("XX69----------> ConnectBlock(): nValueOut: %s, nValueIn: %s, nFees: %s, nMint: %s zABETSpent: %s\n",
+    //              FormatMoney(nValueOut), FormatMoney(nValueIn),
+    //              FormatMoney(nFees), FormatMoney(pindex->nMint), FormatMoney(nAmountZerocoinSpent));
 
     int64_t nTime1 = GetTimeMicros();
     nTimeConnect += nTime1 - nTimeStart;
@@ -3968,8 +3940,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     //Check that the block does not overmint
     if (!IsBlockValueValid(block, nExpectedMint, pindex->nMint) && (pindex->pprev->nHeight != 84702)) { // bug patched at block 90000, too far to roll back
-        return state.DoS(100, error("ConnectBlock() : reward pays too much (actual=%s vs limit=%s)",
-                FormatMoney(pindex->nMint), FormatMoney(nExpectedMint)), REJECT_INVALID, "bad-cb-amount");
+        return state.DoS(100, error("ConnectBlock() : reward pays too much (actual=%s vs limit=%s)", FormatMoney(pindex->nMint), FormatMoney(nExpectedMint)), REJECT_INVALID, "bad-cb-amount");
     }
 #if 0
 
@@ -4046,7 +4017,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     //Record accumulator checksums
     DatabaseChecksums(mapAccumulators);
-#endif 
+#endif
     if (fTxIndex)
         if (!pblocktree->WriteTxIndex(vPosTxid))
             return state.Error("Failed to write transaction index");
@@ -4056,27 +4027,26 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
             return state.Error("Failed to write address index");
 
     // add new entries
-    for (const CTransaction tx: block.vtx) {
+    for (const CTransaction tx : block.vtx) {
         if (tx.IsCoinBase() || tx.IsZerocoinSpend())
             continue;
-        for (const CTxIn in: tx.vin) {
+        for (const CTxIn in : tx.vin) {
             LogPrint("map", "mapStakeSpent: Insert %s | %u\n", in.prevout.ToString(), pindex->nHeight);
             mapStakeSpent.insert(std::make_pair(in.prevout, pindex->nHeight));
         }
     }
 
-    
+
     // delete old entries
     for (auto it = mapStakeSpent.begin(); it != mapStakeSpent.end();) {
         if (it->second < pindex->nHeight - Params().MaxReorganizationDepth()) {
             LogPrint("map", "mapStakeSpent: Erase %s | %u\n", it->first.ToString(), it->second);
             it = mapStakeSpent.erase(it);
-        }
-        else {
+        } else {
             it++;
         }
     }
-    
+
 
     // add this block to the view's block chain
     view.SetBestBlock(pindex->GetBlockHash());
@@ -4171,8 +4141,8 @@ void static UpdateTip(CBlockIndex* pindexNew)
     chainActive.SetTip(pindexNew);
 
     // If turned on AutoZeromint will automatically convert ABET to zABET
-    if (pwalletMain->isZeromintEnabled ())
-        pwalletMain->AutoZeromint ();
+    if (pwalletMain->isZeromintEnabled())
+        pwalletMain->AutoZeromint();
 
     // New best block
     nTimeBestReceived = GetTime();
@@ -4969,12 +4939,10 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                     return state.DoS(100, error("CheckBlock() : coinbase output has wrong size for proof-of-stake block"));
                 if (!block.vtx[0].vout[1].scriptPubKey.IsUnspendable())
                     return state.DoS(100, error("CheckBlock() : coinbase must be unspendable for proof-of-stake block"));
-            }
-            else {
+            } else {
                 return state.DoS(100, error("CheckBlock() : staking-on-segwit is not enabled"));
             }
-        }
-        else {
+        } else {
             if (block.vtx[0].vout.size() != 1)
                 return state.DoS(100, error("CheckBlock() : coinbase output has wrong size for proof-of-stake block"));
         }
@@ -5033,7 +5001,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
             if (!IsBlockPayeeValid(block, nHeight)) {
                 mapRejectedBlocks.insert(make_pair(block.GetHash(), GetTime()));
                 return state.DoS(0, error("CheckBlock() : Couldn't find masternode/budget payment"),
-                        REJECT_INVALID, "bad-cb-payee");
+                    REJECT_INVALID, "bad-cb-payee");
             }
         } else {
             if (fDebug)
@@ -5072,11 +5040,11 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
         uint256 hashProofOfStake;
         uint256 hash = block.GetHash();
 
-        if(!CheckProofOfStake(block, hashProofOfStake)) {
+        if (!CheckProofOfStake(block, hashProofOfStake)) {
             LogPrintf("WARNING: ProcessBlock(): check proof-of-stake failed for block %s\n", hash.ToString().c_str());
             return false;
         }
-        if(!mapProofOfStake.count(hash)) // add to mapProofOfStake
+        if (!mapProofOfStake.count(hash)) // add to mapProofOfStake
             mapProofOfStake.insert(make_pair(hash, hashProofOfStake));
     }
     return true;
@@ -5136,7 +5104,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
 static int GetWitnessCommitmentIndex(const CBlock& block)
 {
     int commitpos = -1;
-    if(block.vtx.size() > 1) {
+    if (block.vtx.size() > 1) {
         for (size_t o = 0; o < block.vtx[0].vout.size(); o++) {
             if (block.vtx[0].vout[o].scriptPubKey.size() >= 38 && block.vtx[0].vout[o].scriptPubKey[0] == OP_RETURN && block.vtx[0].vout[o].scriptPubKey[1] == 0x24 && block.vtx[0].vout[o].scriptPubKey[2] == 0xaa && block.vtx[0].vout[o].scriptPubKey[3] == 0x21 && block.vtx[0].vout[o].scriptPubKey[4] == 0xa9 && block.vtx[0].vout[o].scriptPubKey[5] == 0xed) {
                 commitpos = o;
@@ -5200,7 +5168,8 @@ bool IsBlockHashInChain(const uint256& hashBlock)
     return chainActive.Contains(mapBlockIndex[hashBlock]);
 }
 
-bool IsTransactionInChain(const uint256& txId, int& nHeightTx, CTransaction& tx) {
+bool IsTransactionInChain(const uint256& txId, int& nHeightTx, CTransaction& tx)
+{
     uint256 hashBlock;
     if (!GetTransaction(txId, tx, hashBlock, true))
         return false;
@@ -5211,7 +5180,8 @@ bool IsTransactionInChain(const uint256& txId, int& nHeightTx, CTransaction& tx)
     return true;
 }
 
-bool IsTransactionInChain(const uint256& txId, int& nHeightTx) {
+bool IsTransactionInChain(const uint256& txId, int& nHeightTx)
+{
     CTransaction tx;
     return IsTransactionInChain(txId, nHeightTx, tx);
 }
@@ -5222,9 +5192,9 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
 
     // Version 4 header must be used after Params().Zerocoin_StartHeight(). And never before.
     if (nHeight > Params().Zerocoin_StartHeight()) {
-        if(block.nVersion < Params().Zerocoin_HeaderVersion())
+        if (block.nVersion < Params().Zerocoin_HeaderVersion())
             return state.DoS(50, error("CheckBlockHeader() : block version must be above 4 after ZerocoinStartHeight"),
-            REJECT_INVALID, "block-version");
+                REJECT_INVALID, "block-version");
 
         vector<CBigNum> vBlockSerials;
         for (const CTransaction& tx : block.vtx) {
@@ -5238,16 +5208,16 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
                         libzerocoin::CoinSpend spend = TxInToZerocoinSpend(txIn);
                         if (count(vBlockSerials.begin(), vBlockSerials.end(), spend.getCoinSerialNumber()))
                             return state.DoS(100, error("%s : Double spending of zABET serial %s in block\n Block: %s",
-                                                        __func__, spend.getCoinSerialNumber().GetHex(), block.ToString()));
+                                                      __func__, spend.getCoinSerialNumber().GetHex(), block.ToString()));
                         vBlockSerials.emplace_back(spend.getCoinSerialNumber());
                     }
                 }
             }
         }
-    //} else {
+        //} else {
         //if (block.nVersion >= Params().Zerocoin_HeaderVersion())
-            //return state.DoS(50, error("CheckBlockHeader() : block version must be below 4 before ZerocoinStartHeight"),
-            //REJECT_INVALID, "block-version");
+        //return state.DoS(50, error("CheckBlockHeader() : block version must be below 4 before ZerocoinStartHeight"),
+        //REJECT_INVALID, "block-version");
     }
 
     // Check that all transactions are finalized
@@ -5369,9 +5339,8 @@ bool AcceptBlockHeader(const CBlock& block, CValidationState& state, CBlockIndex
             }
 
             return state.DoS(100, error("%s : prev block height=%d hash=%s is invalid, unable to add block %s", __func__, pindexPrev->nHeight, block.hashPrevBlock.GetHex(), block.GetHash().GetHex()),
-                             REJECT_INVALID, "bad-prevblk");
+                REJECT_INVALID, "bad-prevblk");
         }
-
     }
 
     if (!ContextualCheckBlockHeader(block, state, pindexPrev))
@@ -5411,7 +5380,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                 }
             }
             return state.DoS(100, error("%s : prev block %s is invalid, unable to add block %s", __func__, block.hashPrevBlock.GetHex(), block.GetHash().GetHex()),
-                             REJECT_INVALID, "bad-prevblk");
+                REJECT_INVALID, "bad-prevblk");
         }
     }
 
@@ -5459,7 +5428,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         // if this is on a fork
         if (!chainActive.Contains(pindexPrev) && pindexPrev != NULL) {
             // start at the block we're adding on to
-            CBlockIndex *last = pindexPrev;
+            CBlockIndex* last = pindexPrev;
 
             // while that block is not on the main chain
             while (!chainActive.Contains(last) && last != NULL) {
@@ -5467,7 +5436,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
                 ReadBlockFromDisk(bl, last);
                 // loop through every spent input from said block
                 for (CTransaction t : bl.vtx) {
-                    for (CTxIn in: t.vin) {
+                    for (CTxIn in : t.vin) {
                         // loop through every spent input in the staking transaction of the new block
                         for (CTxIn stakeIn : block.vtx[1].vin) {
                             // if they spend the same input
@@ -5609,22 +5578,22 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     }
 
     {
-        LOCK(cs_main);   // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
+        LOCK(cs_main); // Replaces the former TRY_LOCK loop because busy waiting wastes too much resources
 
-        MarkBlockAsReceived (pblock->GetHash ());
+        MarkBlockAsReceived(pblock->GetHash());
         if (!checked) {
-            return error ("%s : CheckBlock FAILED for block %s", __func__, pblock->GetHash().GetHex());
+            return error("%s : CheckBlock FAILED for block %s", __func__, pblock->GetHash().GetHex());
         }
 
         // Store to disk
         CBlockIndex* pindex = NULL;
-        bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
+        bool ret = AcceptBlock(*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
-            mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
+            mapBlockSource[pindex->GetBlockHash()] = pfrom->GetId();
         }
-        CheckBlockIndex ();
+        CheckBlockIndex();
         if (!ret)
-            return error ("%s : AcceptBlock FAILED", __func__);
+            return error("%s : AcceptBlock FAILED", __func__);
     }
 
     if (!ActivateBestChain(state, pblock, checked))
@@ -5649,7 +5618,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
     }
 
     LogPrintf("%s : ACCEPTED in %ld milliseconds with size=%d\n", __func__, GetTimeMillis() - nStartTime,
-            pblock->GetSerializeSize(SER_DISK, CLIENT_VERSION));
+        pblock->GetSerializeSize(SER_DISK, CLIENT_VERSION));
 
     return true;
 }
@@ -6098,7 +6067,7 @@ bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos* dbp)
     int nLoaded = 0;
     try {
         // This takes over fileIn and calls fclose() on it in the CBufferedFile destructor
-        CBufferedFile blkdat(fileIn, 2*MAX_BLOCK_SIZE_CURRENT, MAX_BLOCK_SIZE_CURRENT+8, SER_DISK, CLIENT_VERSION);
+        CBufferedFile blkdat(fileIn, 2 * MAX_BLOCK_SIZE_CURRENT, MAX_BLOCK_SIZE_CURRENT + 8, SER_DISK, CLIENT_VERSION);
         uint64_t nRewind = blkdat.GetPos();
         while (!blkdat.eof()) {
             boost::this_thread::interruption_point();
@@ -6472,8 +6441,7 @@ void static ProcessGetData(CNode* pfrom)
             boost::this_thread::interruption_point();
             it++;
 
-            if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK || inv.type == MSG_WITNESS_BLOCK)
-            {
+            if (inv.type == MSG_BLOCK || inv.type == MSG_FILTERED_BLOCK || inv.type == MSG_WITNESS_BLOCK) {
                 bool send = false;
                 BlockMap::iterator mi = mapBlockIndex.find(inv.hash);
                 if (mi != mapBlockIndex.end()) {
@@ -6710,15 +6678,13 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (!pfrom->fInbound)
-        {
+        if (!pfrom->fInbound) {
             addrman.SetServices(pfrom->addr, pfrom->nServices);
         }
-        if (pfrom->nServicesExpected & ~pfrom->nServices)
-        {
+        if (pfrom->nServicesExpected & ~pfrom->nServices) {
             LogPrint("net", "peer=%d does not offer the expected services (%08x offered, %08x expected); disconnecting\n", pfrom->id, pfrom->nServices, pfrom->nServicesExpected);
             pfrom->PushMessage(NetMsgType::REJECT, strCommand, REJECT_NONSTANDARD,
-                               strprintf("Expected to offer services %08x", pfrom->nServicesExpected));
+                strprintf("Expected to offer services %08x", pfrom->nServicesExpected));
             pfrom->fDisconnect = true;
         }
 
@@ -6733,7 +6699,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         }
         // broken releases with wrong blockchain data
         if (pfrom->cleanSubVer == "/Altbet Core:1.1.0/" ||
-            pfrom->cleanSubVer == "/Altbet Core:1.3.0/" ) {
+            pfrom->cleanSubVer == "/Altbet Core:1.3.0/") {
             LOCK(cs_main);
             Misbehaving(pfrom->GetId(), 100); // instantly ban them because they have bad block data
             return false;
@@ -6763,8 +6729,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         pfrom->fClient = !(pfrom->nServices & NODE_NETWORK);
 
-        if((pfrom->nServices & NODE_WITNESS))
-        {
+        if ((pfrom->nServices & NODE_WITNESS)) {
             LOCK(cs_main);
             State(pfrom->GetId())->fHaveWitness = true;
         }
@@ -6780,7 +6745,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         // available. If not, ask the first peer connected for them.
         bool fMissingSporks = !pSporkDB->SporkExists(SPORK_23_ZEROCOIN_MAINTENANCE_MODE);
 
-        if (fMissingSporks || !fRequestedSporksIDB){
+        if (fMissingSporks || !fRequestedSporksIDB) {
             LogPrintf("asking peer for sporks\n");
             pfrom->PushMessage(NetMsgType::GETSPORKS);
             fRequestedSporksIDB = true;
@@ -6935,9 +6900,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         std::vector<CInv> vToFetch;
 
-        for (unsigned int nInv = 0; nInv < vInv.size(); nInv++)
-        {
-            CInv &inv = vInv[nInv];
+        for (unsigned int nInv = 0; nInv < vInv.size(); nInv++) {
+            CInv& inv = vInv[nInv];
 
             boost::this_thread::interruption_point();
             pfrom->AddInventoryKnown(inv);
@@ -6964,7 +6928,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     // doing this will result in the received block being rejected as an orphan in case it is
                     // not a direct successor.
                     if (State(pfrom->GetId())->fHaveWitness &&
-                       (GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) > chainActive.Tip()->nTime || State(pfrom->GetId())->fHaveWitness)) {
+                        (GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) > chainActive.Tip()->nTime || State(pfrom->GetId())->fHaveWitness)) {
                         inv.type = MSG_WITNESS_BLOCK;
                     }
                     vToFetch.push_back(inv);
@@ -7144,23 +7108,23 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             vWorkQueue.push_back(inv.hash);
 
             LogPrint("mempool", "AcceptToMemoryPool: peer=%d %s : accepted %s (poolsz %u)\n",
-                     pfrom->id, pfrom->cleanSubVer,
-                     tx.GetHash().ToString(),
-                     mempool.mapTx.size());
+                pfrom->id, pfrom->cleanSubVer,
+                tx.GetHash().ToString(),
+                mempool.mapTx.size());
 
             uiInterface.NotifyTransaction(tx.GetHash());
 
             // Recursively process any orphan transactions that depended on this one
             set<NodeId> setMisbehaving;
-            for(unsigned int i = 0; i < vWorkQueue.size(); i++) {
+            for (unsigned int i = 0; i < vWorkQueue.size(); i++) {
                 map<uint256, set<uint256> >::iterator itByPrev = mapOrphanTransactionsByPrev.find(vWorkQueue[i]);
-                if(itByPrev == mapOrphanTransactionsByPrev.end())
+                if (itByPrev == mapOrphanTransactionsByPrev.end())
                     continue;
-                for(set<uint256>::iterator mi = itByPrev->second.begin();
-                    mi != itByPrev->second.end();
-                    ++mi) {
-                    const uint256 &orphanHash = *mi;
-                    const CTransaction &orphanTx = mapOrphanTransactions[orphanHash].tx;
+                for (set<uint256>::iterator mi = itByPrev->second.begin();
+                     mi != itByPrev->second.end();
+                     ++mi) {
+                    const uint256& orphanHash = *mi;
+                    const CTransaction& orphanTx = mapOrphanTransactions[orphanHash].tx;
                     NodeId fromPeer = mapOrphanTransactions[orphanHash].fromPeer;
                     bool fMissingInputs2 = false;
                     // Use a dummy CValidationState so someone can't setup nodes to counter-DoS based on orphan
@@ -7169,17 +7133,16 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     CValidationState stateDummy;
 
 
-                    if(setMisbehaving.count(fromPeer))
+                    if (setMisbehaving.count(fromPeer))
                         continue;
-                    if(AcceptToMemoryPool(mempool, stateDummy, orphanTx, true, &fMissingInputs2)) {
+                    if (AcceptToMemoryPool(mempool, stateDummy, orphanTx, true, &fMissingInputs2)) {
                         LogPrint("mempool", "   accepted orphan tx %s\n", orphanHash.ToString());
                         RelayTransaction(orphanTx);
                         vWorkQueue.push_back(orphanHash);
                         vEraseQueue.push_back(orphanHash);
-                    } else if(!fMissingInputs2) {
+                    } else if (!fMissingInputs2) {
                         int nDos = 0;
-                        if (stateDummy.IsInvalid(nDos) && nDos > 0 && (!state.CorruptionPossible() || State(fromPeer)->fHaveWitness))
-                        {
+                        if (stateDummy.IsInvalid(nDos) && nDos > 0 && (!state.CorruptionPossible() || State(fromPeer)->fHaveWitness)) {
                             // Punish peer that gave us an invalid orphan tx
                             Misbehaving(fromPeer, nDos);
                             setMisbehaving.insert(fromPeer);
@@ -7194,15 +7157,16 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 }
             }
 
-            BOOST_FOREACH (uint256 hash, vEraseQueue)EraseOrphanTx(hash);
+            BOOST_FOREACH (uint256 hash, vEraseQueue)
+                EraseOrphanTx(hash);
         } else if (tx.IsZerocoinSpend() && AcceptToMemoryPool(mempool, state, tx, true, &fMissingZerocoinInputs, false, ignoreFees)) {
             //Presstab: ZCoin has a bunch of code commented out here. Is this something that should have more going on?
             //Also there is nothing that handles fMissingZerocoinInputs. Does there need to be?
             RelayTransaction(tx);
             LogPrint("mempool", "AcceptToMemoryPool: Zerocoinspend peer=%d %s : accepted %s (poolsz %u)\n",
-                     pfrom->id, pfrom->cleanSubVer,
-                     tx.GetHash().ToString(),
-                     mempool.mapTx.size());
+                pfrom->id, pfrom->cleanSubVer,
+                tx.GetHash().ToString(),
+                mempool.mapTx.size());
         } else if (fMissingInputs) {
             AddOrphanTx(tx, pfrom->GetId());
 
@@ -7336,12 +7300,12 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             if (!mapBlockIndex.count(block.GetHash())) {
                 ProcessNewBlock(state, pfrom, &block);
                 int nDoS;
-                if(state.IsInvalid(nDoS)) {
+                if (state.IsInvalid(nDoS)) {
                     pfrom->PushMessage(NetMsgType::REJECT, strCommand, state.GetRejectCode(),
-                                    state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
-                    if(nDoS > 0) {
+                        state.GetRejectReason().substr(0, MAX_REJECT_MESSAGE_LENGTH), inv.hash);
+                    if (nDoS > 0) {
                         TRY_LOCK(cs_main, lockMain);
-                        if(lockMain) Misbehaving(pfrom->GetId(), nDoS);
+                        if (lockMain) Misbehaving(pfrom->GetId(), nDoS);
                     }
                 }
                 //disconnect this node if its old protocol version
@@ -7493,9 +7457,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
     }
 
     else if (!(nLocalServices & NODE_BLOOM) &&
-                (strCommand == NetMsgType::FILTERLOAD ||
-                    strCommand == NetMsgType::FILTERADD ||
-                    strCommand == NetMsgType::FILTERCLEAR)) {
+             (strCommand == NetMsgType::FILTERLOAD ||
+                 strCommand == NetMsgType::FILTERADD ||
+                 strCommand == NetMsgType::FILTERCLEAR)) {
         LogPrintf("bloom message=%s\n", strCommand);
         LOCK(cs_main);
         Misbehaving(pfrom->GetId(), 100);
@@ -7896,7 +7860,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
             vector<CBlockIndex*> vToDownload;
             NodeId staller = -1;
             FindNextBlocksToDownload(pto->GetId(), MAX_BLOCKS_IN_TRANSIT_PER_PEER - state.nBlocksInFlight, vToDownload, staller);
-            BOOST_FOREACH(CBlockIndex *pindex, vToDownload) {
+            BOOST_FOREACH (CBlockIndex* pindex, vToDownload) {
                 if (State(pto->GetId())->fHaveWitness || GetSporkValue(SPORK_22_SEGWIT_ACTIVATION) > pindex->pprev->nTime) {
                     vGetData.push_back(CInv(State(staller)->fHaveWitness ? MSG_WITNESS_BLOCK : MSG_BLOCK, pindex->GetBlockHash()));
                     MarkBlockAsInFlight(pto->GetId(), pindex->GetBlockHash(), pindex);

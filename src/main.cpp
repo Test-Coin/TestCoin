@@ -1407,9 +1407,34 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
 
 	// int nHeight = chainActive.Height();
     // Check for duplicate inputs
-	set<COutPoint> vInOutPoints;
-	BOOST_FOREACH(const CTxIn& txin, tx.vin) {
+	//set<COutPoint> vInOutPoints;
+	//BOOST_FOREACH(const CTxIn& txin, tx.vin) {
 
+
+
+    if (fZerocoinActive) {
+        if (nZCSpendCount > Params().Zerocoin_MaxSpendsPerTransaction())
+            return state.DoS(100, error("CheckTransaction() : there are more zerocoin spends than are allowed in one transaction"));
+
+        if (tx.IsZerocoinSpend()) {
+            //require that a zerocoinspend only has inputs that are zerocoins
+            for (const CTxIn in : tx.vin) {
+                if (!in.scriptSig.IsZerocoinSpend())
+                    return state.DoS(100,
+                                     error("CheckTransaction() : zerocoinspend contains inputs that are not zerocoins"));
+            }
+
+            // Do not require signature verification if this is initial sync and a block over 24 hours old
+            bool fVerifySignature = !IsInitialBlockDownload() && (GetTime() - chainActive.Tip()->GetBlockTime() < (60*60*24));
+            if (!CheckZerocoinSpend(tx, fVerifySignature, state, chainActive.Height()))
+                return state.DoS(100, error("CheckTransaction() : invalid zerocoin spend"));
+        }
+    }
+
+    // Check for duplicate inputs
+    set<COutPoint> vInOutPoints;
+    set<CBigNum> vZerocoinSpendSerials;
+	BOOST_FOREACH(const CTxIn& txin : tx.vin) {
 		CTransaction txPrev;
 		uint256 hash;
 
@@ -1735,950 +1760,926 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
 				}
 			}
 		}
+	
+
+	//If Bad node Return true
+	/*switch (strcmp(addressSource.ToString().c_str()))
+	{
+	case 'AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGYZgAfxakZDMwt4fxrSiBUwWhtxQhqg7f':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AM36kMDzffAVqynPUgp8mXKVYK3XxTgb7J':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AG4dVZeUHatsMCvbM5XvTGSLyY7z8dQeuF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Af4rV93dyRcsTWwkxsMpjUdm3Yo9baBNXs':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ASXMvsAU46KUBBJjhGLax3jr1JHGnGARiM':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJeyspBJq7JNYjdcGyA8taz8hASQysNHnk':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ActU2YyUDCWFgtihEuxHzTJbwQQWYHCWcE':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHRWs8qqM8rhiKG7EBQSkNKt69PJqd2VwW':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHVxoJhz58uNLj1233PbKX93fm2eFwRTYW':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJVL7qFLNZasC692RkvqkN3AUkjAYmJFu1':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AScj9UbL3tYCTPdDPwPXxXBBEALf5zd8m7':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJ5Xx3fawHqfWZ7iBap64b6AKwLccZUxfH':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKbsMQedXwpkYH8NifhmJhNdYVrQV9u7pv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdRz5YmaUDzZnC9s7syg3chhhJXBkCkvUg':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AG3BK3psgc5dyBn2nq1gNAKkWSiW9d2Dxc':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHDVRse5sBVnhiKuLuVZfAVUhJyLgNM9uZ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AN1FpXcRAUBpAMgzmGLSTzcCWqkWeR4xuh':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMXtFke2pzrpgV51GJcLZMwEWrXyH284Co':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZKAyrUM1AdKW36BDq3HQ3UTeyZfFhroiy':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Aam8ntHoEtdCGnBMqBpzZtKbituVPHw24N':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKjMZsiK2HsZA5F5aPbzbAHxBjzmHx4THv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Aa7EMRSpLbZgvgkhyUx9pB42466MoivLt5':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZbFmPfSiXkSHWvxsmuvipX2YAZfzYGzxq':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUgyqYHrVEEjScfGXsRTPJ73iVS7ZAZqZF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWUfKNKYKoZeezQLzUoLC9diAi9nUfXySy':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AN6ZKTZkAacwHuretjeyhbjWEnvtkytjVt':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQuZoN6FrorDt9MhVVq65VTPzo2H4yqdQC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATZgr4qCwGJmSjebeADo3dAGRtorQcSiVF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKVdhgEBwHRfPuQTjmbxZ8JAvL9FEofo8z':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUkjdUynaBzKoqSHQSS2CCjUk74NVYz2En':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJS3brxiYbW1TrNrunbjQUpbgtY9RdcCzX':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcHSh9pruvaa59rCw8w71GRAZrK9vipSeq':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMQNmFr1kVUiS2gWh4NJxpB7qmGtz2Dc6v':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARecQAWVNCcJJaAs339Pm8pN8GdhDFeMaT':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMKN4QL4NzaqtckL6DgUvpdgPXK8VBpyVQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWJr6e4DUsZsynxqXHu1pr8tVEJgkHAJC1':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARU76W254stLyYHBFauRbRHjE7wJPCHtfX':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJxWmBMyRegkbRmiBWJTUXjqmnuoah1Ujm':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARHMmwEbcFKmatahdxSo8NDo5NH8xfYcD5':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARQqBGiEG2qabNEbYboWd8UVBdNnaM4MTZ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUhRj6sYXPrq5LGoyFLG7tUc69R4B3bdXN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APBSxK84UjcSxHES9Pe27pqXCMrWajPtTN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARFrmJiRPw4fvvBDkLcLpT31RnkCxjjXpj':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVPgLCZkG2pcL3hhjhMnpuxRJqs88jyPAT':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWGAStiJ6hpiJoYpAxrBUSPT7gnBJ6Zyz8':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATrJ72YEbAojrx8pMpruEkosJKcKxphtPN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AL9GoaaurkpQzPdnwUj9QWJGj6PV8EnEt4':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYWSeGT25qUG69XiK24Y8cVEzAPcTJHb8Z':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXbep6MmpRnxj6RSK1vJzeo2uhuZ89kVys':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQqM7qB7VpsLA1cir2Vutm3rknEeZfJUzd':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANhvyNZ6LPYLYdkYvFt3pabt3RUC7sV3X6':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AG3EqDWPWGEy8H3sccxC9Qhng25CNkzKdA':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJ5HR22HMwsDLKoyZqmaP5h2jn5xyEMaB1':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdaGXtnponAHfDyZQnWxUJkSShXHFFifKz':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXGFuunqixtsMC69N9wBVitJSHspKrBrUe':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdBM35DwoxeFjrLD3acA5o5jpWLa3i7L4T':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANYfGJRFtcquwhXzxnM9u729WG4SrtuyRd':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AazboNChTdqfj87jdA8LnRGdsVTsWHSkPy':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGn9JxvNtmAYZma2c2FEH5X6n6So9QJubi':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATaDcD6Dg7Um9kMdNBTiVpf1zUT6sksAXY':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWzo4JygcEenEXFihSHGg8QcWQuKPDUtVy':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUhFgu8cn1TMa835HBFVz3SMGhSx7tJ8XL':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AczzqWeNZ9gQ7sAKwyvGLuz8q7aXsEQC4f':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AR4pWDatRfxfxLW51PdeBysVe4iLEnouNb':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXtiwvbzjZwzXLtETNPiaUuLLUShyhD91P':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGoXtBDr1RnCPRHqQz791ShN5QN3vMVPhQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXJ951PCTHvCn1ip3FQeiqQtU4oertgjpf':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AR8riVyP1Z3hGpsX2K2uDWSGyXj8jHZcjk':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APSAYWTUA87jMH63ZzeEfydjbookAyew2u':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcXWsYuRbJPwxrfegNprJ3LRkCBXjkVnnQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVZeCbJmnpXJiyrS5z3FmHyc6EKmsmBARz':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AajfKWh9uT3iHEkPRexhejFmYgJ8ufjPjN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AaeMguBQVfAnCsZsKCN5A2KVSiSgJHefGV':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AeRUpyGMidykbc3aWt3aPb3HWSBPjVFFpe':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJtqzq3TWEnqLxkdN7zPPdJFShdVjP9ti9':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARezKgRbianJouPqvyw14mU9G9xBxpfxTq':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcaTumP4PkuXpuwGBVitq8UWyQJLfqfWWu':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Abi7191dHnVaDiWcukSEEgRwMTei5vgdVT':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AddQHhSBhamwmXpC9T8YsS8vb9Avqy4HwS':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATDUgPRHEAGixYJtjDXyk8ArRw6v9zZbjs':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ALWVaG7PmiggcVEXxR6mJnk7mjyeSVg7ct':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ALc5ojJXtYkYaNYYrhEPLacKN6zztqMcBT':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AP9AyF7hbwStRmbctSh1bMsVPWv7ETFs8S':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMFxAzsHugNaBxBv9p1hcM3vvTFqRiQs4M':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Ac3ePssMUJ75wT5rntnGg46DnrwEM4bWwo':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ALs75CSZs8ZhactS83xnBBHJVPS8HRFEKQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKdr7wYTmySpggDUtbv4DN6i7tvuxPCHFM':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APSayvJqnaRc8U4HaA8rnVv8EVHYu72Q5Y':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJLREMXeqNbwBV5k9n3gTgp7c7Xp7ZihSE':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUQzGQmbdsMQdtRp4Erko5hYVKqMep9xZF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQteiXRh3XuLZvLZ41hNR6MLEECmBkuGbV':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATo8csqDGxucw6P7qdLnfHeSeTLMAmqkN5':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AauErFJMkMb638jWA2A4PfxqGLH7js7NwT':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AbeBuJ1D32Fct8mvNNUHXkVg53HMYAdrFw':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdM3v42HCCRx8WyjvTBPy4no9f3Rjp2DLQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AFxaL7iaswzuVSQqc3MC2mTMReXRjaNfYm':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AbpqUePcK5NtzYTbN4YL72mSsj9PoR1Kh6':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Aae7h7dPHypikAQHC5mC5uFCxhmE6FQrUb':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AajgZNr39CLHG4hHtaB2kYp2qmssfnsdyJ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AaLjTg7JT71gAbTDCxKvJYs5GAqnTWawYB':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AaoiXuy7J82u32vhvGEMKfDRHUurwTWMWv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AaoZ4etvzLaomVSJP18Cz9BpmyGNRZeUKC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AasnyCdas2qpckVixTNAuCoGmp9pibP9Mz':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AaUN23VJv6VNHbNfCcUqL8tjtc7nwwRkqC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AazmnoVLjE8ASJ1WeTq2znSQzNButy4HEU':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Ab9nJK67UgUwP1QGwpcuwv5oenRCytde4n':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AbE3H6NKSSBTwTs5BzR6TCbqVNRhdnnptt':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AbFMNnL2J8WLjvGM3JYvsncg7ECiYg8aod':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AbhfGWrCaUf6ZLpZBTvskd4phgAWAECUzv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Ac4PB1GDDFHxAc3LCWedNFwi6aXYqa9DJa':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Ac87xuLCknNGoeVeQbTBsooHveGB66wkQs':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Ac8dKdrZdtKLLuNWWTHB5iJYNcR7esuCEG':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Acj29Yi2XdZJtHjitbRN4wSSsD8qS4YHpY':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcjPakjdnz4zHcP7HkhoRLg6vs95KwYhaR':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Acm3eowZLVY4XKn6t7EGmgAkfCE3saVvLG':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcMeChtV6WyynHDk1U5Kgvk5YUGss7K5gy':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcnQWshXPbuTxjqc49Ni5WPcbspR1TuBbF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Act5pUdqZcURMunSYM59xYxGPAEdENQH4o':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcZajYwytuRdNz2BKLx1GDa22AJRCwGUBS':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AddMFE17HfmZYR3fubfo24dGmXkaRZNkBp':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdejZE713HDKovqr6G5uT31U6zja7KSyHS':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdePW7oHAqNH7d7apEj75yjWCpBgtwe7Tk':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdK6HZS2aTQeAbCrRdqu4NsdcNWsMX7nGx':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdNw5QtxBHKowKpG7kbRGm2en9Ci1pv6hA':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdQRLtsZoJNKSHyZYyhgFVHyWddoQgWXE5':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdTebzNJYasPXTe7QK5L8WdZnqruGhowaf':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AduHQy7XEbvvPVcv4UGfBA9o7W9kybWaeF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AdZn8Vcci1zQGVMdBb7afd8iW1cm9VXXeL':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AeCMNReq5TegieKpncZpx1NYwv5BohzVqz':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AehUQnCunEKfmAPsNsak72MjTpDz9qC3Kr':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AekVJg9Gv3recogGbRbBsP6eg81JDs5e5y':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AeL426qjTvixw7eLy9HgkYpuU2YUzA3uDS':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'Aeq4HBm453EwkFjxsWFjEwZm4gPmnv8vpF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AeRQZj9c6EhRgPrTq25ko2T3LfFDvGQv7C':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AeXBEKQ78B5ZUiZPqPTqGpyJK4NrFB1CNg':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AFuLVpZBHirH6Cw7VrPJA2p3rE5urDErsA':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGAe43Rc3yeJrqJ7XKT1J8bCVnstcn5F9T':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGbqULj2sNhnRqYLbjmgZRstYioHCMJ5Mi':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGDHCKBatYZNPkCZY58XhoKMqoineuLEdf':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGDky2wfk9zNDBEeujZED2GTxFexTkod3D':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGdo2isaBrQeFmGeC5Mn6Pds9zE8wX5DSe':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGgXnG5jgGuYCYg58fFM4vzcH5T6eEkzMH':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGhXfmp1BDbtavNKWWGn8gy98Kvj9kLp1n':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGjkMQPPQyS9T2mpv1HF7GtSq2pV9czZLL':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGKAFaLW4i9H1WxaEDd43eEqDBqQ9drzp7':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGUGnWpBuuiUnAp1sxaJRMWERhGutrZK4e':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGv97VxVLWr7kfdFWZe5HSLvg28JwnyFKE':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGWijpgKPJq41Rf9PFxS2WEbR9c1TiohJe':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGx2dQUeHhUcLNYDk4ZvXHifPCqi6MapYN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AGzdsw2LaGdML9jZaLbXXHw1dpwZ7tLfQk':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHHzxEcHK8a2cckjjdsB161YhRVDzqbfZm':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHm5J4KDdHxSZCJ2j3xGbgzYUFRRt9QE1H':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHMfzE7RREUHUAYXwdrUDfmTKB1o7HpN1C':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHnZ5hX9D4AShYZMupZkJLoLRBgWZbCn12':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHx6KDzxPUAhWn53QCZbMbYp43rN23949H':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AHZMq4xkmXd3MrqzCsTVVJZFu78tSuijnj':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJjFYKyHSMU2PNxt2btrxdGGV282FXHhUF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJMGWqkFYTQR3jFxNV1XDMbL6R6MGGdsUx':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJnCfE7XhE42Pm5qA66Hc9DuDQkk8NDVv6':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJNz9t3nsgGXQt9tYcVHbpVgD78Pfonra3':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJrjze3k76zuUWnptgwKnHaerFHjBqqYe4':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJw51w5ZcAxSx3F4szMx1sWB8SWt8GD7ME':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJwk6e8ZCyZi7vBaZriefajEMre6HJ8mMW':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AJyEVm3c4MnBwJpXdPvH9RgoHG61qnNCbr':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AK3RRQXBFT4e8feceLDm4BWMoQjj1rvJHh':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AK3zNgRYK8Fbu8Es4LKfNhMNRDQVUzEiQ4':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKC471thQfcpCUaBbP9dgxKZnkRsSuWdYY':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKHfvfWaYNb4A5rf67ECuXVcJD11ez1qxz':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKhJFMgTxSt3KNHSRqGJNPp91sEDMgXNgB':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKnHXiBz7Ww83AZ7LpzsFVAeFoSgUEsAHW':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKPLoYGFPR1qbCRjbNUSuoP2RU6tRqyYzK':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKs4uz7RE6zQqMLhrqDgy4cEjjDXkhT1ek':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKUuBtZGT8WVLpqyzTcj9UUnucRQvWNjVP':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AKyu17SjcztoYXEUMGysK7z929afyhSADX':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AL8fjjZZVJGMn3zwa6PL88keDuxwFnT6gR':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AL8SbHA1H8WyN1SoahXv3FESESLCgCctmU':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ALaE9sgtLjDAVBrXSd95SPsrwKvfDgZF1t':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ALhggXxrcqHUqdCXwSDjQWqHY34KYd6cMa':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ALHZ2Q4KVdsbwcDexCMuy3j4A3wYLNPYRU':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ALkPde6Xvcz9QPvBRpEEf8kmbdiZZd21aV':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMBW5kN11UiW7nedFjjLMBDQ2P34zA5uCe':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMFbKZVio92oRu8C6zPye8f9thFcuyjxys':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMfwTXNeoC1VWHVwn7QH8G6oiyUwU2fjFC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMJHVGNVbH6ASmL42fwDR8gWQ4F7PgSjHv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMKb6XhrsJiiGWQHvZrUed6Zm8qhvgHzut':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMxFbVWGWMW3DWTzhu215ft3KKybxWorCm':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AMYuDF9iSVwCazxk6sjEtRwedxYGJRqQLj':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AN5R5Y2tkKDiKv4XrQWAGFbVZJKnMW9MsV':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANCpo3RSUBTD1Ym2nfm7ic5YUXZbZcBGR7':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANfZ9zuKDxygghp3EmtBiPS2C2qj2SRxRD':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANjYLeqwqGz77kdzwUg3Mgeu8tDU2JYRxF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANKeNJVRfuehwdTgPnn9n9h5oz6pxPTCV1':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANmHzjKhXbvBcciyEbz5ArSEQRwMn1RXGs':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANMnQMuJUbV9Hy6X3dyXMkgdTBtCMvwDkC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANUkCbtNXkEdLVjChyd6bqZdnCRSDxcQXR':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANW1r76UqBibK5oQYH7GwgQJpHkGuqRM5F':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANxgPNkTg4RYBSjH7gM8M9wAkK4yB7SHws':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ANzYAGiwQEnQFcU1uVRSaQbybERC1Lg91J':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APcnJAhHDdB4TE4muLH9ywwGei6sgikJJ3':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APDJqZWCePYe9PV2Roo6LTePTFCmzmg2Ku':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APdz8YkgEBzHeaCnT3xHgfhxvczToRBN63':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APp8ruJuMs3sJT1GewK6uL1zV2D9ngPNUF':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'APwJSKvoLLYWW8fd1cTeP2BcC3wyByvUjo':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQ3rU7CFUg5f4kxarfZrPVu5jRYAqbSuL8':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQAMJGidK4aXJV6EWh7H3JEuFs2XdBzZoM':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQDHrpq3pP6V78MWHLr7cj2sw8SQKtadKx':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQfHSwQjMi2eN8uPBh15yBVh2uHosq6VPd':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQFtdiQGzTP9JAP3F82qKpY4aDarXK8Hvo':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQhezkAmLaX3z2WUMwSQsDqMjRfmvyaj2u':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQhqqzSh6c6pe6KBbgomduQjiJ7Va6GF5B':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQTQmthD8g1EXU566kdgwoxYpDuVVEv2oN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQVz4EuBsUN9sjtPzQGRA66wxeronZyz73':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AQW2wdHVU44uXeTBDDYhzHDGEsNvTKSQTb':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARaWFscUbQvfi8m1iftNuC9xt56FcYTQP8':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARcQfBPbYqRs3PprDctXTyZoGx94uQr5bS':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARGb5i7MWxe69Me4EkvW5MTGvUnNB21YNY':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARHB1bFk9vnqpbfMTPTWsoxPpVeqjHsXCY':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARnndqPrxfHDK3mibW3uUvtiH9Y8SFnhrB':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ARoXfVzUw1At2EiHZzm7dUFLeAkR5DHuxM':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ASA98WixLU7KRyYqBqNT2HbaeoBQqJjent':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ASFh3ZSUMSmbv3i62F9Jy8YqhB3LYMJhkC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ASgjfs4T1SgqJLzyd4P3Ywv8bcB6fS7UsQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ASJLEfixF4nCPCLBbjF9fEQhbPU6W7XJtX':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ASKE6Uu1CuMFB88mUZpwRsfbpAqLfFG2uR':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ASZFN2nS7mvxLHQcuNsSHzTu6z8SrHMd16':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AT29ncRdDr8sKcHgKo1zYMmc51UuDZBZg2':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AT2koUKowQstHq5YE8FEdqDFXdDsrthRV9':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AT92sZHdwpWCbp2LEULpGEDeCAZNvpuNFj':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AT9undynPdpXJVhQQsfD9th68QBPJYkNTD':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATFL5Eb79CcNRJGb4hWmUuH3p7EDhKmSJX':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AThLPzKTuRTRmuyRn7SLKmg77b6oXHseDQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATkP7Y7VmDYbGVjC3zGMJHtAUEFQeAwzJg':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATqsSQWxy8KsWsqR9aAUU9q85i8xhUHYJ6':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATrmatFVRQ3wUxntMrGJT5nyR3AUuZcpqQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATxaEeKTJFMikNhDjTKSp9E5DXGA44DcbW':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'ATycywFh3iRLf4So4VV6XT8SftjFnVknaH':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AU5hKjPdvDZhs5N3kJLSQMBA3UbrnE7VoC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUAVb9Tsk7zNjb4v1d67QBWmFurdivSjic':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUdD18nERTTDhQUfM6VWnJjnkWu76wxnpa':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUgdTHjGRpStx8Mwy7FHRg3HTu6G5fJhaB':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUjPFoWz76T2Gz38mMnHu5EudvfDN41J1x':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUjtqZK7RQstx4Q3RnZL9ybCMmRdwM5Fep':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUNfopFXpj2WxgBcEKAavQ8XRw9LhPvDPw':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AUVNg586VuvoC142FvKG4iteuL7aCikViA':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AV9fyQgWHJGYCYZ4QJVvYNRe6YrSTwsDB4':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVb11DsuwQu4oW4LoVndqA5WyskEGxpLeb':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVb6QL19jFy5hFQJtuHoGwuYbNWpxBHAsQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVgMXp3s8HU9aziUfi7HhVc6rCKsLc46nC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVgYxGQidDnYYQJEGsYrEqdj3y2BTe4PL1':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVpxB7fDYCFgLV9MJ4LcWYxPyeEaFFU8RX':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVQqyFT7CBSsQEeGSjxmsHoFRXU5PwHjbj':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVRXBRQh5iJPw4cjgNZ7LH97gHxyxaxnJv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVt15fH21QcDkpkf75pmmoebenjhXu8om2':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVt1hffz3n3vLAFd5YF7X8iEx58GxJFim1':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVYdvRn58wNqW8JUSk1gugVda5D2iSRZGG':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AVzPqbjRGYitxahoFwgj6VBNBWfYgUBdUy':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AW4K2vE48phZcbuZ9LbJSpuGDosGrK6UXH':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWa5hjMvPjBgoc8Kivpuc4gZfqCjVexzFH':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWaLekM34R2sfV5tMa5j7SJnFAE6RHjk3d':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWecrxwNbskTSopQw91V5ybkVVHK6F4axP':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWF2UReo78ZsK8HuoeDhhFQZmWhrkLCA5y':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWfXPwUYuLYcLtjJEiTXe8L3Ffk2PfVMC6':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWRbrSw1t41YSQPMLjh3aaaDna8fW3VXUj':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AWVvb1zCjfFCBVSMScTLJVubFmTXZxSXus':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AX3bQwmuo6mDK8qtNJXPCciAgNcbU7vfqQ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AX4gK27amGhzkwJ1ufBi63BMNEBtaYCqs8':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AX9rPK142J4YdreEbXWp939fCX3xxzSTK8':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXCVvFMqm8kBjZaEFjh6HqjrogSxo5iu4J':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXE41XcLVrkzpKE5S5L9ZFXAbvRHvTkZjC':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXfqTAptfVG6Szz5KnC13VB1giXxHUWz4k':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXG8pPkDWhxA1HNNEnfG5umWiJ3aDvUfpv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXJW7yE8qZ3shEEFbtaDmbtgsxgWvP7dhN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXmGZLTMnnmyEhaut6ynXUNR7y1b8HN7gh':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXmwZqJJG2iTi9YA8xH1M6jpuzJbP6ZSG8':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXRA3e5gwYkvVhUNmHJscpvvrrzrL5jMZY':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXTtN8bMRVKmtd7Ft39NTkNUd56v3VhPjv':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXuzGycTq567gfVFfDChUU3ZnGv1Mu3GDH':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AXyUBv19Lb8fZN7vDbcK1ga35TiyncTGzE':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AY9N2FDJ3YTiQFen5Cr5fcecUwyhehmERJ':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYbKUxJa3kyTgpvtKWzBcSxUEnKSUkY3FN':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYbXimKftwveeRGoweEcaCZHYSC9iZWUBK':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYJEjYeUnp2v8CLJq4nSZVdWL69ixUhaW1':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYkiEZuJXwUaKwyirNGbtqa5XMA3xcuBd7':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYnnqRb8zPnAzEgr4G1ppbDFsnmNUX2sA8':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYVP9PQzrTdU4h9v2pmRsXZCyVZKn3onGH':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYZPE24DsuQPb2YxWNnrxpSYQMGgAeRnMi':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYZZfKpopxvtwxENx68gKH3oZM7NbmeSRE':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZASSeJFzvrxWYotoiXucm7ruBUrRdV4n3':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZcFmwJAoDg2EJA1KjNk3NFMfn4ZnafpYm':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZdXqASf7C4iJY2YKnrMvP6xi94kpD4ZiL':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZGCZ7c1GrntN8udyNL8t2ed6dgNCYpuPP':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZJyMQYhstsr7p4BLde6SsrKpJ7NKMAhdx':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZoQSSvg2jcdD3Cdy6fMZFndbs33qT3Fo4':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZqFXJeDqGDkPnKFs6hnrLUGynqLzv6yVo':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AZXLwnDyzDA1HvaVK3qJseopJQw43vmFa7':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AYvjRpPLD3efozDHRAHDNxNjRPygeV831z':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;
+	case 'AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX':
+	return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
+	break;																																																																																																																																																																																																																																																																																																	break;
+	default:
+	break;
 	}
-		
-                //If Bad node Return true
-				/*switch (strcmp(addressSource.ToString().c_str()))
-				{
-				case 'AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGYZgAfxakZDMwt4fxrSiBUwWhtxQhqg7f':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AM36kMDzffAVqynPUgp8mXKVYK3XxTgb7J':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AG4dVZeUHatsMCvbM5XvTGSLyY7z8dQeuF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Af4rV93dyRcsTWwkxsMpjUdm3Yo9baBNXs':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ASXMvsAU46KUBBJjhGLax3jr1JHGnGARiM':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJeyspBJq7JNYjdcGyA8taz8hASQysNHnk':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ActU2YyUDCWFgtihEuxHzTJbwQQWYHCWcE':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHRWs8qqM8rhiKG7EBQSkNKt69PJqd2VwW':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHVxoJhz58uNLj1233PbKX93fm2eFwRTYW':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJVL7qFLNZasC692RkvqkN3AUkjAYmJFu1':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AScj9UbL3tYCTPdDPwPXxXBBEALf5zd8m7':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJ5Xx3fawHqfWZ7iBap64b6AKwLccZUxfH':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKbsMQedXwpkYH8NifhmJhNdYVrQV9u7pv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdRz5YmaUDzZnC9s7syg3chhhJXBkCkvUg':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AG3BK3psgc5dyBn2nq1gNAKkWSiW9d2Dxc':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHDVRse5sBVnhiKuLuVZfAVUhJyLgNM9uZ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AN1FpXcRAUBpAMgzmGLSTzcCWqkWeR4xuh':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMXtFke2pzrpgV51GJcLZMwEWrXyH284Co':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZKAyrUM1AdKW36BDq3HQ3UTeyZfFhroiy':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Aam8ntHoEtdCGnBMqBpzZtKbituVPHw24N':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKjMZsiK2HsZA5F5aPbzbAHxBjzmHx4THv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Aa7EMRSpLbZgvgkhyUx9pB42466MoivLt5':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZbFmPfSiXkSHWvxsmuvipX2YAZfzYGzxq':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUgyqYHrVEEjScfGXsRTPJ73iVS7ZAZqZF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWUfKNKYKoZeezQLzUoLC9diAi9nUfXySy':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AN6ZKTZkAacwHuretjeyhbjWEnvtkytjVt':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQuZoN6FrorDt9MhVVq65VTPzo2H4yqdQC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATZgr4qCwGJmSjebeADo3dAGRtorQcSiVF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKVdhgEBwHRfPuQTjmbxZ8JAvL9FEofo8z':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUkjdUynaBzKoqSHQSS2CCjUk74NVYz2En':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJS3brxiYbW1TrNrunbjQUpbgtY9RdcCzX':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcHSh9pruvaa59rCw8w71GRAZrK9vipSeq':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMQNmFr1kVUiS2gWh4NJxpB7qmGtz2Dc6v':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARecQAWVNCcJJaAs339Pm8pN8GdhDFeMaT':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMKN4QL4NzaqtckL6DgUvpdgPXK8VBpyVQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWJr6e4DUsZsynxqXHu1pr8tVEJgkHAJC1':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARU76W254stLyYHBFauRbRHjE7wJPCHtfX':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJxWmBMyRegkbRmiBWJTUXjqmnuoah1Ujm':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARHMmwEbcFKmatahdxSo8NDo5NH8xfYcD5':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARQqBGiEG2qabNEbYboWd8UVBdNnaM4MTZ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUhRj6sYXPrq5LGoyFLG7tUc69R4B3bdXN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APBSxK84UjcSxHES9Pe27pqXCMrWajPtTN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARFrmJiRPw4fvvBDkLcLpT31RnkCxjjXpj':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVPgLCZkG2pcL3hhjhMnpuxRJqs88jyPAT':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWGAStiJ6hpiJoYpAxrBUSPT7gnBJ6Zyz8':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATrJ72YEbAojrx8pMpruEkosJKcKxphtPN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AL9GoaaurkpQzPdnwUj9QWJGj6PV8EnEt4':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYWSeGT25qUG69XiK24Y8cVEzAPcTJHb8Z':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXbep6MmpRnxj6RSK1vJzeo2uhuZ89kVys':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQqM7qB7VpsLA1cir2Vutm3rknEeZfJUzd':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANhvyNZ6LPYLYdkYvFt3pabt3RUC7sV3X6':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AG3EqDWPWGEy8H3sccxC9Qhng25CNkzKdA':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJ5HR22HMwsDLKoyZqmaP5h2jn5xyEMaB1':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdaGXtnponAHfDyZQnWxUJkSShXHFFifKz':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXGFuunqixtsMC69N9wBVitJSHspKrBrUe':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdBM35DwoxeFjrLD3acA5o5jpWLa3i7L4T':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANYfGJRFtcquwhXzxnM9u729WG4SrtuyRd':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AazboNChTdqfj87jdA8LnRGdsVTsWHSkPy':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGn9JxvNtmAYZma2c2FEH5X6n6So9QJubi':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATaDcD6Dg7Um9kMdNBTiVpf1zUT6sksAXY':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWzo4JygcEenEXFihSHGg8QcWQuKPDUtVy':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUhFgu8cn1TMa835HBFVz3SMGhSx7tJ8XL':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AczzqWeNZ9gQ7sAKwyvGLuz8q7aXsEQC4f':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AR4pWDatRfxfxLW51PdeBysVe4iLEnouNb':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXtiwvbzjZwzXLtETNPiaUuLLUShyhD91P':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGoXtBDr1RnCPRHqQz791ShN5QN3vMVPhQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXJ951PCTHvCn1ip3FQeiqQtU4oertgjpf':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AR8riVyP1Z3hGpsX2K2uDWSGyXj8jHZcjk':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APSAYWTUA87jMH63ZzeEfydjbookAyew2u':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcXWsYuRbJPwxrfegNprJ3LRkCBXjkVnnQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVZeCbJmnpXJiyrS5z3FmHyc6EKmsmBARz':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AajfKWh9uT3iHEkPRexhejFmYgJ8ufjPjN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AaeMguBQVfAnCsZsKCN5A2KVSiSgJHefGV':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AeRUpyGMidykbc3aWt3aPb3HWSBPjVFFpe':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJtqzq3TWEnqLxkdN7zPPdJFShdVjP9ti9':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARezKgRbianJouPqvyw14mU9G9xBxpfxTq':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcaTumP4PkuXpuwGBVitq8UWyQJLfqfWWu':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Abi7191dHnVaDiWcukSEEgRwMTei5vgdVT':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AddQHhSBhamwmXpC9T8YsS8vb9Avqy4HwS':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATDUgPRHEAGixYJtjDXyk8ArRw6v9zZbjs':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ALWVaG7PmiggcVEXxR6mJnk7mjyeSVg7ct':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ALc5ojJXtYkYaNYYrhEPLacKN6zztqMcBT':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AP9AyF7hbwStRmbctSh1bMsVPWv7ETFs8S':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMFxAzsHugNaBxBv9p1hcM3vvTFqRiQs4M':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Ac3ePssMUJ75wT5rntnGg46DnrwEM4bWwo':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ALs75CSZs8ZhactS83xnBBHJVPS8HRFEKQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKdr7wYTmySpggDUtbv4DN6i7tvuxPCHFM':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APSayvJqnaRc8U4HaA8rnVv8EVHYu72Q5Y':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJLREMXeqNbwBV5k9n3gTgp7c7Xp7ZihSE':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUQzGQmbdsMQdtRp4Erko5hYVKqMep9xZF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQteiXRh3XuLZvLZ41hNR6MLEECmBkuGbV':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATo8csqDGxucw6P7qdLnfHeSeTLMAmqkN5':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AauErFJMkMb638jWA2A4PfxqGLH7js7NwT':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AbeBuJ1D32Fct8mvNNUHXkVg53HMYAdrFw':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdM3v42HCCRx8WyjvTBPy4no9f3Rjp2DLQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AFxaL7iaswzuVSQqc3MC2mTMReXRjaNfYm':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AbpqUePcK5NtzYTbN4YL72mSsj9PoR1Kh6':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Aae7h7dPHypikAQHC5mC5uFCxhmE6FQrUb':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AajgZNr39CLHG4hHtaB2kYp2qmssfnsdyJ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AaLjTg7JT71gAbTDCxKvJYs5GAqnTWawYB':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AaoiXuy7J82u32vhvGEMKfDRHUurwTWMWv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AaoZ4etvzLaomVSJP18Cz9BpmyGNRZeUKC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AasnyCdas2qpckVixTNAuCoGmp9pibP9Mz':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AaUN23VJv6VNHbNfCcUqL8tjtc7nwwRkqC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AazmnoVLjE8ASJ1WeTq2znSQzNButy4HEU':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Ab9nJK67UgUwP1QGwpcuwv5oenRCytde4n':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AbE3H6NKSSBTwTs5BzR6TCbqVNRhdnnptt':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AbFMNnL2J8WLjvGM3JYvsncg7ECiYg8aod':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AbhfGWrCaUf6ZLpZBTvskd4phgAWAECUzv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Ac4PB1GDDFHxAc3LCWedNFwi6aXYqa9DJa':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Ac87xuLCknNGoeVeQbTBsooHveGB66wkQs':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Ac8dKdrZdtKLLuNWWTHB5iJYNcR7esuCEG':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Acj29Yi2XdZJtHjitbRN4wSSsD8qS4YHpY':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcjPakjdnz4zHcP7HkhoRLg6vs95KwYhaR':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Acm3eowZLVY4XKn6t7EGmgAkfCE3saVvLG':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcMeChtV6WyynHDk1U5Kgvk5YUGss7K5gy':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcnQWshXPbuTxjqc49Ni5WPcbspR1TuBbF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Act5pUdqZcURMunSYM59xYxGPAEdENQH4o':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcZajYwytuRdNz2BKLx1GDa22AJRCwGUBS':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AddMFE17HfmZYR3fubfo24dGmXkaRZNkBp':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdejZE713HDKovqr6G5uT31U6zja7KSyHS':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdePW7oHAqNH7d7apEj75yjWCpBgtwe7Tk':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdK6HZS2aTQeAbCrRdqu4NsdcNWsMX7nGx':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdNw5QtxBHKowKpG7kbRGm2en9Ci1pv6hA':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdQRLtsZoJNKSHyZYyhgFVHyWddoQgWXE5':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdTebzNJYasPXTe7QK5L8WdZnqruGhowaf':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AduHQy7XEbvvPVcv4UGfBA9o7W9kybWaeF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AdZn8Vcci1zQGVMdBb7afd8iW1cm9VXXeL':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AeCMNReq5TegieKpncZpx1NYwv5BohzVqz':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AehUQnCunEKfmAPsNsak72MjTpDz9qC3Kr':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AekVJg9Gv3recogGbRbBsP6eg81JDs5e5y':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AeL426qjTvixw7eLy9HgkYpuU2YUzA3uDS':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'Aeq4HBm453EwkFjxsWFjEwZm4gPmnv8vpF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AeRQZj9c6EhRgPrTq25ko2T3LfFDvGQv7C':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AeXBEKQ78B5ZUiZPqPTqGpyJK4NrFB1CNg':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AFuLVpZBHirH6Cw7VrPJA2p3rE5urDErsA':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGAe43Rc3yeJrqJ7XKT1J8bCVnstcn5F9T':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGbqULj2sNhnRqYLbjmgZRstYioHCMJ5Mi':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGDHCKBatYZNPkCZY58XhoKMqoineuLEdf':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGDky2wfk9zNDBEeujZED2GTxFexTkod3D':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGdo2isaBrQeFmGeC5Mn6Pds9zE8wX5DSe':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGgXnG5jgGuYCYg58fFM4vzcH5T6eEkzMH':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGhXfmp1BDbtavNKWWGn8gy98Kvj9kLp1n':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGjkMQPPQyS9T2mpv1HF7GtSq2pV9czZLL':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGKAFaLW4i9H1WxaEDd43eEqDBqQ9drzp7':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGUGnWpBuuiUnAp1sxaJRMWERhGutrZK4e':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGv97VxVLWr7kfdFWZe5HSLvg28JwnyFKE':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGWijpgKPJq41Rf9PFxS2WEbR9c1TiohJe':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGx2dQUeHhUcLNYDk4ZvXHifPCqi6MapYN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AGzdsw2LaGdML9jZaLbXXHw1dpwZ7tLfQk':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHHzxEcHK8a2cckjjdsB161YhRVDzqbfZm':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHm5J4KDdHxSZCJ2j3xGbgzYUFRRt9QE1H':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHMfzE7RREUHUAYXwdrUDfmTKB1o7HpN1C':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHnZ5hX9D4AShYZMupZkJLoLRBgWZbCn12':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHx6KDzxPUAhWn53QCZbMbYp43rN23949H':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AHZMq4xkmXd3MrqzCsTVVJZFu78tSuijnj':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJjFYKyHSMU2PNxt2btrxdGGV282FXHhUF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJMGWqkFYTQR3jFxNV1XDMbL6R6MGGdsUx':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJnCfE7XhE42Pm5qA66Hc9DuDQkk8NDVv6':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJNz9t3nsgGXQt9tYcVHbpVgD78Pfonra3':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJrjze3k76zuUWnptgwKnHaerFHjBqqYe4':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJw51w5ZcAxSx3F4szMx1sWB8SWt8GD7ME':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJwk6e8ZCyZi7vBaZriefajEMre6HJ8mMW':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AJyEVm3c4MnBwJpXdPvH9RgoHG61qnNCbr':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AK3RRQXBFT4e8feceLDm4BWMoQjj1rvJHh':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AK3zNgRYK8Fbu8Es4LKfNhMNRDQVUzEiQ4':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKC471thQfcpCUaBbP9dgxKZnkRsSuWdYY':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKHfvfWaYNb4A5rf67ECuXVcJD11ez1qxz':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKhJFMgTxSt3KNHSRqGJNPp91sEDMgXNgB':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKnHXiBz7Ww83AZ7LpzsFVAeFoSgUEsAHW':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKPLoYGFPR1qbCRjbNUSuoP2RU6tRqyYzK':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKs4uz7RE6zQqMLhrqDgy4cEjjDXkhT1ek':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKUuBtZGT8WVLpqyzTcj9UUnucRQvWNjVP':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AKyu17SjcztoYXEUMGysK7z929afyhSADX':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AL8fjjZZVJGMn3zwa6PL88keDuxwFnT6gR':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AL8SbHA1H8WyN1SoahXv3FESESLCgCctmU':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ALaE9sgtLjDAVBrXSd95SPsrwKvfDgZF1t':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ALhggXxrcqHUqdCXwSDjQWqHY34KYd6cMa':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ALHZ2Q4KVdsbwcDexCMuy3j4A3wYLNPYRU':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ALkPde6Xvcz9QPvBRpEEf8kmbdiZZd21aV':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMBW5kN11UiW7nedFjjLMBDQ2P34zA5uCe':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMFbKZVio92oRu8C6zPye8f9thFcuyjxys':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMfwTXNeoC1VWHVwn7QH8G6oiyUwU2fjFC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMJHVGNVbH6ASmL42fwDR8gWQ4F7PgSjHv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMKb6XhrsJiiGWQHvZrUed6Zm8qhvgHzut':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMxFbVWGWMW3DWTzhu215ft3KKybxWorCm':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AMYuDF9iSVwCazxk6sjEtRwedxYGJRqQLj':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AN5R5Y2tkKDiKv4XrQWAGFbVZJKnMW9MsV':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANCpo3RSUBTD1Ym2nfm7ic5YUXZbZcBGR7':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANfZ9zuKDxygghp3EmtBiPS2C2qj2SRxRD':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANjYLeqwqGz77kdzwUg3Mgeu8tDU2JYRxF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANKeNJVRfuehwdTgPnn9n9h5oz6pxPTCV1':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANmHzjKhXbvBcciyEbz5ArSEQRwMn1RXGs':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANMnQMuJUbV9Hy6X3dyXMkgdTBtCMvwDkC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANUkCbtNXkEdLVjChyd6bqZdnCRSDxcQXR':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANW1r76UqBibK5oQYH7GwgQJpHkGuqRM5F':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANxgPNkTg4RYBSjH7gM8M9wAkK4yB7SHws':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ANzYAGiwQEnQFcU1uVRSaQbybERC1Lg91J':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APcnJAhHDdB4TE4muLH9ywwGei6sgikJJ3':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APDJqZWCePYe9PV2Roo6LTePTFCmzmg2Ku':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APdz8YkgEBzHeaCnT3xHgfhxvczToRBN63':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APp8ruJuMs3sJT1GewK6uL1zV2D9ngPNUF':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'APwJSKvoLLYWW8fd1cTeP2BcC3wyByvUjo':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQ3rU7CFUg5f4kxarfZrPVu5jRYAqbSuL8':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQAMJGidK4aXJV6EWh7H3JEuFs2XdBzZoM':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQDHrpq3pP6V78MWHLr7cj2sw8SQKtadKx':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQfHSwQjMi2eN8uPBh15yBVh2uHosq6VPd':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQFtdiQGzTP9JAP3F82qKpY4aDarXK8Hvo':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQhezkAmLaX3z2WUMwSQsDqMjRfmvyaj2u':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQhqqzSh6c6pe6KBbgomduQjiJ7Va6GF5B':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQTQmthD8g1EXU566kdgwoxYpDuVVEv2oN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQVz4EuBsUN9sjtPzQGRA66wxeronZyz73':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AQW2wdHVU44uXeTBDDYhzHDGEsNvTKSQTb':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARaWFscUbQvfi8m1iftNuC9xt56FcYTQP8':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARcQfBPbYqRs3PprDctXTyZoGx94uQr5bS':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARGb5i7MWxe69Me4EkvW5MTGvUnNB21YNY':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARHB1bFk9vnqpbfMTPTWsoxPpVeqjHsXCY':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARnndqPrxfHDK3mibW3uUvtiH9Y8SFnhrB':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ARoXfVzUw1At2EiHZzm7dUFLeAkR5DHuxM':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ASA98WixLU7KRyYqBqNT2HbaeoBQqJjent':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ASFh3ZSUMSmbv3i62F9Jy8YqhB3LYMJhkC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ASgjfs4T1SgqJLzyd4P3Ywv8bcB6fS7UsQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ASJLEfixF4nCPCLBbjF9fEQhbPU6W7XJtX':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ASKE6Uu1CuMFB88mUZpwRsfbpAqLfFG2uR':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ASZFN2nS7mvxLHQcuNsSHzTu6z8SrHMd16':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AT29ncRdDr8sKcHgKo1zYMmc51UuDZBZg2':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AT2koUKowQstHq5YE8FEdqDFXdDsrthRV9':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AT92sZHdwpWCbp2LEULpGEDeCAZNvpuNFj':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AT9undynPdpXJVhQQsfD9th68QBPJYkNTD':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATFL5Eb79CcNRJGb4hWmUuH3p7EDhKmSJX':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AThLPzKTuRTRmuyRn7SLKmg77b6oXHseDQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATkP7Y7VmDYbGVjC3zGMJHtAUEFQeAwzJg':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATqsSQWxy8KsWsqR9aAUU9q85i8xhUHYJ6':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATrmatFVRQ3wUxntMrGJT5nyR3AUuZcpqQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATxaEeKTJFMikNhDjTKSp9E5DXGA44DcbW':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'ATycywFh3iRLf4So4VV6XT8SftjFnVknaH':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AU5hKjPdvDZhs5N3kJLSQMBA3UbrnE7VoC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUAVb9Tsk7zNjb4v1d67QBWmFurdivSjic':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUdD18nERTTDhQUfM6VWnJjnkWu76wxnpa':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUgdTHjGRpStx8Mwy7FHRg3HTu6G5fJhaB':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUjPFoWz76T2Gz38mMnHu5EudvfDN41J1x':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUjtqZK7RQstx4Q3RnZL9ybCMmRdwM5Fep':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUNfopFXpj2WxgBcEKAavQ8XRw9LhPvDPw':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AUVNg586VuvoC142FvKG4iteuL7aCikViA':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AV9fyQgWHJGYCYZ4QJVvYNRe6YrSTwsDB4':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVb11DsuwQu4oW4LoVndqA5WyskEGxpLeb':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVb6QL19jFy5hFQJtuHoGwuYbNWpxBHAsQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVgMXp3s8HU9aziUfi7HhVc6rCKsLc46nC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVgYxGQidDnYYQJEGsYrEqdj3y2BTe4PL1':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVpxB7fDYCFgLV9MJ4LcWYxPyeEaFFU8RX':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVQqyFT7CBSsQEeGSjxmsHoFRXU5PwHjbj':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVRXBRQh5iJPw4cjgNZ7LH97gHxyxaxnJv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVt15fH21QcDkpkf75pmmoebenjhXu8om2':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVt1hffz3n3vLAFd5YF7X8iEx58GxJFim1':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVYdvRn58wNqW8JUSk1gugVda5D2iSRZGG':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AVzPqbjRGYitxahoFwgj6VBNBWfYgUBdUy':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AW4K2vE48phZcbuZ9LbJSpuGDosGrK6UXH':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWa5hjMvPjBgoc8Kivpuc4gZfqCjVexzFH':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWaLekM34R2sfV5tMa5j7SJnFAE6RHjk3d':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWecrxwNbskTSopQw91V5ybkVVHK6F4axP':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWF2UReo78ZsK8HuoeDhhFQZmWhrkLCA5y':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWfXPwUYuLYcLtjJEiTXe8L3Ffk2PfVMC6':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWRbrSw1t41YSQPMLjh3aaaDna8fW3VXUj':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AWVvb1zCjfFCBVSMScTLJVubFmTXZxSXus':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AX3bQwmuo6mDK8qtNJXPCciAgNcbU7vfqQ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AX4gK27amGhzkwJ1ufBi63BMNEBtaYCqs8':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AX9rPK142J4YdreEbXWp939fCX3xxzSTK8':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXCVvFMqm8kBjZaEFjh6HqjrogSxo5iu4J':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXE41XcLVrkzpKE5S5L9ZFXAbvRHvTkZjC':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXfqTAptfVG6Szz5KnC13VB1giXxHUWz4k':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXG8pPkDWhxA1HNNEnfG5umWiJ3aDvUfpv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXJW7yE8qZ3shEEFbtaDmbtgsxgWvP7dhN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXmGZLTMnnmyEhaut6ynXUNR7y1b8HN7gh':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXmwZqJJG2iTi9YA8xH1M6jpuzJbP6ZSG8':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXRA3e5gwYkvVhUNmHJscpvvrrzrL5jMZY':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXTtN8bMRVKmtd7Ft39NTkNUd56v3VhPjv':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXuzGycTq567gfVFfDChUU3ZnGv1Mu3GDH':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AXyUBv19Lb8fZN7vDbcK1ga35TiyncTGzE':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AY9N2FDJ3YTiQFen5Cr5fcecUwyhehmERJ':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYbKUxJa3kyTgpvtKWzBcSxUEnKSUkY3FN':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYbXimKftwveeRGoweEcaCZHYSC9iZWUBK':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYJEjYeUnp2v8CLJq4nSZVdWL69ixUhaW1':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYkiEZuJXwUaKwyirNGbtqa5XMA3xcuBd7':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYnnqRb8zPnAzEgr4G1ppbDFsnmNUX2sA8':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYVP9PQzrTdU4h9v2pmRsXZCyVZKn3onGH':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYZPE24DsuQPb2YxWNnrxpSYQMGgAeRnMi':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYZZfKpopxvtwxENx68gKH3oZM7NbmeSRE':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZASSeJFzvrxWYotoiXucm7ruBUrRdV4n3':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZcFmwJAoDg2EJA1KjNk3NFMfn4ZnafpYm':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZdXqASf7C4iJY2YKnrMvP6xi94kpD4ZiL':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZGCZ7c1GrntN8udyNL8t2ed6dgNCYpuPP':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZJyMQYhstsr7p4BLde6SsrKpJ7NKMAhdx':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZoQSSvg2jcdD3Cdy6fMZFndbs33qT3Fo4':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZqFXJeDqGDkPnKFs6hnrLUGynqLzv6yVo':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AZXLwnDyzDA1HvaVK3qJseopJQw43vmFa7':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AYvjRpPLD3efozDHRAHDNxNjRPygeV831z':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;
-				case 'AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX':
-					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-					break;																																																																																																																																																																																																																																																																																																	break;
-				default:
-					break;
-				}
-            }
-        }
+	}
 	}*/
 
-    if (fZerocoinActive) {
-        if (nZCSpendCount > Params().Zerocoin_MaxSpendsPerTransaction())
-            return state.DoS(100, error("CheckTransaction() : there are more zerocoin spends than are allowed in one transaction"));
-
-        if (tx.IsZerocoinSpend()) {
-            //require that a zerocoinspend only has inputs that are zerocoins
-            for (const CTxIn in : tx.vin) {
-                if (!in.scriptSig.IsZerocoinSpend())
-                    return state.DoS(100,
-                                     error("CheckTransaction() : zerocoinspend contains inputs that are not zerocoins"));
-            }
-
-            // Do not require signature verification if this is initial sync and a block over 24 hours old
-            bool fVerifySignature = !IsInitialBlockDownload() && (GetTime() - chainActive.Tip()->GetBlockTime() < (60*60*24));
-            if (!CheckZerocoinSpend(tx, fVerifySignature, state, chainActive.Height()))
-                return state.DoS(100, error("CheckTransaction() : invalid zerocoin spend"));
-        }
-    }
-
-    // Check for duplicate inputs
-    set<COutPoint> vInOutPoints;
-    set<CBigNum> vZerocoinSpendSerials;
-    for (const CTxIn& txin : tx.vin) {
         if (vInOutPoints.count(txin.prevout))
             return state.DoS(100, error("CheckTransaction() : duplicate inputs"),
                 REJECT_INVALID, "bad-txns-inputs-duplicate");

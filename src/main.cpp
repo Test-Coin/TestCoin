@@ -1371,22 +1371,22 @@ bool CheckZerocoinSpend(const CTransaction tx, bool fVerifySignature, CValidatio
 
 bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fRejectBadUTXO, CValidationState& state, bool fWitnessEnabled)
 {
-    // Basic checks that don't depend on any context
-    if (tx.vin.empty())
-        return state.DoS(10, error("CheckTransaction() : vin empty"),
-            REJECT_INVALID, "bad-txns-vin-empty");
-    if (tx.vout.empty())
-        return state.DoS(10, error("CheckTransaction() : vout empty"),
-            REJECT_INVALID, "bad-txns-vout-empty");
+	// Basic checks that don't depend on any context
+	if (tx.vin.empty())
+		return state.DoS(10, error("CheckTransaction() : vin empty"),
+			REJECT_INVALID, "bad-txns-vin-empty");
+	if (tx.vout.empty())
+		return state.DoS(10, error("CheckTransaction() : vout empty"),
+			REJECT_INVALID, "bad-txns-vout-empty");
 
-    // Size limits (this doesn't take the witness into account, as that hasn't been checked for malleability)
-    if (::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) > MAX_BLOCK_BASE_SIZE)
-        return state.DoS(100, false, REJECT_INVALID, "bad-txns-oversize");
+	// Size limits (this doesn't take the witness into account, as that hasn't been checked for malleability)
+	if (::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) > MAX_BLOCK_BASE_SIZE)
+		return state.DoS(100, false, REJECT_INVALID, "bad-txns-oversize");
 
     // Check for negative or overflow output values
     CAmount nValueOut = 0;
     int nZCSpendCount = 0;
-    BOOST_FOREACH (const CTxOut& txout, tx.vout) {
+	BOOST_FOREACH (const CTxOut& txout, tx.vout) {
         if (txout.nValue < 0)
             return state.DoS(100, error("CheckTransaction() : txout.nValue negative"),
                 REJECT_INVALID, "bad-txns-vout-negative");
@@ -1403,27 +1403,29 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
         }
         if (fZerocoinActive && txout.scriptPubKey.IsZerocoinSpend())
             nZCSpendCount++;
-    }
+	}
 
 	// int nHeight = chainActive.Height();
     // Check for duplicate inputs
-    set<COutPoint> vInOutPoints;
-BOOST_FOREACH (const CTxIn& txin, tx.vin) {
-        CTransaction txPrev;
-        uint256 hash;
+	set<COutPoint> vInOutPoints;
+	BOOST_FOREACH(const CTxIn& txin, tx.vin) {
 
-        // get previous transaction
-        GetTransaction(txin.prevout.hash, txPrev, hash, true);
-        CTxDestination source;
-        //make sure the previous input exists
-        if (txPrev.vout.size() > txin.prevout.n) {
-            //if (nHeight >= 146440 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))){
-            if (chainActive.Height() >= 156000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
-                // extract the destination of the previous transactions vout[n]
-                ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
+		CTransaction txPrev;
+		uint256 hash;
 
-                // convert to an address
-                CBitcoinAddress addressSource(source);
+		// get previous transaction
+		GetTransaction(txin.prevout.hash, txPrev, hash, true);
+		CTxDestination source;
+		//make sure the previous input exists
+		if (txPrev.vout.size() > txin.prevout.n) {
+			//if (nHeight >= 146440 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))){
+			if (chainActive.Height() >= 156000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
+
+				// extract the destination of the previous transactions vout[n]
+				ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
+
+				// convert to an address
+				CBitcoinAddress addressSource(source);
 
 				if (strcmp(addressSource.ToString().c_str(), "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7") == 0) return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
 				else if (strcmp(addressSource.ToString().c_str(), "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv") == 0) return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
@@ -1730,8 +1732,11 @@ BOOST_FOREACH (const CTxIn& txin, tx.vin) {
 					else if (strcmp(addressSource.ToString().c_str(), "AdM3v42HCCRx8WyjvTBPy4no9f3Rjp2DLQ") == 0) return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
 					else if (strcmp(addressSource.ToString().c_str(), "AFxaL7iaswzuVSQqc3MC2mTMReXRjaNfYm") == 0) return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
 					else if (strcmp(addressSource.ToString().c_str(), "AbpqUePcK5NtzYTbN4YL72mSsj9PoR1Kh6") == 0) return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-
-
+				}
+			}
+		}
+	}
+		
                 //If Bad node Return true
 				/*switch (strcmp(addressSource.ToString().c_str()))
 				{
@@ -2645,10 +2650,11 @@ BOOST_FOREACH (const CTxIn& txin, tx.vin) {
 					return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
 					break;																																																																																																																																																																																																																																																																																																	break;
 				default:
-					break;*/
+					break;
 				}
             }
         }
+	}*/
 
     if (fZerocoinActive) {
         if (nZCSpendCount > Params().Zerocoin_MaxSpendsPerTransaction())

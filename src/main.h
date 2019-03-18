@@ -32,6 +32,7 @@
 #include "uint256.h"
 #include "undo.h"
 #include "validationinterface.h"
+#include "base58.h"
 
 #include <algorithm>
 #include <exception>

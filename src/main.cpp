@@ -97,6 +97,13 @@ unsigned int nBytesPerSigOp = DEFAULT_BYTES_PER_SIGOP;
 bool fAlerts = DEFAULT_ALERTS;
 
 unsigned int nStakeMinAge = 1 * 60 * 60;
+unsigned int StakeMinAgev2()
+{
+	if (chainActive.Height() > 192021)
+		return 3 * 60 * 60;
+	return nStakeMinAge;
+}
+
 int64_t nReserveBalance = 0;
 
 /** Fees smaller than this (in uabet) are considered zero fee (for relaying and mining)
@@ -926,7 +933,7 @@ bool GetCoinAge(const CTransaction& tx, const unsigned int nTxTime, uint64_t& nC
         // Read block header
         CBlockHeader prevblock = pindex->GetBlockHeader();
 
-        if (prevblock.nTime + nStakeMinAge > nTxTime)
+        if (prevblock.nTime + StakeMinAgev2() > nTxTime)
             continue; // only count coins meeting min age requirement
 
         if (nTxTime < prevblock.nTime) {

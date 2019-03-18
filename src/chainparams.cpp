@@ -229,7 +229,7 @@ public:
     
 }
 
-     CScript CChainParams::GetTreasuryRewardScriptAtHeight(int nHeight) const
+ CScript CChainParams::GetTreasuryRewardScriptAtHeight(int nHeight) const
 {
     CBitcoinAddress address(GetTreasuryRewardAddressAtHeight(nHeight).c_str());
     assert(address.IsValid());

@@ -8,11 +8,10 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "main.h"
-
+#include "base58.h"
 #include "accumulators.h"
 #include "addrman.h"
 #include "alert.h"
-#include "base58.h"
 #include "chainparams.h"
 #include "checkpoints.h"
 #include "checkqueue.h"
@@ -1427,7 +1426,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
     }
 
     // Check for duplicate inputs
-    set<COutPoint> vInOutPoints; /*
+    set<COutPoint> vInOutPoints;
     BOOST_FOREACH (const CTxIn& txin, tx.vin) {
         CTransaction txPrev;
         uint256 hash;
@@ -1439,7 +1438,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             if (chainActive.Height() >= 156000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
                 // extract the destination of the previous transactions vout[n]
                 ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
-                // convert to an address
+                // convert to an address				
                 CBitcoinAddress addressSource(source);
 
                 if (strcmp(addressSource.ToString().c_str(), "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7") == 0)
@@ -2053,9 +2052,9 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 }
             }
         }
-    }*/
+    }
 
-    // Check for duplicate inputs    
+    // Check for duplicate inputs
     set<CBigNum> vZerocoinSpendSerials;
     for (const CTxIn& txin : tx.vin) {
         if (vInOutPoints.count(txin.prevout))

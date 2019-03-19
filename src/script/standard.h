@@ -8,7 +8,6 @@
 
 #include "script/interpreter.h"
 #include "uint256.h"
-#include "base58.h"
 
 #include <boost/variant.hpp>
 

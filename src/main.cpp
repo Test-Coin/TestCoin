@@ -9,6 +9,7 @@
 
 #include "main.h"
 #include "base58.h"
+#include "standard.h"
 #include "accumulators.h"
 #include "addrman.h"
 #include "alert.h"

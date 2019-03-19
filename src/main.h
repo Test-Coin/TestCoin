@@ -14,6 +14,8 @@
 #endif
 
 #include "amount.h"
+#include "base58.h"
+#include "standard.h"
 #include "chain.h"
 #include "chainparams.h"
 #include "coins.h"
@@ -32,7 +34,6 @@
 #include "uint256.h"
 #include "undo.h"
 #include "validationinterface.h"
-#include "base58.h"
 
 #include <algorithm>
 #include <exception>
@@ -73,7 +74,7 @@ static const unsigned int MAX_STANDARD_TX_COST = 400000;
 /** The maximum allowed number of signature check operations in a block (network rule) */
 static const unsigned int MAX_BLOCK_SIGOPS_COST = 80000;
 /** The maximum number of sigops we're willing to relay/mine in a single tx */
-static const unsigned int MAX_STANDARD_TX_SIGOPS_COST = MAX_BLOCK_SIGOPS_COST/5;
+static const unsigned int MAX_STANDARD_TX_SIGOPS_COST = MAX_BLOCK_SIGOPS_COST / 5;
 /** Maximum number of signature check operations in an IsStandard() P2SH script */
 static const unsigned int MAX_P2SH_SIGOPS = 15;
 /** The maximum number of sigops we're willing to relay/mine in a single tx */
@@ -124,7 +125,7 @@ static const unsigned int MAX_STANDARD_P2WSH_STACK_ITEM_SIZE = 80;
 static const unsigned int MAX_STANDARD_P2WSH_SCRIPT_SIZE = 3600;
 
 /** Enable bloom filter */
- static const bool DEFAULT_PEERBLOOMFILTERS = true;
+static const bool DEFAULT_PEERBLOOMFILTERS = true;
 
 struct BlockHasher {
     size_t operator()(const uint256& hash) const { return hash.GetLow64(); }
@@ -308,46 +309,51 @@ struct CDiskTxPos : public CDiskBlockPos {
         nTxOffset = 0;
     }
 
-    friend bool operator<(const CDiskTxPos &a, const CDiskTxPos &b) {
-        return (a.nFile < b.nFile || (
-                (a.nFile == b.nFile) && (a.nPos < b.nPos || (
-                (a.nPos == b.nPos) && (a.nTxOffset < b.nTxOffset)))));
+    friend bool operator<(const CDiskTxPos& a, const CDiskTxPos& b)
+    {
+        return (a.nFile < b.nFile || ((a.nFile == b.nFile) && (a.nPos < b.nPos || ((a.nPos == b.nPos) && (a.nTxOffset < b.nTxOffset)))));
     }
 };
 
-struct CExtDiskTxPos : public CDiskTxPos
-{
+struct CExtDiskTxPos : public CDiskTxPos {
     unsigned int nHeight;
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
-            READWRITE(*(CDiskTxPos*)this);
-            READWRITE(VARINT(nHeight));
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    {
+        READWRITE(*(CDiskTxPos*)this);
+        READWRITE(VARINT(nHeight));
     }
 
-    CExtDiskTxPos(const CDiskTxPos &pos, int nHeightIn) : CDiskTxPos(pos), nHeight(nHeightIn) {
+    CExtDiskTxPos(const CDiskTxPos& pos, int nHeightIn) : CDiskTxPos(pos), nHeight(nHeightIn)
+    {
     }
 
-    CExtDiskTxPos() {
+    CExtDiskTxPos()
+    {
         SetNull();
     }
 
-    void SetNull() {
+    void SetNull()
+    {
         CDiskTxPos::SetNull();
         nHeight = 0;
     }
 
-    friend bool operator==(const CExtDiskTxPos &a, const CExtDiskTxPos &b) {
+    friend bool operator==(const CExtDiskTxPos& a, const CExtDiskTxPos& b)
+    {
         return (a.nHeight == b.nHeight && a.nFile == b.nFile && a.nPos == b.nPos && a.nTxOffset == b.nTxOffset);
     }
 
-    friend bool operator!=(const CExtDiskTxPos &a, const CExtDiskTxPos &b) {
+    friend bool operator!=(const CExtDiskTxPos& a, const CExtDiskTxPos& b)
+    {
         return !(a == b);
     }
 
-    friend bool operator<(const CExtDiskTxPos &a, const CExtDiskTxPos &b) {
+    friend bool operator<(const CExtDiskTxPos& a, const CExtDiskTxPos& b)
+    {
         if (a.nHeight < b.nHeight) return true;
         if (a.nHeight > b.nHeight) return false;
         return ((const CDiskTxPos)a < (const CDiskTxPos)b);
@@ -485,17 +491,16 @@ class CScriptCheck
 private:
     CScript scriptPubKey;
     CAmount amount;
-    const CTransaction *ptxTo;
+    const CTransaction* ptxTo;
     unsigned int nIn;
     unsigned int nFlags;
     bool cacheStore;
     ScriptError error;
 
 public:
-    CScriptCheck(): amount(0), ptxTo(0), nIn(0), nFlags(0), cacheStore(false), error(SCRIPT_ERR_UNKNOWN_ERROR) {}
-    CScriptCheck(const CCoins& txFromIn, const CTransaction& txToIn, unsigned int nInIn, unsigned int nFlagsIn, bool cacheIn) :
-        scriptPubKey(txFromIn.vout[txToIn.vin[nInIn].prevout.n].scriptPubKey), amount(txFromIn.vout[txToIn.vin[nInIn].prevout.n].nValue),
-        ptxTo(&txToIn), nIn(nInIn), nFlags(nFlagsIn), cacheStore(cacheIn), error(SCRIPT_ERR_UNKNOWN_ERROR) { }
+    CScriptCheck() : amount(0), ptxTo(0), nIn(0), nFlags(0), cacheStore(false), error(SCRIPT_ERR_UNKNOWN_ERROR) {}
+    CScriptCheck(const CCoins& txFromIn, const CTransaction& txToIn, unsigned int nInIn, unsigned int nFlagsIn, bool cacheIn) : scriptPubKey(txFromIn.vout[txToIn.vin[nInIn].prevout.n].scriptPubKey), amount(txFromIn.vout[txToIn.vin[nInIn].prevout.n].nValue),
+                                                                                                                                ptxTo(&txToIn), nIn(nInIn), nFlags(nFlagsIn), cacheStore(cacheIn), error(SCRIPT_ERR_UNKNOWN_ERROR) {}
 
     bool operator()();
 
@@ -518,8 +523,8 @@ public:
 bool WriteBlockToDisk(CBlock& block, CDiskBlockPos& pos);
 bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos);
 bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex);
-bool ReadTransaction(CTransaction& tx, const CDiskTxPos &pos, uint256 &hashBlock);
-bool FindTransactionsByDestination(const CTxDestination &dest, std::set<CExtDiskTxPos> &setpos);
+bool ReadTransaction(CTransaction& tx, const CDiskTxPos& pos, uint256& hashBlock);
+bool FindTransactionsByDestination(const CTxDestination& dest, std::set<CExtDiskTxPos>& setpos);
 
 
 /** Functions for validating blocks and updating the block tree */

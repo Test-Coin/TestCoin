@@ -234,8 +234,7 @@ public:
     CBitcoinAddress address(GetTreasuryRewardAddressAtHeight(nHeight).c_str());
     assert(address.IsValid());
     CScript script = GetScriptForDestination(address.Get());
-    return script;
-    
+    return script;    
 }
 static CMainParams mainParams;
 

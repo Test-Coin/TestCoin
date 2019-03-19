@@ -103,9 +103,9 @@ public:
 class CBitcoinAddress : public CBase58Data
 {
 public:
-    bool Set(const CKeyID& id);
-    bool Set(const CScriptID& id);
-    bool Set(const CTxDestination& dest);
+    //bool Set(const CKeyID& id);
+    //bool Set(const CScriptID& id);
+    //bool Set(const CTxDestination& dest);
     bool IsValid() const;
     bool IsValid(const CChainParams& params) const;
 

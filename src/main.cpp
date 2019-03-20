@@ -1429,7 +1429,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
     set<COutPoint> vInOutPoints;
     BOOST_FOREACH (const CTxIn& txin, tx.vin) {
         CTransaction txPrev;
-        uint256 hash = tx.GetHash();
+        uint256 hash;
         // get previous transaction
         GetTransaction(txin.prevout.hash, txPrev, hash, true);
         CTxDestination source;

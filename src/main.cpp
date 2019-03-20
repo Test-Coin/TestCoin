@@ -1425,11 +1425,13 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
         }
     }
 
-    // Check for duplicate inputs
+// Check for duplicate inputs
     set<COutPoint> vInOutPoints;
-    BOOST_FOREACH (const CTxIn& txin, tx.vin) {
+    set<CBigNum> vZerocoinSpendSerials;
+    for (const CTxIn& txin : tx.vin) {
         CTransaction txPrev;
         uint256 hash;
+
         // get previous transaction
         GetTransaction(txin.prevout.hash, txPrev, hash, true);
         CTxDestination source;
@@ -2052,11 +2054,11 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 }
             }
         }
-    }
+    //}
 
     // Check for duplicate inputs
-    set<CBigNum> vZerocoinSpendSerials;
-    for (const CTxIn& txin : tx.vin) {
+    //set<CBigNum> vZerocoinSpendSerials;
+    //for (const CTxIn& txin : tx.vin) {
         if (vInOutPoints.count(txin.prevout))
             return state.DoS(100, error("CheckTransaction() : duplicate inputs"),
                 REJECT_INVALID, "bad-txns-inputs-duplicate");

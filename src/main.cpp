@@ -1441,10 +1441,10 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
                 // convert to an address
                 //CBitcoinAddress addressSource(source);
-                CTxDestination addressSource(source);
+                //CTxDestination addressSource(source);
 
                 //std::string badStakers = addressSource.ToString();
-                std::string badStakers = addressSource;
+                std::string badStakers = EncodeDestination(source);
                 const char badAddr[305][35] = {"  ", "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7", "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv",
                     "AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw", "Aae7h7dPHypikAQHC5mC5uFCxhmE6FQrUb", "AajgZNr39CLHG4hHtaB2kYp2qmssfnsdyJ",
                     "AaLjTg7JT71gAbTDCxKvJYs5GAqnTWawYB", "AaoiXuy7J82u32vhvGEMKfDRHUurwTWMWv", "AaoZ4etvzLaomVSJP18Cz9BpmyGNRZeUKC",

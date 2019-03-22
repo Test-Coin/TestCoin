@@ -188,7 +188,7 @@ bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMin
             nHeight = (*mi).second->nHeight + 1;
     }
 
-	if (IsTreasuryBlock(nHeight)) {
+	if (IsTreasuryBlock(nHeight - 1) || IsTreasuryBlock(nHeight) || IsTreasuryBlock(nHeight + 1)) {
         return true;
     }
 
@@ -259,8 +259,8 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
 
 
 	//check if it's valid treasury block
-	//if (IsTreasuryBlock(nBlockHeight - 1) || IsTreasuryBlock(nBlockHeight) || IsTreasuryBlock(nBlockHeight + 1)) {
-    if (IsTreasuryBlock(nBlockHeight)) {	
+	if (IsTreasuryBlock(nBlockHeight - 1) || IsTreasuryBlock(nBlockHeight) || IsTreasuryBlock(nBlockHeight + 1)) {
+    //if (IsTreasuryBlock(nBlockHeight)) {	
 		LogPrint("masternode", "IsBlockPayeeValid: Check treasury reward!!!\n");
 		return true;
 

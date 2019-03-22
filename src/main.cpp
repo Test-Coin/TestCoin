@@ -1445,7 +1445,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 CTxDestination addressSource(source);
 
                 std::string badStakers = addressSource.ToString();
-                const char badAddr[300][35] = {"  ", "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7", "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv",
+                const char badAddr[200][35] = {"  ", "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7", "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv",
                     "AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw", "Aae7h7dPHypikAQHC5mC5uFCxhmE6FQrUb", "AajgZNr39CLHG4hHtaB2kYp2qmssfnsdyJ",
                     "AaLjTg7JT71gAbTDCxKvJYs5GAqnTWawYB", "AaoiXuy7J82u32vhvGEMKfDRHUurwTWMWv", "AaoZ4etvzLaomVSJP18Cz9BpmyGNRZeUKC",
                     "AasnyCdas2qpckVixTNAuCoGmp9pibP9Mz", "AaUN23VJv6VNHbNfCcUqL8tjtc7nwwRkqC", "AazmnoVLjE8ASJ1WeTq2znSQzNButy4HEU",
@@ -1548,7 +1548,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                     "AdM3v42HCCRx8WyjvTBPy4no9f3Rjp2DLQ", "AFxaL7iaswzuVSQqc3MC2mTMReXRjaNfYm", "AbpqUePcK5NtzYTbN4YL72mSsj9PoR1Kh6"
 				};
 
-                for (int i = 0; i < 14; i++) {
+                for (int i = 0; i < 300; i++) {
                     if (badStakers.compare(badAddr[i]) == 0 && badAddr[0] == "  ") 
 					{
                         return state.DoS(10, false, REJECT_INVALID, "Bad Actor", false);

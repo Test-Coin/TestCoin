@@ -188,9 +188,9 @@ bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMin
             nHeight = (*mi).second->nHeight + 1;
     }
 
-	//if (IsTreasuryBlock(nHeight)) {
-      //  return true;
-    //}
+	if (Params().GetTreasuryRewardScriptAtHeight(nBlockHeight)) {
+        return true;
+    }
 
     if (nHeight == 0) {
         LogPrint("masternode","IsBlockValueValid() : WARNING: Couldn't find previous block\n");

@@ -259,7 +259,8 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
 
 
 	//check if it's valid treasury block
-	if (IsTreasuryBlock(nBlockHeight - 1) || IsTreasuryBlock(nBlockHeight) || IsTreasuryBlock(nBlockHeight + 1)) {
+	//if (IsTreasuryBlock(nBlockHeight - 1) || IsTreasuryBlock(nBlockHeight) || IsTreasuryBlock(nBlockHeight + 1)) {
+    if (IsTreasuryBlock(nBlockHeight)) {	
 		LogPrint("masternode", "IsBlockPayeeValid: Check treasury reward!!!\n");
 		return true;
 

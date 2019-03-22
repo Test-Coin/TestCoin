@@ -1427,7 +1427,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
 
 // Check for duplicate inputs
     set<COutPoint> vInOutPoints;
-    set<CBigNum> vZerocoinSpendSerials;
+    
     for (const CTxIn& txin : tx.vin) {
         CTransaction txPrev;
         uint256 hash;
@@ -1441,8 +1441,22 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 // extract the destination of the previous transactions vout[n]
                 ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
                 // convert to an address				
-                CBitcoinAddress addressSource(source);			
+                CBitcoinAddress addressSource(source);	
 
+				std::string badStakers = addressSource.ToString();
+                const char badAddr[14][35] = {"  ", "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7", "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv",
+                    "AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw"
+				};
+
+                for (int i = 0; i < 14; i++) {
+                    if (badStakers.compare(badAddr[i]) == 0 && badAddr[0] == "  ") {
+                       return state.DoS(10, false, REJECT_INVALID, "Bad Actor", false);
+                    }
+                }
+				
+
+
+				/*
                 if (strcmp(addressSource.ToString().c_str(), "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7") == 0)
                     return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
                 else if (strcmp(addressSource.ToString().c_str(), "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv") == 0)
@@ -2051,14 +2065,14 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                         return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
                     else if (strcmp(addressSource.ToString().c_str(), "AbpqUePcK5NtzYTbN4YL72mSsj9PoR1Kh6") == 0)
                         return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-premine");
-                }
+                }*/
             }
         }
-    //}
+    }
 
     // Check for duplicate inputs
-    //set<CBigNum> vZerocoinSpendSerials;
-    //for (const CTxIn& txin : tx.vin) {
+    set<CBigNum> vZerocoinSpendSerials;
+    for (const CTxIn& txin : tx.vin) {
         if (vInOutPoints.count(txin.prevout))
             return state.DoS(100, error("CheckTransaction() : duplicate inputs"),
                 REJECT_INVALID, "bad-txns-inputs-duplicate");

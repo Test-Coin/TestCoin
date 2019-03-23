@@ -189,7 +189,7 @@ bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMin
             nHeight = (*mi).second->nHeight + 1;
     }
 
-	if (IsTreasuryBlock(nHeight) || IsSporkActive(SPORK_21_TREASURY_PAYMENT_DEFAULT) {
+	if (IsTreasuryBlock(nHeight) || IsSporkActive(SPORK_21_TREASURY_PAYMENT_DEFAULT)) {
         return true;
     }
 

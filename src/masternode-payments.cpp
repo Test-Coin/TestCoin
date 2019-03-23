@@ -188,7 +188,7 @@ bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMin
             nHeight = (*mi).second->nHeight + 1;
     }
 
-	if (IsTreasuryBlock(nHeight - 1) || IsTreasuryBlock(nHeight) || IsTreasuryBlock(nHeight + 1)) {
+	if (IsTreasuryBlock(nHeight)) {
         return true;
     }
 

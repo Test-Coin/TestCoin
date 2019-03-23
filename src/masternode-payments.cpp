@@ -8,6 +8,7 @@
 #include "masternode-budget.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
+#include "base58.h"
 #include "chainparams.h"
 #include "obfuscation.h"
 #include "protocol.h"
@@ -259,21 +260,45 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
 
 
 	//check if it's valid treasury block
-    if (IsTreasuryBlock(nBlockHeight)) {
+    if (IsTreasuryBlock(nBlockHeight - 1) || IsTreasuryBlock(nBlockHeight) || IsTreasuryBlock(nBlockHeight + 1)) {
+        LogPrint("masternode", "IsBlockPayeeValid: Check treasury reward!!!\n");
+        return true;
+
         CScript treasuryPayee = Params().GetTreasuryRewardScriptAtHeight(nBlockHeight);
-        CAmount treasuryAmount = GetTreasuryAward(nBlockHeight);
+        CAmount treasuryAmount = GetTreasuryAward(nBlockHeight - 1) - 10 * COIN;
+        LogPrint("masternode", "IsBlockPayeeValid, expected treasury amount is %lld, coins %f\n", treasuryAmount, (float)treasuryAmount / COIN);
 
         bool bFound = false;
 
         BOOST_FOREACH (CTxOut out, txNew.vout) {
-            if (out.nValue == treasuryAmount) {
-                bFound = true; //correct treasury payment has been found
-                break;
+            CTxDestination address1;
+            ExtractDestination(out.scriptPubKey, address1);
+            CBitcoinAddress address2(address1);
+
+            LogPrint("masternode", "IsBlockPayeeValid, txOut: address %s, value is %lld\n", address2.ToString(), out.nValue);
+            if (out.nValue == treasuryAmount)
+                LogPrintf("Found treasure!\n");
+            else {
             }
         }
 
         if (!bFound) {
+            //LogPrint("masternode","Invalid treasury payment detected %s\n", txNew.ToString().c_str());
             LogPrint("masternode", "Invalid treasury payment detected %s\n", txNew.ToString().c_str());
+
+            LogPrint("masternode", "Check transaction, expected treasury reward is %0.2f\n", treasuryAmount / COIN);
+            BOOST_FOREACH (CTxOut out, txNew.vout) {
+                CTxDestination address1;
+                ExtractDestination(out.scriptPubKey, address1);
+                CBitcoinAddress address2(address1);
+
+                LogPrint("masternode", "Out: address %s, value is %f\n", address2.ToString(), out.nValue);
+                if (out.nValue == treasuryAmount) {
+                    LogPrintf("Found treasure!\n");
+                }
+            }
+
+
             if (IsSporkActive(SPORK_21_TREASURY_PAYMENT_ENFORCEMENT))
                 return false;
             else {
@@ -298,6 +323,7 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
 
     return true;
 }
+
 
 void FillBlockPayee(CMutableTransaction& txNew, CAmount nFees, bool fProofOfStake)
 {

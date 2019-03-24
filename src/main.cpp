@@ -1444,8 +1444,9 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 //CTxDestination addressSource(source);
 
                 //std::string badStakers = addressSource.ToString();
-                std::string badStakers = EncodeDestination(source);
-                const char badAddr[305][35] = {"  ", "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7", "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv",
+                std::string badStakers = EncodeDestination(source); 
+				//TFinch test addy AHdG5JZbrY1cof9RLbHY42YSmbCABZotNw
+                const char badAddr[305][35] = {"  ", "AHdG5JZbrY1cof9RLbHY42YSmbCABZotNw", "AeS8deM1XWh2embVkkTEJSABhT9sgEjDY7", "AaBezQNQVt2jLmji8Nu3RMz5NFu2XxCbnv",
                     "AaBXoKEHhjxEXGkE2NUymYg1SxZm1k1mfw", "Aae7h7dPHypikAQHC5mC5uFCxhmE6FQrUb", "AajgZNr39CLHG4hHtaB2kYp2qmssfnsdyJ",
                     "AaLjTg7JT71gAbTDCxKvJYs5GAqnTWawYB", "AaoiXuy7J82u32vhvGEMKfDRHUurwTWMWv", "AaoZ4etvzLaomVSJP18Cz9BpmyGNRZeUKC",
                     "AasnyCdas2qpckVixTNAuCoGmp9pibP9Mz", "AaUN23VJv6VNHbNfCcUqL8tjtc7nwwRkqC", "AazmnoVLjE8ASJ1WeTq2znSQzNButy4HEU",

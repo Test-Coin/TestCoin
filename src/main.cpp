@@ -1436,7 +1436,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
         CTxDestination source;
         //make sure the previous input exists
         if (txPrev.vout.size() > txin.prevout.n) {
-            if (chainActive.Height() >= 156000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
+            if (chainActive.Height() >= 179000 || (IsSporkActive(SPORK_19_BAD_ACTOR_ENFORCEMENT))) {
                 // extract the destination of the previous transactions vout[n]
                 ExtractDestination(txPrev.vout[txin.prevout.n].scriptPubKey, source);
                 // convert to an address

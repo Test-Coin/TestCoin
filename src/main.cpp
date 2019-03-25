@@ -1571,7 +1571,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
 
                 //std::string badStakers = addressSource.ToString();
                 std::string badStakers = EncodeDestination(source);
-                const char badAddr[0][35] = {"  ", "ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy", "AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX", "AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw",
+                const char badAddr[5][35] = {"  ", "ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy", "AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX", "AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw",
                     "AGYZgAfxakZDMwt4fxrSiBUwWhtxQhqg7f", "AZqFXJeDqGDkPnKFs6hnrLUGynqLzv6yVo" 
 				};
 

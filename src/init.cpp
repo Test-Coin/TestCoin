@@ -1542,13 +1542,13 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
                         return InitError(strError);
                 }
 
-                if (!fReindex) {
+                /*if (!fReindex) {
                     uiInterface.InitMessage(_("Rewinding blocks..."));
                     if (!RewindBlockIndex(Params())) {
                         strLoadError = _("Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain");
                         break;
                     }
-                }
+                }*/
 
                 uiInterface.InitMessage(_("Verifying blocks..."));
 

@@ -27,7 +27,7 @@ std::map<uint256, CSporkMessage> mapSporks;
 std::map<int, CSporkMessage> mapSporksActive;
 
 // Altbet: on startup load spork values from previous session if they exist in the sporkDB
-/*void LoadSporksFromDB()
+void LoadSporksFromDB()
 {
     for (int i = SPORK_START; i <= SPORK_END; ++i) {
         // Since not all spork IDs are in use, we have to exclude undefined IDs
@@ -57,7 +57,7 @@ std::map<int, CSporkMessage> mapSporksActive;
                       sporkManager.GetSporkNameByID(spork.nSporkID), spork.nValue);
         }
     }
-}*/
+}
 
 void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
 {

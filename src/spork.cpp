@@ -27,7 +27,7 @@ std::map<uint256, CSporkMessage> mapSporks;
 std::map<int, CSporkMessage> mapSporksActive;
 
 // Altbet: on startup load spork values from previous session if they exist in the sporkDB
-void LoadSporksFromDB()
+/*void LoadSporksFromDB()
 {
     for (int i = SPORK_START; i <= SPORK_END; ++i) {
         // Since not all spork IDs are in use, we have to exclude undefined IDs
@@ -57,7 +57,7 @@ void LoadSporksFromDB()
                       sporkManager.GetSporkNameByID(spork.nSporkID), spork.nValue);
         }
     }
-}
+}*/
 
 void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
 {
@@ -98,7 +98,8 @@ void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
         sporkManager.Relay(spork);
 
         // Altbet: add to spork database.
-        pSporkDB->WriteSpork(spork.nSporkID, spork);
+        ExecuteSpork(spork.nSporkID, spork.nValue);
+        //pSporkDB->WriteSpork(spork.nSporkID, spork);
     }
     if (strCommand == NetMsgType::GETSPORKS) {
         std::map<int, CSporkMessage>::iterator it = mapSporksActive.begin();
@@ -192,6 +193,19 @@ bool IsSporkActive(int nSporkID)
     return r < GetTime();
 }
 
+void ExecuteSpork(int nSporkID, int nValue)
+{
+    if (nSporkID == SPORK_11_RESET_BUDGET && nValue == 1) {
+        budget.Clear();
+    }
+
+    //correct fork via spork technology
+    if (nSporkID == SPORK_12_RECONSIDER_BLOCKS && nValue > 0) {
+        LogPrintf("Spork::ExecuteSpork -- Reconsider Last %d Blocks\n", nValue);
+
+        ReprocessBlocks(nValue);
+    }
+}
 
 void ReprocessBlocks(int nBlocks)
 {

@@ -1422,17 +1422,22 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
                 if (fReindex)
                     pblocktree->WriteReindexing(true);
 
-                // Altbet: load previous sessions sporks if we have them.
-                uiInterface.InitMessage(_("Loading sporks..."));
-                LoadSporksFromDB();
+				if (!LoadBlockIndex()) {
+                    strLoadError = _("Error loading block database");
+                    break;
+                }
 
-                uiInterface.InitMessage(_("Loading block index..."));
+                // Altbet: load previous sessions sporks if we have them.
+                //uiInterface.InitMessage(_("Loading sporks..."));
+                //LoadSporksFromDB();
+
+                /*uiInterface.InitMessage(_("Loading block index..."));
                 string strBlockIndexError = "";
                 if (!LoadBlockIndex(strBlockIndexError)) {
                     strLoadError = _("Error loading block database");
                     strLoadError = strprintf("%s : %s", strLoadError, strBlockIndexError);
                     break;
-                }
+                }*/
 
                 // If the loaded chain has a wrong genesis, bail out immediately
                 // (we're likely using a testnet datadir, or the other way around).

@@ -1426,7 +1426,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
     }
 
 
-    BOOST_FOREACH (const CTxIn& txin : tx.vin) 
+    for (const CTxIn& txin : tx.vin) 
 	{
         // check if vin is known stolen/frozen fund (will disregard the tx/block)
         if ((txin.prevout.hash == uint256("0xff8789138a6ea9c2aaadb11bd739986d6fba97793db2f768e1783e5a4345d88c") && txin.prevout.n == 0) || //AFxaL7iaswzuVSQqc3MC2mTMReXRjaNfYm
@@ -1549,7 +1549,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
     }
 
 		return true;
-}
+
 
     // Check for duplicate inputs
     set<COutPoint> vInOutPoints;

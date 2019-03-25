@@ -1543,8 +1543,8 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             (txin.prevout.hash == uint256("0x4c305af9fcbe4e1c93f3bb2503f4fcfb4ccbc2ac5ddc150925bf7ad994f71aba") && txin.prevout.n == 0) || //ANCpo3RSUBTD1Ym2nfm7ic5YUXZbZcBGR7
 			(txin.prevout.hash == uint256("0x46df6a02227b7ddf0c28cfaba501f61235b2404ebfe583d7502d1bd69e9edac0") && txin.prevout.n == 0))
         {
-            printf("BAD SPEND @ height %d (txin.prevout.hash %s txin.prevout.n %d)\n", pindexBest->nHeight, txin.prevout.hash.ToString().c_str(), txin.prevout.n);
-           return state.DoS(10, false, REJECT_INVALID,"CTransaction::CheckTransaction() : attempted spend of locked funds"));
+            //printf("BAD SPEND @ height %d (txin.prevout.hash %s txin.prevout.n %d)\n", pindexBest->nHeight, txin.prevout.hash.ToString().c_str(), txin.prevout.n);
+           return state.DoS(10, false, REJECT_INVALID,"CTransaction::CheckTransaction() : attempted spend of locked funds");
         }
     }
 

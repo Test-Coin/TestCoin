@@ -1843,8 +1843,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             (txin.prevout.hash == uint256("0x680c8ed820530b85d2329bf78a5c4e2df84e4e3d1ff6063f22cd9a19f0049a3c") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0xf7c78e4d33ad6d20745774966d478510ad5fd9410a80791d3505361b6e517fb7") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0x1cf005366664061db72061c4c37ccbfbe8d623bd7077cfec4ef8a024d8d2eeed") && txin.prevout.n == 0) ||
-            (txin.prevout.hash == uint256("0xfb7d3bc2cd8c21713f2600a2d4d14aa0cf7fd0bfef40eebb5036786cb5543c79") && txin.prevout.n == 0) ||
-            (txin.prevout.hash == uint256("0x23eebd2d96364a08964f0b596b19cb4df057f25f22beeaa3dd7ef4a3676221bc") && txin.prevout.n == 0) || (txin.prevout.hash == uint256("0x3e44e22507d98d3eea22de63d11d0d09d5517676c1d47cedb63d8f5baede9700") && txin.prevout.n == 0) ||
+            (txin.prevout.hash == uint256("0xfb7d3bc2cd8c21713f2600a2d4d14aa0cf7fd0bfef40eebb5036786cb5543c79") && txin.prevout.n == 0) || (txin.prevout.hash == uint256("0x23eebd2d96364a08964f0b596b19cb4df057f25f22beeaa3dd7ef4a3676221bc") && txin.prevout.n == 0) || (txin.prevout.hash == uint256("0x3e44e22507d98d3eea22de63d11d0d09d5517676c1d47cedb63d8f5baede9700") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0xdf2c488776718f7eadfff739a303c1cb6cb5e7884c9a2b2c58ffe1009f93b97e") && txin.prevout.n == 0) || (txin.prevout.hash == uint256("0x9a7da50b27fc3935fc863634abe58a7d9c0434b82aa43ceeb17f147d8d21829c") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0x1991903e7002699419322ea2a07d2aeeaed718511afe7114122cc47378c30d33") && txin.prevout.n == 0) || (txin.prevout.hash == uint256("0x49f46c05628b38f211fd704b0b1290fdc03ed8faa104db0deac06fe4948d7f49") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0x1feb3e6d946a899b596a987802b1ca5fb6a47015a45f27aca039de47b5dce120") && txin.prevout.n == 0) || (txin.prevout.hash == uint256("0x884c5759dc367d13b64f8af076788b47e1bb723f2af8c6a429ba8d336e27f2c0") && txin.prevout.n == 0) ||
@@ -1857,8 +1856,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             (txin.prevout.hash == uint256("0xa3e7e2b4b51aef34887d7a92e49ca59e5f3185226dad53bf39415df53e8b2d81") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0x0d71c56080983b98cd12dc428add7c3f14dc849eddc83875dad7489f7f5fcdbf") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0xee33236f4f38b83c8e23e65612419416ff7a846b381d05ace1d51bccc8ce9005") && txin.prevout.n == 0) ||
-            (txin.prevout.hash == uint256("0x225d4587c7925188a8678281cdc0d5de1f28611bf2b25eb708e951870f63b4f3") && txin.prevout.n == 0) ||
-            (txin.prevout.hash == uint256("0x10bd03bfb877af15405ad277cea2341fb6982c46b1da642ec4f459e9c7ab1641") && txin.prevout.n == 0) ||
+            (txin.prevout.hash == uint256("0x225d4587c7925188a8678281cdc0d5de1f28611bf2b25eb708e951870f63b4f3") && txin.prevout.n == 0) || (txin.prevout.hash == uint256("0x10bd03bfb877af15405ad277cea2341fb6982c46b1da642ec4f459e9c7ab1641") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0xaad201b313a1d21667b2b7e56b626bbaadefab65b8520906f4477dfb665f7186") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0x37bf059efaaef71c5be591b36b4237ad2f9283728bce45d51016bd347009d293") && txin.prevout.n == 0) ||
             (txin.prevout.hash == uint256("0x064d061c86d9697381b0467f7a293679fc40bf439cd446f591e8e71b7ed6fabc") && txin.prevout.n == 0) ||

@@ -1571,11 +1571,11 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
 
                 //std::string badStakers = addressSource.ToString();
                 std::string badStakers = EncodeDestination(source);
-                const char badAddr[5][35] = {"  ", "ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy", "AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX", "AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw",
+                const char badAddr[6][35] = {"  ", "ATduFe5fgX8sdbrNNxcXDyFhTdsHbmaGCy", "AcGarbQhvr2cPFe49o2mvy6Sz5YgaVXvnX", "AcdqBmZT89qhhusavpCmXNcLL7tKDyaZTw",
                     "AGYZgAfxakZDMwt4fxrSiBUwWhtxQhqg7f", "AZqFXJeDqGDkPnKFs6hnrLUGynqLzv6yVo" 
 				};
 
-                for (int i = 0; i < 305; i++) {
+                for (int i = 0; i < 6; i++) {
                     if (badStakers.compare(badAddr[i]) == 0 && badAddr[0] == "  ") 
 					{
                         return state.DoS(10, false, REJECT_INVALID, "Bad Actor", false);

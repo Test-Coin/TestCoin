@@ -1422,8 +1422,6 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
                 if (fReindex)
                     pblocktree->WriteReindexing(true);
 
-
-
                 // Altbet: load previous sessions sporks if we have them.
                 uiInterface.InitMessage(_("Loading sporks..."));
                 LoadSporksFromDB();
@@ -1542,13 +1540,13 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
                         return InitError(strError);
                 }
 
-                /*if (!fReindex) {
+                if (!fReindex) {
                     uiInterface.InitMessage(_("Rewinding blocks..."));
                     if (!RewindBlockIndex(Params())) {
                         strLoadError = _("Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain");
                         break;
                     }
-                }*/
+                }
 
                 uiInterface.InitMessage(_("Verifying blocks..."));
 

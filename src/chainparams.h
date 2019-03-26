@@ -95,7 +95,11 @@ public:
     std::string ObfuscationPoolDummyAddress() const { return strObfuscationPoolDummyAddress; }
     int64_t BudgetFeeConfirmations() const { return nBudgetFeeConfirmations; }
     CBaseChainParams::Network NetworkID() const { return networkID; }
-     int MasternodeCollateralLimit() const { return nMasternodeCollateralLimit; }
+
+	//Collat Related Stuff
+    int MasternodeCollateralLimit() const { return nMasternodeCollateralLimit; }
+    int MasternodeCollateralLimitNew() const { return nMasternodeCollateralLimitNew; }
+
      //Treasury Related
          std::string vTreasuryRewardAddress;
      std::string GetTreasuryRewardAddressAtHeight(int height) const;
@@ -143,6 +147,7 @@ protected:
     int nLastPOWBlock;
     int nMasternodeCountDrift;
     int nMasternodeCollateralLimit;
+    int nMasternodeCollateralLimitNew;
     int nMaturity;
     unsigned int nStakeMaturity;
     int nModifierUpdateBlock;

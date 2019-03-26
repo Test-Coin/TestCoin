@@ -2602,6 +2602,13 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             return true;
         }
 
+		CAmount GetCurrentCollateral()
+        {
+            if (IsSporkActive(SPORK_26_NEW_COLLATERAL))
+                return Params().nMasternodeCollateralLimitNew();
+            else
+                return Params().nMasternodeCollateralLimit();
+        }
 
         double ConvertBitsToDouble(unsigned int nBits)
         {
@@ -7378,7 +7385,7 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
         //       it was the one which was commented out
         int ActiveProtocol()
         {
-            if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
+            if (IsSporkActive(SPORK_17_NEW_PROTOCOL_ENFORCEMENT_3))
                 return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
             return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
         }

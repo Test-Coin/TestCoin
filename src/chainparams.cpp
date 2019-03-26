@@ -141,6 +141,7 @@ public:
         nMaturity = 15;
         nMasternodeCountDrift = 20;
         nMasternodeCollateralLimit = 1000;
+        nMasternodeCollateralLimitNew = 5000;
         nMinStakeInput = 15 * COIN;
         nModifierUpdateBlock = 615800;
         nMaxMoneyOut = 21000000 * COIN;

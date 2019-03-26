@@ -97,8 +97,8 @@ public:
     CBaseChainParams::Network NetworkID() const { return networkID; }
 
 	//Collat Related Stuff
-    int MasternodeCollateralLimit() const { return nMasternodeCollateralLimit; }
-    int MasternodeCollateralLimitNew() const { return nMasternodeCollateralLimitNew; }
+    int MasternodeCollateralAmt() const { return nMasternodeCollateralAmt; }
+    int MasternodeCollateralAmtNew() const { return nMasternodeCollateralAmtNew; }
 
      //Treasury Related
          std::string vTreasuryRewardAddress;
@@ -146,8 +146,8 @@ protected:
     int64_t nTargetSpacing;
     int nLastPOWBlock;
     int nMasternodeCountDrift;
-    int nMasternodeCollateralLimit;
-    int nMasternodeCollateralLimitNew;
+    int nMasternodeCollateralAmt;
+    int nMasternodeCollateralAmtNew;
     int nMaturity;
     unsigned int nStakeMaturity;
     int nModifierUpdateBlock;

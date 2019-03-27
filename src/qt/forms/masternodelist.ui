@@ -318,19 +318,6 @@
                   </item>
                  </layout>
                 </item>
-               </layout>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
   <widget class="QWidget" name="allMasternodeList">

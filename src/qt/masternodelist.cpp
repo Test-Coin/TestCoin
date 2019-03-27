@@ -153,7 +153,6 @@ void MasternodeList::updateNodeList()
         QTableWidgetItem* statusItem = new QTableWidgetItem(QString::fromStdString(mn.GetStatus()));
         QTableWidgetItem* activeSecondsItem = new QTableWidgetItem(QString::fromStdString(DurationToDHMS(mn.lastPing.sigTime - mn.sigTime)));
         QTableWidgetItem* lastSeenItem = new QTableWidgetItem(QString::fromStdString(DateTimeStrFormat("%Y-%m-%d %H:%M", mn.lastPing.sigTime)));
-        //QTableWidgetItem* pubkeyItem = new QTableWidgetItem(QString::fromStdString(CBitcoinAddress(mn.pubKeyCollateralAddress.GetID()).ToString()));
         QTableWidgetItem* pubkeyItem = new QTableWidgetItem(QString::fromStdString(EncodeDestination(CTxDestination(mn.pubKeyCollateralAddress.GetID()))));		
 
         if (strCurrentFilter != "") {

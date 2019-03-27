@@ -1811,10 +1811,13 @@ QWidget#PrivacyDialog .QPushButton {
 	border-radius: 10px;
 }
 /**************************** MASTERNODE LIST *******************************************/
-
-QWidget#MasternodeList .QFrame#frameList {
-	background-color: transparent;
+QWidget#MasternodeList {
+    background-color: #ffffff;
 }
+
+    QWidget#MasternodeList .QFrame#frameList {
+        background-color: #ffffff;
+    }
 /********************************* CALENDAR WIDGET **************************************/
 
 QCalendarView {

@@ -51,14 +51,7 @@ MasternodeList::MasternodeList(QWidget* parent) : QWidget(parent),
     ui->tableWidgetMyMasternodes->setColumnWidth(3, columnStatusWidth);
     ui->tableWidgetMyMasternodes->setColumnWidth(4, columnActiveWidth);
     ui->tableWidgetMyMasternodes->setColumnWidth(5, columnLastSeenWidth);
-
-	ui->tableWidgetAllMasternodes->setAlternatingRowColors(true);
-    ui->tableWidgetMyMasternodes->setColumnWidth(0, columnAddressWidth);
-    ui->tableWidgetMyMasternodes->setColumnWidth(1, columnProtocolWidth);
-    ui->tableWidgetMyMasternodes->setColumnWidth(2, columnStatusWidth);
-    ui->tableWidgetMyMasternodes->setColumnWidth(3, columnActiveWidth);
-    ui->tableWidgetMyMasternodes->setColumnWidth(4, columnLastSeenWidth);
-
+	
     ui->tableWidgetMyMasternodes->setContextMenuPolicy(Qt::CustomContextMenu);
 
     ui->tableWidgetMyMasternodes->horizontalHeader()->setDefaultAlignment(Qt::AlignVCenter);

@@ -258,6 +258,32 @@ void RPCExecutor::request(const QString& command)
     }
 }
 
+bool RPCExecutor::commandHasWarning(const std::string& command)
+{
+    /*  If command was executed already, return false */
+    if (warningHistory.count(command) > 0 && warningHistory.at(command) > 0) {
+        return false;
+    }
+
+    return (command == "dumpprivkey" || command == "dumpwallet");
+}
+
+QString RPCExecutor::getCommandWarning(const std::string& command)
+{
+    if (command == "dumpprivkey") {
+        return "Warning: This command will print your private key! If someone\n"
+               "gains access to this key you will lose all your coins! Hackers/Scammers\n"
+               "are known to use this method. Be careful!";
+    } else if (command == "dumpwallet") {
+        return "Warning: This command will dump your private keys! If someone\n"
+               "gains access to these keys you will lose all your coins! Hackers/Scammers\n"
+               "are known to use this method. Be careful!";
+    } else {
+        /*  Should not happen */
+        return "Warning!";
+    }
+}
+
 RPCConsole::RPCConsole(QWidget* parent) : QDialog(parent),
                                           ui(new Ui::RPCConsole),
                                           clientModel(0),

@@ -69,7 +69,7 @@ const struct {
     {"cmd-reply", ":/icons/tx_output"},
     {"cmd-error", ":/icons/tx_output"},
     {"misc", ":/icons/tx_inout"},
-    {NULL, NULL}};
+    {nullptr, nullptr}};
 
 /* Object for executing console RPC commands in a separate thread.
 */
@@ -82,6 +82,11 @@ public slots:
 
 signals:
     void reply(int category, const QString& command);
+
+	private:
+    bool commandHasWarning(const std::string& command);
+    QString getCommandWarning(const std::string& command);
+    std::map<std::string, int> warningHistory; /*  Number of times each command was executed */
 };
 
 /** Class for handling RPC timers

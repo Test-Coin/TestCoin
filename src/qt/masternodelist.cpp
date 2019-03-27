@@ -105,6 +105,7 @@ void MasternodeList::setClientModel(ClientModel* model)
         // try to update list when masternode count changes
         connect(clientModel, SIGNAL(strMasternodesChanged(QString)), this, SLOT(updateNodeList()));
     }
+}
 
 void MasternodeList::setWalletModel(WalletModel* model)
 {

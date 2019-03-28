@@ -4794,7 +4794,8 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 CTxDestination mnaddress;
                 if (!ExtractDestination(block.vtx[1].vout[2].scriptPubKey, mnaddress))
                     LogPrintf("WARNING: unknown masternode type/address\n");
-                CBitcoinAddress mnpayee(mnaddress);
+                //CBitcoinAddress mnpayee(mnaddress);
+                EncodeDestination(mnaddress);
 
                 if (!pmn) {
                     LogPrintf("WARNING: unknown masternode has claimed output in this block (block: %d, payee %s)\n", chainActive.Height() + 1, mnpayee.ToString());

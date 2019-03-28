@@ -137,7 +137,7 @@ public:
 		nTargetTimespan = 1 * 60; // Altbet: 1 day
         nTargetSpacing = 1 * 60;  // Altbet: 1 minute
         nLastPOWBlock = 200;
-		nZerocoinStartHeight = 250000;
+        nZerocoinStartHeight = INT_MAX;
         nMaturity = 15;
         nMasternodeCountDrift = 20;
         nMasternodeCollateralAmt = 1000;

@@ -4791,14 +4791,15 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
                 masternodeSync.IsSynced()) {
                 // extract collateral info from masternode list
                 CMasternode* pmn = mnodeman.Find(block.vtx[1].vout[2].scriptPubKey);
-                CTxDestination mnaddress = DecodeDestination(text.toStdString());
+                CTxDestination mnaddress;
                 
                 if (!ExtractDestination(block.vtx[1].vout[2].scriptPubKey, mnaddress))
                     LogPrintf("WARNING: unknown masternode type/address\n");
                 //CBitcoinAddress mnpayee(mnaddress);
+                std::string mnpayee = EncodeDestination(mnaddress);
 
                 if (!pmn) {
-                    LogPrintf("WARNING: unknown masternode has claimed output in this block (block: %d, payee %s)\n", chainActive.Height() + 1, mnaddress;
+                    LogPrintf("WARNING: unknown masternode has claimed output in this block (block: %d, payee %s)\n", chainActive.Height() + 1, mnpayee);
                 } else {
                     // extract details from the masternode
                     uint256 nCollateralHash = pmn->vin.prevout.hash;

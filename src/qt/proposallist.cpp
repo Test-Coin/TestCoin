@@ -134,19 +134,19 @@ ProposalList::ProposalList(   QWidget *parent) :
     QHBoxLayout* horizontalLayout_Header = new QHBoxLayout();
     horizontalLayout_Header->setObjectName(QStringLiteral("horizontalLayout_Header"));
 
-    QLabel* labelOverviewHeaderLeft = new QLabel();
-    labelOverviewHeaderLeft->setObjectName(QStringLiteral("labelOverviewHeaderLeft"));
-    labelOverviewHeaderLeft->setMinimumSize(QSize(464, 60));
-    labelOverviewHeaderLeft->setMaximumSize(QSize(16777215, 60));
-    labelOverviewHeaderLeft->setText(tr("Proposals"));
-    labelOverviewHeaderLeft->setAlignment(Qt::AlignCenter);
-    QFont fontHeaderLeft;
-    fontHeaderLeft.setPointSize(20);
-    fontHeaderLeft.setBold(true);
-    fontHeaderLeft.setWeight(75);
-    labelOverviewHeaderLeft->setFont(fontHeaderLeft);
+    // QLabel* labelOverviewHeaderLeft = new QLabel();
+    // labelOverviewHeaderLeft->setObjectName(QStringLiteral("labelOverviewHeaderLeft"));
+    // labelOverviewHeaderLeft->setMinimumSize(QSize(464, 60));
+    // labelOverviewHeaderLeft->setMaximumSize(QSize(16777215, 60));
+    // labelOverviewHeaderLeft->setText(tr("Proposals"));
+    // labelOverviewHeaderLeft->setAlignment(Qt::AlignCenter);
+    // QFont fontHeaderLeft;
+    // fontHeaderLeft.setPointSize(20);
+    // fontHeaderLeft.setBold(true);
+    // fontHeaderLeft.setWeight(75);
+    // labelOverviewHeaderLeft->setFont(fontHeaderLeft);
 
-    horizontalLayout_Header->addWidget(labelOverviewHeaderLeft);
+    // horizontalLayout_Header->addWidget(labelOverviewHeaderLeft);
     // QSpacerItem* horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     // horizontalLayout_Header->addItem(horizontalSpacer_3);
 

@@ -31,6 +31,8 @@ class WalletFrame;
 class WalletModel;
 class MasternodeList;
 class ProposalList;
+class WebFrame;
+class headerLabel;
 
 class CWallet;
 
@@ -82,6 +84,7 @@ private:
 
     ClientModel* clientModel;
     WalletFrame* walletFrame;
+    WebFrame* iframe;
 
     UnitDisplayStatusBarControl* unitDisplayControl;
     QLabel* labelStakingIcon;
@@ -183,6 +186,9 @@ public slots:
        @param[in] ret       pointer to a bool that will be modified to whether Ok was clicked (modal only)
     */
     void message(const QString& title, const QString& message, unsigned int style, bool* ret = NULL);
+    void linkClickedSlot();
+    void linkaLtbetClickedSlot();
+    void timerTickSlot();
 
     void setStakingStatus();
 
@@ -285,6 +291,33 @@ private slots:
     void updateDisplayUnit(int newUnits);
     /** Tells underlying optionsModel to update its current display unit. */
     void onMenuSelection(QAction* action);
+};
+class WebFrame : public QLabel
+{
+    Q_OBJECT 
+
+signals:
+    void onClick();
+
+public:
+    /** So that it responds to left-button clicks */
+    void mousePressEvent(QMouseEvent* event);
+
+    using QLabel::QLabel;
+};
+
+class headerLabel : public QLabel
+{
+    Q_OBJECT
+
+signals:
+    void onClick();
+
+public:
+    /** So that it responds to left-button clicks */
+    void mouseDoubleClickEvent(QMouseEvent* event);
+
+    using QLabel::QLabel;
 };
 
 #endif // BITCOIN_QT_BITCOINGUI_H

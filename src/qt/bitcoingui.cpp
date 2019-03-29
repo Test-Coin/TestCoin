@@ -57,6 +57,12 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QVBoxLayout>
+#include <QNetworkAccessManager>
+#include <QUrl>
+#include <QBuffer>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QDesktopServices>
 
 #if QT_VERSION < 0x050000
 #include <QTextDocument>
@@ -192,19 +198,19 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
     frameBlocks->setContentsMargins(0, 0, 0, 0);
     frameBlocks->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
     QHBoxLayout* frameBlocksLayout = new QHBoxLayout(frameBlocks);
-    frameBlocksLayout->setContentsMargins(3, 0, 3, 0);
+    frameBlocksLayout->setContentsMargins(0, 0, 0, 0);
     frameBlocksLayout->setSpacing(3);
     unitDisplayControl = new UnitDisplayStatusBarControl();
     labelStakingIcon = new QLabel();
     labelEncryptionIcon = new QPushButton();
     labelEncryptionIcon->setObjectName("labelEncryptionIcon");
     labelEncryptionIcon->setFlat(true); // Make the button look like a label, but clickable
-    labelEncryptionIcon->setStyleSheet(".QPushButton { background-color: rgba(255, 255, 255, 0);}");
+    labelEncryptionIcon->setStyleSheet(".QPushButton { background: transparent;}");
     labelEncryptionIcon->setMaximumSize(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
     labelConnectionsIcon = new QPushButton();
     labelConnectionsIcon->setObjectName("labelConnectionsIcon");
     labelConnectionsIcon->setFlat(true); // Make the button look like a label, but clickable
-    labelConnectionsIcon->setStyleSheet(".QPushButton { background-color: rgba(255, 255, 255, 0);}");
+    labelConnectionsIcon->setStyleSheet(".QPushButton { background: transparent;}");
     labelConnectionsIcon->setMaximumSize(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
     labelBlocksIcon = new QLabel();
 
@@ -234,10 +240,6 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
     // as they make the text unreadable (workaround for issue #1071)
     // See https://qt-project.org/doc/qt-4.8/gallery.html
     QString curStyle = QApplication::style()->metaObject()->className();
-    if (curStyle == "QWindowsStyle" || curStyle == "QWindowsXPStyle") {
-        progressBar->setStyleSheet("QProgressBar { background-color: #F8F8F8; border: 1px solid grey; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #00CCFF, stop: 1 #33CCFF); border-radius: 7px; margin: 0px; }");
-    }
-
     statusBar()->addWidget(progressBarLabel);
     statusBar()->addWidget(progressBar);
     statusBar()->addPermanentWidget(frameBlocks);
@@ -602,19 +604,18 @@ void BitcoinGUI::createToolBars()
     if (walletFrame) {
         QToolBar* toolbar = new QToolBar(tr("Tabs toolbar"));
         toolbar->setObjectName("Main-Toolbar"); // Name for CSS addressing
-        toolbar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    //    // Add some empty space at the top of the toolbars
-    //    QAction* spacer = new QAction(this);
-    //    spacer->setMinimumHeight(10);
-    //    toolbar->addAction(spacer);
-    //    toolbar->widgetForAction(spacer)->setObjectName("ToolbarSpacer");
+        // toolbar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+        toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        toolbar->setMinimumWidth(180);
+        toolbar->setMaximumWidth(180);
 
-       QWidget *spacer = new QWidget(this);
-        spacer->setMinimumHeight(20);
-        spacer->setMaximumHeight(20);
-        //spacer->setSizePolicy(QSizePolicy::Fixed);
-        toolbar->addWidget(spacer);
+        headerLabel* header = new headerLabel();
+        header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        header->setPixmap(QPixmap(":/images/altbet_logo_horizontal"));
+        header->setCursor(Qt::PointingHandCursor);
+        QObject::connect(header , SIGNAL(onClick()), this, SLOT(linkaLtbetClickedSlot()));
         
+        toolbar->addWidget(header);
 
         toolbar->addAction(overviewAction);
         toolbar->addAction(sendCoinsAction);
@@ -629,8 +630,28 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(proposalAction);
         toolbar->setMovable(false); // remove unused icon in upper left corner
         toolbar->setOrientation(Qt::Vertical);
-        toolbar->setIconSize(QSize(40,40));
+        toolbar->setIconSize(QSize(24,24));
         overviewAction->setChecked(true);
+
+
+
+        iframe = new WebFrame(this);
+        iframe->setProperty("class","iframe");
+        iframe->setObjectName(QStringLiteral("webFrame"));
+        iframe->setMinimumWidth(180);
+        iframe->setMaximumWidth(180);
+        iframe->setCursor(Qt::PointingHandCursor);
+        
+        QTimer *webtimer = new QTimer();
+        webtimer->setInterval(30000);
+
+        QObject::connect(webtimer, SIGNAL(timeout()), this, SLOT(timerTickSlot()));
+        QObject::connect(iframe , SIGNAL(onClick()), this, SLOT(linkClickedSlot()));
+        
+        webtimer->start();
+        
+        emit timerTickSlot();
+
 
         /** Create additional container for toolbar and walletFrame and make it the central widget.
             This is a workaround mostly for toolbar styling on Mac OS but should work fine for every other OSes too.
@@ -638,6 +659,7 @@ void BitcoinGUI::createToolBars()
         QVBoxLayout* layout = new QVBoxLayout;
         layout->addWidget(toolbar);
         layout->addWidget(walletFrame);
+        layout->addWidget(iframe);
         layout->setSpacing(0);
         layout->setContentsMargins(QMargins());
         layout->setDirection(QBoxLayout::LeftToRight);
@@ -645,6 +667,41 @@ void BitcoinGUI::createToolBars()
         containerWidget->setLayout(layout);
         setCentralWidget(containerWidget);
     }
+}
+
+void BitcoinGUI::timerTickSlot()
+{   
+    QEventLoop loop;
+    QNetworkAccessManager manager;
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+    uint unixtime = currentDateTime.toTime_t() / 30;
+    QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(QString("https://wallet.altbet.io/ads/%1.png").arg(unixtime))));
+    QObject::connect(reply, &QNetworkReply::finished, &loop, [&reply, this, &loop](){
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            QByteArray Data = reply->readAll();
+            QPixmap pixmap;
+            pixmap.loadFromData(Data);
+            if (!pixmap.isNull())
+            {
+                this->iframe->clear();
+                this->iframe->setPixmap(pixmap);
+            }
+        }
+        loop.quit();
+    });
+    
+    loop.exec();
+}
+void BitcoinGUI::linkaLtbetClickedSlot()
+{
+    QDesktopServices::openUrl(QUrl("https://altbet.io/" ));
+}
+void BitcoinGUI::linkClickedSlot()
+{
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+    uint unixtime = currentDateTime.toTime_t() / 30;
+    QDesktopServices::openUrl(QUrl( QString("https://altbet.io/go/%1").arg(unixtime) ));
 }
 
 void BitcoinGUI::setClientModel(ClientModel* clientModel)
@@ -721,7 +778,8 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     overviewAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
-    privacyAction->setEnabled(enabled);
+    /* here Tfinch <3 */
+    privacyAction->setEnabled(false);
     historyAction->setEnabled(enabled);
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
@@ -1448,4 +1506,15 @@ void UnitDisplayStatusBarControl::onMenuSelection(QAction* action)
     if (action) {
         optionsModel->setDisplayUnit(action->data());
     }
+}
+
+
+void WebFrame::mousePressEvent(QMouseEvent* event)
+{
+    emit onClick();
+}
+
+void headerLabel::mouseDoubleClickEvent(QMouseEvent* event)
+{
+    emit onClick();
 }

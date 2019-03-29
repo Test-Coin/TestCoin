@@ -5,7 +5,8 @@
 [![Discord Chat](https://img.shields.io/discord/473618220524240928.svg?style=flat&logo=Discord)](https://altbet.io/go/discord) 
 
 [![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=for-the-badge&logo=Github)](https://github.com/altbet/abet/releases)
-[![Twitter](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=popout&logo=Twitter)](https://github.com/altbet/abet/releases)
+
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&style=plastic)]()  
 
 
 <h2>What is Altbet?</h2>

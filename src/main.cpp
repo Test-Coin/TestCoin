@@ -2601,14 +2601,6 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             return true;
         }
 
-		CAmount GetCurrentCollateral()
-        {
-            if (IsSporkActive(SPORK_26_NEW_COLLATERAL))
-                return Params().MasternodeCollateralAmtNew();
-            else
-                return Params().MasternodeCollateralAmt();
-        }
-
         double ConvertBitsToDouble(unsigned int nBits)
         {
             int nShift = (nBits >> 24) & 0xff;

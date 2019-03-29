@@ -8,13 +8,22 @@
 #include "consensus/validation.h"
 #include "masternodeman.h"
 #include "obfuscation.h"
+#include "chainparams.h"
 #include "sync.h"
 #include "util.h"
+#include "spork.h"
 
 // keep track of the scanning errors I've seen
 map<uint256, int> mapSeenMasternodeScanningErrors;
 // cache block hashes as we calculate them
 std::map<int64_t, uint256> mapCacheBlockHashes;
+
+CAmount GetMasternodeCollateral() {
+	if (IsSporkActive(SPORK_26_NEW_COLLATERAL)) {
+		return Params().MasternodeCollateralAmtNew();
+	}
+	return Params().MasternodeCollateralAmt();
+}
 
 //Get the last hash that matches the modulus given. Processed in reverse order
 bool GetBlockHash(uint256& hash, int nBlockHeight)
@@ -216,7 +225,7 @@ void CMasternode::Check(bool forceCheck)
     if (!unitTest) {
         CValidationState state;
         CMutableTransaction tx = CMutableTransaction();
-        CTxOut vout = CTxOut((GetCurrentCollateral() - 0.01) * COIN, obfuScationPool.collateralPubKey);
+        CTxOut vout = CTxOut((GetMasternodeCollateral() - 0.01) * COIN, obfuScationPool.collateralPubKey);
         tx.vin.push_back(vin);
         tx.vout.push_back(vout);
 
@@ -586,7 +595,7 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
 
     CValidationState state;
     CMutableTransaction tx = CMutableTransaction();
-    CTxOut vout = CTxOut((GetCurrentCollateral() - 0.01) * COIN, obfuScationPool.collateralPubKey);
+    CTxOut vout = CTxOut((GetMasternodeCollateral() - 0.01) * COIN, obfuScationPool.collateralPubKey);
     tx.vin.push_back(vin);
     tx.vout.push_back(vout);
 

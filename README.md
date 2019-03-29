@@ -3,10 +3,9 @@
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/Test-Coin/TestCoin/blob/master/LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat&logo=Github)]()
 [![Discord Chat](https://img.shields.io/discord/473618220524240928.svg?style=flat&logo=Discord)](https://altbet.io/go/discord) 
+[![Twitter Follow](https://img.shields.io/twitter/follow/bstevensondev.svg?style=social)](https://altbet.io/go/twitter) 
 
-[![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=for-the-badge&logo=Github)](https://github.com/altbet/abet/releases)
-
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&style=plastic)]()  
+[![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=for-the-badge&logo=Github)](https://github.com/altbet/abet/releases) 
 
 
 <h2>What is Altbet?</h2>

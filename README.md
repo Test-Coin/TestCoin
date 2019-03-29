@@ -1,4 +1,4 @@
-![altbet](https://github.com/altbet/abet/raw/master/src/qt/res/images/about.png)
+![altbet](https://github.com/altbet/brand/blob/master/abetlogofull-colorblack-transparent-2000.png)
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/Test-Coin/TestCoin/blob/master/LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat&logo=Github)]()

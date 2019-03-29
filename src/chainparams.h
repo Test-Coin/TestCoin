@@ -110,7 +110,6 @@ public:
     {
         return nMinStakeInput;
     }
-     int64_t StartMasternodePayments() const { return nStartMasternodePayments; }
 
     /** Zerocoin **/
     std::string Zerocoin_Modulus() const { return zerocoinModulus; }
@@ -173,7 +172,6 @@ protected:
     int nPoolMaxTransactions;
     std::string strSporkKey;
     std::string strObfuscationPoolDummyAddress;
-    int64_t nStartMasternodePayments;
     std::string zerocoinModulus;
     std::string oldZerocoinModulus;
     int nMaxZerocoinSpendsPerTransaction;

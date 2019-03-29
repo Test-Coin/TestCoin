@@ -1,4 +1,4 @@
-[![Downloads](https://img.shields.io/badge/Download-Current-Wallet%20Build-green.svg)](https://github.com/altbet/abet/releases)
+[![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg)](https://github.com/altbet/abet/releases)
 [![Contributors](https://img.shields.io/github/contributors)](https://github.com/altbet/graphs/contributors)
 ![altbet](https://github.com/altbet/abet/raw/master/src/qt/res/images/about.png)
 

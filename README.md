@@ -1,5 +1,4 @@
 [![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg)](https://github.com/altbet/abet/releases)
-[![Contributors](https://img.shields.io/github/contributors/magnumripper/JohnTheRipper.svg)](https://github.com/altbet/abet/graphs/contributors)
 ![altbet](https://github.com/altbet/abet/raw/master/src/qt/res/images/about.png)
 
 <h2>What is Altbet?</h2>

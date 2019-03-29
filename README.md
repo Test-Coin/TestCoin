@@ -2,7 +2,7 @@
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/Test-Coin/TestCoin/blob/master/LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat&logo=Github)]()
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg?style=flat)](https://github.com/altbet/abet/releases) 
+[![Github All Releases](https://img.shields.io/github/downloads/Test-Coin/Test-Coin/total.svg?style=flat)](https://github.com/altbet/abet/releases) 
 [![Discord Chat](https://img.shields.io/discord/473618220524240928.svg?style=flat&logo=Discord)](https://altbet.io/go/discord) 
 [![Twitter Follow](https://img.shields.io/twitter/follow/altbetofficial.svg?style=social)](https://altbet.io/go/twitter) 
 

@@ -1,5 +1,6 @@
-[![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg)](https://github.com/altbet/abet/releases)
 ![altbet](https://github.com/altbet/abet/raw/master/src/qt/res/images/about.png)
+[![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg)](https://github.com/altbet/abet/releases)
+
 
 <h2>What is Altbet?</h2>
 <p>Mutual betting is widely adopted in gambling and applied to horse racing, greyhound racing and sports betting. Altbet is the first platform that combines this model with blockchain technology, what allows to benefit from the advantages of own cryptocurrency.</p>

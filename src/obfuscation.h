@@ -7,7 +7,6 @@
 #define OBFUSCATION_H
 
 #include "main.h"
-#include "masternode.h"
 #include "masternode-payments.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
@@ -47,7 +46,7 @@ class CActiveMasternode;
 #define OBFUSCATION_RELAY_SIG 3
 
 static const CAmount OBFUSCATION_COLLATERAL = (10 * COIN);
-static const CAmount OBFUSCATION_POOL_MAX = ((GetMasternodeCollateral() - 0.01) * COIN);
+static const CAmount OBFUSCATION_POOL_MAX = (99999.99 * COIN);
 
 extern CObfuscationPool obfuScationPool;
 extern CObfuScationSigner obfuScationSigner;

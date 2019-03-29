@@ -1,5 +1,5 @@
 ![altbet](https://github.com/altbet/abet/raw/master/src/qt/res/images/about.png)
-[![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=popout&logo=Github)](https://github.com/altbet/abet/releases)
+[![Downloads](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=for-the-badge&logo=Github)](https://github.com/altbet/abet/releases)
 [![Discord](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=popout&logo=Discord)](https://github.com/altbet/abet/releases)
 [![Twitter](https://img.shields.io/badge/Download-Windows%20Build-green.svg?style=popout&logo=Twitter)](https://github.com/altbet/abet/releases)
 

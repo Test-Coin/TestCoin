@@ -46,46 +46,6 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_Header" stretch="0">
-          <item>
-           <widget class="QLabel" name="labelOverviewHeaderLeft">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>464</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Hind</family>
-              <pointsize>48</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Privacy</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
        </layout>
       </widget>
      </item>
@@ -145,7 +105,6 @@
                          <widget class="QLabel" name="labelzABETActions">
                           <property name="font">
                            <font>
-                            <pointsize>24</pointsize>
                             <weight>50</weight>
                             <bold>false</bold>
                            </font>
@@ -963,7 +922,6 @@ zABET are mature when they have more than 20 confirmations AND more than 1 mint 
                          <widget class="QLabel" name="labelzABETStats">
                           <property name="font">
                            <font>
-                            <pointsize>24</pointsize>
                             <weight>50</weight>
                             <bold>false</bold>
                            </font>

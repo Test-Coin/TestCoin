@@ -43,7 +43,7 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0">
+     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -72,7 +72,7 @@
         </property>
         <item>
          <widget class="QFrame" name="frame_Header">
-          <layout class="QVBoxLayout" name="verticalLayout_Header" stretch="0">
+          <layout class="QVBoxLayout" name="verticalLayout_Header">
            <property name="leftMargin">
             <number>0</number>
            </property>
@@ -85,42 +85,6 @@
            <property name="bottomMargin">
             <number>0</number>
            </property>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_Header" stretch="1">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="labelOverviewHeaderLeft">
-               <property name="minimumSize">
-                <size>
-                 <width>464</width>
-                 <height>60</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>60</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>20</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Overview</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
           </layout>
          </widget>
         </item>
@@ -204,9 +168,14 @@
                            <height>20</height>
                           </size>
                          </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>40</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
-                           <pointsize>24</pointsize>
                            <weight>50</weight>
                            <bold>false</bold>
                           </font>
@@ -221,6 +190,12 @@
                        </item>
                        <item>
                         <widget class="QLabel" name="labelWalletStatus">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>40</height>
+                          </size>
+                         </property>
                          <property name="cursor">
                           <cursorShape>WhatsThisCursor</cursorShape>
                          </property>
@@ -340,19 +315,6 @@
                        </item>
                       </layout>
                      </item>
-                     <item>
-                      <spacer name="verticalSpacer_1">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
                     </layout>
                    </widget>
                   </item>
@@ -377,7 +339,6 @@
                          </property>
                          <property name="font">
                           <font>
-                           <pointsize>24</pointsize>
                            <weight>50</weight>
                            <bold>false</bold>
                           </font>
@@ -743,19 +704,6 @@
                        </item>
                       </layout>
                      </item>
-                     <item>
-                      <spacer name="verticalSpacer_3">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
                     </layout>
                    </widget>
                   </item>
@@ -780,7 +728,6 @@
                          </property>
                          <property name="font">
                           <font>
-                           <pointsize>24</pointsize>
                            <weight>50</weight>
                            <bold>false</bold>
                           </font>
@@ -963,19 +910,6 @@ Immature: confirmed, but less than 3 mints of the same denomination after it was
                        </item>
                       </layout>
                      </item>
-                     <item>
-                      <spacer name="verticalSpacer_4">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
                     </layout>
                    </widget>
                   </item>
@@ -994,13 +928,19 @@ Immature: confirmed, but less than 3 mints of the same denomination after it was
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>550</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_1" stretch="0,0,0,0">
+                 <layout class="QVBoxLayout" name="verticalLayout_1" stretch="0,0,0">
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_2">
                     <item>
@@ -1008,12 +948,11 @@ Immature: confirmed, but less than 3 mints of the same denomination after it was
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>20</height>
+                        <height>40</height>
                        </size>
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>24</pointsize>
                         <weight>50</weight>
                         <bold>false</bold>
                        </font>
@@ -1083,22 +1022,6 @@ Immature: confirmed, but less than 3 mints of the same denomination after it was
                    </widget>
                   </item>
                   <item>
-                   <spacer name="verticalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Expanding</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
                    <widget class="QLabel" name="labelAlerts">
                     <property name="maximumSize">
                      <size>
@@ -1131,6 +1054,28 @@ Immature: confirmed, but less than 3 mints of the same denomination after it was
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="exchangeFrame">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>260</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>260</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

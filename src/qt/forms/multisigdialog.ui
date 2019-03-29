@@ -29,7 +29,7 @@
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="addMultisigTab">
       <property name="sizePolicy">
@@ -152,7 +152,7 @@
             <x>0</x>
             <y>0</y>
             <width>761</width>
-            <height>184</height>
+            <height>166</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -368,7 +368,7 @@ Please be patient after clicking import.</string>
                 <string>Add a Raw Input</string>
                </property>
                <property name="icon">
-                <iconset resource="../altbet.qrc">
+                <iconset>
                  <normaloff>:/css/default</normaloff>:/css/default</iconset>
                </property>
               </widget>
@@ -398,7 +398,7 @@ Please be patient after clicking import.</string>
                 <x>0</x>
                 <y>0</y>
                 <width>749</width>
-                <height>141</height>
+                <height>134</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -482,7 +482,7 @@ Please be patient after clicking import.</string>
                 <x>0</x>
                 <y>0</y>
                 <width>749</width>
-                <height>140</height>
+                <height>134</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -763,7 +763,7 @@ txScrollArea:{
                 <x>0</x>
                 <y>0</y>
                 <width>755</width>
-                <height>68</height>
+                <height>73</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9">

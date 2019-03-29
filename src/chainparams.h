@@ -173,6 +173,7 @@ protected:
     std::string strSporkKey;
     std::string strObfuscationPoolDummyAddress;
     std::string zerocoinModulus;
+	int64_t nStartMasternodePayments;
     std::string oldZerocoinModulus;
     int nMaxZerocoinSpendsPerTransaction;
     CAmount nMinZerocoinMintFee;
@@ -183,7 +184,7 @@ protected:
     int64_t nBudgetFeeConfirmations;
     int nZerocoinStartHeight;
     int nZerocoinLastOldParams;
-    int64_t nStartMasternodePayments;
+    
 };
 
 /**

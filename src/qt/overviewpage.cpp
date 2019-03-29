@@ -26,7 +26,7 @@
 #include <QSettings>
 #include <QTimer>
 
-#define DECORATION_SIZE 44
+#define DECORATION_SIZE 68
 #define ICON_OFFSET 16
 #define NUM_ITEMS 9
 
@@ -49,14 +49,14 @@ public:
         QIcon icon = qvariant_cast<QIcon>(index.data(Qt::DecorationRole));
         QRect mainRect = option.rect;
         mainRect.moveLeft(ICON_OFFSET);
-        QRect decorationRect(mainRect.topLeft(), QSize(DECORATION_SIZE - 10, DECORATION_SIZE - 10));
+        QRect decorationRect(mainRect.topLeft(), QSize(DECORATION_SIZE, DECORATION_SIZE));
+        decorationRect.setWidth(595);
         int xspace = DECORATION_SIZE + 8;
         int ypad = 6;
         int halfheight = (mainRect.height() - 2 * ypad) / 2;
         QRect amountRect(mainRect.left() + xspace, mainRect.top() + ypad, mainRect.width() - xspace - ICON_OFFSET, halfheight);
         QRect addressRect(mainRect.left() + xspace, mainRect.top() + ypad + halfheight, mainRect.width() - xspace, halfheight);
-        icon.paint(painter, decorationRect);
-
+        icon.paint(painter, decorationRect); 
         QDateTime date = index.data(TransactionTableModel::DateRole).toDateTime();
         QString address = index.data(Qt::DisplayRole).toString();
         qint64 amount = index.data(TransactionTableModel::AmountRole).toLongLong();

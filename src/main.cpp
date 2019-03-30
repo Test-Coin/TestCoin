@@ -6641,10 +6641,10 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
 
                 pfrom->fClient = !(pfrom->nServices & NODE_NETWORK);
 
-                if ((pfrom->nServices & NODE_WITNESS)) {
+               /* if ((pfrom->nServices & NODE_WITNESS)) {
                     LOCK(cs_main);
                     State(pfrom->GetId())->fHaveWitness = true;
-                }
+                }*/
 
                 // Potentially mark this peer as a preferred download peer.
                 UpdatePreferredDownload(pfrom, State(pfrom->GetId()));

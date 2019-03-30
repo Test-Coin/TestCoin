@@ -99,6 +99,8 @@ void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
 
         // Altbet: add to spork database.
         pSporkDB->WriteSpork(spork.nSporkID, spork);
+		//does a task if needed
+		ExecuteSpork(spork.nSporkID, spork.nValue);
     }
     if (strCommand == NetMsgType::GETSPORKS) {
         std::map<int, CSporkMessage>::iterator it = mapSporksActive.begin();
@@ -188,6 +190,19 @@ bool IsSporkActive(int nSporkID)
     return r < GetTime();
 }
 
+void ExecuteSpork(int nSporkID, int nValue)
+{
+	if (nSporkID == SPORK_11_RESET_BUDGET && nValue == 1) {
+		budget.Clear();
+	}
+
+	//correct fork via spork technology
+	if (nSporkID == SPORK_12_RECONSIDER_BLOCKS && nValue > 0) {
+		LogPrintf("Spork::ExecuteSpork -- Reconsider Last %d Blocks\n", nValue);
+
+		ReprocessBlocks(nValue);
+	}
+}
 
 void ReprocessBlocks(int nBlocks)
 {

@@ -313,7 +313,7 @@ enum {
     NODE_BLOOM = (1 << 2),
     // Indicates that a node can be asked for blocks and transactions including
     // witness data.
-    //NODE_WITNESS = (1 << 3),
+    NODE_WITNESS = (1 << 3),
 
 	// NODE_BLOOM_WITHOUT_MN means the node has the same features as NODE_BLOOM with the only difference
 	// that the node doens't want to receive master nodes messages. (the 1<<3 was not picked as constant because on bitcoin 0.14 is witness and we want that update here )

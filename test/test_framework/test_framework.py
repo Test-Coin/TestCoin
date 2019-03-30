@@ -41,7 +41,7 @@ class BitcoinTestFramework(object):
 
     def add_options(self, parser):
         pass
-
+		
     def setup_chain(self):
         print("Initializing test directory "+self.options.tmpdir)
         if self.setup_clean_chain:

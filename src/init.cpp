@@ -1760,7 +1760,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     //nLocalServices |= NODE_WITNESS;
     // Only care about others providing witness capabilities if there is a softfork
     // defined.
-    //nRelevantServices |= NODE_WITNESS;
+    nRelevantServices |= NODE_WITNESS;
 
     // ********************************************************* Step 9: import blocks
 

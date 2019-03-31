@@ -792,66 +792,7 @@ QWidget#AddressBookPage QHeaderView::section {
 	/* Min width for Windows fix */
 	min-width: 260px;
 }
-/**************************** Privacy Dialog ********************************************/
 
-QWidget#PrivacyDialog QFrame {
-	background-color: transparent;
-	border: 0px solid #000;
-}
-QWidget#PrivacyDialog QFrame#labelMintStatus {
-	/* background-color:transparent; */
-	background-color: #eee;
-	/* border-style: inset; */
-	/* border-width:2; */
-	/* border:2px solid #00; */
-	border: 1px inset gray;
-}
-QWidget#PrivacyDialog QLabel {
-	border: 0px solid #000;
-}
-QWidget#PrivacyDialog QLabel#zABETLabel {
-	font-size: 14px;
-	color: #ffffff;
-	background-color: #fb2057;
-}
-QWidget#PrivacyDialog QLabel#oABETLabel {
-	font-size: 14px;
-	color: #ffffff;
-	background-color: #fb2057;
-}
-QWidget#PrivacyDialog QPushButton {
-	border: 0;
-	border-radius: 14px;
-	color: #ffffff;
-	font-size: 12px;
-	font-weight: normal;
-	padding-left: 8px;
-	padding-right: 8px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-QWidget#PrivacyDialog QPushButton:hover {
-	color: #fb2057;
-}
-QWidget#PrivacyDialog QPushButton:focus {
-	color: #fb2057;
-}
-QWidget#PrivacyDialog QPushButton:pressed {
-	color: #fb2057;
-}
-QWidget#PrivacyDialog QProgressBar#obfuscationProgress {
-	/* Obfuscation Completion */
-	border: 1px solid #818181;
-	border-radius: 1px;
-	margin-right: 43px;
-	text-align: right;
-	color: #818181;
-}
-
-QWidget#PrivacyDialog QProgressBar#obfuscationProgress::chunk {
-	background-color: #fb2057;
-	width: 1px;
-}
 /**************************** SETTINGS MENU *********************************************/
 
 /* Encrypt Wallet and Change Passphrase Dialog */
@@ -1737,34 +1678,7 @@ QDialog#TransactionDescDialog QTextEdit {
 	/* Contents of Receive Coin Dialog */
 	border: 1px solid #d7d7d7;
 }
-/**************************** PRIVACY PAGE *****************************************/
 
-QDialog#PrivacyDialog {
-	background-color: transparent;
-}
-/*
-QWidget#PrivacyDialog {
-background-color:#fff;
-}
-*/
-
-QWidget#PrivacyDialog .QFrame[frameShape="4"] {
-	/* QFrame::HLine == 0x0004 */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    
-}
-QWidget#PrivacyDialog .QFrame#frame_Content {
-	background-color: transparent;
-}
-QWidget#PrivacyDialog .QFrame#verticalFrameLeft {
-	background-color: transparent;
-}
-QWidget#PrivacyDialog .QFrame#verticalFrameRight {
-	background-color: transparent;
-}
-QWidget#PrivacyDialog .QPushButton {
-	border-radius: 10px;
-}
 /**************************** MASTERNODE LIST *******************************************/
 
 QWidget#MasternodeList .QFrame#frameList {

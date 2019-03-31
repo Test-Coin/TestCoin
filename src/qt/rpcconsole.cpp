@@ -324,9 +324,7 @@ RPCConsole::RPCConsole(QWidget* parent) : QDialog(parent),
     // set library version labels
     ui->openSSLVersion->setText(SSLeay_version(SSLEAY_VERSION));
 #ifdef ENABLE_WALLET
-    std::string strPathCustom = GetArg("-backuppath", "");
-    std::string strzabetPathCustom = GetArg("-zabetbackuppath", "");
-    int nCustomBackupThreshold = GetArg("-custombackupthreshold", DEFAULT_CUSTOMBACKUPTHRESHOLD);
+	std::string strPathCustom = GetArg("-backuppath", "");
 
     if(!strPathCustom.empty()) {
         ui->wallet_custombackuppath->setText(QString::fromStdString(strPathCustom));

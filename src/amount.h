@@ -13,7 +13,7 @@
 
 typedef int64_t CAmount;
 
-static const CAmount COIN = 100000000;
+static const CAmount nOnlyDenominatedBalance = 100000000;
 static const CAmount CENT = 1000000;
 
 /** Type-safe wrapper class to for fee rates

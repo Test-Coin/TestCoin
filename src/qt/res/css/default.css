@@ -182,8 +182,7 @@ QGroupBox {
     outline:0;
 }
 QToolTip {
-	background-color: #24262c;
-	color: #fff;
+    background: #fff;
     font-size: 13px;
     line-height: 1.5em;
 }

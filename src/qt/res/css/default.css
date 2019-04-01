@@ -1042,84 +1042,7 @@ QWidget .QFrame#frame .QLabel#labelWatchTotal {
 	qproperty-alignment: 'AlignVCenter | AlignLeft';
 	margin-left: 16px;
 }
-QWidget .QFrame#frame_4 .QLabel#label_5z_3 {
-	/* Zerocoin Balance Label */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	min-width: 160px;
-	background-color: transparent;
-	color: #fb2057;
-	font-weight: bold;
-	margin-right: 5px;
-	padding-right: 5px;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalanceText {
-	/* Available zABET Label */
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	min-width: 160px;
-	background-color: #fb2057;
-	color: #fff;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalance {
-	/* Available zABET Balance */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	font-weight: bold;
-	color: #fb2057;
-	margin-left: 0px;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalanceUnconfirmedText {
-	/* Unconfirmed zABET Label */
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	min-width: 160px;
-	background-color: #fb2057;
-	color: #fff;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalanceUnconfirmed {
-	/* Unconfirmed zABET Balance */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	font-weight: bold;
-	color: #fb2057;
-	margin-left: 0px;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalanceMatureText {
-	/* Mature zABET Label */
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	min-width: 160px;
-	background-color: #fb2057;
-	color: #fff;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalanceMature {
-	/* Mature zABET Balance */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	font-weight: bold;
-	color: #fb2057;
-	margin-left: 0px;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalanceImmatureText {
-	/* Immature zABET Label */
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	min-width: 160px;
-	background-color: #fb2057;
-	color: #fff;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-}
-QWidget .QFrame#frame_4 .QLabel#labelzBalanceImmature {
-	/* Immature zABET Balance */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	font-weight: bold;
-	color: #fb2057;
-	margin-left: 0px;
-}
+
 QWidget .QFrame#frame_3 .QLabel#label_5z {
 	/* Combined Balance Label */
 	qproperty-alignment: 'AlignVCenter | AlignLeft';
@@ -1149,59 +1072,7 @@ QWidget .QFrame#frame_3 .QLabel#labelBalancez {
 	color: #fb2057;
 	margin-left: 0px;
 }
-QWidget .QFrame#frame_3 .QLabel#labelzBalanceTextz {
-	/* Available zABET Label */
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	min-width: 160px;
-	background-color: #fb2057;
-	color: #fff;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-}
-QWidget .QFrame#frame_3 .QLabel#labelzBalancez {
-	/* Available zABET Balance */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	font-weight: bold;
-	color: #fb2057;
-	margin-left: 0px;
-}
-QWidget .QFrame#frame_3 .QLabel#labelLockedBalanceText {
-	/* Available zABET Label */
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	min-width: 160px;
-	background-color: #fb2057;
-	color: #fff;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-	/* min-height:35px; */
-}
-QWidget .QFrame#frame_3 .QLabel#labelLockedBalance {
-	/* Available zABET Balance */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	font-weight: normal;
-	color: #fb2057;
-	margin-left: 0px;
-}
-QWidget .QFrame#frame_3 .QLabel#labelUnLockedBalanceText {
-	/* Available zABET Label */
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	min-width: 160px;
-	background-color: #fb2057;
-	color: #fff;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-	/* min-height:35px; */
-}
-QWidget .QFrame#frame_3 .QLabel#labelUnLockedBalance {
-	/* Available zABET Balance */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	font-weight: normal;
-	color: #fb2057;
-	margin-left: 0px;
-}
+
 QWidget .QFrame#frame_3 .QLabel#labelTotalTextz {
 	/* Available total Label */
 	qproperty-alignment: 'AlignVCenter | AlignRight';
@@ -1799,7 +1670,7 @@ AmountSpinBox::down-arrow {
     color: #747c83;
 }
 
-#labelSmartFee3, #labelForBalance, #labelCoinControlQuantityText, #labelCoinControlAmountText, #labelzABETSelected, #labelQuantitySelected, #labelzABETBalanceText, #labelSecurityLevel, #labelzAvailableText, #labelZsupplyText, #labelzABETAmountText, #labelBalanceTextz, #labelTotalTextz, #labelBalanceText, #labelPendingText, #labelImmatureText, #labelLockedBalanceText, #labelTotalText, #labelzBalanceMatureText, #labelzBalanceUnconfirmedText, #labelzBalanceImmatureText, #labelzBalanceText, #payToLabel, #labelLabel, #amountLabel{
+#labelSmartFee3, #labelForBalance, #labelCoinControlQuantityText, #labelCoinControlAmountText, #labelQuantitySelected, #labelSecurityLevel, #labelBalanceTextz, #labelTotalTextz, #labelBalanceText, #labelPendingText, #labelImmatureText, #labelLockedBalanceText, #labelTotalText, #payToLabel, #labelLabel, #amountLabel{
     font-weight: 500;
 }
 

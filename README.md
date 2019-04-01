@@ -374,7 +374,7 @@
 <td>PHASE 44</td>
 <td>1957461 - 2475860</td>
 <td>1.50 ABET</td>
-<td>1,35 ABET</td>
+<td>1.35 ABET</td>
 <td>0.15 ABET</td>
 <td>~3 YEARS</td>
 </tr></tbody></table>

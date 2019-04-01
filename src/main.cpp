@@ -2835,64 +2835,60 @@ bool CheckTransaction(const CTransaction& tx, bool fZerocoinActive, bool fReject
             if (IsTreasuryBlock(nHeight)) {
                 if (nHeight <= 212180 && nHeight > 192020) { // 14 days
                     return 702 * COIN;
-
                 } else if (nHeight <= 232340 && nHeight > 212180) { // 14 days
                     return 684 * COIN;
                 } else if (nHeight <= 252500 && nHeight > 232340) { // 14 days
                     return 666 * COIN;
                 } else if (nHeight <= 272660 && nHeight > 252500) { // 14 days
-                    return 648 * COIN;
+                    return 1440 * COIN;
                 } else if (nHeight <= 292820 && nHeight > 272660) { // 14 days
-                    return 630 * COIN;
+                    return 1584 * COIN;
                 } else if (nHeight <= 312980 && nHeight > 292820) { // 14 days
-                    return 612 * COIN;
+                    return 1728 * COIN;
                 } else if (nHeight <= 333140 && nHeight > 312980) { // 14 days
-                    return 594 * COIN;
+                    return 1872 * COIN;
                 } else if (nHeight <= 353300 && nHeight > 333140) { // 14 days
-                    return 576 * COIN;
-                } else if (nHeight <= 373460 && nHeight > 353300) { // 14 days
-                    return 558 * COIN;
+                    return 2016 * COIN;
+                } else if (nHeight <= 373460 && nHeight > 353300) { // 14 days 
+                    return 2160 * COIN;
                 } else if (nHeight <= 393620 && nHeight > 373460) { // 14 days
-                    return 540 * COIN;
+                    return 2124 * COIN;
                 } else if (nHeight <= 413780 && nHeight > 393620) { // 14 days
-                    return 522 * COIN;
+                    return 2088 * COIN;
                 } else if (nHeight <= 433940 && nHeight > 413780) { // 14 days
-                    return 504 * COIN;
+                    return 2052 * COIN;
                 } else if (nHeight <= 454100 && nHeight > 433940) { // 14 days
-                    return 486 * COIN;
+                    return 2016 * COIN;
                 } else if (nHeight <= 474260 && nHeight > 454100) { // 14 days
-                    return 468 * COIN;
+                    return 1980 * COIN;
                 } else if (nHeight <= 494420 && nHeight > 474260) { // 14 days
-                    return 450 * COIN;
+                    return 1944 * COIN;
                 } else if (nHeight <= 514580 && nHeight > 494420) { // 14 days
-                    return 432 * COIN;
+                    return 1908 * COIN;
                 } else if (nHeight <= 534740 && nHeight > 514580) { // 14 days
-                    return 414 * COIN;
+                    return 1872 * COIN;
                 } else if (nHeight <= 554900 && nHeight > 534740) { // 14 days
-                    return 396 * COIN;
+                    return 1836 * COIN;
                 } else if (nHeight <= 575060 && nHeight > 554900) { // 14 days
-                    return 378 * COIN;
+                    return 1800 * COIN;
                 } else if (nHeight <= 618260 && nHeight > 575060) { // 30 days
-                    return 360 * COIN;
+                    return 1440 * COIN;
                 } else if (nHeight <= 661460 && nHeight > 618260) { // 30 days
-                    return 342 * COIN;
+                    return 720 * COIN;
                 } else if (nHeight <= 791060 && nHeight > 661460) { // 90 days
-                    return 324 * COIN;
+                    return 648 * COIN;
                 } else if (nHeight <= 920660 && nHeight > 791060) { // 90 days
-                    return 306 * COIN;
+                    return 576 * COIN;
                 } else if (nHeight <= 1179860 && nHeight > 920660) { // 180 days
-                    return 288 * COIN;
+                    return 504 * COIN;
                 } else if (nHeight <= 1439060 && nHeight > 1179860) { // 180 days
-                    return 252 * COIN;
+                    return 432 * COIN;
                 } else if (nHeight <= 1957460 && nHeight > 1439060) { // 360 days
                     return 216 * COIN;
-                } else if (nHeight <= 2475860 && nHeight > 1957460) { // 360 days
-                    return 180 * COIN;
-                } else if (nHeight > 2475860) { // Till Max Supply - 10 years
-                    return 140 * COIN;
+                } else if (nHeight  > 1957460) { // Till Max Supply Is Reached
+                    return 108 * COIN;
                 } else
-                    return 140;
-
+                    return 108;
             } else
                 return 0;
         }

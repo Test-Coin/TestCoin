@@ -213,71 +213,71 @@
 <td>PHASE 21</td>
 <td>252501 - 272660</td>
 <td>20.00 ABET</td>
-<td>18 ABET</td>
-<td>2 ABET</td>
+<td>18.00 ABET</td>
+<td>2.00 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 22</td>
 <td>272661 - 292820</td>
-<td>22 ABET</td>
-<td>19.8 ABET</td>
-<td>2.2 ABET</td>
+<td>22.00 ABET</td>
+<td>19.80 ABET</td>
+<td>2.20 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 23</td>
 <td>292821 - 312980</td>
-<td>24 ABET</td>
-<td>21.6 ABET</td>
-<td>2.4 ABET</td>
+<td>24.00 ABET</td>
+<td>21.60 ABET</td>
+<td>2.40 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 24</td>
 <td>312981 - 333140</td>
-<td>26 ABET</td>
-<td>23.4 ABET</td>
-<td>2.6 ABET</td>
+<td>26.00 ABET</td>
+<td>23.40 ABET</td>
+<td>2.60 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 25</td>
 <td>333141 - 353300</td>
-<td>28 ABET</td>
-<td>25.2 ABET</td>
+<td>28.00 ABET</td>
+<td>25.20 ABET</td>
 <td>2.80 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 26</td>
 <td>353301 - 373460</td>
-<td>30 ABET</td>
-<td>27 ABET</td>
-<td>3 ABET</td>
+<td>30.00 ABET</td>
+<td>27.00 ABET</td>
+<td>3.00 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 27</td>
 <td>373461 - 393620</td>
-<td>29.5 ABET</td>
+<td>29.50 ABET</td>
 <td>26.55 ABET</td>
 <td>2.95 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 28</td>
 <td>393621 - 413780</td>
-<td>29 ABET</td>
-<td>26.1 ABET</td>
-<td>2.9 ABET</td>
+<td>29.00 ABET</td>
+<td>26.10 ABET</td>
+<td>2.90 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 29</td>
 <td>413781 - 433940</td>
-<td>28.5 ABET</td>
+<td>28.50 ABET</td>
 <td>25.65 ABET</td>
  <td>2.85 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 30</td>
 <td>433941 - 454100</td>
-<td>28 ABET</td>
-<td>25.2 ABET</td>
-<td>2.8 ABET</td>
+<td>28.00 ABET</td>
+<td>25.20 ABET</td>
+<td>2.80 ABET</td>
 <td>2 WEEKS</td>
 </tr><tr>
 <td>PHASE 31</td>
